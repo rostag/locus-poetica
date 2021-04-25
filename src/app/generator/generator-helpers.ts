@@ -11,7 +11,6 @@ let getRandomFromSetCallCount = 0;
 export function getRandomFromSet<Type>(set: Type[]): Type {
   const result = set[Math.round(Math.random() * set.length - 1)];
   if (!!result || getRandomFromSetCallCount > 1000) {
-    // console.log('-', result, getRandomFromSet['callCount'] );
     getRandomFromSetCallCount = 0;
     return result;
   } else {
@@ -30,7 +29,6 @@ export function getRandomWordOfGivenLength(words: Word[], targetWordLength: numb
     syllablesCount += vowels.split('').includes(char) ? 1 : 0;
   })
   if (syllablesCount === targetWordLength || getRandomWordOfGivenLengthCallCount > 100) {
-    // console.log(':', callStack, syllablesCount, randomWord);
     if (removeWordsFromDic) {
       words.splice(words.indexOf(randomWord), 1);
     }
@@ -93,5 +91,4 @@ export function cleanUpWord(word: string, syllablesSeparator?: string): string {
     r = r.replace(/-/g, '');
   }
   return r.toLowerCase();
-  // return r;
 }
