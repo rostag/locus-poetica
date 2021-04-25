@@ -1,0 +1,42 @@
+<div fxLayout="row" fxLayoutAlign="space-between baseline" fxLayoutGap="10px">
+    <div fxLayout="row" fxLayoutAlign="space-between baseline" fxLayoutGap="10px">
+        <!-- <mat-checkbox>Latynize</mat-checkbox> -->
+        <input mat-input type="checkbox" [formControl]="latynizeControl" id="cb-latynize" />
+        <label for="cb-latynize">Latynize</label>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="space-between baseline" fxLayoutGap="10px">
+        <mat-form-field>
+            <mat-label>Slovnyk: {{ dictionary.name }}, {{ dictionary.words.length }}</mat-label>
+            <mat-select [formControl]="dictionaryControl">
+                <mat-option *ngFor="let dictionary of getDictionaries()" [value]="dictionary">
+                    {{dictionary.name}}, {{dictionary.words.length}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+        <button mat-button (click)="reSlovo()">re:slovo</button>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="space-between baseline" fxLayoutGap="10px">
+        <mat-form-field>
+            <mat-label>Ryma: {{ rhyme.name }}: {{ rhyme.value }}</mat-label>
+            <mat-select [formControl]="rhymeControl">
+                <mat-option *ngFor="let rhyme of getRhymes()" [value]="rhyme">
+                    {{rhyme.name}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+        <button mat-button mat-raised-button (click)="reStyle()">re:ryma</button>
+    </div>
+</div>
+
+<button mat-button color="accent" (click)="generate()" class="wrapper-button">
+    <pre class="pre-poetry">
+        <div class="strophae" *ngFor="let strophae of oOPoetry.strophae">
+            <div class="line" *ngFor="let line of strophae.lines" (click)="reline(strophae.lines, line, $event)">
+                <div fxLayout="row" fxLayoutAlign="start baseline">
+                    <div class="word" (click)="reword(line.words, word, $event)" *ngFor="let word of line.words">{{postProcess(word)}}&nbsp;</div>
+                </div>
+            </div>
+        </div>
+    </pre>
+    <button mat-button color="warn" (click)="copyText($event)">Copy</button>
+</button>
