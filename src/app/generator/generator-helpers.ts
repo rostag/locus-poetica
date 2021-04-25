@@ -1,21 +1,23 @@
 import { latynka } from './components/models/latynka.model';
-import { Word } from './components/services/poetry.service';
+import { Dictionary, Word } from './components/services/poetry.service';
 
 export function latynize(str: string): string {
-    Object['entries'](latynka).forEach(letter => str = str.replace(new RegExp(letter[0], 'g'), letter[1]));
-    return str
+  Object['entries'](latynka).forEach(letter => str = str.replace(new RegExp(letter[0], 'g'), letter[1]));
+  return str
 }
 
-export function getRandomFromSet(set: any[]) {
-    const result = set[Math.round(Math.random() * set.length - 1)];
-    if (!!result || getRandomFromSet['callCount'] > 1000) {
-        // console.log('-', result, getRandomFromSet['callCount'] );
-        getRandomFromSet['callCount'] = 0;
-        return result || '';
-    } else {
-        getRandomFromSet['callCount'] = getRandomFromSet['callCount'] + 1;
-        return getRandomFromSet(set);
-    }
+let getRandomFromSetCallCount = 0;
+
+export function getRandomFromSet<Type>(set: Type[]): Type {
+  const result = set[Math.round(Math.random() * set.length - 1)];
+  if (!!result || getRandomFromSetCallCount > 1000) {
+    // console.log('-', result, getRandomFromSet['callCount'] );
+    getRandomFromSetCallCount = 0;
+    return result;
+  } else {
+    getRandomFromSetCallCount += 1;
+    return getRandomFromSet(set);
+  }
 };
 
 let getRandomWordOfGivenLengthCallCount = 0;
@@ -50,29 +52,29 @@ export function getRandomWordOfGivenLength(words: Word[], targetWordLength: numb
   }
 }
 
-export function getRandomName(dictionary: string[]) {
-    const key: string = getRandomFromSet(dictionary);
-    const randomLen = Math.min(Math.max(Math.floor(Math.random() * key.length), 4), 10);
-    return (
-        key[Math.floor(Math.random() * key.length)].toUpperCase() +
-        key
-            .substr(key.length - randomLen)
-            .toLowerCase()
-            .replace(/_/g, ' ')
-    );
+export function getRandomName(dictionary: Dictionary) {
+  const key: string = getRandomFromSet(dictionary.words).wordContents;
+  const randomLen = Math.min(Math.max(Math.floor(Math.random() * key.length), 4), 10);
+  return (
+    key[Math.floor(Math.random() * key.length)].toUpperCase() +
+    key
+      .substr(key.length - randomLen)
+      .toLowerCase()
+      .replace(/_/g, ' ')
+  );
 };
 
-export function getRandomSequence(dictionary, wordCount) {
-    let result = '',
-        i = 0;
-    do {
-        result += getRandomName(dictionary.words) + ' ';
-        i++;
-    } while (i < wordCount);
-    return result;
+export function getRandomSequence(dictionary: Dictionary, wordCount: number) {
+  let result = '',
+    i = 0;
+  do {
+    result += getRandomName(dictionary) + ' ';
+    i++;
+  } while (i < wordCount);
+  return result;
 };
 
-export function cleanUpWord(word: string, syllablesSeparator = null): string {
+export function cleanUpWord(word: string, syllablesSeparator?: string): string {
   let r = word.replace(/«/gi, '');
   r = r.replace(/»/gi, '');
   r = r.replace(/\?/gi, '');
@@ -88,7 +90,7 @@ export function cleanUpWord(word: string, syllablesSeparator = null): string {
   r = r.replace(/\,/gi, '');
   r = r.replace(/\—/gi, '');
   if (syllablesSeparator) {
-      r = r.replace(/-/g, '');
+    r = r.replace(/-/g, '');
   }
   return r.toLowerCase();
   // return r;

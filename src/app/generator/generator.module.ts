@@ -8,12 +8,16 @@ import { PoetryXComponent } from './components/poetry-x/poetry-x.component';
 import { PoetryComponent } from './components/poetry/poetry.component';
 import { PoetryService } from './components/services/poetry.service';
 import { GeneratorRoutingModule } from './generator-routing.module';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
   imports: [
     CommonModule,
     GeneratorRoutingModule,
     ReactiveFormsModule,
+    MatFormFieldModule,
+    MatSelectModule,
   ],
   declarations: [
     GeneratorComponent,

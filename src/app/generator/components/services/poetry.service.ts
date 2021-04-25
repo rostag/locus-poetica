@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { cleanUpWord } from 'app/generator/generator-helpers';
+import { cleanUpWord } from '../../generator-helpers';
 import { DictionarySource, dictonarySource } from '../models/poetry.model';
 
 /**
@@ -82,7 +82,7 @@ export class PoetryService {
         sectionSeparator = '\n\n',
         linesSeparator = '\n',
         wordsSeparator = ' ',
-        syllablesSeparator = null,
+        syllablesSeparator?: string,
     ): Dictionary {
         const dictionaryName = dictionarySource.name;
         const multilineString = dictionarySource.value;
@@ -106,11 +106,11 @@ export class PoetryService {
                 dictionaryWords = dictionaryWords.concat(superstrings);
             })
         });
-        this.dictionaries[dictionaryName] = <Dictionary>{
+        this.dictionaries[dictionaryName as any] = <Dictionary>{
             name: dictionarySource.name,
             words: dictionaryWords,
         };
-        return this.dictionaries[dictionaryName];
+        return this.dictionaries[dictionaryName as any];
     }
 
     // public getDictionaryFromString(

@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { getRandomFromSet, getRandomWordOfGivenLength, latynize } from 'app/generator/generator-helpers';
-import { dictonarySource } from '../models/poetry.model';
+import { getRandomWordOfGivenLength, latynize } from '../../generator-helpers';
 import { Rhyme, Rhymes, rhymes } from '../models/rythm.models';
 import { Dictionary, Line, Poetry, PoetryService, Strophae, Word } from '../services/poetry.service';
 
@@ -23,7 +22,7 @@ export class PoetryComponent implements OnInit {
 
   rhymeControl = new FormControl();
   dictionaryControl = new FormControl();
-  latynizeControl = new FormControl(true);
+  latynizeControl = new FormControl(false);
 
   dictionaries: Dictionary[];
   dictionary: Dictionary;
@@ -32,7 +31,7 @@ export class PoetryComponent implements OnInit {
   rhyme: Rhyme;
 
   poetry: string = '';
-  oOPoetry: Poetry = null;
+  public objectOrientedPoetry: Poetry;
 
   constructor(private poetryService: PoetryService) {
     this.dictionaries = this.poetryService.setupDictionaries();
@@ -62,7 +61,8 @@ export class PoetryComponent implements OnInit {
   }
 
   public getRhymes(): [] {
-    return Object['values'](this.rhymes);
+    // @ts-ignore: Object is of type 'unknown'.
+    return Object.values(this.rhymes);
   }
 
   public ngOnInit() {
@@ -85,7 +85,7 @@ export class PoetryComponent implements OnInit {
   }
 
   public generate() {
-    this.oOPoetry = this.getOPoetryObjectFromDicAndRythm();
+    this.objectOrientedPoetry = this.getOPoetryObjectFromDicAndRythm();
   }
 
   public getPoetryStringFromDicAndRythm(): string {
@@ -127,7 +127,7 @@ export class PoetryComponent implements OnInit {
     event.preventDefault;
     event.stopPropagation();
     let val = '';
-    this.oOPoetry.strophae.forEach(strophae => strophae.lines.forEach(line => {
+    this.objectOrientedPoetry.strophae.forEach(strophae => strophae.lines.forEach(line => {
       line.words.forEach(word => {
         val += this.postProcess(word) + ' ';
       });
@@ -154,7 +154,7 @@ export class PoetryComponent implements OnInit {
     words[index] = newWord;
     event.stopPropagation();
   }
-  reline(lines: Line[], line: Line, event): void {
+  reline(lines: Line[], line: Line, event: Event): void {
     line.words.forEach((word, index, words) => {
       words[index] = getRandomWordOfGivenLength(this.dictionary.words, word.rhymeWordLength)
     })

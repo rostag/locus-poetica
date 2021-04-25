@@ -915,5 +915,4 @@ export const dictonarySource: DictionarySources = {
   kob: { name: 'Kob', value: kobzar },
   ham: { name: 'Hamlet', value: ham },
   roz: { name: 'Roz', value: roz },
-  reduced: null,
 }

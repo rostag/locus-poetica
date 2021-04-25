@@ -30,7 +30,7 @@
 
 <button mat-button color="accent" (click)="generate()" class="wrapper-button">
     <pre class="pre-poetry">
-        <div class="strophae" *ngFor="let strophae of oOPoetry.strophae">
+        <div class="strophae" *ngFor="let strophae of objectOrientedPoetry.strophae">
             <div class="line" *ngFor="let line of strophae.lines" (click)="reline(strophae.lines, line, $event)">
                 <div fxLayout="row" fxLayoutAlign="start baseline">
                     <div class="word" (click)="reword(line.words, word, $event)" *ngFor="let word of line.words">{{postProcess(word)}}&nbsp;</div>

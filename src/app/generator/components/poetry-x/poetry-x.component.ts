@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { dumyMoiDumy, syllablesDict } from '../models/poetry.model';
+import { Dictionary, Word } from '../services/poetry.service';
 
 @Component({
   selector: 'app-poetry-x',
@@ -89,7 +90,7 @@ export class PoetryXComponent implements OnInit {
       `;
   }
 
-  public getByCount(count) {
+  public getByCount(count: number) {
     let res = '';
     for (let c = 0; c < count; c++) {
       res += this.getNext(syllablesDict);
@@ -107,18 +108,21 @@ export class PoetryXComponent implements OnInit {
   }
   */
 
-  public getNext(dict: any) {
+  private getNext(dict: any[]) {
+    let result = '';
     const nth = Math.random() * dict.length;
     let all = 0;
     for (let n = 0; n < dict.length; n++) {
-      all += Object['values'](dict[n])[0];
+      // @ts-ignore: Object is of type 'unknown'.
+      all += Object.values(dict[n])[0];
       if (all > nth) {
-        let result = Object.keys(dict[n])[0];
+        result = Object.keys(dict[n])[0];
         // if ((result as string).trim().length === 0) {
         //   result += this.getNext(this.dict);
         // }
-        return result;
+        // return result;
       }
     }
+    return result;
   }
 }
