@@ -1,5 +1,12 @@
 :host {
 
+    .settings {
+        display: flex;
+        justify-content: start;
+        align-items: center;
+        column-gap: 20px;
+    }
+
     .wrapper-button {
         border-radius: 0;
         width: 100%;
@@ -27,6 +34,7 @@
 
     // OOPO
     .line {
+        display: flex;
         cursor: pointer;
         padding-left: 30px;
         padding: 5px;
