@@ -10,20 +10,20 @@
     .wrapper-button {
         border-radius: 0;
         width: 100%;
-        padding-bottom: 300px;
+        &:hover {
+            background-color: #fafafa;
+        }
     }
 
     .pre-poetry {
         text-align: left;
         padding-left: 150px;
         font-family: Helvetica, Arial, sans-serif;
-        font-size: 50px;
         letter-spacing: -1px;
         color: #024;
         font-weight: 200;
         &:hover {
-            color: #fff;
-            background-color: #024;
+            color: #135;
         }
 
         &::first-letter {
@@ -32,7 +32,6 @@
 
     }
 
-    // OOPO
     .line {
         display: flex;
         cursor: pointer;
@@ -41,9 +40,9 @@
         border-bottom: transparent 1px dotted;
         line-height: 0px;
         &:hover {
-            // border-bottom: #024 1px dotted;
-            background-color: #324;
-            color: #447;
+            border-bottom: #024 1px dotted;
+            background-color: #eee;
+            color: #000;
         }
     }
     
@@ -54,8 +53,8 @@
         line-height: 60px;
         border-bottom: transparent 1px dashed;        
         &:hover {
-            background-color: #fc0;
-            color: #44e;
+            background-color: #ddd;
+            color: #000;
         }
     }
 }
