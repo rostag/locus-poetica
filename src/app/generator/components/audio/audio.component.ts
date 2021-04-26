@@ -20,8 +20,8 @@ export class AudioComponent implements OnInit {
     private _binauralFreq: number;
     private _sampleFreq: number;
 
-    public sampleNames: any = ['kick', 'dsb-thinner'];
-    public currentSample = 'dsb-thinner';
+    public sampleNames = ['kick', 'dsb-thinner'];
+    public currentSample = 'minus';
     audioInitialized: boolean;
 
     constructor() { }
@@ -38,7 +38,7 @@ export class AudioComponent implements OnInit {
             this.fetchSample(this.sampleNames[s])
                 .then(audioBuffer => {
                     this.loadingSample = false;
-                    this.audioBuffer[this.sampleNames[s]] = audioBuffer;
+                    this.audioBuffer[this.sampleNames[s] as any] = audioBuffer;
                 })
                 .catch(error => {
                     throw error;
@@ -62,13 +62,17 @@ export class AudioComponent implements OnInit {
     }
 
     public stopLoop(loopName: string) {
-        console.log('Loop:', loopName);
         this.onDestroy$.next();
+    }
+
+    public playMinus(sample: string) {
+        this.initAudio();
+        this.playSample('minus');
     }
 
     public playLoop(sample: string) {
         this.initAudio();
-        this._sampleFreq = Math.round(Math.random() * 100) + 100;
+        this._sampleFreq = Math.round(Math.random() * 200) + 200;
         this.initLoop(sample, this._sampleFreq);
     }
 
