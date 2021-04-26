@@ -3,6 +3,7 @@
     Overcrowd Minus
   </button>
 </div>
+
 <div>
     
   <button mat-button *ngFor="let sampleName of sampleNames" [disabled]="loadingSample" (click)="playLoop(sampleName)">
@@ -10,9 +11,8 @@
   </button>
 
   <mat-slider min="400" max="2000" [step]="10" [thumbLabel]="true" (change)="setControlValue($event)"></mat-slider>
-  interval {{sampleFreq}}ms
 
-  <button mat-button [disabled]="loadingSample" (click)="stopLoop('')">Stop</button>
+  <button mat-button [disabled]="loadingSample" (click)="stopLoop('')">{{sampleFreq}}ms. Stop</button>
 
 </div>
 

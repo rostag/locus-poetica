@@ -164,4 +164,9 @@ export class PoetryComponent implements OnInit {
   postProcess(word: Word): string {
     return this.latynizeControl.value ? latynize(word.wordContents) : word.wordContents;
   }
+
+  public sequence(evt: Event) {
+    console.log('seq: ', evt);
+    
+  }
 }

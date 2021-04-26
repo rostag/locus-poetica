@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { MatSliderChange } from '@angular/material/slider';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { MatSliderChange } from '@angular/material/slider'
 import { interval, Subject } from 'rxjs';
-import { timeInterval, take, takeUntil } from 'rxjs/operators';
+import { timeInterval, takeUntil } from 'rxjs/operators';
 
 // ankursethi.in/2016/01/13/build-a-sampler-with-angular-2-webaudio-and-webmidi-lesson-1-introduction-to-the-webaudio-api
 
@@ -26,6 +26,8 @@ export class AudioComponent implements OnInit {
     audioInitialized: boolean;
 
     constructor() { }
+
+    @Output() sequencer: EventEmitter<any> = new EventEmitter();
 
     public ngOnInit() { }
 
@@ -83,6 +85,7 @@ export class AudioComponent implements OnInit {
                 takeUntil(this.onDestroy$)
             )
             .subscribe(a => {
+                this.sequencer.emit(sample);
                 this.playSample(sample || this.currentSample);
             });
     }
@@ -95,7 +98,6 @@ export class AudioComponent implements OnInit {
     }
 
     public setControlValue(evt: MatSliderChange) {
-        console.log('Evt:', evt);
         this._sampleFreq = evt.value as number;
     }
 

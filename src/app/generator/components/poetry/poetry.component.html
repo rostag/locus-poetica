@@ -12,7 +12,6 @@
                 </mat-option>
             </mat-select>
         </mat-form-field>
-        <button mat-button (click)="reSlovo()">re:slovo</button>
     </div>
     <div class="settings">
         <mat-form-field>
@@ -23,9 +22,8 @@
                 </mat-option>
             </mat-select>
         </mat-form-field>
-        <button mat-button mat-raised-button (click)="reStyle()">re:ryma</button>
     </div>
-    <button mat-button color="warn" (click)="copyText($event)">Copy</button>
+    <button mat-button (click)="copyText($event)">Copy</button>
 </div>
 
 <button mat-button color="accent" (click)="generate()" class="wrapper-button">

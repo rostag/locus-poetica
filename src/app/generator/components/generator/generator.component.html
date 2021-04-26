@@ -2,8 +2,8 @@
   <!-- <h1>Генератори</h1> -->
   <div class="generator-cards">
     <div class="row">
-      <app-poetry></app-poetry>
-      <app-audio></app-audio>
+      <app-poetry #poetry></app-poetry>
+      <app-audio (sequencer)=poetry.sequence($event)></app-audio>
     </div>
     <div>
     </div>

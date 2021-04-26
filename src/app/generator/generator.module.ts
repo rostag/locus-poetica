@@ -11,6 +11,7 @@ import { GeneratorRoutingModule } from './generator-routing.module';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSliderModule } from '@angular/material/slider';
+import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
   imports: [
@@ -20,6 +21,7 @@ import { MatSliderModule } from '@angular/material/slider';
     MatFormFieldModule,
     MatSelectModule,
     MatSliderModule,
+    MatButtonModule,
   ],
   declarations: [
     GeneratorComponent,
