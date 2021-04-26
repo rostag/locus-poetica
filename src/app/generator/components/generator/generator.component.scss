@@ -1,8 +1,17 @@
 :host {
   display: block;
 
-  h1 {
-    text-align: center;
+  .row {
+    display: flex;
+    &>* {
+      display: block;
+    }
+
+    app-audio {
+      padding: 40px;
+      border: 1px solid #aadaea;
+      margin: 20px;
+    }
   }
 
   .gene-wrapper {
