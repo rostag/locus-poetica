@@ -28,6 +28,7 @@
 </div>
 
 <button mat-button color="accent" (click)="generate()" class="wrapper-button">
+    <button mat-button color="warn" (click)="copyText($event)">Copy</button>
     <pre class="pre-poetry">
         <div class="strophae" *ngFor="let strophae of objectOrientedPoetry.strophae">
             <div class="line" *ngFor="let line of strophae.lines" (click)="reline(strophae.lines, line, $event)">
@@ -35,5 +36,4 @@
             </div>
         </div>
     </pre>
-    <button mat-button color="warn" (click)="copyText($event)">Copy</button>
 </button>

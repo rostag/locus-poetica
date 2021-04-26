@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { interval ,  Subject } from 'rxjs';
+import { MatSliderChange } from '@angular/material/slider';
+import { interval, Subject } from 'rxjs';
 import { timeInterval, take, takeUntil } from 'rxjs/operators';
 
 // ankursethi.in/2016/01/13/build-a-sampler-with-angular-2-webaudio-and-webmidi-lesson-1-introduction-to-the-webaudio-api
@@ -18,7 +19,7 @@ export class AudioComponent implements OnInit {
 
     private onDestroy$ = new Subject<void>();
     private _binauralFreq: number;
-    private _sampleFreq: number;
+    private _sampleFreq = 300;
 
     public sampleNames = ['kick', 'dsb-thinner'];
     public currentSample = 'minus';
@@ -72,7 +73,6 @@ export class AudioComponent implements OnInit {
 
     public playLoop(sample: string) {
         this.initAudio();
-        this._sampleFreq = Math.round(Math.random() * 200) + 200;
         this.initLoop(sample, this._sampleFreq);
     }
 
@@ -92,6 +92,11 @@ export class AudioComponent implements OnInit {
         bufferSource.buffer = this.audioBuffer[loopName];
         bufferSource.connect(this.audioContext[loopName].destination);
         bufferSource.start(0);
+    }
+
+    public setControlValue(evt: MatSliderChange) {
+        console.log('Evt:', evt);
+        this._sampleFreq = evt.value as number;
     }
 
     public y(x: number) {
