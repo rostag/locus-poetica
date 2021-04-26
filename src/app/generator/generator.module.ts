@@ -10,6 +10,7 @@ import { PoetryService } from './components/services/poetry.service';
 import { GeneratorRoutingModule } from './generator-routing.module';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
+import { MatSliderModule } from '@angular/material/slider';
 
 @NgModule({
   imports: [
@@ -18,6 +19,7 @@ import { MatSelectModule } from '@angular/material/select';
     ReactiveFormsModule,
     MatFormFieldModule,
     MatSelectModule,
+    MatSliderModule,
   ],
   declarations: [
     GeneratorComponent,
