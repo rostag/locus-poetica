@@ -108,19 +108,19 @@ export class PoetryXComponent implements OnInit {
   }
   */
 
-  private getNext(dict: any[]) {
-    let result = '';
+  public getNext(dict: any) {
     const nth = Math.random() * dict.length;
     let all = 0;
+    let result = '';
     for (let n = 0; n < dict.length; n++) {
-      // @ts-ignore: Object is of type 'unknown'.
-      all += Object.values(dict[n])[0];
+       // @ts-ignore: Object is of type 'unknown'.
+      all += Object['values'](dict[n])[0];
       if (all > nth) {
         result = Object.keys(dict[n])[0];
+        n = dict.length;
         // if ((result as string).trim().length === 0) {
         //   result += this.getNext(this.dict);
         // }
-        // return result;
       }
     }
     return result;
