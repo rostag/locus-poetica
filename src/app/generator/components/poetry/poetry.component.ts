@@ -148,11 +148,11 @@ export class PoetryComponent implements OnInit {
     document.body.removeChild(selBox);
   }
 
-  reword(words: Word[], word: Word, event: MouseEvent): void {
+  reword(words: Word[], word: Word, event?: MouseEvent): void {
     const newWord = getRandomWordOfGivenLength(this.dictionary.words, word.rhymeWordLength);
     const index = words.indexOf(word);
     words[index] = newWord;
-    event.stopPropagation();
+    event ? event.stopPropagation() : null;
   }
   reline(lines: Line[], line: Line, event: Event): void {
     line.words.forEach((word, index, words) => {
@@ -166,7 +166,16 @@ export class PoetryComponent implements OnInit {
   }
 
   public sequence(evt: Event) {
-    console.log('seq: ', evt);
-    
+    // console.log('seq: ', evt);
+    const randomStrophae = Math.floor(Math.random() * this.objectOrientedPoetry.strophae.length);
+    const strophae: Strophae = this.objectOrientedPoetry.strophae[randomStrophae];
+    const randomLine = Math.floor(Math.random() * strophae.lines.length);
+    const line: Line = strophae.lines[randomLine];
+    const randomWord = Math.floor(Math.random() * line.words.length);
+    const word = line.words[randomWord];
+
+    this.reword(line.words, word);
+    // this.generate();
   }
+
 }

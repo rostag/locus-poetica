@@ -21,7 +21,7 @@ export class AudioComponent implements OnInit {
     private _binauralFreq: number;
     private _sampleFreq = 300;
 
-    public sampleNames = ['kick', 'dsb-thinner'];
+    public sampleNames = ['kick', 'dsb-thinner', 'speech15'];
     public currentSample = 'minus';
     audioInitialized: boolean;
 
@@ -98,6 +98,7 @@ export class AudioComponent implements OnInit {
     }
 
     public setControlValue(evt: MatSliderChange) {
+        this.sequencer.emit(evt);
         this._sampleFreq = evt.value as number;
     }
 

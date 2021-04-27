@@ -42,21 +42,21 @@
         padding-left: 30px;
         padding: 5px;
         border-bottom: transparent 1px dotted;
-        line-height: 0px;
         &:hover {
-            border-bottom: #024 1px dotted;
-            background-color: #eee;
+            border-bottom: #bbb 1px dashed;
+            // background-color: #eee;
             color: #000;
         }
     }
     
     .word {
         cursor: pointer;
-        padding: 2px;
-        font-size: 50px;
-        line-height: 60px;
-        border-bottom: transparent 1px dashed;        
+        font-size: 30px;
+        line-height: 50px;
+        padding: 0;
+        border: transparent 1px dashed;
         &:hover {
+            border-right: #aaa 1px dotted;
             background-color: #ddd;
             color: #000;
         }
