@@ -154,11 +154,11 @@ export class PoetryComponent implements OnInit {
     words[index] = newWord;
     event ? event.stopPropagation() : null;
   }
-  reline(lines: Line[], line: Line, event: Event): void {
+  reline(lines: Line[], line: Line, event?: Event): void {
     line.words.forEach((word, index, words) => {
       words[index] = getRandomWordOfGivenLength(this.dictionary.words, word.rhymeWordLength)
     })
-    event.stopPropagation();
+    event ? event.stopPropagation() : null;
   }
 
   postProcess(word: Word): string {
@@ -174,7 +174,8 @@ export class PoetryComponent implements OnInit {
     const randomWord = Math.floor(Math.random() * line.words.length);
     const word = line.words[randomWord];
 
-    this.reword(line.words, word);
+    // this.reword(line.words, word);
+    this.reline(strophae.lines, line);
     // this.generate();
   }
 

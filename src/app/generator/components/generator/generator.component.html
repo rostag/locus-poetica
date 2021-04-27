@@ -3,6 +3,7 @@
   <div class="generator-cards">
     <div class="row">
       <app-poetry #poetry></app-poetry>
+      <!-- <app-sample sample="{ name: 'kick' }"></app-sample> -->
       <app-audio (sequencer)=poetry.sequence($event)></app-audio>
     </div>
     <div>

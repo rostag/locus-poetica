@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PoetryXComponent } from './poetry.component';
+import { PoetryXComponent } from './poetry-x.component';
 
 describe('PoetryXComponent', () => {
   let component: PoetryXComponent;

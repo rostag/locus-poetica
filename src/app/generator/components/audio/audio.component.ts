@@ -5,6 +5,11 @@ import { timeInterval, takeUntil } from 'rxjs/operators';
 
 // ankursethi.in/2016/01/13/build-a-sampler-with-angular-2-webaudio-and-webmidi-lesson-1-introduction-to-the-webaudio-api
 
+export interface Sample {
+    name: string;
+    audioContext?: AudioContext;
+    audioBuffer?: AudioBuffer;
+}
 @Component({
     selector: 'app-audio',
     templateUrl: './audio.component.html',
@@ -21,6 +26,11 @@ export class AudioComponent implements OnInit {
     private _binauralFreq: number;
     private _sampleFreq = 300;
 
+    public samples: Sample[] = [
+        { name: 'kick' },
+        { name: 'dsb-thinner' },
+        { name: 'speech15' }
+    ];
     public sampleNames = ['kick', 'dsb-thinner', 'speech15'];
     public currentSample = 'minus';
     audioInitialized: boolean;
@@ -29,7 +39,10 @@ export class AudioComponent implements OnInit {
 
     @Output() sequencer: EventEmitter<any> = new EventEmitter();
 
-    public ngOnInit() { }
+    public ngOnInit() {
+        const kick = this.getSampleByName('kick');
+        console.log('Kick:', kick);
+    }
 
     public initAudio() {
         if (this.audioInitialized) {
@@ -41,6 +54,8 @@ export class AudioComponent implements OnInit {
             this.fetchSample(this.sampleNames[s])
                 .then(audioBuffer => {
                     this.loadingSample = false;
+                    const sample: Sample = this.getSampleByName(this.sampleNames[s]);
+                    sample.audioBuffer = audioBuffer;
                     this.audioBuffer[this.sampleNames[s] as any] = audioBuffer;
                 })
                 .catch(error => {
@@ -54,8 +69,10 @@ export class AudioComponent implements OnInit {
             .then(response => response.arrayBuffer())
             .then(buffer => {
                 return new Promise<AudioBuffer>((resolve, reject) => {
-                    this.audioContext[sampleName] = new AudioContext();
-                    this.audioContext[sampleName].decodeAudioData(
+                    const sample: Sample = this.getSampleByName(this.sampleNames[sampleName]);
+                    sample.audioContext = new AudioContext();
+                    this.audioContext[sampleName] = sample.audioContext;
+                    sample.audioContext.decodeAudioData(
                         buffer,
                         resolve,
                         reject
@@ -136,6 +153,10 @@ export class AudioComponent implements OnInit {
 
     public get sampleFreq() {
         return this._sampleFreq;
+    }
+
+    private getSampleByName(name: string) {
+        return this.samples.find((sample: any) => sample.name === name) || { name: 'Undefined' };
     }
 
 }
