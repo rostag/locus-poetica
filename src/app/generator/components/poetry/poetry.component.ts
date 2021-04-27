@@ -36,6 +36,7 @@ export class PoetryComponent implements OnInit {
   constructor(private poetryService: PoetryService) {
     this.dictionaries = this.poetryService.setupDictionaries();
     this.dictionary = this.dictionaries[0];
+    this.recolor();
   }
 
   public onDictionarySelection(d: Dictionary) {
@@ -174,9 +175,23 @@ export class PoetryComponent implements OnInit {
     const randomWord = Math.floor(Math.random() * line.words.length);
     const word = line.words[randomWord];
 
-    // this.reword(line.words, word);
+    this.reword(line.words, word);
     this.reline(strophae.lines, line);
+    this.recolor();
     // this.generate();
+  }
+
+  public color: any;
+  public fontSize = 19;
+
+  public recolor() {
+    const r = Math.round(Math.random() * 155)+180;
+    const g = Math.round(Math.random() * 155)+180;
+    const b = Math.round(Math.random() * 155)+140;
+    this.color = {r, g, b};
+
+    this.fontSize += Math.round(Math.random()*3 - Math.random()*3);
+    // console.log('fsize', this.fontSize);
   }
 
 }

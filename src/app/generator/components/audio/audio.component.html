@@ -1,16 +1,21 @@
 <div>
-  <mat-slider min="400" max="2000" [step]="10" [thumbLabel]="true" (change)="setControlValue($event)"></mat-slider>
-  
-  <div>{{sampleFreq}}ms.</div>
-  
-  <button mat-button color="primary" *ngFor="let sampleName of sampleNames" [disabled]="loadingSample" (click)="playLoop(sampleName)">
-    <mat-icon>play_arrow</mat-icon>{{sampleName}}
-  </button>
-  
   <div>
-    <button mat-button color="accent" [disabled]="loadingSample" (click)="stopLoop('')" class="stop"><mat-icon inline="true">stop</mat-icon></button>
+    <mat-slider min="400" max="2000" [step]="10" [thumbLabel]="true" (change)="setControlValue($event)"></mat-slider>
+    <div align="center">{{sampleFreq}}ms.</div>
   </div>
-  
+
+  <div style="display: flex;">
+    <div>
+      <button mat-button color="primary" *ngFor="let sampleName of sampleNames" [disabled]="loadingSample"
+        (click)="playLoop(sampleName)">
+        <mat-icon>play_arrow</mat-icon>{{sampleName}}
+      </button>
+    </div>
+
+    <button mat-flat-button color="accent" [disabled]="loadingSample" (click)="stopLoop('')" class="stop">
+      <mat-icon inline="true">stop</mat-icon>
+    </button>
+  </div>
 </div>
 
 <!-- <div>
@@ -24,4 +29,4 @@
   <button mat-button *ngFor="let sampleName of sampleNames" [disabled]="loadingSample" (click)="playBinaural(sampleName, r(20), 20)">
     {{sampleName}}
   </button>  
-</div> -->  
+</div> -->
