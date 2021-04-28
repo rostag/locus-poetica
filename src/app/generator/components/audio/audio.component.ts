@@ -1,12 +1,12 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { MatSliderChange } from '@angular/material/slider'
-import { interval, Subject } from 'rxjs';
+import { interval, of, Subject } from 'rxjs';
 import { timeInterval, takeUntil } from 'rxjs/operators';
 
 // ankursethi.in/2016/01/13/build-a-sampler-with-angular-2-webaudio-and-webmidi-lesson-1-introduction-to-the-webaudio-api
-
 export interface Sample {
     name: string;
+    interval?: number; // Set duration of one
     audioContext?: AudioContext;
     audioBuffer?: AudioBuffer;
 }
@@ -17,7 +17,10 @@ export interface Sample {
 })
 export class AudioComponent implements OnInit {
 
+    @Input() title = 'Audio Loop';
+
     public loadingSample = false;
+    public playingSample = false;
 
     private audioContext: AudioContext[] = [];
     private audioBuffer: AudioBuffer[] = [];
@@ -31,8 +34,8 @@ export class AudioComponent implements OnInit {
         { name: 'dsb-thinner' },
         { name: 'speech15' }
     ];
-    public sampleNames = ['kick', 'dsb-thinner', 'speech15'];
-    public currentSample = 'minus';
+    public sampleNames = ['kick', 'dsb-thinner', 'speech15', 'speech2'];
+    public currentSampleName = 'minus';
     audioInitialized: boolean;
 
     constructor() { }
@@ -40,8 +43,7 @@ export class AudioComponent implements OnInit {
     @Output() sequencer: EventEmitter<any> = new EventEmitter();
 
     public ngOnInit() {
-        const kick = this.getSampleByName('kick');
-        console.log('Kick:', kick);
+        this.initAudio();
     }
 
     public initAudio() {
@@ -81,7 +83,10 @@ export class AudioComponent implements OnInit {
             });
     }
 
-    public stopLoop(loopName: string) {
+    public stopLoop(sampleName: string) {
+        this.playingSample = false;
+        console.log('stop:', sampleName);
+
         this.onDestroy$.next();
     }
 
@@ -90,12 +95,18 @@ export class AudioComponent implements OnInit {
         this.playSample('minus');
     }
 
+    public play() {
+        this.initAudio();
+        this.initLoop(this.currentSampleName, this._sampleFreq);
+    }
+
     public playLoop(sample: string) {
         this.initAudio();
         this.initLoop(sample, this._sampleFreq);
     }
 
     public initLoop(sample: string, time: number) {
+        this.playSample(sample);
         interval(time)
             .pipe(
                 timeInterval(),
@@ -103,14 +114,25 @@ export class AudioComponent implements OnInit {
             )
             .subscribe(a => {
                 this.sequencer.emit(sample);
-                this.playSample(sample || this.currentSample);
+                this.playSample(sample);
             });
     }
 
-    public playSample(loopName: any) {
-        const bufferSource = this.audioContext[loopName].createBufferSource();
-        bufferSource.buffer = this.audioBuffer[loopName];
-        bufferSource.connect(this.audioContext[loopName].destination);
+    public playLoopOnce(name: string) {
+        this.initAudio();
+        of(1).pipe().subscribe(a => {
+            this.sequencer.emit(name);
+            this.playSample(name);
+        });
+    }
+
+    public playSample(sampleName: any) {
+        this.initAudio();
+        this.playingSample = true;
+        this.currentSampleName = sampleName;
+        const bufferSource = this.audioContext[sampleName].createBufferSource();
+        bufferSource.buffer = this.audioBuffer[sampleName];
+        bufferSource.connect(this.audioContext[sampleName].destination);
         bufferSource.start(0);
     }
 
@@ -141,7 +163,7 @@ export class AudioComponent implements OnInit {
      ******/
 
     public playBinaural(sample: string, baze: number, hz: number) {
-        this.stopLoop(this.currentSample);
+        this.stopLoop(this.currentSampleName);
         this._binauralFreq = baze;
         this.initLoop(sample, baze);
         this.initLoop(sample, baze + hz);

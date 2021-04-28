@@ -5,7 +5,17 @@
     width: 200px;
   }
 
+  .play,
   .stop {
-    font-size: 20px;
+    font-size: 40px;
+    margin-right: 20px;
+  }
+
+  .samples {
+    .mat-button {
+      margin-left: 0;
+      padding: 0 20px 0 2px;
+      border-radius: 10px;
+    }
   }
 }

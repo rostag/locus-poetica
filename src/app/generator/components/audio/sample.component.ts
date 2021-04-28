@@ -18,6 +18,7 @@ export class SampleComponent implements OnInit {
     };
 
     public loadingSample = false;
+    public audioInitialized: boolean;
 
     private audioContext: AudioContext;
     private audioBuffer: AudioBuffer;
@@ -26,8 +27,7 @@ export class SampleComponent implements OnInit {
     private _binauralFreq: number;
     private _sampleFreq = 300;
 
-    public currentSample = 'minus';
-    audioInitialized: boolean;
+    public currentSample: string;
 
     constructor() { }
 

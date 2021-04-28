@@ -1,9 +1,10 @@
 :host {
   display: block;
 
-  .row {
+  ::ng-deep .row {
     display: flex;
     justify-content: space-between;
+
     &>* {
       display: block;
     }

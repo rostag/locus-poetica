@@ -1,20 +1,24 @@
 <div>
-  <div>
-    <mat-slider min="400" max="2000" [step]="10" [thumbLabel]="true" (change)="setControlValue($event)"></mat-slider>
-    <div align="center">{{sampleFreq}}ms.</div>
+
+  <div class="title"><pre>{{ title }} {{sampleFreq}}&nbsp;ms</pre></div>
+
+  <div class="row">    
+    <button *ngIf="!playingSample" mat-icon-button color="accent" [disabled]="loadingSample" (click)="play()" class="play">
+      <mat-icon inline="true">play_circle_filled</mat-icon>
+    </button>
+    <button *ngIf="playingSample" mat-icon-button color="accent" [disabled]="loadingSample" (click)="stopLoop('')" class="stop">
+      <mat-icon inline="true">stop_circle_filled</mat-icon>
+    </button>
+    <mat-slider min="400" max="2000" [step]="100" [thumbLabel]="true" (input)="setControlValue($event)"></mat-slider>
   </div>
 
-  <div style="display: flex;">
-    <div>
-      <button mat-button color="primary" *ngFor="let sampleName of sampleNames" [disabled]="loadingSample"
+  <div class="row">
+    <div class="samples">
+      <button mat-button *ngFor="let sampleName of sampleNames" [disabled]="loadingSample"
         (click)="playLoop(sampleName)">
         <mat-icon>play_arrow</mat-icon>{{sampleName}}
       </button>
     </div>
-
-    <button mat-flat-button color="accent" [disabled]="loadingSample" (click)="stopLoop('')" class="stop">
-      <mat-icon inline="true">stop</mat-icon>
-    </button>
   </div>
 </div>
 
