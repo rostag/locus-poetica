@@ -35,7 +35,7 @@ export class AudioComponent implements OnInit {
         { name: 'speech15' }
     ];
     public sampleNames = ['kick', 'dsb-thinner', 'speech15', 'speech2'];
-    public currentSampleName = 'minus';
+    public currentSampleName = 'kick';
     audioInitialized: boolean;
 
     constructor() { }
