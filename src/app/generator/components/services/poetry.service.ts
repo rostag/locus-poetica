@@ -2,25 +2,24 @@ import { Injectable } from '@angular/core';
 import { cleanUpWord } from '../../generator-helpers';
 import { DictionarySource, dictonarySource } from '../models/poetry.model';
 
-/**
- * Poetry backlog:
+/*
+ * Poetry backlog
  * 
- * OOPO:
- * Words are interactive objects:
- *  - U can click a word to replace it
- *  - U can click a line to replace it
+ * OOPO: Words are interactive objects
+ * 
+ *  - User can click a word or line to replace it
  *  - Real rhyming
- *  - Punctuation ('—', '₴') generation
- *  - Add sequencing word generation like ('наї' / 'заї') + ('ба') + ('в' || 'ла' || 'ло' || 'ли' || 'ло')
- * 
+ *  - Punctuation ('—', '₴')
+ *  - TODO: sequencing word generation like ('наї' / 'заї') + ('ба') + ('в' || 'ла' || 'ло' || 'ли' || 'ло')
  * 
  * UI Controls:
  * 
- *  - Rhythm selector
+ *  - Rhyme selector
  *  - Model selector
  *  - Full-auto (animated) mode
  * 
  * Re-mixing on different levels:
+ * 
  *  - Letters
  *  - Syllables
  *  - Words

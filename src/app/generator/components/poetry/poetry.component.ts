@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { getRandomWordOfGivenLength, latynize } from '../../generator-helpers';
-import { Rhyme, Rhymes, rhymes } from '../models/rythm.models';
+import { Connection } from '../audio/audio.component';
+import { Rhyme, Rhymes, rhymes } from '../models/rhyme.models';
 import { Dictionary, Line, Poetry, PoetryService, Strophae, Word } from '../services/poetry.service';
 
 /*
@@ -86,10 +87,10 @@ export class PoetryComponent implements OnInit {
   }
 
   public generate() {
-    this.objectOrientedPoetry = this.getOPoetryObjectFromDicAndRythm();
+    this.objectOrientedPoetry = this.getPoetryObjectFromDicAndRhyme();
   }
 
-  public getPoetryStringFromDicAndRythm(): string {
+  public getPoetryStringFromDicAndRhyme(): string {
     let result = '';
     this.rhyme.value.forEach(line => {
       line.forEach(wordLength => {
@@ -101,7 +102,7 @@ export class PoetryComponent implements OnInit {
     return result;
   };
 
-  public getOPoetryObjectFromDicAndRythm(): Poetry {
+  public getPoetryObjectFromDicAndRhyme(): Poetry {
     const oopo: Poetry = {
       strophae: [{
         lines: [{
@@ -167,7 +168,7 @@ export class PoetryComponent implements OnInit {
   }
 
   public sequence(evt: Event) {
-    // console.log('seq: ', evt);
+    console.log('seq: ', evt);
     const randomStrophae = Math.floor(Math.random() * this.objectOrientedPoetry.strophae.length);
     const strophae: Strophae = this.objectOrientedPoetry.strophae[randomStrophae];
     const randomLine = Math.floor(Math.random() * strophae.lines.length);
@@ -181,17 +182,37 @@ export class PoetryComponent implements OnInit {
     // this.generate();
   }
 
+  public methodMap = [{
+    target: null,
+    targetProperty: null,
+    destination: null,
+    destinationProperty: null
+  }, {
+    target: null,
+    targetProperty: null,
+    destination: null,
+    destinationProperty: null
+  }]
+
   public color: any;
   public fontSize = 19;
 
   public recolor() {
-    const r = Math.round(Math.random() * 155)+180;
-    const g = Math.round(Math.random() * 155)+180;
-    const b = Math.round(Math.random() * 155)+140;
-    this.color = {r, g, b};
+    const r = Math.round(Math.random() * 155) + 180;
+    const g = Math.round(Math.random() * 155) + 180;
+    const b = Math.round(Math.random() * 155) + 140;
+    this.color = { r, g, b };
 
-    this.fontSize += Math.round(Math.random()*3 - Math.random()*3);
+    this.fontSize += Math.round(Math.random() * 3 - Math.random() * 3);
     // console.log('fsize', this.fontSize);
   }
+
+  public connections: Connection[] = [{
+    source: 'beat()',
+    destination: 'reBgColor()',
+  }, {
+    source: 'beat()',
+    destination: 'reword()',
+  }]
 
 }

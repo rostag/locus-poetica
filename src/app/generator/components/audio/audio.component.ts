@@ -4,6 +4,10 @@ import { interval, of, Subject } from 'rxjs';
 import { timeInterval, takeUntil } from 'rxjs/operators';
 
 // ankursethi.in/2016/01/13/build-a-sampler-with-angular-2-webaudio-and-webmidi-lesson-1-introduction-to-the-webaudio-api
+export interface Connection {
+    source: any;
+    destination: any;
+}
 export interface Sample {
     name: string;
     interval?: number; // Set duration of one
