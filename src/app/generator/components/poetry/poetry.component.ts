@@ -168,7 +168,7 @@ export class PoetryComponent implements OnInit {
   }
 
   public sequence(evt: Event) {
-    console.log('seq: ', evt);
+    console.log('sequencer event:', evt);
     const randomStrophae = Math.floor(Math.random() * this.objectOrientedPoetry.strophae.length);
     const strophae: Strophae = this.objectOrientedPoetry.strophae[randomStrophae];
     const randomLine = Math.floor(Math.random() * strophae.lines.length);
@@ -176,10 +176,14 @@ export class PoetryComponent implements OnInit {
     const randomWord = Math.floor(Math.random() * line.words.length);
     const word = line.words[randomWord];
 
-    this.reword(line.words, word);
-    this.reline(strophae.lines, line);
+    this.retext(strophae, line, word);
     this.recolor();
     // this.generate();
+  }
+
+  private retext(strophae: any, line: any, word: any) {
+    this.reword(line.words, word);
+    this.reline(strophae.lines, line);
   }
 
   public methodMap = [{

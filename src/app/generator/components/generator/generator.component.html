@@ -4,7 +4,7 @@
     <div class="row">
       <app-poetry #poetry></app-poetry>
       <!-- <app-sample sample="{ name: 'kick' }"></app-sample> -->
-      <app-audio (sequencer)=poetry.sequence($event)></app-audio>
+      <app-audio [name]="'kick-300'" (sequencer)=poetry.sequence($event)></app-audio>
       <app-audio (sequencer)=poetry.sequence($event)></app-audio>
     </div>
     <div>

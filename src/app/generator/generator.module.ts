@@ -8,11 +8,12 @@ import { PoetryXComponent } from './components/poetry-x/poetry-x.component';
 import { PoetryComponent } from './components/poetry/poetry.component';
 import { PoetryService } from './components/services/poetry.service';
 import { GeneratorRoutingModule } from './generator-routing.module';
-import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatFormFieldModule, MatLabel } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
 import { SampleComponent } from './components/audio/sample.component';
 
 @NgModule({
@@ -21,6 +22,7 @@ import { SampleComponent } from './components/audio/sample.component';
     GeneratorRoutingModule,
     ReactiveFormsModule,
     MatFormFieldModule,
+    MatInputModule,
     MatSelectModule,
     MatSliderModule,
     MatButtonModule,

@@ -21,7 +21,7 @@ export interface Sample {
 })
 export class AudioComponent implements OnInit {
 
-    @Input() title = 'Audio Loop';
+    @Input() name = 'Audio Loop';
 
     public loadingSample = false;
     public playingSample = false;

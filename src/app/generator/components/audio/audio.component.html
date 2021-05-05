@@ -1,6 +1,13 @@
 <div>
-
-  <div class="title"><pre>{{ title }} {{sampleFreq}}&nbsp;ms</pre></div>
+  
+  <div class="title">
+  <!-- <form class="example-form">
+    <mat-form-field class="example-full-width">
+      <mat-label><pre>{{ name }} {{sampleFreq}}&nbsp;</pre></mat-label>
+      <input matInput placeholder="name" value="Kick 300">
+    </mat-form-field>
+  </form> -->
+  </div>
 
   <div class="row">    
     <button *ngIf="!playingSample" mat-icon-button color="accent" [disabled]="loadingSample" (click)="play()" class="play">
