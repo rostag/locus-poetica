@@ -2,7 +2,7 @@
   display: block;
 
   mat-slider {
-    width: 200px;
+    max-width: 200px;
   }
 
   .play,
@@ -16,6 +16,8 @@
       margin-left: 0;
       padding: 0 20px 0 2px;
       border-radius: 10px;
+      font-size: .6rem;
+      font-weight: 100;
     }
   }
 }

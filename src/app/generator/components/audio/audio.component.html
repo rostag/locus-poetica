@@ -1,26 +1,26 @@
-<div>
-  
-  <div class="title">
-  <!-- <form class="example-form">
-    <mat-form-field class="example-full-width">
-      <mat-label><pre>{{ name }} {{sampleFreq}}&nbsp;</pre></mat-label>
-      <input matInput placeholder="name" value="Kick 300">
-    </mat-form-field>
-  </form> -->
+<div class="shidden">
+  <div class="title row">
+    <form [formGroup]="mainForm">
+      <mat-form-field>
+        <mat-label>{{ name }} {{sampleFreq}}&nbsp;</mat-label>
+        <input matInput placeholder="name" [value]="name">
+      </mat-form-field>
+    </form>
+    <div class="close-button"><button mat-icon-button (click)="close(generatorStateAudio)" mat-button><mat-icon>close</mat-icon></button></div>
   </div>
-
-  <div class="row">    
-    <button *ngIf="!playingSample" mat-icon-button color="accent" [disabled]="loadingSample" (click)="play()" class="play">
+  <div class="row">
+    <button *ngIf="!playingSample" mat-icon-button color="accent" [disabled]="loadingSample" (click)="play()"
+      class="play">
       <mat-icon inline="true">play_circle_filled</mat-icon>
     </button>
-    <button *ngIf="playingSample" mat-icon-button color="accent" [disabled]="loadingSample" (click)="stopLoop('')" class="stop">
+    <button *ngIf="playingSample" mat-icon-button color="accent" [disabled]="loadingSample" (click)="stopLoop('')"
+      class="stop">
       <mat-icon inline="true">stop_circle_filled</mat-icon>
     </button>
-    <mat-slider min="400" max="2000" [step]="100" [thumbLabel]="true" (input)="setControlValue($event)"></mat-slider>
+    <mat-slider min="400" max="2000" step="100" [thumbLabel]="true" (input)="setControlValue($event)"></mat-slider>
   </div>
-
   <div class="row">
-    <div class="samples">
+    <div class="samples g-row">
       <button mat-button *ngFor="let sampleName of sampleNames" [disabled]="loadingSample"
         (click)="playLoop(sampleName)">
         <mat-icon>play_arrow</mat-icon>{{sampleName}}
@@ -36,7 +36,7 @@
 </div> -->
 
 <!-- <div>
-  <h4>Binaural, frequency {{binauralFreq}}Hz</h4>
+  <h4>Binaural, {{binauralFreq}}Hz</h4>
   <button mat-button *ngFor="let sampleName of sampleNames" [disabled]="loadingSample" (click)="playBinaural(sampleName, r(20), 20)">
     {{sampleName}}
   </button>  

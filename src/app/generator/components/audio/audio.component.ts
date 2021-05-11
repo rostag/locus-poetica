@@ -1,7 +1,9 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
 import { MatSliderChange } from '@angular/material/slider'
 import { interval, of, Subject } from 'rxjs';
 import { timeInterval, takeUntil } from 'rxjs/operators';
+import { generatorState } from '../generator/generator.component';
 
 // ankursethi.in/2016/01/13/build-a-sampler-with-angular-2-webaudio-and-webmidi-lesson-1-introduction-to-the-webaudio-api
 export interface Connection {
@@ -22,7 +24,11 @@ export interface Sample {
 export class AudioComponent implements OnInit {
 
     @Input() name = 'Audio Loop';
+    @Input('audio') generatorStateAudio: any;
+    
+    public generatorState = generatorState;
 
+    public mainForm: FormGroup;
     public loadingSample = false;
     public playingSample = false;
 
@@ -38,15 +44,20 @@ export class AudioComponent implements OnInit {
         { name: 'dsb-thinner' },
         { name: 'speech15' }
     ];
-    public sampleNames = ['kick', 'dsb-thinner', 'speech15', 'speech2'];
+
+    public sampleNames = ['kick', 'dsb-thinner', 'speech15', 'speech2', 'minus'];
     public currentSampleName = 'kick';
-    audioInitialized: boolean;
+    public audioInitialized: boolean;
+    public isOpened: boolean;
 
     constructor() { }
 
     @Output() sequencer: EventEmitter<any> = new EventEmitter();
 
     public ngOnInit() {
+        this.mainForm = new FormGroup({
+            'name': new FormControl(null),
+        });
         this.initAudio();
     }
 
@@ -181,8 +192,16 @@ export class AudioComponent implements OnInit {
         return this._sampleFreq;
     }
 
+    public open() {
+        console.log('Open');
+        this.isOpened = true;
+    }
+
     private getSampleByName(name: string) {
         return this.samples.find((sample: any) => sample.name === name) || { name: 'Undefined' };
     }
 
+    public close(state: any) {
+        state.enabled = false;
+    }
 }
