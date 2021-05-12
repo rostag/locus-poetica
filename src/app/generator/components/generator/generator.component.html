@@ -3,11 +3,12 @@
   <div class="generator-cards">
     <div class="row">
       <app-poetry #poetry></app-poetry>
-      <!-- <app-sample sample="{ name: 'kick' }"></app-sample> -->
-      <app-audio *ngIf="!!generatorState.audio[0].enabled; else setAudio1" [audio]="generatorState.audio[0]" [name]="'kick'" (sequencer)=poetry.sequence($event)></app-audio>
-      <app-audio *ngIf="!!generatorState.audio[1].enabled; else setAudio2" [audio]="generatorState.audio[1]" [name]="'speech2'" (sequencer)=poetry.sequence($event)></app-audio>
-    </div>
-    <div>
+      <div>
+        <app-audio *ngIf="!!generatorState.audio[0].enabled; else setAudio1" [audio]="generatorState.audio[0]"
+          [name]="'kick'" (sequencer)=poetry.sequence($event)></app-audio>
+        <app-audio *ngIf="!!generatorState.audio[1].enabled; else setAudio2" [audio]="generatorState.audio[1]"
+          [name]="'speech2'" (sequencer)=poetry.sequence($event)></app-audio>
+      </div>
     </div>
     <div>
       <app-poetry-x></app-poetry-x>
@@ -19,9 +20,13 @@
 </div>
 
 <ng-template #setAudio1>
-  <div class="open-button"><button mat-icon-button (click)="open(generatorState.audio[0])" mat-stroked-button><mat-icon>filter_list</mat-icon></button></div>
+  <div class="open-button"><button mat-icon-button (click)="open(generatorState.audio[0])">
+      <mat-icon>audiotrack</mat-icon>
+    </button></div>
 </ng-template>
 
 <ng-template #setAudio2>
-  <div class="open-button"><button mat-icon-button (click)="open(generatorState.audio[1])" mat-stroked-button><mat-icon>filter_list</mat-icon></button></div>
+  <div class="open-button"><button mat-icon-button (click)="open(generatorState.audio[1])">
+      <mat-icon>audiotrack</mat-icon>
+    </button></div>
 </ng-template>

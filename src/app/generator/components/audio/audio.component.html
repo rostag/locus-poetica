@@ -1,12 +1,13 @@
 <div class="shidden">
   <div class="title row">
-    <form [formGroup]="mainForm">
+    <div>{{ name }} {{sampleFreq}}ms</div>
+    <!-- <form [formGroup]="mainForm">
       <mat-form-field>
         <mat-label>{{ name }} {{sampleFreq}}&nbsp;</mat-label>
         <input matInput placeholder="name" [value]="name">
       </mat-form-field>
-    </form>
-    <div class="close-button"><button mat-icon-button (click)="close(generatorStateAudio)" mat-button><mat-icon>close</mat-icon></button></div>
+    </form> -->
+    <div class="close-button"><button mat-icon-button (click)="close(generatorStateAudio)"><mat-icon size="16">close</mat-icon></button></div>
   </div>
   <div class="row">
     <button *ngIf="!playingSample" mat-icon-button color="accent" [disabled]="loadingSample" (click)="play()"
@@ -20,8 +21,8 @@
     <mat-slider min="400" max="2000" step="100" [thumbLabel]="true" (input)="setControlValue($event)"></mat-slider>
   </div>
   <div class="row">
-    <div class="samples g-row">
-      <button mat-button *ngFor="let sampleName of sampleNames" [disabled]="loadingSample"
+    <div class="samples grid-row">
+      <button class="sample-button" mat-flat-button *ngFor="let sampleName of sampleNames" [disabled]="loadingSample"
         (click)="playLoop(sampleName)">
         <mat-icon>play_arrow</mat-icon>{{sampleName}}
       </button>

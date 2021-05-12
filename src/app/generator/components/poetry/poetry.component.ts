@@ -34,6 +34,14 @@ export class PoetryComponent implements OnInit {
   poetry: string = '';
   public objectOrientedPoetry: Poetry;
 
+  public connections: Connection[] = [{
+    source: 'audio[0].beat',
+    destination: 'poetry.recolor',
+  }, {
+    source: 'audio[1].beat',
+    destination: 'poetry.sequence',
+  }]
+
   constructor(private poetryService: PoetryService) {
     this.dictionaries = this.poetryService.setupDictionaries();
     this.dictionary = this.dictionaries[0];
@@ -47,14 +55,6 @@ export class PoetryComponent implements OnInit {
 
   public onRhymeSelection(rhyme: Rhyme) {
     this.setRhyme(rhyme);
-    this.generate();
-  }
-
-  public reSlovo() {
-    this.generate();
-  }
-
-  public reStyle() {
     this.generate();
   }
 
@@ -167,7 +167,7 @@ export class PoetryComponent implements OnInit {
     return this.latynizeControl.value ? latynize(word.wordContents) : word.wordContents;
   }
 
-  public sequence(evt: Event) {
+  public sequence(evt: Event | null) {
     console.log('sequencer event:', evt);
     const randomStrophae = Math.floor(Math.random() * this.objectOrientedPoetry.strophae.length);
     const strophae: Strophae = this.objectOrientedPoetry.strophae[randomStrophae];
@@ -210,13 +210,4 @@ export class PoetryComponent implements OnInit {
     this.fontSize += Math.round(Math.random() * 3 - Math.random() * 3);
     // console.log('fsize', this.fontSize);
   }
-
-  public connections: Connection[] = [{
-    source: 'beat()',
-    destination: 'reBgColor()',
-  }, {
-    source: 'beat()',
-    destination: 'reword()',
-  }]
-
 }

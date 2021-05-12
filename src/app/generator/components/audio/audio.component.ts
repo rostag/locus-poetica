@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input, OnDestroy } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MatSliderChange } from '@angular/material/slider'
 import { interval, of, Subject } from 'rxjs';
@@ -21,7 +21,7 @@ export interface Sample {
     templateUrl: './audio.component.html',
     styleUrls: ['./audio.component.scss']
 })
-export class AudioComponent implements OnInit {
+export class AudioComponent implements OnInit, OnDestroy {
 
     @Input() name = 'Audio Loop';
     @Input('audio') generatorStateAudio: any;
@@ -100,8 +100,6 @@ export class AudioComponent implements OnInit {
 
     public stopLoop(sampleName: string) {
         this.playingSample = false;
-        console.log('stop:', sampleName);
-
         this.onDestroy$.next();
     }
 
@@ -203,5 +201,10 @@ export class AudioComponent implements OnInit {
 
     public close(state: any) {
         state.enabled = false;
+    }
+
+    public ngOnDestroy() {
+        this.generatorStateAudio.enabled = false;
+        this.stopLoop('');
     }
 }
