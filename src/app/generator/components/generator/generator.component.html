@@ -1,8 +1,7 @@
 <div class="gene-wrapper">
-  <!-- <h1>Генератори</h1> -->
   <div class="generator-cards">
     <div class="row">
-      <app-poetry #poetry></app-poetry>
+      <app-poetry class="poetry" #poetry></app-poetry>
       <div>
         <app-audio *ngIf="!!generatorState.audio[0].enabled; else setAudio1" [audio]="generatorState.audio[0]"
           [name]="'kick'" (sequencer)=poetry.sequence($event)></app-audio>
@@ -13,6 +12,7 @@
     <div>
       <app-poetry-x></app-poetry-x>
     </div>
+    <!-- TODO Move to the new home -->
     <div>
       <app-c-news></app-c-news>
     </div>

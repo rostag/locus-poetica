@@ -10,7 +10,7 @@ export interface IGeneratorState {
   ]
 }
 export const generatorState = {
-  audio: [{ enabled: true, name: 'kick' }, { enabled: false, name: 'speech2' }]
+  audio: [{ enabled: false, name: 'kick' }, { enabled: false, name: 'speech2' }]
 }
 @Component({
   selector: 'app-generator',
