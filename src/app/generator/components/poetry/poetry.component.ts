@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { getRandomWordOfGivenLength, latynize } from '../../generator-helpers';
-import { Connection } from '../audio/audio.component';
+import { generatorState, IConnection } from '../generator/generator.component';
 import { Rhyme, Rhymes, rhymes } from '../models/rhyme.models';
 import { Dictionary, Line, Poetry, PoetryService, Strophae, Word } from '../services/poetry.service';
 
@@ -34,13 +34,7 @@ export class PoetryComponent implements OnInit {
   poetry: string = '';
   public objectOrientedPoetry: Poetry;
 
-  public connections: Connection[] = [{
-    source: 'audio[0].beat',
-    destination: 'poetry.recolor',
-  }, {
-    source: 'audio[1].beat',
-    destination: 'poetry.sequence',
-  }]
+  public connections: IConnection[] = generatorState.connections;
 
   constructor(private poetryService: PoetryService) {
     this.dictionaries = this.poetryService.setupDictionaries();

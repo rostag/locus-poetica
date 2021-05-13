@@ -2,7 +2,7 @@ import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { MatSliderChange } from '@angular/material/slider'
 import { interval, Subject } from 'rxjs';
 import { timeInterval, takeUntil } from 'rxjs/operators';
-import { Sample } from './audio.component';
+import { ISample } from '../generator/generator.component';
 
 // ankursethi.in/2016/01/13/build-a-sampler-with-angular-2-webaudio-and-webmidi-lesson-1-introduction-to-the-webaudio-api
 
@@ -13,7 +13,7 @@ import { Sample } from './audio.component';
 })
 export class SampleComponent implements OnInit {
 
-    @Input() set sample(value: Sample) {
+    @Input() set sample(value: ISample) {
         this.sample = value;
     };
 

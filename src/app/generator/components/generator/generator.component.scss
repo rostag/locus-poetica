@@ -2,7 +2,12 @@
   display: block;
 
   .open-button {
-    display: block;
+    display: grid;
+    grid-template-columns: auto 40px;
+
+    .mat-icon-button {
+      grid-column: 2;
+    }
   }
 
   ::ng-deep .row {
@@ -20,7 +25,6 @@
 
   .generator-cards {
     >div {
-      padding-right: 32px;
       padding-bottom: 32px;
     }
   }

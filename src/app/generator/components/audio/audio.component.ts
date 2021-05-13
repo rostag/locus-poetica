@@ -3,19 +3,10 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { MatSliderChange } from '@angular/material/slider'
 import { interval, of, Subject } from 'rxjs';
 import { timeInterval, takeUntil } from 'rxjs/operators';
-import { generatorState } from '../generator/generator.component';
+import { generatorState, ISample } from '../generator/generator.component';
 
 // ankursethi.in/2016/01/13/build-a-sampler-with-angular-2-webaudio-and-webmidi-lesson-1-introduction-to-the-webaudio-api
-export interface Connection {
-    source: any;
-    destination: any;
-}
-export interface Sample {
-    name: string;
-    interval?: number; // Set duration of one
-    audioContext?: AudioContext;
-    audioBuffer?: AudioBuffer;
-}
+
 @Component({
     selector: 'app-audio',
     templateUrl: './audio.component.html',
@@ -39,7 +30,7 @@ export class AudioComponent implements OnInit, OnDestroy {
     private _binauralFreq: number;
     private _sampleFreq = 300;
 
-    public samples: Sample[] = [
+    public samples: ISample[] = [
         { name: 'kick' },
         { name: 'dsb-thinner' },
         { name: 'speech15' }
@@ -71,7 +62,7 @@ export class AudioComponent implements OnInit, OnDestroy {
             this.fetchSample(this.sampleNames[s])
                 .then(audioBuffer => {
                     this.loadingSample = false;
-                    const sample: Sample = this.getSampleByName(this.sampleNames[s]);
+                    const sample: ISample = this.getSampleByName(this.sampleNames[s]);
                     sample.audioBuffer = audioBuffer;
                     this.audioBuffer[this.sampleNames[s] as any] = audioBuffer;
                 })
@@ -86,7 +77,7 @@ export class AudioComponent implements OnInit, OnDestroy {
             .then(response => response.arrayBuffer())
             .then(buffer => {
                 return new Promise<AudioBuffer>((resolve, reject) => {
-                    const sample: Sample = this.getSampleByName(this.sampleNames[sampleName]);
+                    const sample: ISample = this.getSampleByName(this.sampleNames[sampleName]);
                     sample.audioContext = new AudioContext();
                     this.audioContext[sampleName] = sample.audioContext;
                     sample.audioContext.decodeAudioData(
