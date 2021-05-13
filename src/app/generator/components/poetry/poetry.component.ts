@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { getRandomWordOfGivenLength, latynize } from '../../generator-helpers';
-import { generatorState, IConnection } from '../generator/generator.component';
+import { generatorState, IAudio, IConnection } from '../generator/generator.component';
 import { Rhyme, Rhymes, rhymes } from '../models/rhyme.models';
 import { Dictionary, Line, Poetry, PoetryService, Strophae, Word } from '../services/poetry.service';
 
@@ -161,8 +161,11 @@ export class PoetryComponent implements OnInit {
     return this.latynizeControl.value ? latynize(word.wordContents) : word.wordContents;
   }
 
-  public sequence(evt: Event | null) {
-    console.log('sequencer event:', evt);
+  public poetryBeat(evt: IAudio) {
+    const cons = generatorState.connections;
+    const con: IConnection = cons.find(con => con.source === evt.name) || { source : null, destination: null};
+    const dest = con.destination;
+    console.log('sequencer event:', evt, con, dest);
     const randomStrophae = Math.floor(Math.random() * this.objectOrientedPoetry.strophae.length);
     const strophae: Strophae = this.objectOrientedPoetry.strophae[randomStrophae];
     const randomLine = Math.floor(Math.random() * strophae.lines.length);
@@ -173,6 +176,14 @@ export class PoetryComponent implements OnInit {
     this.retext(strophae, line, word);
     this.recolor();
     // this.generate();
+
+    const destMethod: string = dest as string;
+
+    // this[`a${destMethod}`];
+
+    // this['hello']();
+
+    // this[dest as any]();
   }
 
   private retext(strophae: any, line: any, word: any) {

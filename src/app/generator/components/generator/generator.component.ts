@@ -21,13 +21,19 @@ export interface IGeneratorState {
 }
 
 export const generatorState: IGeneratorState = {
-  audio: [{ enabled: false, name: 'kick' }, { enabled: false, name: 'speech2' }],
-  connections: [{
-    source: 'audio[0].beat',
-    destination: 'poetry.recolor',
+  audio: [{
+    enabled: false,
+    name: 'kick'
   }, {
-    source: 'audio[1].beat',
-    destination: 'poetry.sequence',
+    enabled: true,
+    name: 'speech'
+  }],
+  connections: [{
+    source: 'kick',
+    destination: 'recolor',
+  }, {
+    source: 'speech',
+    destination: 'generate',
   }],
 }
 @Component({

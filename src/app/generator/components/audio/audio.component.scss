@@ -24,8 +24,8 @@
 
   .samples {
     .sample-button {
-      border-radius: 2px;
-      box-shadow: 1px 1px 1px 1px #00000040;
+      border-radius: 4px;
+      box-shadow: 0px 0px 1px 0px #00000040;
       text-align: left;
       font-size: 0.75rem;
       font-weight: 400;
@@ -34,7 +34,7 @@
       background-color: adjust-color($color: #000000, $hue: 0, $saturation: 0%, $lightness: 98%, $alpha: 1.0);
     }
     .sample-button:hover {
-      background-color: adjust-color($color: #000000, $hue: 0, $saturation: 0%, $lightness: 90%, $alpha: 1.0);
+      background-color: adjust-color($color: #000000, $hue: 0, $saturation: 0%, $lightness: 100%, $alpha: 1.0);
     }
   }
 

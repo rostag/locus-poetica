@@ -4,9 +4,9 @@
       <app-poetry class="poetry" #poetry></app-poetry>
       <div>
         <app-audio *ngIf="!!generatorState.audio[0].enabled; else setAudio1" [audio]="generatorState.audio[0]"
-          [name]="'kick'" (sequencer)=poetry.sequence($event)></app-audio>
+          [name]="'kick'" (beat)=poetry.poetryBeat($event)></app-audio>
         <app-audio *ngIf="!!generatorState.audio[1].enabled; else setAudio2" [audio]="generatorState.audio[1]"
-          [name]="'speech2'" (sequencer)=poetry.sequence($event)></app-audio>
+          [name]="'speech2'" (beat)=poetry.poetryBeat($event)></app-audio>
       </div>
     </div>
     <div>

@@ -43,7 +43,7 @@ export class AudioComponent implements OnInit, OnDestroy {
 
     constructor() { }
 
-    @Output() sequencer: EventEmitter<any> = new EventEmitter();
+    @Output('beat') audioBeat: EventEmitter<any> = new EventEmitter();
 
     public ngOnInit() {
         this.mainForm = new FormGroup({
@@ -117,7 +117,7 @@ export class AudioComponent implements OnInit, OnDestroy {
                 takeUntil(this.onDestroy$)
             )
             .subscribe(a => {
-                this.sequencer.emit(sample);
+                this.audioBeat.emit(this.generatorStateAudio);
                 this.playSample(sample);
             });
     }
@@ -125,7 +125,7 @@ export class AudioComponent implements OnInit, OnDestroy {
     public playLoopOnce(name: string) {
         this.initAudio();
         of(1).pipe().subscribe(a => {
-            this.sequencer.emit(name);
+            this.audioBeat.emit(this.generatorStateAudio);
             this.playSample(name);
         });
     }
@@ -141,7 +141,7 @@ export class AudioComponent implements OnInit, OnDestroy {
     }
 
     public setControlValue(evt: MatSliderChange) {
-        this.sequencer.emit(evt);
+        this.audioBeat.emit(this.generatorStateAudio);
         this._sampleFreq = evt.value as number;
     }
 
