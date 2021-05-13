@@ -2,7 +2,7 @@
   <div class="generator-cards">
     <div class="row">
       <app-poetry class="poetry" #poetry></app-poetry>
-      <div>
+      <div class="panels">
         <app-audio *ngIf="!!generatorState.audio[0].enabled; else setAudio1" [audio]="generatorState.audio[0]"
           [name]="'kick'" (beat)=poetry.poetryBeat($event)></app-audio>
         <app-audio *ngIf="!!generatorState.audio[1].enabled; else setAudio2" [audio]="generatorState.audio[1]"

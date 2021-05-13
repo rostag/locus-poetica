@@ -4,6 +4,7 @@
   .open-button {
     display: grid;
     grid-template-columns: auto 40px;
+    // border-bottom: 1px dashed #cccccc;
 
     .mat-icon-button {
       grid-column: 2;
@@ -30,5 +31,8 @@
   }
   .poetry {
     flex-grow: 2;
+  }
+  .panels {
+    border-top: 1px dotted #cccccc;
   }
 }
