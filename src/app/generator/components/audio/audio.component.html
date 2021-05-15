@@ -1,12 +1,12 @@
 <div>
   <div class="title row">
-    <div>{{ name }} {{sampleFreq}}ms</div>
+    <div class="name">{{name}} {{sampleFreq}}ms</div>
     <div class="close-button"><button mat-icon-button (click)="close(generatorStateAudio)"><mat-icon size="16">close</mat-icon></button></div>
   </div>
-  <div class="row">
-    <button *ngIf="!playingSample" mat-icon-button color="accent" [disabled]="loadingSample" (click)="play()"
+  <div class="controls">
+    <button *ngIf="!playingSample" mat-icon-button [disabled]="loadingSample" (click)="play()"
       class="play">
-      <mat-icon inline="true">play_circle_filled</mat-icon>
+      <mat-icon inline="true">play_circle_outline</mat-icon>
     </button>
     <button *ngIf="playingSample" mat-icon-button color="accent" [disabled]="loadingSample" (click)="stopLoop('')"
       class="stop">

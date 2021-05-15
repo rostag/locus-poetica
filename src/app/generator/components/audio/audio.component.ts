@@ -33,10 +33,10 @@ export class AudioComponent implements OnInit, OnDestroy {
     public samples: ISample[] = [
         { name: 'kick' },
         { name: 'dsb-thinner' },
-        { name: 'speech15' }
+        { name: 'speech1' }
     ];
 
-    public sampleNames = ['kick', 'dsb-thinner', 'speech15', 'speech2', 'minus'];
+    public sampleNames = ['kick', 'bass', 'speech1', 'speech2', 'minus'];
     public currentSampleName = 'kick';
     public audioInitialized: boolean;
     public isOpened: boolean;

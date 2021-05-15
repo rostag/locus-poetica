@@ -22,10 +22,10 @@ export interface IGeneratorState {
 
 export const generatorState: IGeneratorState = {
   audio: [{
-    enabled: false,
+    enabled: true,
     name: 'kick'
   }, {
-    enabled: true,
+    enabled: false,
     name: 'speech'
   }],
   connections: [{

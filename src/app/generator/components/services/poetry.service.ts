@@ -60,10 +60,10 @@ export class PoetryService {
     public setupDictionaries() {
         this.dictionaries = [
             this.createDictionaryFromSource(dictonarySource.kob, '\n\n', '\n', ' '),
-            this.createDictionaryFromSource(dictonarySource.mat),
+            // this.createDictionaryFromSource(dictonarySource.mat),
             this.createDictionaryFromSource(dictonarySource.dumyLat, '\n\n', '\n', ' ', '-'),
             this.createDictionaryFromSource(dictonarySource.ham),
-            this.createDictionaryFromSource(dictonarySource.roz),
+            // this.createDictionaryFromSource(dictonarySource.roz),
             this.createDictionaryFromSource(dictonarySource.gg, '--SECTION-->'),
             this.createDictionaryFromSource(dictonarySource.pyro),
             this.createDictionaryFromSource(dictonarySource.numbers),

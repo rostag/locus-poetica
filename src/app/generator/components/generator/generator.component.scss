@@ -4,7 +4,6 @@
   .open-button {
     display: grid;
     grid-template-columns: auto 40px;
-    // border-bottom: 1px dashed #cccccc;
 
     .mat-icon-button {
       grid-column: 2;
@@ -21,7 +20,7 @@
   }
 
   .gene-wrapper {
-    padding: 32px;
+    padding: 8px;
   }
 
   .generator-cards {
@@ -32,7 +31,12 @@
   .poetry {
     flex-grow: 2;
   }
-  .panels {
-    border-top: 1px dotted #cccccc;
+
+  .panel {
+
+    &>* {
+      border-top: 1px dashed #cccccc;
+      border-bottom: 1px dashed #cccccc;
+    }
   }
 }

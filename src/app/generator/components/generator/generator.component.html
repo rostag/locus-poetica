@@ -2,7 +2,7 @@
   <div class="generator-cards">
     <div class="row">
       <app-poetry class="poetry" #poetry></app-poetry>
-      <div class="panels">
+      <div class="panel">
         <app-audio *ngIf="!!generatorState.audio[0].enabled; else setAudio1" [audio]="generatorState.audio[0]"
           [name]="'kick'" (beat)=poetry.poetryBeat($event)></app-audio>
         <app-audio *ngIf="!!generatorState.audio[1].enabled; else setAudio2" [audio]="generatorState.audio[1]"
@@ -13,20 +13,22 @@
       <app-poetry-x></app-poetry-x>
     </div>
     <!-- TODO Move to the new home -->
+    <!-- 
     <div>
       <app-c-news></app-c-news>
     </div>
+    -->
   </div>
 </div>
 
 <ng-template #setAudio1>
-  <div class="open-button"><button mat-icon-button (click)="open(generatorState.audio[0])">
+  <div class="open-button"><button color="primary" mat-icon-button (click)="open(generatorState.audio[0])">
       <mat-icon>audiotrack</mat-icon>
     </button></div>
 </ng-template>
 
 <ng-template #setAudio2>
-  <div class="open-button"><button mat-icon-button (click)="open(generatorState.audio[1])">
+  <div class="open-button"><button color="primary" mat-icon-button (click)="open(generatorState.audio[1])">
       <mat-icon>audiotrack</mat-icon>
     </button></div>
 </ng-template>

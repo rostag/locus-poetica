@@ -1,8 +1,21 @@
+<button mat-button color="accent" (click)="generate()" class="wrapper-button" [ngStyle]="{ backgroundColor: 'rgba('+color.r+', '+color.g+', '+color.b+', 1)' } ">
+    <pre class="pre-poetry">
+        <div class="strophae" *ngFor="let strophae of objectOrientedPoetry.strophae">
+            <div class="line" *ngFor="let line of strophae.lines" (click)="reline(strophae.lines, line, $event)">
+                <div class="word" (click)="reword(line.words, word, $event)" *ngFor="let word of line.words">{{postProcess(word)}}&nbsp;</div>
+            </div>
+        </div>
+    </pre>
+</button>
+
 <div class="settings">
-    <div class="settings">
+    <!-- <div class="settings">
         <input mat-input type="checkbox" [formControl]="latynizeControl" id="cb-latynize" />
         <label for="cb-latynize">Latynize</label>
-    </div>
+    </div> -->
+    <div>
+        <span *ngFor="let connection of connections">{{connection.source}} &gt; {{connection.destination}}&nbsp;&nbsp;&nbsp;&nbsp; </span>
+    </div>    
     <div class="settings">
         <mat-form-field>
             <mat-label>Slovnyk: {{ dictionary.name }}, {{ dictionary.words.length }}</mat-label>
@@ -26,15 +39,3 @@
     <button mat-button (click)="copyText($event)">Copy</button>
 </div>
 
-<button mat-button color="accent" (click)="generate()" class="wrapper-button" [ngStyle]="{ backgroundColor: 'rgba('+color.r+', '+color.g+', '+color.b+', 1)' } ">
-    <pre class="pre-poetry">
-        <div class="strophae" *ngFor="let strophae of objectOrientedPoetry.strophae">
-            <div class="line" *ngFor="let line of strophae.lines" (click)="reline(strophae.lines, line, $event)">
-                <div class="word" (click)="reword(line.words, word, $event)" *ngFor="let word of line.words">{{postProcess(word)}}&nbsp;</div>
-            </div>
-        </div>
-    </pre>
-</button>
-<div>
-    <div *ngFor="let connection of connections">{{connection.source}} &gt; {{connection.destination}}</div>
-</div>  

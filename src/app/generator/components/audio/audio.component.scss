@@ -2,18 +2,32 @@
   display: block;
   padding: 0 0 10px 10px;
   margin-left: 10px;
+  background-color: #cecaa5;
+  border-radius: 6px;
+  margin-bottom: 10px;
 
   .title {
     align-items: center;
     font-size: 16px;
   }
 
+  .name {
+    // font-weight: 500;
+    color: #777777;
+    text-transform: uppercase;
+  }
+
   .close-button {
     font-size: 10px;
   }
 
+  .controls {
+    display: grid;
+    grid-template-columns: 40px auto;
+  }
+
   mat-slider {
-    max-width: 200px;
+    margin-right: 10px;
   }
 
   .play,
@@ -23,7 +37,9 @@
   }
 
   .samples {
+    margin-right: 10px;
     .sample-button {
+      padding-left: 1px;
       border-radius: 4px;
       box-shadow: 0px 0px 1px 0px #00000040;
       text-align: left;
@@ -44,6 +60,8 @@
 
     grid-template-columns: 50% 50%;
     grid-template-rows: 25px 25px 25px 25px;
+    column-gap: 3px;
+    row-gap: 3px;
 
     // grid-template-columns: repeat(auto-fill, minmax(1rem, 1fr));
     
