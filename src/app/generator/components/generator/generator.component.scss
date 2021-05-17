@@ -2,12 +2,11 @@
   display: block;
 
   .open-button {
-    display: grid;
-    grid-template-columns: auto 40px;
-
-    .mat-icon-button {
-      grid-column: 2;
-    }
+    text-align: right;
+    padding-right: 8px;
+    padding-left: 8px;
+    margin-left: 10px;
+    min-width: unset;
   }
 
   ::ng-deep .row {
@@ -33,9 +32,9 @@
   }
 
   .panel {
-
+    display: flex;
+    flex-direction: column;
     &>* {
-      border-top: 1px dashed #cccccc;
       border-bottom: 1px dashed #cccccc;
     }
   }

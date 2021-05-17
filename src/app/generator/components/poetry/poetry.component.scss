@@ -9,11 +9,10 @@
     }
 
     .wrapper-button {
+        width: 100%;
         min-height: 420px;
         background-color: transparent;
-        border: 1px solid transparent;
         border-radius: 0;
-        width: 100%;
         line-height: 16px;
         &:hover {
             border: 1px dotted #dedede77;

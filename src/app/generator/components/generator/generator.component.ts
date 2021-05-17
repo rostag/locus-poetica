@@ -26,13 +26,16 @@ export const generatorState: IGeneratorState = {
     name: 'kick'
   }, {
     enabled: false,
-    name: 'speech'
+    name: 'speech1'
+  }, {
+    enabled: false,
+    name: 'speech2'
   }],
   connections: [{
     source: 'kick',
     destination: 'recolor',
   }, {
-    source: 'speech',
+    source: 'speech1',
     destination: 'generate',
   }],
 }

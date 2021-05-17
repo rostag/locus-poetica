@@ -6,12 +6,17 @@
         <app-audio *ngIf="!!generatorState.audio[0].enabled; else setAudio1" [audio]="generatorState.audio[0]"
           [name]="'kick'" (beat)=poetry.poetryBeat($event)></app-audio>
         <app-audio *ngIf="!!generatorState.audio[1].enabled; else setAudio2" [audio]="generatorState.audio[1]"
+          [name]="'speech1'" (beat)=poetry.poetryBeat($event)></app-audio>
+        <app-audio *ngIf="!!generatorState.audio[2].enabled; else setAudio3" [audio]="generatorState.audio[2]"
           [name]="'speech2'" (beat)=poetry.poetryBeat($event)></app-audio>
       </div>
     </div>
+    <!-- TODO Move to the new home -->
+    <!--
     <div>
       <app-poetry-x></app-poetry-x>
     </div>
+    -->
     <!-- TODO Move to the new home -->
     <!-- 
     <div>
@@ -22,13 +27,19 @@
 </div>
 
 <ng-template #setAudio1>
-  <div class="open-button"><button color="primary" mat-icon-button (click)="open(generatorState.audio[0])">
-      <mat-icon>audiotrack</mat-icon>
-    </button></div>
+  <button mat-button (click)="open(generatorState.audio[0])" class="open-button">
+    <mat-icon>audiotrack</mat-icon>
+  </button>
 </ng-template>
 
 <ng-template #setAudio2>
-  <div class="open-button"><button color="primary" mat-icon-button (click)="open(generatorState.audio[1])">
-      <mat-icon>audiotrack</mat-icon>
-    </button></div>
+  <button mat-button (click)="open(generatorState.audio[1])" class="open-button">
+    <mat-icon>audiotrack</mat-icon>
+  </button>
+</ng-template>
+
+<ng-template #setAudio3>
+  <button mat-button (click)="open(generatorState.audio[2])" class="open-button">
+    <mat-icon>audiotrack</mat-icon>
+  </button>
 </ng-template>
