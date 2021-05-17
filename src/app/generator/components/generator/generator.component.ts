@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 
 export interface IConnection {
   source: any;
-  destination: any;
+  target: any;
 }
 export interface ISample {
   name: string;
@@ -33,13 +33,13 @@ export const generatorState: IGeneratorState = {
   }],
   connections: [{
     source: 'kick',
-    destination: 'recolor',
+    target: 'randomize',
   }, {
     source: 'speech1',
-    destination: 'resizeFont',
+    target: 'resizeFont',
   }, {
     source: 'speech2',
-    destination: 'retext',
+    target: 'retext',
   }],
 }
 @Component({

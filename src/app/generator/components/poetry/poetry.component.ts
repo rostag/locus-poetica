@@ -162,29 +162,39 @@ export class PoetryComponent implements OnInit {
     return this.latynizeControl.value ? latynize(word.wordContents) : word.wordContents;
   }
 
-  public poetryBeat(evt: IAudio) {
-    const cons = generatorState.connections;
-    const con: IConnection = cons.find(con => con.source === evt.name) || { source : null, destination: null};
-    const dest = con.destination;
+  public getRandomText() {
     const randomStrophae = Math.floor(Math.random() * this.objectOrientedPoetry.strophae.length);
     const strophae: Strophae = this.objectOrientedPoetry.strophae[randomStrophae];
     const randomLine = Math.floor(Math.random() * strophae.lines.length);
     const line: Line = strophae.lines[randomLine];
     const randomWord = Math.floor(Math.random() * line.words.length);
     const word = line.words[randomWord];
-    
-    // Options:
+    return { strophae, line, word }
+  }
+
+  public poetryBeat(evt: IAudio) {
+    const text = this.getRandomText();
+
+    const connection: IConnection = generatorState.connections.find(con => con.source === evt.name) || { source: null, target: null };
+    const targetMethod = connection.target;
+
     const methodMap = [
-      { name: 'retext', ref: () => this.retext(strophae, line, word) },
+      { name: 'retext', ref: () => this.retext(text.strophae, text.line, text.word) },
       { name: 'recolor', ref: () => this.recolor() },
       { name: 'resizeFont', ref: () => this.resizeFont() },
+      { name: 'randomize', ref: () => this.randomize() },
     ]
-    // console.log('sequencer event:', evt, con, dest);
-    // this.retext(strophae, line, word);
-    // this.recolor();
-    // this.resizeFont();
-    const meth = methodMap.find(method => method.name === dest) || methodMap[1];
+    console.log('sequencer event, audio:', connection);
+
+    const meth = methodMap.find(method => method.name === targetMethod) || methodMap[1];
     meth.ref();
+  }
+
+  private randomize() {
+    const text = this.getRandomText();
+    this.retext(text.strophae, text.line, text.word);
+    this.recolor();
+    this.resizeFont();
   }
 
   private retext(strophae: any, line: any, word: any) {
@@ -216,7 +226,6 @@ export class PoetryComponent implements OnInit {
   }
 
   public resizeFont() {
-    this.fontSize = Math.round(15 + Math.random() * 30 - Math.random() * 3);
-
+    this.fontSize = Math.round(35 + Math.random() * 3 - Math.random() * 2);
   }
 }
