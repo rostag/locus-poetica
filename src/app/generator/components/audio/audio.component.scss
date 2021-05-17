@@ -9,10 +9,10 @@
   .title {
     align-items: center;
     font-size: 16px;
+    margin-bottom: -10px;
   }
 
   .name {
-    // font-weight: 500;
     color: #777777;
     text-transform: uppercase;
   }
@@ -27,7 +27,9 @@
   }
 
   mat-slider {
-    margin-right: 10px;
+    margin-right: 16px;
+    position: relative;
+    top: 10px;
   }
 
   .play,
@@ -59,9 +61,9 @@
     display: grid;
 
     grid-template-columns: 50% 50%;
-    grid-template-rows: 25px 25px 25px 25px;
+    grid-template-rows: 25px 25px 25px;
     column-gap: 3px;
-    row-gap: 3px;
+    row-gap: 6px;
 
     // grid-template-columns: repeat(auto-fill, minmax(1rem, 1fr));
     
