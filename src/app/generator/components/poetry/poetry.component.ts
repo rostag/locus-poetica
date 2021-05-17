@@ -184,7 +184,6 @@ export class PoetryComponent implements OnInit {
       { name: 'resizeFont', ref: () => this.resizeFont() },
       { name: 'randomize', ref: () => this.randomize() },
     ]
-    console.log('sequencer event, audio:', connection);
 
     const meth = methodMap.find(method => method.name === targetMethod) || methodMap[1];
     meth.ref();
@@ -222,7 +221,6 @@ export class PoetryComponent implements OnInit {
     const g = Math.round(Math.random() * 135) + 150;
     const b = Math.round(Math.random() * 135) + 100;
     this.color = { r, g, b };
-    // console.log(`Recolor:`, this.color);
   }
 
   public resizeFont() {

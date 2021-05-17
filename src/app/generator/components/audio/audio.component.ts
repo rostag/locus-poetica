@@ -182,7 +182,6 @@ export class AudioComponent implements OnInit, OnDestroy {
     }
 
     public open() {
-        console.log('Open');
         this.isOpened = true;
     }
 

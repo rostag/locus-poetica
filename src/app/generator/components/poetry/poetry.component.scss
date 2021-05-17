@@ -10,13 +10,10 @@
 
     .wrapper-button {
         width: 100%;
-        min-height: 420px;
-        background-color: transparent;
+        min-height: 400px;
+        background-color:beige ;
         border-radius: 0;
         line-height: 16px;
-        &:hover {
-            border: 1px dotted #dedede77;
-        }
     }
 
     .pre-poetry {
