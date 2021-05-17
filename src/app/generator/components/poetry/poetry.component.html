@@ -1,8 +1,11 @@
-<button mat-button color="accent" (click)="generate()" class="wrapper-button" [ngStyle]="{ backgroundColor: 'rgba('+color.r+', '+color.g+', '+color.b+', 1)' } ">
+<button mat-button color="accent" (click)="generate()" class="wrapper-button" [ngStyle]="{ fontSize: fontSize+'px' } ">
     <pre class="pre-poetry">
         <div class="strophae" *ngFor="let strophae of objectOrientedPoetry.strophae">
             <div class="line" *ngFor="let line of strophae.lines" (click)="reline(strophae.lines, line, $event)">
-                <div class="word" (click)="reword(line.words, word, $event)" *ngFor="let word of line.words">{{postProcess(word)}}&nbsp;</div>
+                <div class="word" (click)="reword(line.words, word, $event)" *ngFor="let word of line.words"
+                [ngStyle]="{ backgroundColor: 'rgba('+color.r+', '+color.g+', '+color.b+', 1)' }" 
+
+                >{{postProcess(word)}}&nbsp;</div>
             </div>
         </div>
     </pre>

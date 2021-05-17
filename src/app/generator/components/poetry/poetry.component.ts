@@ -40,6 +40,7 @@ export class PoetryComponent implements OnInit {
     this.dictionaries = this.poetryService.setupDictionaries();
     this.dictionary = this.dictionaries[0];
     this.recolor();
+    this.resizeFont();
   }
 
   public onDictionarySelection(d: Dictionary) {
@@ -165,25 +166,25 @@ export class PoetryComponent implements OnInit {
     const cons = generatorState.connections;
     const con: IConnection = cons.find(con => con.source === evt.name) || { source : null, destination: null};
     const dest = con.destination;
-    console.log('sequencer event:', evt, con, dest);
     const randomStrophae = Math.floor(Math.random() * this.objectOrientedPoetry.strophae.length);
     const strophae: Strophae = this.objectOrientedPoetry.strophae[randomStrophae];
     const randomLine = Math.floor(Math.random() * strophae.lines.length);
     const line: Line = strophae.lines[randomLine];
     const randomWord = Math.floor(Math.random() * line.words.length);
     const word = line.words[randomWord];
-
-    this.retext(strophae, line, word);
-    this.recolor();
-    // this.generate();
-
-    const destMethod: string = dest as string;
-
-    // this[`a${destMethod}`];
-
-    // this['hello']();
-
-    // this[dest as any]();
+    
+    // Options:
+    const methodMap = [
+      { name: 'retext', ref: () => this.retext(strophae, line, word) },
+      { name: 'recolor', ref: () => this.recolor() },
+      { name: 'resizeFont', ref: () => this.resizeFont() },
+    ]
+    // console.log('sequencer event:', evt, con, dest);
+    // this.retext(strophae, line, word);
+    // this.recolor();
+    // this.resizeFont();
+    const meth = methodMap.find(method => method.name === dest) || methodMap[1];
+    meth.ref();
   }
 
   private retext(strophae: any, line: any, word: any) {
@@ -207,12 +208,15 @@ export class PoetryComponent implements OnInit {
   public fontSize = 19;
 
   public recolor() {
-    const r = Math.round(Math.random() * 155) + 180;
-    const g = Math.round(Math.random() * 155) + 180;
-    const b = Math.round(Math.random() * 155) + 140;
+    const r = Math.round(Math.random() * 135) + 150;
+    const g = Math.round(Math.random() * 135) + 150;
+    const b = Math.round(Math.random() * 135) + 100;
     this.color = { r, g, b };
+    // console.log(`Recolor:`, this.color);
+  }
 
-    this.fontSize += Math.round(Math.random() * 3 - Math.random() * 3);
-    // console.log('fsize', this.fontSize);
+  public resizeFont() {
+    this.fontSize = Math.round(15 + Math.random() * 30 - Math.random() * 3);
+
   }
 }

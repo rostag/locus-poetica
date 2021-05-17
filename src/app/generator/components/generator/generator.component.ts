@@ -36,7 +36,10 @@ export const generatorState: IGeneratorState = {
     destination: 'recolor',
   }, {
     source: 'speech1',
-    destination: 'generate',
+    destination: 'resizeFont',
+  }, {
+    source: 'speech2',
+    destination: 'retext',
   }],
 }
 @Component({
