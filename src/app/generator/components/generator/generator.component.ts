@@ -9,6 +9,7 @@ export interface ISample {
   interval?: number; // Set duration of one
   audioContext?: AudioContext;
   audioBuffer?: AudioBuffer;
+  bufferSource?: AudioBufferSourceNode;
 }
 export interface IAudio {
   name?: string,

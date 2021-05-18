@@ -14,32 +14,31 @@ import { generatorState, ISample } from '../generator/generator.component';
 })
 export class AudioComponent implements OnInit, OnDestroy {
 
-    @Input() name = 'Audio Loop';
-    @Input('audio') generatorStateAudio: any;
-    
-    public generatorState = generatorState;
+    @Input() name = 'Audio Loop'
+    @Input('audio') generatorStateAudio: any
 
-    public mainForm: FormGroup;
-    public loadingSample = false;
-    public playingSample = false;
-
-    private audioContext: AudioContext[] = [];
-    private audioBuffer: AudioBuffer[] = [];
-
-    private onDestroy$ = new Subject<void>();
-    private _binauralFreq: number;
-    private _sampleFreq = 300;
+    public sources: BufferSource[] = []
+    public generatorState = generatorState
+    public mainForm: FormGroup
+    public loadingSample = false
+    public playingSample = false
+    private audioContext: AudioContext[] = []
+    private audioBuffer: AudioBuffer[] = []
+    private onDestroy$ = new Subject<void>()
+    private _binauralFreq: number
+    private _sampleFreq = 300
 
     public samples: ISample[] = [
         { name: 'kick' },
-        { name: 'dsb-thinner' },
-        { name: 'speech1' }
-    ];
+        { name: 'bass' },
+        { name: 'speech1' },
+        { name: 'speech2' },
+        { name: 'minus' },
+    ]
 
-    public sampleNames = ['kick', 'bass', 'speech1', 'speech2', 'minus'];
-    public currentSampleName = 'kick';
-    public audioInitialized: boolean;
-    public isOpened: boolean;
+    public currentSampleName = 'kick'
+    public audioInitialized: boolean
+    public isOpened: boolean
 
     constructor() { }
 
@@ -47,27 +46,27 @@ export class AudioComponent implements OnInit, OnDestroy {
 
     public ngOnInit() {
         this.mainForm = new FormGroup({
-            'name': new FormControl(null),
+            'name': new FormControl(null)
         });
-        this.initAudio();
+        this.initAudio()
     }
 
     public initAudio() {
         if (this.audioInitialized) {
             return;
         }
-        this.audioInitialized = true;
-        for (let s = 0; s < this.sampleNames.length; s++) {
-            this.loadingSample = true;
-            this.fetchSample(this.sampleNames[s])
+        this.audioInitialized = true
+        for (let s = 0; s < this.samples.length; s++) {
+            this.loadingSample = true
+            this.fetchSample(this.samples[s].name)
                 .then(audioBuffer => {
-                    this.loadingSample = false;
-                    const sample: ISample = this.getSampleByName(this.sampleNames[s]);
-                    sample.audioBuffer = audioBuffer;
-                    this.audioBuffer[this.sampleNames[s] as any] = audioBuffer;
+                    this.loadingSample = false
+                    const sample: ISample = this.getSampleByName(this.samples[s].name)
+                    sample.audioBuffer = audioBuffer
+                    this.audioBuffer[this.samples[s].name as any] = audioBuffer
                 })
                 .catch(error => {
-                    throw error;
+                    throw error
                 });
         }
     }
@@ -77,9 +76,9 @@ export class AudioComponent implements OnInit, OnDestroy {
             .then(response => response.arrayBuffer())
             .then(buffer => {
                 return new Promise<AudioBuffer>((resolve, reject) => {
-                    const sample: ISample = this.getSampleByName(this.sampleNames[sampleName]);
-                    sample.audioContext = new AudioContext();
-                    this.audioContext[sampleName] = sample.audioContext;
+                    const sample: ISample = this.getSampleByName(sampleName)
+                    sample.audioContext = new AudioContext()
+                    this.audioContext[sampleName] = sample.audioContext
                     sample.audioContext.decodeAudioData(
                         buffer,
                         resolve,
@@ -89,8 +88,9 @@ export class AudioComponent implements OnInit, OnDestroy {
             });
     }
 
-    public stopLoop(sampleName: string) {
+    public stopLoop(sampleName: any) {
         this.playingSample = false;
+        this.closeAudioContext(sampleName);
         this.onDestroy$.next();
     }
 
@@ -134,10 +134,13 @@ export class AudioComponent implements OnInit, OnDestroy {
         this.initAudio();
         this.playingSample = true;
         this.currentSampleName = sampleName;
-        const bufferSource = this.audioContext[sampleName].createBufferSource();
-        bufferSource.buffer = this.audioBuffer[sampleName];
-        bufferSource.connect(this.audioContext[sampleName].destination);
-        bufferSource.start(0);
+
+        // Save buffer source to sample
+        const sample: ISample = this.getSampleByName(sampleName);
+        sample.bufferSource = this.audioContext[sampleName].createBufferSource();
+        sample.bufferSource.buffer = this.audioBuffer[sampleName];
+        sample.bufferSource.connect(this.audioContext[sampleName].destination);
+        sample.bufferSource.start(0);
     }
 
     public setControlValue(evt: MatSliderChange) {
@@ -185,10 +188,6 @@ export class AudioComponent implements OnInit, OnDestroy {
         this.isOpened = true;
     }
 
-    private getSampleByName(name: string) {
-        return this.samples.find((sample: any) => sample.name === name) || { name: 'Undefined' };
-    }
-
     public close(state: any) {
         state.enabled = false;
     }
@@ -196,5 +195,18 @@ export class AudioComponent implements OnInit, OnDestroy {
     public ngOnDestroy() {
         this.generatorStateAudio.enabled = false;
         this.stopLoop('');
+        this.samples.forEach(sample => this.closeAudioContext(sample.name));
     }
+
+    private closeAudioContext(sampleName: any) {
+        this.playingSample = false;
+        const audioContext = this.audioContext[sampleName];
+        if (audioContext) {
+            audioContext.close();
+        }
+    }
+
+    private getSampleByName(name: string) {
+        return this.samples.find((sample: any) => sample.name === name) || { name: 'Undefined' };
+    }    
 }

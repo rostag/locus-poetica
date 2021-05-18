@@ -16,9 +16,9 @@
   </div>
   <div class="row">
     <div class="samples grid-row">
-      <button class="sample-button" mat-flat-button *ngFor="let sampleName of sampleNames" [disabled]="loadingSample"
-        (click)="playLoop(sampleName)">
-        <mat-icon>play_arrow</mat-icon>{{sampleName}}
+      <button class="sample-button" mat-flat-button *ngFor="let sample of samples" [disabled]="loadingSample"
+        (click)="playLoop(sample.name)">
+        <mat-icon>play_arrow</mat-icon>{{sample.name}}
       </button>
     </div>
   </div>
@@ -32,7 +32,7 @@
 
 <!-- <div>
   <h4>Binaural, {{binauralFreq}}Hz</h4>
-  <button mat-button *ngFor="let sampleName of sampleNames" [disabled]="loadingSample" (click)="playBinaural(sampleName, r(20), 20)">
-    {{sampleName}}
+  <button mat-button *ngFor="let sample of samples" [disabled]="loadingSample" (click)="playBinaural(sample.name, r(20), 20)">
+    {{sample.name}}
   </button>  
 </div> -->
