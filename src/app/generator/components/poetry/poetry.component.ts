@@ -3,7 +3,7 @@ import { FormControl } from '@angular/forms';
 import { getRandomWordOfGivenLength, latynize } from '../../generator-helpers';
 import { generatorState, IAudio, IConnection } from '../generator/generator.component';
 import { Rhyme, Rhymes, rhymes } from '../models/rhyme.models';
-import { Dictionary, Line, Poetry, PoetryService, Strophae, Word } from '../services/poetry.service';
+import { Dictionary, Line, OOPTimelineMode, Poetry, PoetryService, Strophae, Word } from '../services/poetry.service';
 
 /*
   pyro / senkan
@@ -22,6 +22,7 @@ import { Dictionary, Line, Poetry, PoetryService, Strophae, Word } from '../serv
 export class PoetryComponent implements OnInit {
 
   rhymeControl = new FormControl();
+  modeControl = new FormControl();
   dictionaryControl = new FormControl();
   latynizeControl = new FormControl(false);
 
@@ -30,13 +31,14 @@ export class PoetryComponent implements OnInit {
 
   rhymes: Rhymes;
   rhyme: Rhyme;
+  mode: OOPTimelineMode;
 
   poetry: string = '';
   public objectOrientedPoetry: Poetry;
 
   public connections: IConnection[] = generatorState.connections;
 
-  constructor(private poetryService: PoetryService) {
+  constructor(public poetryService: PoetryService) {
     this.dictionaries = this.poetryService.setupDictionaries();
     this.dictionary = this.dictionaries[0];
     this.recolor();
@@ -53,6 +55,11 @@ export class PoetryComponent implements OnInit {
     this.generate();
   }
 
+  public onModeSelection(mode: OOPTimelineMode) {
+    this.setMode(mode);
+    this.generate();
+  }
+
   public getDictionaries(): Dictionary[] {
     return Object['values'](this.dictionaries);
   }
@@ -65,6 +72,7 @@ export class PoetryComponent implements OnInit {
   public ngOnInit() {
     this.dictionaryControl.valueChanges.pipe().subscribe(val => this.onDictionarySelection(val));
     this.rhymeControl.valueChanges.pipe().subscribe(val => this.onRhymeSelection(val));
+    this.modeControl.valueChanges.pipe().subscribe(val => this.onModeSelection(val));
     this.latynizeControl.valueChanges.pipe().subscribe(val => this.generate())
 
     this.rhymes = rhymes;
@@ -79,6 +87,11 @@ export class PoetryComponent implements OnInit {
 
   public setRhyme(rhyme: Rhyme) {
     this.rhyme = rhyme;
+  }
+
+  public setMode(mode: OOPTimelineMode) {
+    console.log('set mode:', mode);
+    this.mode = mode;
   }
 
   public generate() {
@@ -226,4 +239,76 @@ export class PoetryComponent implements OnInit {
   public resizeFont() {
     this.fontSize = Math.round(35 + Math.random() * 3 - Math.random() * 2);
   }
+
+  // TODO Move to separate component
+  /* Timeline */
+  // private playingSample: boolean
+  // public currentSampleName = 'kick'
+  // private onDestroy$ = new Subject<void>()
+  // private _sampleFreq = 300
+
+
+  // public stopLoop(sampleName: any) {
+  //   this.playingSample = false;
+  //   // this.closeAudioContext(sampleName);
+  //   this.onDestroy$.next();
+  // }
+
+  // public play() {
+  //   this.initLoop(this.currentSampleName, this._sampleFreq);
+  // }
+
+  // public playLoop(sample: string) {
+  //   this.initLoop(sample, this._sampleFreq);
+  // }
+
+  // public initLoop(sample: string, time: number) {
+  //   this.playSample(sample);
+  //   interval(time)
+  //     .pipe(
+  //       timeInterval(),
+  //       takeUntil(this.onDestroy$)
+  //     )
+  //     .subscribe(a => {
+  //       // this.timelineBeat.emit(this.TODOgeneratorMigrate);
+  //       this.playSample(sample);
+  //     });
+  // }
+
+  // public playLoopOnce(name: string) {
+  //   of(1).pipe().subscribe(a => {
+  //     // this.timelineBeat.emit(this.TODOgeneratorMigrate);
+  //     this.playSample(name);
+  //   });
+  // }
+
+  // public playSample(sampleName: any) {
+  //   this.playingSample = true;
+  //   this.currentSampleName = sampleName;
+
+  //   // Save buffer source to sample
+  // }
+
+  // public setControlValue(evt: MatSliderChange) {
+  //   // this.timelineBeat.emit(this.TODOgeneratorMigrate);
+  //   this._sampleFreq = evt.value as number;
+  // }
+
+  // public y(x: number) {
+  //   return Math.round(Math.exp(x));
+  // }
+
+  // public r(r: number) {
+  //   const a = Math.random() * r;
+  //   return Math.round(a * a + a);
+  // }
+
+  // public ngOnDestroy() {
+  //   // this.TODOgeneratorMigrate.enabled = false;
+  //   this.stopLoop('');
+  // }
+
+  // private getModeByName(name: string) {
+  //   return this.poetryService.getTimeline().modes.find((mode: any) => mode.name === name) || { name: 'Undefined' };
+  // }
 }

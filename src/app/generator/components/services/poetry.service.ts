@@ -52,8 +52,29 @@ export interface Dictionary {
     words: Word[];
 }
 
+export type OOPMode = 'default' | 'wording';
+
+export interface OOPTimeline extends AnimationTimeline {
+    currentTime: number;
+    mode: OOPMode;
+    modes: OOPTimelineMode[];
+}
+
+export interface OOPTimelineMode {
+    name: string;
+}
+
 @Injectable()
 export class PoetryService {
+
+    private timeline: OOPTimeline = {
+        currentTime: 0,
+        mode: 'default',
+        modes: [
+            { name: 'default' },
+            { name: 'wording' }
+        ],
+    };
 
     private dictionaries: Dictionary[] = [];
 
@@ -112,38 +133,8 @@ export class PoetryService {
         return this.dictionaries[dictionaryName as any];
     }
 
-    // public getDictionaryFromString(
-    //     dictionarySource: any,
-    //     sectionSeparator = '\n\n',
-    //     linesSeparator = '\n',
-    //     wordsSeparator = ' ',
-    //     syllablesSeparator = null,
-    // ): DictionaryVO {
-    //     // const existingDictionary = this.dictionaries.some(dictionary => dictionary.n);
-    //     console.log('dic src:', dictionarySource);
-    //     console.log('ex dic:', existingDictionary);
-    //     if (!existingDictionary) {
-    //         const multilineString = dictionarySource.value;
-    //         const newDictionaryVO = {
-    //             name: dictionarySource.name,
-    //             dictionary: [],
-    //         }
-    //         const sections = multilineString.split(sectionSeparator);
-    //         sections.forEach(section => {
-    //             const lines = section.split(linesSeparator);
-    //             lines.forEach(line => {
-    //                 const words = line.trim();
-    //                 const syllables = words.split(wordsSeparator);
-    //                 syllables.forEach((syllable, index, array) => {
-    //                     array[index] = this.cleanUpWord(syllable, syllablesSeparator);
-    //                 });
-    //                 // newDictionary = newDictionary.concat(syllables);
-    //                 newDictionaryVO.dictionary = newDictionaryVO.dictionary.concat(syllables);
-    //             })
-    //         });
-    //         this.dics[dictionarySource] = newDictionaryVO;
-    //     }
-    //     console.log('Return dic:', this.dics[dictionarySource]);
-    //     return this.dics[dictionarySource];
-    // }
+    public getTimeline() {
+        return this.timeline
+    }
+
 }
