@@ -52,7 +52,7 @@ export interface Dictionary {
     words: Word[];
 }
 
-export type OOPMode = 'default' | 'wording';
+export type OOPMode = 'default' | 'wording' | 'stream' | 'feed';
 
 export interface OOPTimeline extends AnimationTimeline {
     currentTime: number;
@@ -62,6 +62,7 @@ export interface OOPTimeline extends AnimationTimeline {
 
 export interface OOPTimelineMode {
     name: string;
+    description?: string;
 }
 
 @Injectable()
@@ -72,7 +73,9 @@ export class PoetryService {
         mode: 'default',
         modes: [
             { name: 'default' },
-            { name: 'wording' }
+            { name: 'wording' },
+            { name: 'stream', description: 'Text is streamlined horizontally by adding words to lines and auto-scrolling horizontally'},
+            { name: 'feed', description: 'Text is streamlined vertically by adding lines and auto-scrolling generated content vertically'},
         ],
     };
 
