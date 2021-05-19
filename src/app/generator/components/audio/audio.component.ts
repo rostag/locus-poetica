@@ -34,9 +34,10 @@ export class AudioComponent implements OnInit, OnDestroy {
         { name: 'speech1' },
         { name: 'speech2' },
         { name: 'minus' },
+        { name: 'tick' },
     ]
 
-    public currentSampleName = 'kick'
+    public currentSampleName = 'tick'
     public audioInitialized: boolean
     public isOpened: boolean
 

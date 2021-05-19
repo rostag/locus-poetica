@@ -8,17 +8,25 @@
 
   .title {
     align-items: center;
-    font-size: 16px;
+    font-size: 14px;
     margin-bottom: -10px;
+    margin-top: -4px;
   }
 
   .name {
     color: #777777;
     text-transform: uppercase;
+    white-space: nowrap;
   }
 
   .close-button {
     font-size: 10px;
+    .mat-icon {
+      width: 8px;
+      height: 26px;
+      font-size: 17px;
+      color: #444;
+    }
   }
 
   .controls {

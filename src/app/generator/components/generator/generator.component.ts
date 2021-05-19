@@ -10,6 +10,7 @@ export interface ISample {
   audioContext?: AudioContext;
   audioBuffer?: AudioBuffer;
   bufferSource?: AudioBufferSourceNode;
+  mode?: 'default' | 'silent';
 }
 export interface IAudio {
   name?: string,
@@ -22,25 +23,25 @@ export interface IGeneratorState {
 }
 
 export const generatorState: IGeneratorState = {
-  audio: [{
-    enabled: true,
-    name: 'kick'
-  }, {
-    enabled: false,
-    name: 'speech1'
-  }, {
-    enabled: false,
-    name: 'speech2'
-  }],
   connections: [{
-    source: 'kick',
-    target: 'randomize',
+    source: 're:text',
+    target: 'retext',
   }, {
-    source: 'speech1',
+    source: 're:size',
     target: 'resizeFont',
   }, {
-    source: 'speech2',
-    target: 'retext',
+    source: 're:color',
+    target: 'recolor',
+  }],
+  audio: [{
+    name: 're:text',
+    enabled: true,
+  }, {
+    name: 're:size',
+    enabled: false,
+  }, {
+    name: 're:color',
+    enabled: false,
   }],
 }
 @Component({
