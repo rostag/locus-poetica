@@ -70,12 +70,11 @@ export class PoetryService {
 
     private timeline: OOPTimeline = {
         currentTime: 0,
-        mode: { name: 'default', description: 'Strophaes appear on the screen one by one, swithcing with clicks.' },
-        modes: [
-            { name: 'default', description: 'Strophaes appear on the screen one by one, swithcing with clicks.' },
-            { name: 'wording', description: 'Single words are jumping in and out of the screen.' },
-            { name: 'stream', description: 'Text is streamlined horizontally by adding words to lines and auto-scrolling horizontally.' },
-            { name: 'feed', description: 'Text is streamlined vertically by adding lines and auto-scrolling generated content vertically.' },
+        mode:   { name: 'default', description: 'Strophaes appear on the screen one by one, swithcing with clicks.' },
+        modes: [{ name: 'default', description: 'Strophaes appear on the screen one by one, swithcing with clicks.' },
+                { name: 'wording', description: 'Single words are jumping in and out of the screen.' },
+                { name: 'stream', description: 'Text is streamlined horizontally by adding words to lines and auto-scrolling horizontally.' },
+                { name: 'feed', description: 'Text is streamlined vertically by adding lines and auto-scrolling generated content vertically.' },
         ],
     };
 
