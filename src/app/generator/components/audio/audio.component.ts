@@ -3,7 +3,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { MatSliderChange } from '@angular/material/slider'
 import { interval, of, Subject } from 'rxjs';
 import { timeInterval, takeUntil } from 'rxjs/operators';
-import { generatorState, ISample } from '../generator/generator.component';
+import { generatorState, IGeneratorState, ISample } from '../generator/generator.component';
 
 // ankursethi.in/2016/01/13/build-a-sampler-with-angular-2-webaudio-and-webmidi-lesson-1-introduction-to-the-webaudio-api
 
@@ -15,10 +15,10 @@ import { generatorState, ISample } from '../generator/generator.component';
 export class AudioComponent implements OnInit, OnDestroy {
 
     @Input() name = 'Audio Loop'
-    @Input('audio') generatorStateAudio: any
+    @Input('audio') audio: any
 
     public sources: BufferSource[] = []
-    public generatorState = generatorState
+    public generatorState: IGeneratorState = generatorState
     public mainForm: FormGroup
     public loadingSample = false
     public playingSample = false
@@ -40,6 +40,10 @@ export class AudioComponent implements OnInit, OnDestroy {
     public currentSampleName = 'tick'
     public audioInitialized: boolean
     public isOpened: boolean
+
+    // TODO: Implement two modes of mixing in new beats: 
+    // additive as default, and sequential as second option.
+    // isAdditiveMode = true;
 
     constructor() { }
 
@@ -73,6 +77,7 @@ export class AudioComponent implements OnInit, OnDestroy {
     }
 
     public fetchSample(sampleName: any): Promise<AudioBuffer> {
+        let AudioContext = window.AudioContext || window['webkitAudioContext' as any];
         return fetch(`/assets/wav/${sampleName}.wav`)
             .then(response => response.arrayBuffer())
             .then(buffer => {
@@ -118,7 +123,7 @@ export class AudioComponent implements OnInit, OnDestroy {
                 takeUntil(this.onDestroy$)
             )
             .subscribe(a => {
-                this.audioBeat.emit(this.generatorStateAudio);
+                this.audioBeat.emit(this.audio);
                 this.playSample(sample);
             });
     }
@@ -126,7 +131,7 @@ export class AudioComponent implements OnInit, OnDestroy {
     public playLoopOnce(name: string) {
         this.initAudio();
         of(1).pipe().subscribe(a => {
-            this.audioBeat.emit(this.generatorStateAudio);
+            this.audioBeat.emit(this.audio);
             this.playSample(name);
         });
     }
@@ -145,7 +150,7 @@ export class AudioComponent implements OnInit, OnDestroy {
     }
 
     public setControlValue(evt: MatSliderChange) {
-        this.audioBeat.emit(this.generatorStateAudio);
+        this.audioBeat.emit(this.audio);
         this._sampleFreq = evt.value as number;
     }
 
@@ -194,8 +199,8 @@ export class AudioComponent implements OnInit, OnDestroy {
     }
 
     public ngOnDestroy() {
-        this.generatorStateAudio.enabled = false;
-        this.stopLoop('');
+        this.audio.enabled = false;
+        this.stopLoop(this.audio.name);
         this.samples.forEach(sample => this.closeAudioContext(sample.name));
     }
 
@@ -209,5 +214,5 @@ export class AudioComponent implements OnInit, OnDestroy {
 
     private getSampleByName(name: string) {
         return this.samples.find((sample: any) => sample.name === name) || { name: 'Undefined' };
-    }    
+    }
 }

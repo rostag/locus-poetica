@@ -7,16 +7,13 @@
         </div>
     </div>
 </button>
-
+<button class="copy-button" mat-button (click)="copyText($event)">Copy</button>
 <div class="settings">
     <!-- <div class="settings">
         <input mat-input type="checkbox" [formControl]="latynizeControl" id="cb-latynize" />
         <label for="cb-latynize">Latynize</label>
     </div> -->
     <div>
-        <div *ngFor="let connection of connections">{{connection.source}}&nbsp;&gt;&nbsp;{{connection.target}}</div>
-    </div>    
-    <div class="settings">
         <mat-form-field>
             <mat-label>Slovnyk: {{ dictionary.name }}, {{ dictionary.words.length }}</mat-label>
             <mat-select [formControl]="dictionaryControl">
@@ -26,7 +23,7 @@
             </mat-select>
         </mat-form-field>
     </div>
-    <div class="settings">
+    <div>
         <mat-form-field>
             <mat-label>Ryma: {{ rhyme.name }}: {{ rhyme.value }}</mat-label>
             <mat-select [formControl]="rhymeControl">
@@ -36,7 +33,7 @@
             </mat-select>
         </mat-form-field>
     </div>
-    <div class="settings">
+    <div>
         <div>
             <mat-form-field>
                 <mat-label>Mode: {{ poetryService.getTimeline().mode.name }}</mat-label>
@@ -46,11 +43,12 @@
                     </mat-option>
                 </mat-select>
             </mat-form-field>
-            <div>
-                <mat-label>{{ poetryService.getTimeline().mode.description }}</mat-label>
-            </div>
         </div>
     </div>
-    <button mat-button (click)="copyText($event)">Copy</button>
 </div>
-
+<div>
+    <mat-label>{{ poetryService.getTimeline().mode.name }} mode, {{ poetryService.getTimeline().mode.description }}</mat-label>
+</div>
+<div>
+    <div *ngFor="let connection of connections">{{connection.source}}&nbsp;&gt;&nbsp;{{connection.target}}</div>
+</div>    

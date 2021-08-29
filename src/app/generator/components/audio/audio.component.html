@@ -1,7 +1,7 @@
 <div>
   <div class="title row">
     <div class="name">{{name}} {{sampleFreq}}ms</div>
-    <div class="close-button"><button mat-icon-button (click)="close(generatorStateAudio)"><mat-icon size="16">close</mat-icon></button></div>
+    <div class="close-button"><button mat-icon-button (click)="close(audio)"><mat-icon size="16">close</mat-icon></button></div>
   </div>
   <div class="controls">
     <button *ngIf="!playingSample" mat-icon-button [disabled]="loadingSample" (click)="play()"
@@ -24,15 +24,19 @@
   </div>
 </div>
 
-<!-- <div>
+<!--
+<div>
   <button mat-button [disabled]="loadingSample" (click)="playMinus('minus')">
     Overcrowd Minus
   </button>
-</div> -->
+</div>
+-->
 
-<!-- <div>
+<!--
+<div>
   <h4>Binaural, {{binauralFreq}}Hz</h4>
   <button mat-button *ngFor="let sample of samples" [disabled]="loadingSample" (click)="playBinaural(sample.name, r(20), 20)">
     {{sample.name}}
-  </button>  
-</div> -->
+  </button>
+</div>
+-->

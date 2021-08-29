@@ -1,3 +1,8 @@
-.generator {
+.menu {
     margin: 24px;
+}
+.generator {
+    width: 64px;
+    height: 64px;
+    font-size: 60px;
 }

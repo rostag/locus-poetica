@@ -13,8 +13,9 @@ export interface ISample {
   mode?: 'default' | 'silent';
 }
 export interface IAudio {
-  name?: string,
+  name?: string
   enabled: boolean
+  interval: number
 }
 
 export interface IGeneratorState {
@@ -36,12 +37,15 @@ export const generatorState: IGeneratorState = {
   audio: [{
     name: 're:text',
     enabled: true,
+    interval: 300,
   }, {
     name: 're:size',
     enabled: false,
+    interval: 600,
   }, {
     name: 're:color',
     enabled: false,
+    interval: 1000,
   }],
 }
 @Component({

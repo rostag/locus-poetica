@@ -2,10 +2,10 @@
 
     .settings {
         display: flex;
+        flex-wrap: wrap;
         justify-content: flex-start;
-        // align-items: center;
         column-gap: 20px;
-        margin-top: 5px;
+        margin-top: -30px;
     }
 
     .wrapper-button {
@@ -56,5 +56,11 @@
             border-bottom: #aaa 1px dotted;
             color: #d44;
         }
+    }
+
+    .copy-button {
+        position: relative;
+        top: -40px;
+        left: 4px;
     }
 }

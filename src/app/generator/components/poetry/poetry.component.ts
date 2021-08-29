@@ -34,9 +34,9 @@ export class PoetryComponent implements OnInit {
   mode: OOPTimelineMode;
 
   poetry: string = '';
-  public objectOrientedPoetry: Poetry;
+  objectOrientedPoetry: Poetry;
 
-  public connections: IConnection[] = generatorState.connections;
+  connections: IConnection[] = generatorState.connections;
 
   constructor(public poetryService: PoetryService) {
     this.dictionaries = this.poetryService.setupDictionaries();
