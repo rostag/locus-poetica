@@ -6,3 +6,8 @@
     height: 64px;
     font-size: 60px;
 }
+
+:host {
+    height: 100%;
+    display: flex;
+}

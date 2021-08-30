@@ -2,7 +2,8 @@ import { Component } from "@angular/core";
 
 @Component({
     selector: 'app-compass',
-    template: `<div>Compass Component</div>`
+    templateUrl: './compass.component.html',
+    styleUrls: ['./compass.component.css']
 })
 
 export class CompassComponent {
