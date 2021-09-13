@@ -7,6 +7,9 @@ const routes: Routes = [
   },
   { path: 'compass', 
     loadChildren: () => import('./compass/compass.module').then(m => m.CompassModule)
+  },
+  { path: 'latynizator', 
+    loadChildren: () => import('./latynizator/latynizator.module').then(m => m.LatynizatorModule)
   }
 ];
 @NgModule({
