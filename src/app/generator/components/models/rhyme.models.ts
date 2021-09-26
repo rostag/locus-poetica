@@ -9,7 +9,7 @@ export interface Rhymes {
 
 export const rhymes = {
     pyro: {
-        name: 'Pyro',
+        name: 'Пирожки',
         value: [
             [1, 1, 1, 2, 1, 2],
             [2, 3, 3],
@@ -18,7 +18,7 @@ export const rhymes = {
         ]
     },
     haiku: {
-        name: 'Haiku',
+        name: 'Хайку',
         value: [
             [1, 2, 1],
             [3, 1, 2, 1],
@@ -40,17 +40,17 @@ export const rhymes = {
             [1, 2, 3],
         ]
     },
-    // salo: {
-    //     name: 'Salo',
-    //     value: [
-    //         [1, 2, 3],
-    //         [2, 2, 2],
-    //         [1, 2, 3],
-    //         [3, 3],
-    //     ]
-    // },
+    salo: {
+        name: 'Сало',
+        value: [
+            [1, 2, 3],
+            [2, 2, 2],
+            [1, 2, 3],
+            [3, 3],
+        ]
+    },
     prorizz: {
-        name: 'proriz',
+        name: 'Прорізь',
         value: [
             [1, 2, 3, 1, 2, 3,],
             [2, 2, 2, 2, 2, 2,],
@@ -59,7 +59,7 @@ export const rhymes = {
         ]
     },
     senkan: {
-        name: 'Senkan',
+        name: 'Сенкан',
         value: [
             [2],
             [1, 3],

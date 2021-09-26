@@ -70,11 +70,11 @@ export class PoetryService {
 
     private timeline: OOPTimeline = {
         currentTime: 0,
-        mode:   { name: 'default', description: 'Strophaes appear on the screen one by one, swithcing with clicks.' },
-        modes: [{ name: 'default', description: 'Strophaes appear on the screen one by one, swithcing with clicks.' },
-                { name: 'wording', description: 'Single words are jumping in and out of the screen.' },
-                { name: 'stream', description: 'Text is streamlined horizontally by adding words to lines and auto-scrolling horizontally.' },
-                { name: 'feed', description: 'Text is streamlined vertically by adding lines and auto-scrolling generated content vertically.' },
+        mode:   { name: 'default', description: 'Строфи виникають по черзі, перемикання одним кліком.' },
+        modes: [{ name: 'default', description: 'Строфи виникають по черзі, перемикання одним кліком.' },
+                { name: 'wording', description: 'Одинокі слова вистрибують на екран і зникають.' },
+                { name: 'stream', description: 'Текст тече горизонтально, слова додаються до рядків і автоматично прокручуються.' },
+                { name: 'feed', description: 'Текст тече вертикально, додаються і автоматично прокручуються рядки.' },
         ],
     };
 
@@ -82,14 +82,18 @@ export class PoetryService {
 
     public setupDictionaries() {
         this.dictionaries = [
-            this.createDictionaryFromSource(dictonarySource.kob, '\n\n', '\n', ' '),
+            // this.createDictionaryFromSource(dictonarySource.kobzar, '\n\n', '\n', ' '),
+            // this.createDictionaryFromSource(dictonarySource.zagovor_det, '\n\n', '\n', ' '),
             // this.createDictionaryFromSource(dictonarySource.mat),
+            // this.createDictionaryFromSource(dictonarySource.roz),
+            // this.createDictionaryFromSource(dictonarySource.srcSyllablesSlavic),
+            this.createDictionaryFromSource(dictonarySource.srcUkrMova1000),
+            this.createDictionaryFromSource(dictonarySource.srcSyllablesEnglish),
             this.createDictionaryFromSource(dictonarySource.dumyLat, '\n\n', '\n', ' ', '-'),
             this.createDictionaryFromSource(dictonarySource.ham),
-            // this.createDictionaryFromSource(dictonarySource.roz),
             this.createDictionaryFromSource(dictonarySource.gg, '--SECTION-->'),
             this.createDictionaryFromSource(dictonarySource.pyro),
-            this.createDictionaryFromSource(dictonarySource.numbers),
+            this.createDictionaryFromSource(dictonarySource.srcWordNumbers),
         ]
         return this.dictionaries;
     }

@@ -1,0 +1,15 @@
+:host {
+    flex: auto;
+    margin: 2em;
+
+}
+
+.latynize-full-width {
+    min-width: 500px;
+    height: 200px;
+    display: block;
+}
+
+.latynize-full-width .mat-input-element {
+    min-height: 100px;
+}
