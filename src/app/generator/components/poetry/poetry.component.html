@@ -7,7 +7,7 @@
         </div>
     </div>
 </button>
-<button class="copy-button" mat-button (click)="copyText($event)">Copy</button>
+<button class="copy-button" mat-button (click)="copyText($event)">Копіювати</button>
 <div class="settings">
     <!-- <div class="settings">
         <input mat-input type="checkbox" [formControl]="latynizeControl" id="cb-latynize" />
@@ -15,7 +15,7 @@
     </div> -->
     <div>
         <mat-form-field>
-            <mat-label>Slovnyk: {{ dictionary.name }}, {{ dictionary.words.length }}</mat-label>
+            <mat-label>Словник: {{ dictionary.name }}, {{ dictionary.words.length }}</mat-label>
             <mat-select [formControl]="dictionaryControl">
                 <mat-option *ngFor="let dictionary of getDictionaries()" [value]="dictionary">
                     {{dictionary.name}}, {{dictionary.words.length}}
@@ -25,7 +25,7 @@
     </div>
     <div>
         <mat-form-field>
-            <mat-label>Ryma: {{ rhyme.name }}: {{ rhyme.value }}</mat-label>
+            <mat-label>Розмір: {{ rhyme.name }}: {{ rhyme.value }}</mat-label>
             <mat-select [formControl]="rhymeControl">
                 <mat-option *ngFor="let rhyme of getRhymes()" [value]="rhyme">
                     {{rhyme.name}}
@@ -36,8 +36,8 @@
     <div>
         <div>
             <mat-form-field>
-                <mat-label>Mode: {{ poetryService.getTimeline().mode.name }}</mat-label>
-                <mat-select [formControl]="modeControl">
+                <mat-label>Режим: {{ poetryService.getTimeline().mode.name }}</mat-label>
+                <mat-select disabled [formControl]="modeControl">
                     <mat-option *ngFor="let mode of poetryService.getTimeline().modes" [value]="mode">
                         {{mode.name}}
                     </mat-option>
@@ -47,7 +47,7 @@
     </div>
 </div>
 <div>
-    <mat-label>{{ poetryService.getTimeline().mode.name }} mode, {{ poetryService.getTimeline().mode.description }}</mat-label>
+    <mat-label>Режим: {{ poetryService.getTimeline().mode.name }}, {{ poetryService.getTimeline().mode.description }}</mat-label>
 </div>
 <div>
     <div *ngFor="let connection of connections">{{connection.source}}&nbsp;&gt;&nbsp;{{connection.target}}</div>

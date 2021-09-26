@@ -1,6 +1,8 @@
 import { ham } from './ham';
 import { wordMat } from './mat.model';
 import { kobzar } from './poetry.model.kob';
+import { zagovor_det } from './poetry.model.zagovor.det';
+import { ukrMova1000 } from './ukr.mova.1000.model';
 
 export interface DictionarySource {
   name: string,
@@ -24,7 +26,386 @@ export const wordNumbers =
 десять
 одинадцять`;
 
-export const syllablesDict = [
+
+
+export const syllablesEnglish = 
+`a
+ac
+act
+ad
+af
+ag
+age
+air
+al
+als
+am
+an
+ap
+ar
+as
+at
+ate
+au
+ba
+bat
+be
+ber
+bers
+bet
+bi
+ble
+bles
+bod
+bor
+bout
+but
+by
+ca
+cal
+can
+cap
+car
+cat
+cate
+cen
+cent
+char
+ci
+cial
+cir
+cit
+cle
+co
+col
+com
+come
+con
+cor
+coun
+cov
+cu
+cul
+cus
+cy
+da
+dan
+day
+de
+den
+der
+ders
+di
+dif
+dis
+dle
+dy
+e
+east
+ed
+ef
+el
+en
+ence
+end
+ent
+er
+ered
+ern
+ers
+es
+est
+et
+ev
+eve
+ex
+fa
+fac
+fect
+fer
+fi
+fin
+fish
+fix
+fol
+for
+fore
+form
+ful
+gan
+gen
+ger
+gi
+gle
+go
+grand
+great
+hap
+har
+head
+heav
+high
+ho
+hunt
+i
+ic
+ies
+il
+im
+in
+ing
+ings
+ion
+is
+ish
+it
+its
+jo
+ket
+la
+land
+lands
+lar
+lat
+lead
+lec
+lect
+lent
+less
+let
+li
+light
+lin
+lo
+long
+low
+lu
+ly
+ma
+mag
+main
+mal
+man
+mar
+mat
+me
+meas
+mem
+men
+ment
+ments
+mer
+mi
+mil
+min
+mis
+mo
+mon
+moth
+mu
+mul
+my
+n’t
+na
+nal
+near
+nel
+ner
+ness
+net
+nev
+new
+ni
+ning
+nit
+no
+nore
+nu
+num
+ny
+o
+ob
+oc
+of
+on
+one
+op
+or
+oth
+ous
+out
+pa
+par
+prac
+parc
+pe
+pen
+peo
+per
+pi
+pic
+play
+ple
+ples
+ply
+po
+point
+por
+port
+pos
+pre
+pres
+press
+pro
+ra
+ral
+re
+read
+rec
+rect
+rep
+ri
+ried
+ro
+round
+row
+ry
+sa
+sand
+sat
+sent
+se
+sec
+self
+sen
+ser
+set
+ship
+si
+side
+sim
+sion
+sions
+sis
+so
+some
+son
+sons
+south
+stand
+stud
+su
+sub
+sug
+sun
+sup
+sur
+ta
+tain
+tal
+te
+ted
+tel
+tem
+ten
+tence
+tend
+ter
+ters
+the
+ther
+ti
+tic
+ties
+tin
+ting
+tion
+tions
+tive
+tle
+to
+tom
+ton
+tor
+tors
+tra
+tract
+tray
+tri
+tro
+try
+tu
+ture
+tures
+tween
+ty
+u
+uer
+um
+un
+up
+ure
+us
+va
+val
+var
+vel
+ven
+ver
+vi
+vid
+vis
+wa
+ward
+way
+west
+where
+wil
+win
+won
+work
+writ
+y`;
+
+export const syllablesSlavic = 
+`ба
+ля
+чим
+хо
+дя
+мі
+ї
+хав
+ду
+чи
+я
+тель
+шов
+ку
+ 
+су
+вич
+ми
+кос
+об
+дить
+учи
+му
+би
+це
+цел
+том
+ко
+вал
+нєс
+дет
+но
+вез
+мет
+вет
+ви`;
+
+export const syllablesWeightedDict = [
   { 'ля': 2 },
   { 'чим': 2 },
   { 'хо': 3 },
@@ -906,13 +1287,16 @@ ISBN
 © Интернет-магазин «Розетка™»2001–2020  ТМ используется на основании лицензии правообладателя RozetkaLTD`;
 
 export const dictonarySource: DictionarySources = {
-  mat: { name: 'Mat', value: wordMat },
-  numbers: { name: 'Numbers', value: wordNumbers },
-  // sylla: { name: 'Syllables', value: syllablesDict },
+  // kobzar: { name: 'Kob', value: kobzar },
+  // zagovor_det: { name: 'Zagovor', value: zagovor_det },
+  // mat: { name: 'Mat', value: wordMat },
+  // roz: { name: 'Roz', value: roz },
+  // srcSyllablesSlavic: { name: 'Випадкові склади', value: syllablesSlavic },
+  srcUkrMova1000: { name: 'Слова укр. мов', value: ukrMova1000 },
+  srcSyllablesEnglish: { name: 'Англійські склади', value: syllablesEnglish },
+  dumyLat: { name: 'Думи (латинка)', value: dumyMoiDumy },
+  ham: { name: 'Гамлєт (Л. П.)', value: ham },
   gg: { name: 'Ґ', value: wordsWithGG },
-  dumyLat: { name: 'Dumy Lat', value: dumyMoiDumy },
-  pyro: { name: 'Pyro', value: wordsOfPyro },
-  kob: { name: 'Kob', value: kobzar },
-  ham: { name: 'Hamlet', value: ham },
-  roz: { name: 'Roz', value: roz },
+  pyro: { name: 'Пирожки', value: wordsOfPyro },
+  srcWordNumbers: { name: 'Числа', value: wordNumbers },
 }
