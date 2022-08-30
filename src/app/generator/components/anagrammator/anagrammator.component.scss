@@ -1,0 +1,41 @@
+:host {
+  display: block;
+
+  .open-button {
+    text-align: right;
+    padding-right: 8px;
+    padding-left: 8px;
+    margin-left: 10px;
+    min-width: unset;
+  }
+
+  ::ng-deep .row {
+    display: flex;
+    justify-content: space-between;
+
+    &>* {
+      display: block;
+    }
+  }
+
+  .gene-wrapper {
+    padding: 8px;
+  }
+
+  .generator-cards {
+    >div {
+      padding-bottom: 32px;
+    }
+  }
+  .poetry {
+    flex-grow: 2;
+  }
+
+  .panel {
+    display: flex;
+    flex-direction: column;
+    &>* {
+      border-bottom: 1px dashed #cccccc;
+    }
+  }
+}
