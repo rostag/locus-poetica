@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-anagrammator',
@@ -6,35 +6,69 @@ import { Component } from '@angular/core';
   styleUrls: ['./anagrammator.component.scss']
 })
 
-export class AnagrammatorComponent {
+export class AnagrammatorComponent implements OnInit {
 
-  public sourceWord = '';
+  maxIterations = 10000000000;
 
-  public anagrammate(event: any) {
-    const word = event?.target?.value;
-    console.log('word:', word);
-    const reverse = word.split('').reverse().join('');
-    console.log('reve:', reverse);
+  filterBy = '';
+  sourceWord = '';
+  anagrams = [''];
+  randomize = true;
 
+  filtered = [''];
 
-    function allanagrams(str = '') {
+  formattedResult = '';
 
+  ngOnInit() {
+    console.log('init');
+  }
+
+  setSourceString(event: any) {
+    this.sourceWord = event?.target?.value;
+    this.anagrammate();
+  }
+
+  setFilter(event: any) {
+    this.filterBy = event?.target?.value;
+    this.anagrammate()
+  }
+
+  anagrammate() {
+    const word = this.sourceWord;
+    // const reverse = word.split('').reverse().join('');
+
+    let iteration = 0;
+
+    function allAnagramsForString(str = '', max = 0, start = 0) {
       if (str.length === 0) return [''];
       var result = {} as any;
-      str.split('').forEach(function (char, i) {
-        var remainingLetters = str.slice(0, i) + str.slice(i + 1);
-
-        allanagrams(remainingLetters).forEach(
-          function (anagram = '') {
-            result[char + anagram] = true;
-          });
+      str.split('').forEach((char, i) => {
+        if (++iteration > max) {
+          return;
+        }
+        var remainingChars = str.slice(0, i) + str.slice(i + 1);
+        allAnagramsForString(remainingChars, max, start).forEach((anagram = '') => {
+          result[char + anagram] = true;
+        });
       });
-      return Object.keys(result);
-
+      return Object.keys(result) as string[];
     }
 
+    function shuffleArray(arr: any[]) {
+      let currentIndex = arr.length, randomIndex;
+      while (currentIndex != 0) {
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex--;
+        [arr[currentIndex], arr[randomIndex]] = [arr[randomIndex], arr[currentIndex]];
+      }
+      return arr;
+    }
 
-    const annagrams = allanagrams(word);
-    console.log('annagrams:', annagrams);
+    this.anagrams = allAnagramsForString(word, this.maxIterations);
+    this.filtered = this.filterBy ? this.anagrams.filter(anagram => anagram.indexOf(this.filterBy) === 0) : this.anagrams;
+    const shuffled = this.randomize ? shuffleArray(this.filtered) : this.filtered;
+
+    this.formattedResult = shuffled.join('\n');
   }
 }
+ 

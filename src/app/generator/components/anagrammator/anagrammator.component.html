@@ -1,4 +1,11 @@
-<div>
-  <input type="text" (keyup)="anagrammate($event)">
+<div class="container">
+  <div>Enter string to make anagram of:</div>
+  <input type="text" (keyup)="setSourceString($event)">
+  <div>Show only results which have this sub-string:</div>
+  <input type="text" (keyup)="setFilter($event)">
+  <div>Results: {{anagrams?.length}} total, {{ filtered.length }} after filtering</div>
+  <div>
+    <pre>{{formattedResult}}</pre>
+  </div>
 </div>
 
