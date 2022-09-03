@@ -1,11 +1,43 @@
 <div class="container">
+  <div class="axes">
+    <div class="axe-body">
+      1
+      <div *ngFor="let item of t1" class="axe-item" >
+        {{item}}
+      </div>
+    </div>
+    <div class="axe-body">
+      2
+      <div *ngFor="let item of t2" class="axe-item" >
+        {{item}}
+      </div>
+    </div>
+    <div class="axe-body">
+      3
+      <div *ngFor="let item of t3" class="axe-item" >
+        {{item}}
+      </div>
+    </div>
+    <div class="axe-body">
+      4
+      <div *ngFor="let item of t4" class="axe-item" >
+        {{item}}
+      </div>
+    </div>
+  </div>
+
+  <h1>Anagramator</h1>
   <div>Enter string to make anagram of:</div>
-  <input type="text" (keyup)="setSourceString($event)">
+  <input type="text" (keyup)="setSourceString($event)" value="UKRAINE">
   <div>Show only results which have this sub-string:</div>
   <input type="text" (keyup)="setFilter($event)">
+  <div>
+    <label><input type="checkbox" (change)="toggleShuffling($event)">Shuffle results</label>
+  </div>
   <div>Results: {{anagrams?.length}} total, {{ filtered.length }} after filtering</div>
   <div>
     <pre>{{formattedResult}}</pre>
   </div>
+
 </div>
 

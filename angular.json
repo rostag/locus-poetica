@@ -1,6 +1,6 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
-  "version": 1, 
+  "version": 1,
   "newProjectRoot": "projects",
   "projects": {
     "poetry-gen": {
@@ -121,6 +121,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "poetry-gen"
+    }
+  },
+  "defaultProject": "poetry-gen",
+  "cli": {
+    "analytics": "84192ae0-a6d2-4dd5-8733-60e708763787"
+  }
 }

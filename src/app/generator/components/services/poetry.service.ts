@@ -82,7 +82,7 @@ export class PoetryService {
 
     public setupDictionaries() {
         this.dictionaries = [
-            // this.createDictionaryFromSource(dictonarySource.kobzar, '\n\n', '\n', ' '),
+            this.createDictionaryFromSource(dictonarySource.kobzar, '\n\n', '\n', ' '),
             // this.createDictionaryFromSource(dictonarySource.zagovor_det, '\n\n', '\n', ' '),
             // this.createDictionaryFromSource(dictonarySource.mat),
             // this.createDictionaryFromSource(dictonarySource.roz),

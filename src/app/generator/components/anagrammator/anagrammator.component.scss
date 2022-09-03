@@ -4,11 +4,19 @@
   .container {
     margin: 1em;
 
-    font-size: 30px;
+    &* {
+      font-size: 30px;
+    }
 
     input {
       font-size: 30px;
       margin: 0.5em 0;
+
+      &[type=checkbox] {
+        width: .7em;
+        height: .7em;
+        margin-right: .2em;
+      }
     }
 
     pre {
@@ -17,5 +25,18 @@
       line-height: 90px;
       font-family: Monaco, 'Courier New', Courier, monospace;
     }
+  }
+
+  .axes {
+    font-size: 2em;
+    margin-bottom: 2em;
+  }
+
+  .axe-body {
+    margin-top: 1em;
+  }
+
+  .axe-item {
+    line-height: normal;
   }
 }
