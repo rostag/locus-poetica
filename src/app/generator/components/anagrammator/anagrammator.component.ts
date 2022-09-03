@@ -36,6 +36,7 @@ export class AnagrammatorComponent implements OnInit {
   ngOnInit() {
     // this.anagrammate();
     this.getAxes();
+    this.stackCombos(0, this.axes1, '');
   }
 
   setSourceString(event: any) {
@@ -168,17 +169,52 @@ export class AnagrammatorComponent implements OnInit {
     return Object.values(result) as [];
   }
 
-  // if (items.length === 0) return [''];
-  // var result = {} as any;
-  // items.forEach((item, i) => {
-  //   var remainingItems = items.slice(0, i).concat(items.slice(i + 1));
-  //   this.combineItems(remainingItems, max, start).forEach((remaining = '') => {
-  //     const res = [item].concat(remaining);
-  //     const id = item + remaining
-  //     result[id] = res;
-  //   });
-  // });
-  // return Object.values(result) as [];
+  getAllAxes(axes: GameAxis[] ) {
+    if (axes.length === 0) return [
+      {
+        name: '',
+        values: [
+        {label: ''}
+      ]
+    }
+    ];
+    let result = {} as any;
+    for(let i = 0; i < axes.length; i++ ) {
+      const val = axes[i].values;
+
+      // let remainingItems = axes.slice(0, i).concat(axes.slice(i + 1));
+      // this.getAllAxes(remainingItems).forEach((remaining) => {
+      //   const res = [val].concat(remaining);
+      //   const id = val.label + remainingItems.map(ri => ri.label)
+      //   result[id] = res;
+      // });
+
+
+    }
+    // axes.forEach((val, i) => {
+    // })
+    return Object.values(result) as [];
+  }
+
+  stackCombine(c: any) {
+    for (let i = 0; i < c[0].length ; i++) {
+      for (let j = 0; j < c[1].length ; j++) {
+          console.log("" + c[0][i] + c[1][j]);
+      }
+  }    
+  }
+
+  combos = [''];
+
+  stackCombos(pos: number, c: string[][], soFar: string) {
+    if (pos == c.length) {
+      this.combos.push(soFar);
+      return;
+    }
+    for (let i = 0 ; i != c[pos].length ; i++) {
+      this.stackCombos(pos + 1, c, soFar + ' - ' + c[pos][i]);
+    }
+  }
 
   getCombos(){
     for(let a = 0; a < this.axes.length; a++) {

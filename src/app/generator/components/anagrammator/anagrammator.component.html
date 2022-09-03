@@ -1,4 +1,10 @@
 <div class="container">
+  <div class="senses">
+    <div class="sense-body" *ngFor="let combo of combos; let i = index" >
+      {{i}}. {{ combo }}
+    </div>
+  </div>
+
   <!-- <div class="senses">
     <div class="sense-body" *ngFor="let parsedConfig of parsedConfigs; let i = index" >
       {{i}}. {{ parsedConfig }}
