@@ -5,8 +5,8 @@ export interface Item {
 }
 
 interface GameAxis {
-  name: string;
-  values: GameAxis[]
+  axisName: string;
+  axisValues: GameAxis[]
 };
 
 @Component({
@@ -29,10 +29,79 @@ export class AnagrammatorComponent implements OnInit {
   formattedResult = '';
   iteration: number;
 
+  axes1: string[][] = [
+    ['Свобода', 'Братерство', 'Рівність'],
+    ['Війна', 'Релігія', 'Секс'],
+    ['Наука', 'Містика', 'Ремесло'],
+    ['Ієрархія', 'Гармонія', 'Хаос']
+  ]
+
+  axes: GameAxis[] = [{
+    axisName: 'Модерн',
+    axisValues: [
+      { axisName: 'Свобода', axisValues: [] },
+      { axisName: 'Братерство', axisValues: [] },
+      { axisName: 'Рівність', axisValues: [] },
+    ],
+  }, {
+    axisName: 'Архаїка',
+    axisValues: [
+      { axisName: 'Війна', axisValues: [] },
+      { axisName: 'Релігія', axisValues: [] },
+      { axisName: 'Секс', axisValues: [] },
+    ]
+  }, {
+    axisName: 'Діло',
+    axisValues: [
+      { axisName: 'Наука', axisValues: [] },
+      { axisName: 'Містика', axisValues: [] },
+      { axisName: 'Ремесло', axisValues: [] },
+    ]
+  }, {
+    axisName: 'Ідея',
+    axisValues:
+      [
+        { axisName: 'Ієрархія', axisValues: [] },
+        { axisName: 'Гармонія', axisValues: [] },
+        { axisName: 'Хаос', axisValues: [] },
+      ]
+  }];
+
   ngOnInit() {
     // this.anagrammate();
     this.getAxes();
     this.stackCombos(0, this.axes1, '');
+    this.getAxesCombos(0, this.axes, {
+      axisName: '',
+      axisValues: [
+        { axisName: '', axisValues: [] }
+      ]
+    });
+    console.log(this.axesCombos);
+  }
+
+  combos = [''];
+
+  stackCombos(pos: number, c: string[][], soFar: string) {
+    if (pos == c.length) {
+      this.combos.push(soFar);
+      return;
+    }
+    for (let i = 0; i != c[pos].length; i++) {
+      this.stackCombos(pos + 1, c, soFar + ' - ' + c[pos][i]);
+    }
+  }
+
+  axesCombos: GameAxis[] = [];
+
+  getAxesCombos(pos: number, axis: GameAxis[], soFar: GameAxis) {
+    if (pos == axis.length) {
+      this.axesCombos.push(soFar);
+      return;
+    }
+    for (let i = 0; i != axis[pos].axisValues.length; i++) {
+      this.getAxesCombos(pos + 1, axis, { axisName: soFar.axisName, axisValues: soFar.axisValues.concat(axis[pos].axisValues[i].axisValues) });
+    }
   }
 
   setSourceString(event: any) {
@@ -90,110 +159,40 @@ export class AnagrammatorComponent implements OnInit {
     this.formattedResult = shuffled.join('\n');
   }
 
-  axes1: string[][] =
-    [
-      [
-        'Свобода',
-        'Братерство',
-        'Рівність',
-      ],
-      [
-        'Війна',
-        'Релігія',
-        'Секс',
-      ],
-      [
-        'Наука',
-        'Містика',
-        'Ремесло',
-      ],
-      [
-        'Ієрархія',
-        'Гармонія',
-        'Хаос',
-      ]
-    ]
-
-  axes: GameAxis[] =
-    [
-      {
-        name: 'Модерн',
-        values: [
-          { name: 'Свобода', values: [] },
-          { name: 'Братерство', values: [] },
-          { name: 'Рівність', values: [] },
-        ],
-      },
-      {
-        name: 'Архаїка',
-        values: [
-          { name: 'Війна', values: [] },
-          { name: 'Релігія', values: [] },
-          { name: 'Секс', values: [] },
-        ]
-      },
-      {
-        name: 'Діло',
-        values: [
-          { name: 'Наука', values: [] },
-          { name: 'Містика', values: [] },
-          { name: 'Ремесло', values: [] },
-        ]
-      },
-      {
-        name: 'Ідея',
-        values:
-          [
-            { name: 'Ієрархія', values: [] },
-            { name: 'Гармонія', values: [] },
-            { name: 'Хаос', values: [] },
-          ]
-      }
-    ];
-
-  getValues(axes: GameAxis[] ) {
+  getValues(axes: GameAxis[]) {
     if (axes.length === 0) return [{
-        name: '',
-        values: [
-        {name: '', values: []}
-      ]}] as GameAxis[];
+      axisName: '',
+      axisValues: [
+        { axisName: '', axisValues: [] }
+      ]
+    }] as GameAxis[];
     let result = {} as any;
     axes.forEach((axis, i) => {
       let remainingItems = axes.slice(0, i).concat(axes.slice(i + 1));
       this.getValues(remainingItems).forEach((remaining) => {
         const res = [axis].concat(remaining);
-        const id = axis.name + remainingItems.map(ri => ri.name)
+        const id = axis.axisName + remainingItems.map(ri => ri.axisName)
         result[id] = res;
       });
     })
     return Object.values(result) as [];
   }
 
-  getAllAxes(axes: GameAxis[] ) {
+  getAllAxes(axes: GameAxis[]) {
     if (axes.length === 0) return [{
-      name: '',
-      values: [
-      {name: '', values: []}
-    ]}] as GameAxis[];
+      axisName: '',
+      axisValues: [
+        { axisName: '', axisValues: [] }
+      ]
+    }] as GameAxis[];
     let result = {} as any;
-    for(let i = 0; i < axes.length; i++ ) {
-      const val = axes[i].values;
+    for (let i = 0; i < axes.length; i++) {
+      const val = axes[i].axisValues;
     }
     return Object.values(result) as [];
   }
 
-  combos = [''];
 
-  stackCombos(pos: number, c: string[][], soFar: string) {
-    if (pos == c.length) {
-      this.combos.push(soFar);
-      return;
-    }
-    for (let i = 0 ; i != c[pos].length ; i++) {
-      this.stackCombos(pos + 1, c, soFar + ' - ' + c[pos][i]);
-    }
-  }
-  
   triangles: string[] = [];
 
   tModern = [''];
@@ -205,7 +204,7 @@ export class AnagrammatorComponent implements OnInit {
   senses: string[][] = [];
 
   getSenses2() {
-    for (let i = 0; i < 6; i+=2) {
+    for (let i = 0; i < 6; i += 2) {
       const categoryModern = this.tModern[i][0];
       const categoryArchaic = this.tArchaic[i][0];
       const categoryCraft = this.tCraft[i][0];
@@ -220,7 +219,7 @@ export class AnagrammatorComponent implements OnInit {
     const parsed: any[] = [];
     this.bookConfigs.forEach(bc => {
       const bookAxes = bc as [];
-      parsed.push([bc[0][0][0], bc[1][0][0], bc[2][0][0], bc[3][0][0]] );
+      parsed.push([bc[0][0][0], bc[1][0][0], bc[2][0][0], bc[3][0][0]]);
     })
     this.parsedConfigs = parsed;
   }
@@ -240,7 +239,7 @@ export class AnagrammatorComponent implements OnInit {
     this.getSenses2();
 
     // this.parseBookConfigs();
-    
+
   }
 
 }
