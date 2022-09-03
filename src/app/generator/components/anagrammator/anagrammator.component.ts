@@ -6,11 +6,7 @@ export interface Item {
 
 interface GameAxis {
   name: string;
-  values: GameValue[]
-};
-
-interface GameValue {
-  label: string
+  values: GameAxis[]
 };
 
 @Component({
@@ -123,46 +119,50 @@ export class AnagrammatorComponent implements OnInit {
       {
         name: 'Модерн',
         values: [
-          { label: 'Свобода' },
-          { label: 'Братерство' },
-          { label: 'Рівність' },
+          { name: 'Свобода', values: [] },
+          { name: 'Братерство', values: [] },
+          { name: 'Рівність', values: [] },
         ],
       },
       {
         name: 'Архаїка',
         values: [
-          { label: 'Війна' },
-          { label: 'Релігія' },
-          { label: 'Секс' },
+          { name: 'Війна', values: [] },
+          { name: 'Релігія', values: [] },
+          { name: 'Секс', values: [] },
         ]
       },
       {
         name: 'Діло',
         values: [
-          { label: 'Наука' },
-          { label: 'Містика' },
-          { label: 'Ремесло' },
+          { name: 'Наука', values: [] },
+          { name: 'Містика', values: [] },
+          { name: 'Ремесло', values: [] },
         ]
       },
       {
         name: 'Ідея',
         values:
           [
-            { label: 'Ієрархія' },
-            { label: 'Гармонія' },
-            { label: 'Хаос' },
+            { name: 'Ієрархія', values: [] },
+            { name: 'Гармонія', values: [] },
+            { name: 'Хаос', values: [] },
           ]
       }
     ];
 
-  getValues(axisValues: GameValue[] ) {
-    if (axisValues.length === 0) return [{label: ''}];
+  getValues(axes: GameAxis[] ) {
+    if (axes.length === 0) return [{
+        name: '',
+        values: [
+        {name: '', values: []}
+      ]}] as GameAxis[];
     let result = {} as any;
-    axisValues.forEach((val, i) => {
-      let remainingItems = axisValues.slice(0, i).concat(axisValues.slice(i + 1));
+    axes.forEach((axis, i) => {
+      let remainingItems = axes.slice(0, i).concat(axes.slice(i + 1));
       this.getValues(remainingItems).forEach((remaining) => {
-        const res = [val].concat(remaining);
-        const id = val.label + remainingItems.map(ri => ri.label)
+        const res = [axis].concat(remaining);
+        const id = axis.name + remainingItems.map(ri => ri.name)
         result[id] = res;
       });
     })
@@ -170,38 +170,16 @@ export class AnagrammatorComponent implements OnInit {
   }
 
   getAllAxes(axes: GameAxis[] ) {
-    if (axes.length === 0) return [
-      {
-        name: '',
-        values: [
-        {label: ''}
-      ]
-    }
-    ];
+    if (axes.length === 0) return [{
+      name: '',
+      values: [
+      {name: '', values: []}
+    ]}] as GameAxis[];
     let result = {} as any;
     for(let i = 0; i < axes.length; i++ ) {
       const val = axes[i].values;
-
-      // let remainingItems = axes.slice(0, i).concat(axes.slice(i + 1));
-      // this.getAllAxes(remainingItems).forEach((remaining) => {
-      //   const res = [val].concat(remaining);
-      //   const id = val.label + remainingItems.map(ri => ri.label)
-      //   result[id] = res;
-      // });
-
-
     }
-    // axes.forEach((val, i) => {
-    // })
     return Object.values(result) as [];
-  }
-
-  stackCombine(c: any) {
-    for (let i = 0; i < c[0].length ; i++) {
-      for (let j = 0; j < c[1].length ; j++) {
-          console.log("" + c[0][i] + c[1][j]);
-      }
-  }    
   }
 
   combos = [''];
@@ -215,15 +193,6 @@ export class AnagrammatorComponent implements OnInit {
       this.stackCombos(pos + 1, c, soFar + ' - ' + c[pos][i]);
     }
   }
-
-  getCombos(){
-    for(let a = 0; a < this.axes.length; a++) {
-      const axeValues = this.axes[a].values;
-      console.log(axeValues.map(v => v.label));
-      const an = this.getValues(this.axes[a].values);
-      console.log('an:', an);
-    }
-  }
   
   triangles: string[] = [];
 
@@ -232,21 +201,6 @@ export class AnagrammatorComponent implements OnInit {
   tCraft = [''];
   tIdea = [''];
   bookConfigs: any[];
-
-  // combineAxes(axis: GameAxis, max = this.maxIterations, start = 0, divider = '') {
-  //   const axeValues = axis.values;
-  //   if (axeValues.length === 0) return [''];
-  //   var result = {} as any;
-  //   axeValues.forEach((axeValue, i) => {
-  //     var remainingItems = axeValues.slice(0, i).concat(axeValues.slice(i + 1));
-  //     this.combineItems(remainingItems, max, start).forEach((remaining = '') => {
-  //       const res = [axeValue].concat(remaining);
-  //       const id = axeValue + remaining
-  //       result[id] = res;
-  //     });
-  //   });
-  //   return Object.values(result) as [];
-  // }
 
   senses: string[][] = [];
 
@@ -263,29 +217,12 @@ export class AnagrammatorComponent implements OnInit {
   parsedConfigs: any[];
 
   parseBookConfigs() {
-    const configsParsed: any[] = [];
-    const configsParsed2: any[] = [];
+    const parsed: any[] = [];
     this.bookConfigs.forEach(bc => {
       const bookAxes = bc as [];
-      configsParsed2.push([bc[0][0][0], bc[1][0][0], bc[2][0][0], bc[3][0][0]] );
-
-      bookAxes.forEach(axis => {
-        const axeValues = axis as [];
-        // configsParsed2.push([axis[0][0][0], axis[1][0][0], axis[2][0][0], axis[3][0][0]] );
-        
-        if (typeof axeValues === 'object') {
-          console.log('av:', axeValues);
-          axeValues.forEach(value => {
-                configsParsed.push(value[0])
-          })
-        }
-        
-      })
+      parsed.push([bc[0][0][0], bc[1][0][0], bc[2][0][0], bc[3][0][0]] );
     })
-
-    this.parsedConfigs = configsParsed2;
-    
-    return configsParsed as any;
+    this.parsedConfigs = parsed;
   }
 
   getAxes() {
@@ -303,8 +240,6 @@ export class AnagrammatorComponent implements OnInit {
     this.getSenses2();
 
     // this.parseBookConfigs();
-
-    this.getCombos();
     
   }
 
