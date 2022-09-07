@@ -16,6 +16,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { SampleComponent } from './components/audio/sample.component';
 import { AnagrammatorComponent } from './components/anagrammator/anagrammator.component';
+import { ModelAxesComponent } from './components/model-axes/model-axes.component';
 
 @NgModule({
   imports: [
@@ -37,6 +38,7 @@ import { AnagrammatorComponent } from './components/anagrammator/anagrammator.co
     PoetryXComponent,
     PoetryComponent,
     AnagrammatorComponent,
+    ModelAxesComponent,
   ],
   providers: [
     PoetryService

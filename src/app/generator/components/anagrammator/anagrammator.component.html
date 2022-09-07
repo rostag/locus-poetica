@@ -1,42 +1,4 @@
 <div class="container">
-  <div class="senses">
-    <div class="sense-body" *ngFor="let combo of combos; let i = index" >
-      {{i}}. {{ combo }}
-    </div>
-  </div>
-
-  <!-- <div class="senses">
-    <div class="sense-body" *ngFor="let parsedConfig of parsedConfigs; let i = index" >
-      {{i}}. {{ parsedConfig }}
-    </div>
-  </div> -->
-  <!-- <div class="axes">
-    <div class="axe-body">
-      1
-      <div *ngFor="let item of tModern" class="axe-item" >
-        {{item}}
-      </div>
-    </div>
-    <div class="axe-body">
-      2
-      <div *ngFor="let item of tArchaic" class="axe-item" >
-        {{item}}
-      </div>
-    </div>
-    <div class="axe-body">
-      3
-      <div *ngFor="let item of tCraft" class="axe-item" >
-        {{item}}
-      </div>
-    </div>
-    <div class="axe-body">
-      4
-      <div *ngFor="let item of tIdea" class="axe-item" >
-        {{item}}
-      </div>
-    </div>
-  </div> -->
-
   <h1>Anagramator</h1>
   <div>Enter string to make anagram of:</div>
   <input type="text" (keyup)="setSourceString($event)" value="UKRAINE">
@@ -49,6 +11,5 @@
   <div>
     <pre>{{formattedResult}}</pre>
   </div>
-
 </div>
 

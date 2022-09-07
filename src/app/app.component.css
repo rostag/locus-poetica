@@ -1,13 +1,20 @@
-.menu {
-    margin: 24px;
-}
-.generator, .compass {
-    width: 64px;
-    height: 64px;
-    font-size: 60px;
+:host {
+    display: block;
 }
 
-:host {
-    height: 100%;
-    display: flex;
+.menu {
+    margin: 8px;
+    display: inline-grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 2em;
+}
+
+.menu-item {
+    display: inline-grid;
+    grid-template-columns: 32px 1fr;
+    align-items: center;
+}
+
+.icon {
+    font-size: 32px;
 }
