@@ -8,8 +8,8 @@ import { Component, OnInit } from '@angular/core';
 
 export class AnagrammatorComponent implements OnInit {
 
-  sourceWord = 'UKRAINE';
-  randomize = false;
+  sourceWord = 'WORD';
+  shuffle = true;
   filterBy = '';
   anagrams = [''];
   filtered = [''];
@@ -33,7 +33,7 @@ export class AnagrammatorComponent implements OnInit {
   }
 
   toggleShuffling(event: any) {
-    this.randomize = event?.currentTarget?.checked;
+    this.shuffle = event?.currentTarget?.checked;
     this.anagrammate();
   }
 
@@ -69,7 +69,7 @@ export class AnagrammatorComponent implements OnInit {
 
     this.anagrams = this.combineItems(this.sourceWord.split(''), this.maxIterations, 0, '');
     this.filtered = this.filterBy ? this.anagrams.filter(anagram => anagram.indexOf(this.filterBy) === 0) : this.anagrams;
-    const shuffled = this.randomize ? this.shuffleArray(this.filtered) : this.filtered;
+    const shuffled = this.shuffle ? this.shuffleArray(this.filtered) : this.filtered;
 
     this.formattedResult = shuffled.join('\n');
   }

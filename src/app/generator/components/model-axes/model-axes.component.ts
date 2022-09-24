@@ -17,16 +17,18 @@ interface GameAxis {
 
 export class ModelAxesComponent implements OnInit {
 
-  combos = [''];
+  combinations = [''];
 
-  axes1: string[][] = [
+  axesCombos: GameAxis[] = [];
+
+  axesAsStrings: string[][] = [
     ['Свобода', 'Братерство', 'Рівність'],
     ['Війна', 'Релігія', 'Секс'],
     ['Наука', 'Містика', 'Ремесло'],
     ['Ієрархія', 'Гармонія', 'Хаос']
   ]
 
-  axes: GameAxis[] = [{
+  axesAsObjects: GameAxis[] = [{
     axisName: 'Модерн',
     axisValues: [
       { axisName: 'Свобода', axisValues: [] },
@@ -61,29 +63,26 @@ export class ModelAxesComponent implements OnInit {
   iteration = 0;
 
   ngOnInit() {
-    this.getAxes();
-    this.stackCombos(0, this.axes1, '');
-    this.getAxesCombos(0, this.axes, {
-      axisName: '',
-      axisValues: [
-        { axisName: '', axisValues: [] }
-      ]
-    });
-    console.log(this.axesCombos);
+    // this.getAxesInLegacyManner();
+    this.getCombinations(0, this.axesAsStrings, '');
+    // this.getAxesCombos(0, this.axes, {
+    //   axisName: '',
+    //   axisValues: [
+    //     { axisName: '', axisValues: [] }
+    //   ]
+    // });
+    // console.log(this.axesCombos);
   }
 
-
-  stackCombos(pos: number, c: string[][], soFar: string) {
-    if (pos == c.length) {
-      this.combos.push(soFar);
+  getCombinations(pos: number, c: string[][], soFar: string) {
+    if (pos === c.length) {
+      this.combinations.push(soFar);
       return;
     }
-    for (let i = 0; i != c[pos].length; i++) {
-      this.stackCombos(pos + 1, c, soFar + ' - ' + c[pos][i]);
+    for (let i = 0; i < c[pos].length; i++) {
+      this.getCombinations(pos + 1, c, soFar + ' - ' + c[pos][i]);
     }
   }
-
-  axesCombos: GameAxis[] = [];
 
   getAxesCombos(pos: number, axis: GameAxis[], soFar: GameAxis) {
     if (pos == axis.length) {
@@ -187,17 +186,17 @@ export class ModelAxesComponent implements OnInit {
     this.parsedConfigs = parsed;
   }
 
-  getAxes() {
-    this.tModern = this.combineItems(this.axes1[0], undefined, undefined, ', ');
-    this.tArchaic = this.combineItems(this.axes1[1], undefined, undefined, ', ');
-    this.tCraft = this.combineItems(this.axes1[2], undefined, undefined, ', ');
-    this.tIdea = this.combineItems(this.axes1[3], undefined, undefined, ', ');
+  getAxesInLegacyManner() {
+    this.tModern = this.combineItems(this.axesAsStrings[0], undefined, undefined, ', ');
+    this.tArchaic = this.combineItems(this.axesAsStrings[1], undefined, undefined, ', ');
+    this.tCraft = this.combineItems(this.axesAsStrings[2], undefined, undefined, ', ');
+    this.tIdea = this.combineItems(this.axesAsStrings[3], undefined, undefined, ', ');
 
     this.bookConfigs = this.combineItems([this.tModern, this.tArchaic, this.tCraft, this.tIdea], undefined, undefined, ', ');
 
-    console.log('TMOD:', this.tModern);
+    // console.log('TMOD:', this.tModern);
 
-    console.log('BCS:', this.bookConfigs);
+    // console.log('BCS:', this.bookConfigs);
 
     this.getSenses2();
 

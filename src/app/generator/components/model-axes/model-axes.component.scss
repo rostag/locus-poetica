@@ -1,6 +1,8 @@
 :host {
   display: block;
 
+  font-family: var(--mono-font);
+
   .container {
     margin: 1em;
 
@@ -23,7 +25,7 @@
       margin-top: 0;
       font-size: 80px;
       line-height: 90px;
-      font-family: Monaco, 'Courier New', Courier, monospace;
+      font-family: var(--main-font);
     }
   }
 

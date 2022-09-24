@@ -1,9 +1,10 @@
 :host {
-    .pre-poetry {
+    .pre-poetry, p {
+        white-space: pre-line;
         margin-top: 14px;
         padding: 12px;
         border: 1px solid #eee;
-        font-family: Helvetica, Arial, sans-serif;
+        font-family: var(--mono-font);
         font-size: 1.1em;
         color: #222;
     }
