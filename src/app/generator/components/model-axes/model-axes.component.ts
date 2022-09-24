@@ -10,8 +10,10 @@ export class ModelAxesComponent implements OnInit {
 
   combinations = [''];
 
+  displayIndex = false;
+
   axesAsStrings: string[][] = [
-    ['Свобода'],
+    ['Свобода', 'Братерство'],
     ['Війна', 'Релігія'],
   ]
 
@@ -33,7 +35,7 @@ export class ModelAxesComponent implements OnInit {
       return;
     }
     for (let i = 0; i < c[pos].length; i++) {
-      this.getCombinations(pos + 1, c, soFar + c[pos][i] + '. ');
+      this.getCombinations(pos + 1, c, soFar + '<span class="pos-' + i + ' ">' + (this.displayIndex ? i + ': ' : '') + c[pos][i] + '</span>' + '. ');
     }
   }
 }
