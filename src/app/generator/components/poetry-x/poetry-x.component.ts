@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { dumyMoiDumy, syllablesWeightedDict } from '../models/poetry.model';
-import { Dictionary, Word } from '../services/poetry.service';
 
 @Component({
   selector: 'app-poetry-x',
@@ -95,7 +94,7 @@ export class PoetryXComponent implements OnInit {
     for (let c = 0; c < count; c++) {
       res += this.getNext(syllablesWeightedDict);
     }
-    return `${count}: ${res}`;
+    return `${res}`;
   }
 
   /*

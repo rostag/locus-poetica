@@ -1,7 +1,7 @@
 :host {
     flex: auto;
-    margin: 2em;
-
+    margin: 1em;
+    display: block;
 }
 
 .latynize-full-width {
