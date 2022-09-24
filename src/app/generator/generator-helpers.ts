@@ -1,4 +1,5 @@
 import { latynka } from './components/models/latynka.model';
+import { Rhyme } from './components/models/rhyme.models';
 import { Dictionary, Word } from './components/services/poetry.service';
 
 export function latynize(str: string): string {
@@ -21,7 +22,7 @@ export function getRandomFromSet<Type>(set: Type[]): Type {
 
 let getRandomWordOfGivenLengthCallCount = 0;
 
-export function getRandomWordOfGivenLength(words: Word[], targetWordLength: number, transformVowels = false, removeWordsFromDic = false): Word {
+export function getRandomWordOfGivenLength(words: Word[], targetWordLength: number, transformVowels = false, removeWordsFromDic = false, ending?: string): Word {
   const vowels = 'їёуэеиаоєяіиюыєeuioay';
   const randomWord: Word = getRandomFromSet(words);
   let syllablesCount = 0;

@@ -5,14 +5,14 @@ import { generatorState, IAudio, IConnection } from '../generator/generator.comp
 import { Rhyme, Rhymes, rhymes } from '../models/rhyme.models';
 import { Dictionary, Line, OOPTimelineMode, Poetry, PoetryService, Strophae, Word } from '../services/poetry.service';
 
-/*
+/**
   pyro / senkan
   я бог 
   ты бросая 
   сукой волосами 
   красным которые лона 
   меня 
-*/
+ */
 
 @Component({
   selector: 'app-poetry',
@@ -98,19 +98,20 @@ export class PoetryComponent implements OnInit {
     this.objectOrientedPoetry = this.getPoetryObjectFromDicAndRhyme();
   }
 
-  public getPoetryStringFromDicAndRhyme(): string {
-    let result = '';
-    this.rhyme.value.forEach(line => {
-      line.forEach(wordLength => {
-        const newWord = getRandomWordOfGivenLength(this.dictionary.words, wordLength, false, false);
-        result += newWord.wordContents + ' ';
-      })
-      result += '\n';
-    })
-    return result;
-  };
+  // public getPoetryStringFromDicAndRhyme(): string {
+  //   let result = '';
+  //   this.rhyme.value.forEach(line => {
+  //     line.forEach(wordLength => {
+  //       const newWord = getRandomWordOfGivenLength(this.dictionary.words, wordLength, false, false);
+  //       result += newWord.wordContents + ' ';
+  //     })
+  //     result += '\n';
+  //   })
+  //   return result;
+  // };
 
   public getPoetryObjectFromDicAndRhyme(): Poetry {
+    let prevEnding = '';
     const oopo: Poetry = {
       strophae: [{
         lines: [{
@@ -122,7 +123,7 @@ export class PoetryComponent implements OnInit {
     this.rhyme.value.forEach(rhymeLine => {
       let words: Word[] = [];
       rhymeLine.forEach(wordLength => {
-        const newWord = getRandomWordOfGivenLength(this.dictionary.words, wordLength, false, false);
+        const newWord = getRandomWordOfGivenLength(this.dictionary.words, wordLength, false, false, prevEnding);
         words = words.concat(newWord);
       })
       lines.push({
@@ -230,9 +231,21 @@ export class PoetryComponent implements OnInit {
   public fontSize = 19;
 
   public recolor() {
-    const r = Math.round(Math.random() * 135) + 150;
-    const g = Math.round(Math.random() * 135) + 150;
-    const b = Math.round(Math.random() * 135) + 100;
+    
+    const max = 255;
+
+    const minr = 80;
+    const ming = 0;
+    const minb = 150;
+
+    const kr = 1 / (max / (max - minr));
+    const kg = 1 / (max / (max - ming));
+    const kb = 1 / (max / (max - minb));
+    const r = Math.round(Math.random() * max * kr) + max * (1 - kr);
+    const g = Math.round(Math.random() * max * kg) + max * (1 - kg);
+    const b = Math.round(Math.random() * max * kb) + max * (1 - kb);
+    console.log({ r, g, b });
+
     this.color = { r, g, b };
   }
 

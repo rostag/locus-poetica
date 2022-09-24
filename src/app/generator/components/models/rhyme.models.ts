@@ -7,6 +7,11 @@ export interface Rhymes {
     [index: string]: Rhyme;
 }
 
+export const ABAB: Rhyme = {
+    name: 'ABAB',
+    value: [[1],[0],[1],[0]]
+} 
+
 export const rhymes = {
     pyro: {
         name: 'Пирожки',

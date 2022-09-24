@@ -1287,7 +1287,7 @@ ISBN
 © Интернет-магазин «Розетка™»2001–2020  ТМ используется на основании лицензии правообладателя RozetkaLTD`;
 
 export const dictonarySource: DictionarySources = {
-  // kobzar: { name: 'Kob', value: kobzar },
+  kobzar: { name: 'Kob', value: kobzar },
   // zagovor_det: { name: 'Zagovor', value: zagovor_det },
   // mat: { name: 'Mat', value: wordMat },
   // roz: { name: 'Roz', value: roz },

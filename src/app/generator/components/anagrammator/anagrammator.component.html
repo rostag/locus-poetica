@@ -1,0 +1,15 @@
+<div class="container">
+  <h1>Anagramator</h1>
+  <div>Enter string to make anagram of:</div>
+  <input type="text" (keyup)="setSourceString($event)" value="WORD">
+  <div>Show only results which have this sub-string:</div>
+  <input type="text" (keyup)="setFilter($event)">
+  <div>
+    <label><input type="checkbox" (change)="toggleShuffling($event)" checked>Shuffle results</label>
+  </div>
+  <div>Results: {{anagrams?.length}} total, {{ filtered.length }} after filtering</div>
+  <div>
+    <pre>{{formattedResult}}</pre>
+  </div>
+</div>
+

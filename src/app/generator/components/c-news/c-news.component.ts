@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CNewsComponent implements OnInit {
 
-  public news: string = 'Новини:';
+  public news: string = '';
 
   constructor() { }
 
@@ -73,14 +73,14 @@ export class CNewsComponent implements OnInit {
     ];
 
     let result = [
-      "все умрем.",
+      "все умрем!",
       "все будет хорошо.",
       "начнуть с рождения пришивать маски к лицу."
     ];
 
-    function w() {
+    function w(...args: string[][]) {
       let text = '';
-      let args = arguments;
+
       for (let a in args) {
         let words = args[a];
         let id = Math.floor(Math.random() * words.length);
@@ -89,9 +89,9 @@ export class CNewsComponent implements OnInit {
       }
       return text;
     }
-    let phrase = w();
+    let phrase = w(intro, subject, action, provider, requested, message, is, content, soon, result);
 
-    this.news += '\n\r\n\r' + phrase;
+    this.news += `${phrase}\n\n *** \n\n`;
 
     return phrase;
   }
