@@ -1,8 +1,20 @@
 <div class="container">
-  <p><i>TODO: Додати введення базових термінів</i></p>
+  <h1>Комбінація осей та цінностей для сюжету книги</h1>
+  <p>TODO: тут буде форма введення осей та цінностей</p>
+  <h2>Осі: {{axesAsStrings.length}} усього, в кожній по {{axesAsStrings[0].length}} цінності:</h2>
+  <ol>
+    <li *ngFor="let axisItems of axesAsStrings">
+      <ul>
+        <li *ngFor="let item of axisItems">
+          {{item}}
+        </li>
+      </ul>
+    </li>
+  </ol>
+  <h2>З кожної осі беремо по одній цінності і поєднуємо в комбінації, котрих усього {{combinations.length}}:</h2>
   <div class="senses">
     <div class="sense-body" *ngFor="let combo of combinations; let i = index" >
-      {{i}}. {{ combo }}
+      {{i + 1}}. {{ combo }}
     </div>
   </div>
 </div>
