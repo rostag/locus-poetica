@@ -8,18 +8,23 @@ import { PoetryXComponent } from './components/poetry-x/poetry-x.component';
 
 const routes: Routes = [{
   path: '',
-  component: GeneratorComponent
+  pathMatch: 'full',
+  redirectTo: 'c-news',
 }, {
   path: 'anagrammator',
+  pathMatch: 'full',
   component: AnagrammatorComponent
 }, {
   path: 'axes',
+  pathMatch: 'full',
   component: ModelAxesComponent
 }, {
   path: 'c-news',
+  pathMatch: 'full',
   component: CNewsComponent
 }, {
   path: 'poetry-x',
+  pathMatch: 'full',
   component: PoetryXComponent
 }];
 

@@ -7,6 +7,14 @@ const routes: Routes = [
     path: '',
     component: LatynizatorComponent
   },
+  {
+    path: '/',
+    component: LatynizatorComponent
+  },
+  {
+    path: 'lat',
+    component: LatynizatorComponent
+  },
 ];
 
 @NgModule({
