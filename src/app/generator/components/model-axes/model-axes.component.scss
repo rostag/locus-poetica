@@ -1,62 +1,46 @@
-:host {
+.values-renderer {
   display: block;
+  margin: 1em;
 
-  font-family: var(--mono-font);
-
+  &* {
+    font-size: 30px;
+  }
   p {
     font-family: var(--mono-font);
   }
 
-  .container {
-    margin: 1em;
+  .axe-1 {
+    background-color: #dd5522;
+  }
 
-    &* {
-      font-size: 30px;
+  .axe-2 {
+    background-color: #ffeedd;
+  }
+
+  .val-1 {
+    color: #552233;
+  }
+
+  .val-2 {
+    color: #332288;
+  }
+
+  input {
+    font-size: 30px;
+    margin: 0.5em 0;
+
+    &[type=checkbox] {
+      width: .7em;
+      height: .7em;
+      margin-right: .2em;
     }
-
-    input {
-      font-size: 30px;
-      margin: 0.5em 0;
-
-      &[type=checkbox] {
-        width: .7em;
-        height: .7em;
-        margin-right: .2em;
-      }
-    }
-
-    pre {
-      margin-top: 0;
-      font-size: 80px;
-      line-height: 90px;
-      font-family: var(--main-font);
-    }
   }
 
-  .axes {
-    font-size: 2em;
-    margin-bottom: 2em;
-  }
-
-  .axe-body {
-    margin-top: 1em;
-  }
-
-  .axe-item {
-    line-height: normal;
-  }
-
-  .pos-0 {
-    color: #ffcc00;
-  }
-  .pos-1 {
-    color: #ccff00;
-  }
-  .pos-2 {
-    color: #cc00ff;
-  }
-  .pos-3 {
-    color: #00ffcc;
+  pre {
+    margin-top: 0;
+    font-size: 80px;
+    line-height: 90px;
+    font-family: var(--main-font);
   }
 
 }
