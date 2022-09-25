@@ -2,25 +2,26 @@
   <h1>Отримуємо сюжети з усіх можливих комбінацій цінностей</h1>
   <p>TODO: тут буде форма введення осей та цінностей</p>
   <p>TODO: поєднувати цінності різними сполучниками: І, АБО, НЕ, І НЕ, АБО НЕ, НЕ</p>
-  <h2>1. Осі. {{axesAsStrings.length}} усього, в кожній по {{axesAsStrings[0].length}} цінності</h2>
+  <h2>1. Осі. {{axes.length}} усього, в кожній по {{axes[0].length}} цінності</h2>
   <ol>
-    <li *ngFor="let axisItems of axesAsStrings">
+    <li *ngFor="let values of axes">
       <ul>
-        <li *ngFor="let item of axisItems">
-          {{item}}
+        <li *ngFor="let item of values">
+          {{item.label}}
         </li>
       </ul>
     </li>
   </ol>
   <h2>2. Комбінації. З кожної осі беремо по цінності і поєднуємо в комбінації, усього їх {{combinations.length}}</h2>
   <div class="senses">
-    <div class="sense-body" *ngFor="let combo of combinations; let i = index" [innerHTML]="i + 1 + '. ' + combo" >
+    <div class="sense-body" *ngFor="let values of combinations; let i = index" >
+      <span [class]="value.class" *ngFor="let value of values; let j = index" > {{j + 1}}. {{value.label}}.</span>
     </div>
   </div>
 
   <br />
   <h2>3. Пріоритети. Усі можливі перестановки цінностей усередині комбінацій</h2>
-  <p>Це - порядок комбінування самих осей</p>
+  <p>Перебирає порядок самих осей усередині комбінацій</p>
 
 </div>
 
