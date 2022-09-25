@@ -19,7 +19,6 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
             "aot": true,
-            "baseHref": "/locus-poetica/",
             "deployUrl": "/locus-poetica/",
             "assets": [
               "src/favicon.ico",
