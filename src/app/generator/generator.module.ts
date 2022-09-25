@@ -17,7 +17,7 @@ import { MatInputModule } from '@angular/material/input';
 import { SampleComponent } from './components/audio/sample.component';
 import { AnagrammatorComponent } from './components/anagrammator/anagrammator.component';
 import { ModelAxesComponent } from './components/model-axes/model-axes.component';
-
+import { MatTooltipModule } from '@angular/material/tooltip';
 @NgModule({
   imports: [
     CommonModule,
@@ -29,6 +29,7 @@ import { ModelAxesComponent } from './components/model-axes/model-axes.component
     MatSliderModule,
     MatButtonModule,
     MatIconModule,
+    MatTooltipModule,
   ],
   declarations: [
     GeneratorComponent,

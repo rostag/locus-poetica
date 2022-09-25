@@ -15,7 +15,7 @@
   <h2>2. Комбінації. З кожної осі беремо по цінності і поєднуємо в комбінації, усього їх {{combinations.length}}</h2>
   <div class="senses">
     <div class="sense-body" *ngFor="let values of combinations; let i = index" >
-      <span class="value" [class]="value.class" *ngFor="let value of values; let j = index" >{{value.label}}</span>
+      <span [matTooltip]="'Вісь: ' + i + ', цінність: ' + j + '.'" matTooltipPosition="after" class="value" [class]="value.class" *ngFor="let value of values; let j = index" >{{value.label}}</span>
     </div>
   </div>
 

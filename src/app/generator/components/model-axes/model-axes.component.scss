@@ -9,22 +9,6 @@
     font-family: var(--mono-font);
   }
 
-  .axe-1 {
-    background-color: #bbb;
-  }
-
-  .axe-2 {
-    background-color: #ccc;
-  }
-
-  .axe-3 {
-    background-color: #ddd;
-  }
-
-  .axe-4 {
-    background-color: #eee;
-  }
-
   .value {
     display: inline-block;
     text-align: center;
@@ -34,24 +18,45 @@
     margin-right: 1px;
     border: 1px solid transparent;
     border-radius: 0px;
+    border-bottom-width: 1px;
     cursor: default;
 
     &:hover {
       border-radius: 10px;
-      border-color: #888888;
+      border-bottom-color: #888888;
     }
   }
 
+  .axe-1 {
+    background-color: #ddd;
+    border-bottom-color: #ccc;
+  }
+
+  .axe-2 {
+    background-color: #eaeaea;
+    border-bottom-color: #dadada;
+  }
+
+  .axe-3 {
+    background-color: #eee;
+    border-bottom-color: #ddd;
+  }
+
+  .axe-4 {
+    background-color: #f6f6f6;
+    border-bottom-color: #e6e6e6;
+  }
+
   .val-1 {
-    color: #000000;
+    color: #990000;
   }
 
   .val-2 {
-    color: #bb0000;
+    color: #007700;
   }
 
   .val-3 {
-    color: #009900;
+    color: #000099;
   }
 
   input {
