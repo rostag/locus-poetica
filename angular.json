@@ -20,7 +20,7 @@
             "tsConfig": "tsconfig.app.json",
             "aot": true,
             "baseHref": "/locus-poetica/",
-            "deployUrl": "/docs/",
+            "deployUrl": "/locus-poetica/",
             "assets": [
               "src/favicon.ico",
               "src/assets"
