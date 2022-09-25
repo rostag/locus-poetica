@@ -1,48 +1,75 @@
-:host {
+.values-renderer {
   display: block;
+  margin: 1em;
 
-  font-family: var(--mono-font);
-
+  &* {
+    font-size: 30px;
+  }
   p {
     font-family: var(--mono-font);
   }
 
-  .container {
-    margin: 1em;
+  .axe-1 {
+    background-color: #bbb;
+  }
 
-    &* {
-      font-size: 30px;
+  .axe-2 {
+    background-color: #ccc;
+  }
+
+  .axe-3 {
+    background-color: #ddd;
+  }
+
+  .axe-4 {
+    background-color: #eee;
+  }
+
+  .value {
+    display: inline-block;
+    text-align: center;
+    padding: 2px 4px;
+    width: 100px;
+    margin-bottom: 1px;
+    margin-right: 1px;
+    border: 1px solid transparent;
+    border-radius: 0px;
+    cursor: default;
+
+    &:hover {
+      border-radius: 10px;
+      border-color: #888888;
     }
+  }
 
-    input {
-      font-size: 30px;
-      margin: 0.5em 0;
+  .val-1 {
+    color: #000000;
+  }
 
-      &[type=checkbox] {
-        width: .7em;
-        height: .7em;
-        margin-right: .2em;
-      }
+  .val-2 {
+    color: #bb0000;
+  }
+
+  .val-3 {
+    color: #009900;
+  }
+
+  input {
+    font-size: 30px;
+    margin: 0.5em 0;
+
+    &[type=checkbox] {
+      width: .7em;
+      height: .7em;
+      margin-right: .2em;
     }
-
-    pre {
-      margin-top: 0;
-      font-size: 80px;
-      line-height: 90px;
-      font-family: var(--main-font);
-    }
   }
 
-  .axes {
-    font-size: 2em;
-    margin-bottom: 2em;
+  pre {
+    margin-top: 0;
+    font-size: 80px;
+    line-height: 90px;
+    font-family: var(--main-font);
   }
 
-  .axe-body {
-    margin-top: 1em;
-  }
-
-  .axe-item {
-    line-height: normal;
-  }
 }
