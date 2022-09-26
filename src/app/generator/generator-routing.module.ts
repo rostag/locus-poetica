@@ -12,15 +12,19 @@ const routes: Routes = [{
   redirectTo: 'c-news',
 }, {
   path: 'anagrammator',
+  pathMatch: 'full',
   component: AnagrammatorComponent
 }, {
   path: 'axes',
+  pathMatch: 'full',
   component: ModelAxesComponent
 }, {
   path: 'c-news',
+  pathMatch: 'full',
   component: CNewsComponent
 }, {
   path: 'poetry-x',
+  pathMatch: 'full',
   component: PoetryXComponent
 }];
 

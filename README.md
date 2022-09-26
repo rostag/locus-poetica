@@ -2,11 +2,18 @@
 
 Generated with [Angular CLI](https://github.com/angular/angular-cli) v9.0.7.
 
+## What is this
+
+Different text generation toys. Mostly mechanical and random.
+
+## Demo
+
+[Locus Poetica|<https://rostag.github.io/locus-poetica/generator/>] - rostag.github.io/locus-poetica. 
+
 ## Deployment
 
-```ng add angular-cli-ghpages
+`npm run deploy-pages`
 
-ng build --prod && git add . && git commit -m 'build' git push -f
-```
+## Make fun not war
 
-`npx angular-cli-ghpages --dir=dist/poetry-gen`
+Support Ukraine: [KOLO|<https://www.koloua.com/en>]
