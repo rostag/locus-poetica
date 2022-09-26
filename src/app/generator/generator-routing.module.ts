@@ -9,7 +9,7 @@ import { PoetryXComponent } from './components/poetry-x/poetry-x.component';
 const routes: Routes = [{
   path: '',
   pathMatch: 'full',
-  redirectTo: 'c-news',
+  redirectTo: 'axes',
 }, {
   path: 'anagrammator',
   pathMatch: 'full',
