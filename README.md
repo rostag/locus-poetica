@@ -8,7 +8,7 @@ Different text generation toys. Mostly mechanical and random.
 
 ## Demo
 
-[Locus Poetica|<https://rostag.github.io/locus-poetica/generator/>] - rostag.github.io/locus-poetica. 
+[rostag.github.io/locus-poetica](https://rostag.github.io/locus-poetica)
 
 ## Deployment
 
@@ -16,4 +16,4 @@ Different text generation toys. Mostly mechanical and random.
 
 ## Make fun not war
 
-Support Ukraine: [KOLO|<https://www.koloua.com/en>]
+Support Ukraine: [KOLO](https://www.koloua.com/en)
