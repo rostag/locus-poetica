@@ -8,7 +8,8 @@ import { PoetryXComponent } from './components/poetry-x/poetry-x.component';
 
 const routes: Routes = [{
   path: '',
-  component: GeneratorComponent
+  pathMatch: 'full',
+  redirectTo: 'c-news',
 }, {
   path: 'anagrammator',
   component: AnagrammatorComponent

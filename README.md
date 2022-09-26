@@ -6,7 +6,7 @@ Generated with [Angular CLI](https://github.com/angular/angular-cli) v9.0.7.
 
 ```ng add angular-cli-ghpages
 
-ng deploy --base-href=/locus-poetica/
+ng build --prod && git add . && git commit -m 'build' git push -f
 ```
 
 `npx angular-cli-ghpages --dir=dist/poetry-gen`
