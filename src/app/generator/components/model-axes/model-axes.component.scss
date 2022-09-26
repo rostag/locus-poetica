@@ -9,6 +9,12 @@
     font-family: var(--mono-font);
   }
 
+  .grid-wrap {
+    display: inline-grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 2em;
+  }
+
   .value {
     display: inline-block;
     text-align: center;
@@ -72,9 +78,9 @@
 
   pre {
     margin-top: 0;
-    font-size: 80px;
-    line-height: 90px;
-    font-family: var(--main-font);
+    font-size: 12px;
+    line-height: 14px;
+    font-family: var(--mono-font);
   }
 
 }

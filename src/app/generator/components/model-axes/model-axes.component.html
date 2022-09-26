@@ -3,25 +3,49 @@
   <p>TODO: тут буде форма введення осей та цінностей</p>
   <p>TODO: поєднувати цінності різними сполучниками: І, АБО, НЕ, І НЕ, АБО НЕ, НЕ</p>
   <h2>1. Осі. {{axes.length}} усього, в кожній по {{axes[0].length}} цінності</h2>
-  <ol>
-    <li *ngFor="let values of axes">
-      <ul>
-        <li *ngFor="let item of values">
-          {{item.label}}
+  <div class="grid-wrap">
+    <div class="senses">
+      <div class="sense-body" *ngFor="let values of axes; let g = index" >
+        <span *ngFor="let value of values; let h = index" [matTooltip]="'Вісь ' + g + ', цінність ' + h + ''" matTooltipPosition="after" class="value" [class]="value.class" >{{value.label}}</span>
+      </div>
+      <ol>
+        <li *ngFor="let values of axes">
+          <ul>
+            <li *ngFor="let value of values">
+              {{value.label}}
+            </li>
+          </ul>
         </li>
-      </ul>
-    </li>
-  </ol>
-  <h2>2. Комбінації. З кожної осі беремо по цінності і поєднуємо в комбінації, усього їх {{combinations.length}}</h2>
-  <div class="senses">
-    <div class="sense-body" *ngFor="let values of combinations; let i = index" >
-      <span [matTooltip]="'Вісь: ' + i + ', цінність: ' + j + '.'" matTooltipPosition="after" class="value" [class]="value.class" *ngFor="let value of values; let j = index" >{{value.label}}</span>
+      </ol>    
     </div>
+    <pre>{{axes | json}}</pre>
+  </div>
+  <br />
+
+  <h2>2. Набори. З кожної осі беремо по цінності і поєднуємо в набори, усього їх {{sets.length}}</h2>
+  <div class="grid-wrap">
+    <div class="senses">
+      <div class="sense-body" *ngFor="let values of sets; let i = index" >
+        <span *ngFor="let value of values; let j = index" [matTooltip]="'Набір ' + i + ', цінність ' + j + ''" matTooltipPosition="after" class="value" [class]="value.class" >{{value.label}}</span>
+      </div>
+    </div>
+    <pre>{{sets | json}}</pre>
   </div>
 
   <br />
-  <h2>3. Пріоритети. Усі можливі перестановки цінностей усередині комбінацій</h2>
-  <p>Перебирає порядок самих осей усередині комбінацій</p>
+  <h2>3. Пріоритети. Усі можливі перестановки цінностей в наборах</h2>
+  <p>Перебираємо порядок самих осей всередині кожного набору</p>
 
+  <div class="grid-wrap">
+    <div class="senses">
+      <div class="sense-body" *ngFor="let values of combinations; let k = index" >
+        <span *ngFor="let value of values; let l = index" [matTooltip]="'Сюжет ' + k + ', пріоритет ' + l + ''" matTooltipPosition="after" class="value" [class]="value.class" >{{value.label}}</span>
+      </div>
+    </div>
+    <pre>{{combinations | json}}</pre>
+  </div>
+
+  <br />
+  
 </div>
 
