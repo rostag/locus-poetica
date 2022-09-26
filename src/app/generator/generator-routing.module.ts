@@ -5,11 +5,20 @@ import { CNewsComponent } from './components/c-news/c-news.component';
 import { GeneratorComponent } from './components/generator/generator.component';
 import { ModelAxesComponent } from './components/model-axes/model-axes.component';
 import { PoetryXComponent } from './components/poetry-x/poetry-x.component';
+import { PoetryComponent } from './components/poetry/poetry.component';
 
 const routes: Routes = [{
   path: '',
   pathMatch: 'full',
-  redirectTo: 'c-news',
+  redirectTo: 'axes',
+}, {
+  path: 'multi',
+  pathMatch: 'full',
+  component: GeneratorComponent
+}, {
+  path: 'poet-helper',
+  pathMatch: 'full',
+  component: PoetryComponent,
 }, {
   path: 'anagrammator',
   pathMatch: 'full',
