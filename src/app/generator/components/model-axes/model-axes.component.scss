@@ -2,10 +2,6 @@
   display: block;
   margin: 1em;
 
-  &* {
-    font-size: 30px;
-  }
-
   p {
     font-family: var(--mono-font);
   }
@@ -88,4 +84,10 @@
     font-family: var(--mono-font);
   }
 
+  .row-id {
+    padding-right: 1em;
+    text-align: right;
+    display: inline-block;
+    width: 3em;
+  }
 }

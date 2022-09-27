@@ -1,14 +1,14 @@
 <div class="values-renderer">
-  <h1>Отримуємо сюжети з усіх можливих комбінацій цінностей</h1>
+  <h1>Генеруємо всі можливі пріоритети з наборів цінностей</h1>
   <p>TODO: тут буде форма введення осей та цінностей</p>
-  <p>TODO: поєднувати цінності різними сполучниками: І, АБО, НЕ, І НЕ, АБО НЕ, НЕ</p>
-  <h2>1. Осі. {{axes.length}} усього, в кожній по {{axes[0].length}} цінності</h2>
+  <h2>Крок 1. Осі та цінності: {{axes.length}} осі, в кожній по {{axes[0].length}} цінності</h2>
   <div class="grid-wrap">
     <div class="senses">
       <div class="sense-body" *ngFor="let values of axes; let g = index" >
+        <span class="row-id">{{g + 1}}. </span>
         <span *ngFor="let value of values; let h = index" [matTooltip]="'Вісь ' + g + ', цінність ' + h + ''" matTooltipPosition="after" class="value" [class]="value.class" >{{value.label}}</span>
       </div>
-      <ol>
+      <!-- <ol>
         <li *ngFor="let values of axes">
           <ul>
             <li *ngFor="let value of values">
@@ -16,15 +16,16 @@
             </li>
           </ul>
         </li>
-      </ol>    
+      </ol> -->
     </div>
     <!-- <pre>{{axes | json}}</pre> -->
   </div>
   
-  <h2>2. Набори. З кожної осі беремо по цінності і поєднуємо в набори, усього їх {{sets.length}}</h2>
+  <h2>Крок 2. Комбінації: з кожної осі беремо по цінності, комбінуємо в набори, усього їх {{sets.length}}</h2>
   <div class="grid-wrap">
     <div class="senses">
       <div class="sense-body" *ngFor="let values of sets; let i = index" >
+        <span class="row-id">{{i + 1}}. </span>
         <span *ngFor="let value of values; let j = index" class="value" [class]="value.class" >{{value.label}}</span>
       </div>
     </div>
@@ -32,12 +33,13 @@
     <!-- <pre>{{sets | json}}</pre> -->
   </div>
 
-  <h2>3. Пріоритети. Усі можливі пермутації цінностей в наборах. Усього {{priorities.length}}</h2>
+  <h2>Крок 3. Пріоритети. Усі можливі пермутації цінностей в наборах. Усього {{priorities.length}}</h2>
   <p>Перебираємо порядок самих осей всередині кожного набору</p>
 
   <div class="grid-wrap">
     <div class="senses">
       <div class="sense-body" *ngFor="let values of priorities; let k = index" >
+        <span class="row-id">{{k + 1}}. </span>
         <span *ngFor="let value of values; let l = index" class="value" [class]="value.class" >{{value.label}}</span>
       </div>
     </div>
@@ -45,5 +47,8 @@
     <!-- <pre>{{priorities | json}}</pre> -->
   </div>
   
+  <h2>Roadmap</h2>
+  <p>TODO: поєднувати цінності різними сполучниками: І, АБО, НЕ, І НЕ, АБО НЕ, НЕ</p>
+
 </div>
 

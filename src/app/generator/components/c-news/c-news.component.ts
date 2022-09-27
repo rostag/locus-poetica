@@ -91,7 +91,7 @@ export class CNewsComponent implements OnInit {
     }
     let phrase = w(intro, subject, action, provider, requested, message, is, content, soon, result);
 
-    this.news += `${phrase}\n\n *** \n\n`;
+    this.news = `${phrase}\n\n *** \n\n`;
 
     return phrase;
   }
