@@ -9,6 +9,6 @@ import { Component } from "@angular/core";
 export class CompassComponent {
 
     constructor () {
-        console.log('Compass:', this);
+        
     }
 }

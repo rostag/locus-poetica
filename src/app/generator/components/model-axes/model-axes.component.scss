@@ -5,8 +5,13 @@
   &* {
     font-size: 30px;
   }
+
   p {
     font-family: var(--mono-font);
+  }
+
+  h2 {
+    margin-top: 2em;
   }
 
   .grid-wrap {
