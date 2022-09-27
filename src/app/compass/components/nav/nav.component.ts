@@ -1,4 +1,3 @@
-import { ThrowStmt } from "@angular/compiler";
 import { Component, ElementRef, ViewChild } from "@angular/core";
 import * as THREE from "three";
 import { PerspectiveCamera, Renderer, Scene } from "three";

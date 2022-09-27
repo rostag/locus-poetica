@@ -19,7 +19,6 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
             "baseHref": "/locus-poetica/",
-            "deployUrl": "/locus-poetica/",
             "assets": [
               "src/favicon.ico",
               "src/assets"
@@ -120,7 +119,6 @@
       }
     }
   },
-  "defaultProject": "poetry-gen",
   "cli": {
     "analytics": "84192ae0-a6d2-4dd5-8733-60e708763787"
   }

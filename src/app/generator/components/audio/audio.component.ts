@@ -1,5 +1,5 @@
 import { Component, OnInit, Output, EventEmitter, Input, OnDestroy } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 import { MatSliderChange } from '@angular/material/slider'
 import { interval, of, Subject } from 'rxjs';
 import { timeInterval, takeUntil } from 'rxjs/operators';
@@ -19,7 +19,7 @@ export class AudioComponent implements OnInit, OnDestroy {
 
     public sources: BufferSource[] = []
     public generatorState: IGeneratorState = generatorState
-    public mainForm: FormGroup
+    public mainForm: UntypedFormGroup
     public loadingSample = false
     public playingSample = false
     private audioContext: AudioContext[] = []
@@ -50,8 +50,8 @@ export class AudioComponent implements OnInit, OnDestroy {
     @Output('beat') audioBeat: EventEmitter<any> = new EventEmitter();
 
     public ngOnInit() {
-        this.mainForm = new FormGroup({
-            'name': new FormControl(null)
+        this.mainForm = new UntypedFormGroup({
+            'name': new UntypedFormControl(null)
         });
         this.initAudio()
     }

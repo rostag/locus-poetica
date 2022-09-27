@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { latynize } from 'src/app/generator/generator-helpers';
 
 /*
@@ -13,10 +13,10 @@ import { latynize } from 'src/app/generator/generator-helpers';
 })
 export class LatynizatorComponent implements OnInit {
 
-  latForm: FormGroup;
+  latForm: UntypedFormGroup;
   output: string;
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: UntypedFormBuilder) {}
 
   
   public ngOnInit() {

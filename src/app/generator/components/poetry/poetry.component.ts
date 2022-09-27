@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { UntypedFormControl } from '@angular/forms';
 import { getRandomWordOfGivenLength, latynize } from '../../generator-helpers';
 import { generatorState, IAudio, IConnection } from '../generator/generator.component';
 import { Rhyme, Rhymes, rhymes } from '../models/rhyme.models';
@@ -21,10 +21,10 @@ import { Dictionary, Line, OOPTimelineMode, Poetry, PoetryService, Strophae, Wor
 })
 export class PoetryComponent implements OnInit {
 
-  rhymeControl = new FormControl();
-  modeControl = new FormControl();
-  dictionaryControl = new FormControl();
-  latynizeControl = new FormControl(false);
+  rhymeControl = new UntypedFormControl();
+  modeControl = new UntypedFormControl();
+  dictionaryControl = new UntypedFormControl();
+  latynizeControl = new UntypedFormControl(false);
 
   dictionaries: Dictionary[];
   dictionary: Dictionary;
