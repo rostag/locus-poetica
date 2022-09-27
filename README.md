@@ -1,7 +1,5 @@
 # PoetryGen
 
-Generated with [Angular CLI](https://github.com/angular/angular-cli) v9.0.7.
-
 ## What is this
 
 Different text generation toys. Mostly mechanical and random.
@@ -13,6 +11,8 @@ Different text generation toys. Mostly mechanical and random.
 ## Deployment
 
 `npm run deploy-pages`
+
+Generated with [Angular CLI](https://github.com/angular/angular-cli) v9.0.7.
 
 ## Make fun not war
 

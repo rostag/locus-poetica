@@ -38,11 +38,11 @@
 
   <div class="grid-wrap">
     <div class="senses">
-      <div class="sense-body" *ngFor="let values of combinations; let k = index" >
+      <div class="sense-body" *ngFor="let values of priorities; let k = index" >
         <span *ngFor="let value of values; let l = index" [matTooltip]="'Сюжет ' + k + ', пріоритет ' + l + ''" matTooltipPosition="after" class="value" [class]="value.class" >{{value.label}}</span>
       </div>
     </div>
-    <pre>{{combinations | json}}</pre>
+    <pre>{{priorities | json}}</pre>
   </div>
 
   <br />

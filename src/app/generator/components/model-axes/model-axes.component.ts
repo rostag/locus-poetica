@@ -1,4 +1,5 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import * as _ from 'lodash';
 
 type iObj = {
   label: string;
@@ -25,31 +26,33 @@ export class ModelAxesComponent implements OnInit {
   //   [{ label: 'D', class: 'axe-2 val-1' }, { label: 'L', class: 'axe-2 val-2' }],
   // ]
 
-  // axes: IObjValuesCollection = [
-  //   [{ label: 'Свобода', class: 'axe-1 val-1' }, { label: 'Братерство', class: 'axe-1 val-2' }],
-  //   [{ label: 'Війна', class: 'axe-2 val-1' }, { label: 'Релігія', class: 'axe-2 val-2' }],
-  // ]
+  axes: IObjValuesCollection = [
+    [{ label: 'Свобода', class: 'axe-1 val-1' }, { label: 'Братерство', class: 'axe-1 val-2' }],
+    [{ label: 'Війна', class: 'axe-2 val-1' }, { label: 'Релігія', class: 'axe-2 val-2' }],
+  ]
   
   sets: IObjValuesCollection = [];
 
-  combinations: IObjValuesCollection = [];
+  priorities: IObjValuesCollection = [];
 
-  axes: IObjValuesCollection = [
-    [{ label: 'Свобода', class: 'axe-1 val-1' }, { label: 'Братерство', class: 'axe-1 val-2' }, { label: 'Рівність', class: 'axe-1 val-3' }],
-    [{ label: 'Війна', class: 'axe-2 val-1' }, { label: 'Релігія', class: 'axe-2 val-2' }, { label: 'Секс', class: 'axe-2 val-3' }],
-    [{ label: 'Наука', class: 'axe-3 val-1' }, { label: 'Містика', class: 'axe-3 val-2' }, { label: 'Ремесло', class: 'axe-3 val-3' }],
-    [{ label: 'Ієрархія', class: 'axe-4 val-1' }, { label: 'Гармонія', class: 'axe-4 val-2' }, { label: 'Хаос', class: 'axe-4 val-3' }],
-  ]
+  // axes: IObjValuesCollection = [
+  //   [{ label: 'Свобода', class: 'axe-1 val-1' }, { label: 'Братерство', class: 'axe-1 val-2' }, { label: 'Рівність', class: 'axe-1 val-3' }],
+  //   [{ label: 'Війна', class: 'axe-2 val-1' }, { label: 'Релігія', class: 'axe-2 val-2' }, { label: 'Секс', class: 'axe-2 val-3' }],
+  //   [{ label: 'Наука', class: 'axe-3 val-1' }, { label: 'Містика', class: 'axe-3 val-2' }, { label: 'Ремесло', class: 'axe-3 val-3' }],
+  //   [{ label: 'Ієрархія', class: 'axe-4 val-1' }, { label: 'Гармонія', class: 'axe-4 val-2' }, { label: 'Хаос', class: 'axe-4 val-3' }],
+  // ]
 
   showIndex = false;
   
   ngOnInit() {
     this.sets = this.getSets(0, [], this.axes, []);
-    const setDepth = this.sets[0].length;
-    // for (let s = 0; s < this.sets.length; s += setDepth) {
-    //   const row = this.sets.slice(s * setDepth, s * setDepth + setDepth);
-    //   this.combinations = this.combinations.concat(this.getSets(0, [], row, []));
-    // }
+    this.priorities;
+    for (let s = 0; s < this.sets.length; s += 1) {
+      const sset = this.sets[s];
+      console.log('set:', sset);
+      
+      this.priorities.push(this.getPriorities(sset, 0));
+    }
   }
 
   getSets(index: number, initialCollection: IObjValuesCollection, values: IObjValuesCollection, previous: IObjValues): IObjValuesCollection {
@@ -63,7 +66,37 @@ export class ModelAxesComponent implements OnInit {
     return initialCollection;
   }
 
-  getOrders(initialCollection: IObjValuesCollection, values: IObjValuesCollection): IObjValuesCollection {
-    return initialCollection;
+  getPriorities(collection: IObjValues, n: number): IObjValues {
+    let array = _.values(collection);
+    if (array.length < n) {
+      return [];
+    }
+    let recur = ((array: IObjValues, n: number) => {
+      if (--n < 0) {
+        return [[]];
+      }
+      let combinations: any[] = [];
+      array = array.slice();
+      while (array.length - n) {
+        let value = array.shift();
+        recur(array, n).forEach((combination) => {
+          combination.unshift(value);
+          combinations.push(combination);
+        });
+      }
+      return combinations;
+    });
+    return recur(array, n);
   }
+
+  // getPriorities(index: number, initialCollection: IObjValues, set: IObjValues, previous: IObjValue): IObjValues {
+  //   if (index === set.length) {
+  //     initialCollection.push(previous);
+  //     return initialCollection;
+  //   }
+  //   for (let i = 0; i < set.length; i++) {
+  //     this.getPriorities(index + 1, initialCollection, set, set.slice(i, i + 1) );
+  //   }
+  //   return initialCollection;
+  // }
 }
