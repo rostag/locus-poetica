@@ -1,6 +1,14 @@
 <div class="values-renderer">
   <h1>Генеруємо всі можливі пріоритети з наборів цінностей</h1>
   <p>TODO: тут буде форма введення осей та цінностей</p>
+  <mat-button-toggle-group name="displayMode" aria-label="Display Mode" (change)="onDisplayModeChange($event)">
+    <mat-button-toggle value="grid">Сітка</mat-button-toggle>
+    <mat-button-toggle value="sentences">Речення</mat-button-toggle>
+  </mat-button-toggle-group>  
+  <mat-button-toggle-group name="axe" aria-label="Axes" (change)="onAxesChange($event)">
+    <mat-button-toggle value="axesLibrary">Сюжети</mat-button-toggle>
+    <mat-button-toggle value="axesPoetry">Поезія</mat-button-toggle>
+  </mat-button-toggle-group>  
   <h2>Крок 1. Осі та цінності: {{axes.length}} осі, в кожній по {{axes[0].length}} цінності</h2>
   <div class="grid-wrap">
     <div class="senses">
