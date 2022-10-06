@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MatButtonToggleChange } from '@angular/material/button-toggle';
 import * as _ from 'lodash';
 
 type iObj = {
@@ -20,6 +21,13 @@ type IObjValuesCollection = IObjValues[];
 })
 
 export class ModelAxesComponent implements OnInit {
+
+  onAxesChange(axes: MatButtonToggleChange) {
+    this.axes = this.axesMap.get(axes.value) as IObjValuesCollection;
+}
+  onDisplayModeChange(displayMode: MatButtonToggleChange) {
+    this.displayMode = displayMode.value;
+  }
   
   // axes: IObjValuesCollection = [
   //   [{ label: 'A', class: 'axe-1 val-1' }, { label: 'B', class: 'axe-1 val-2' }, { label: 'C', class: 'axe-1 val-3' }],
@@ -36,17 +44,32 @@ export class ModelAxesComponent implements OnInit {
 
   priorities: IObjValuesCollection = [];
 
-  axes: IObjValuesCollection = [
+  axesLibrary: IObjValuesCollection = [
     [{ label: 'Свобода', class: 'axe-1 val-1' }, { label: 'Братерство', class: 'axe-1 val-2' }, { label: 'Рівність', class: 'axe-1 val-3' }],
     [{ label: 'Війна', class: 'axe-2 val-1' }, { label: 'Релігія', class: 'axe-2 val-2' }, { label: 'Секс', class: 'axe-2 val-3' }],
     [{ label: 'Наука', class: 'axe-3 val-1' }, { label: 'Містика', class: 'axe-3 val-2' }, { label: 'Ремесло', class: 'axe-3 val-3' }],
     [{ label: 'Ієрархія', class: 'axe-4 val-1' }, { label: 'Гармонія', class: 'axe-4 val-2' }, { label: 'Хаос', class: 'axe-4 val-3' }],
+  ];
+
+  axesPoetry: IObjValuesCollection = [
+    [{ label: 'війна', class: 'axe-1 val-1' }, { label: 'мир', class: 'axe-1 val-2' }],
+    [{ label: 'безкінечно', class: 'axe-2 val-1' }, { label: 'швидко', class: 'axe-2 val-2' }],
+    [{ label: 'летить', class: 'axe-3 val-1' }, { label: 'іде', class: 'axe-3 val-2' }],
+    // [{ label: 'правдиво', class: 'axe-4 val-1' }, { label: 'лихо', class: 'axe-4 val-2' }],
   ]
 
+  axesMap = new Map<string, IObjValuesCollection>();
+
+  axes: IObjValuesCollection = this.axesPoetry;
+
   showIndex = false;
+
+  displayMode: 'grid' | 'sentences' = 'grid';
   
   ngOnInit() {
     this.sets = this.getSets(0, [], this.axes, []);
+    this.axesMap.set('axesLibrary', this.axesLibrary);
+    this.axesMap.set('axesPoetry', this.axesPoetry);
 
     for (let s = 0; s < this.sets.length; s += 1) {
       const sset = this.sets[s];

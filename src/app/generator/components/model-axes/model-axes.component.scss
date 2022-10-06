@@ -12,25 +12,33 @@
 
   .grid-wrap {
     display: inline-grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
     column-gap: 2em;
   }
 
   .value {
-    display: inline-block;
-    text-align: center;
-    padding: 2px 4px;
-    width: 100px;
-    margin-bottom: 1px;
-    margin-right: 1px;
-    border: 1px solid transparent;
-    border-radius: 0px;
-    border-bottom-width: 1px;
-    cursor: default;
+      &.grid {
+      display: inline-block;
+      text-align: center;
+      padding: 2px 4px;
+      width: 100px;
+      margin-bottom: 1px;
+      margin-right: 1px;
+      border: 1px solid transparent;
+      border-radius: 0px;
+      border-bottom-width: 1px;
+      cursor: default;
 
-    &:hover {
-      border-radius: 10px;
-      border-bottom-color: #888888;
+      &:hover {
+        border-radius: 10px;
+        border-bottom-color: #888888;
+      }
+    }
+
+    &.sentences {
+      background: none;
+      color: #444;
+      margin-right: 0.3rem;
     }
   }
 
@@ -89,5 +97,9 @@
     text-align: right;
     display: inline-block;
     width: 3em;
+
+    &.sentences {
+      display: none;
+    }
   }
 }

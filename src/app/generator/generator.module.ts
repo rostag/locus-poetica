@@ -18,6 +18,9 @@ import { SampleComponent } from './components/audio/sample.component';
 import { AnagrammatorComponent } from './components/anagrammator/anagrammator.component';
 import { ModelAxesComponent } from './components/model-axes/model-axes.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { SequencerComponent } from './components/sequencer/sequencer.component';
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -30,6 +33,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MatButtonModule,
     MatIconModule,
     MatTooltipModule,
+    MatButtonToggleModule
   ],
   declarations: [
     GeneratorComponent,
@@ -40,6 +44,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     PoetryComponent,
     AnagrammatorComponent,
     ModelAxesComponent,
+    SequencerComponent,
   ],
   providers: [
     PoetryService
