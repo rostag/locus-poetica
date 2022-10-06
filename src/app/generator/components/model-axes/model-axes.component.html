@@ -5,8 +5,8 @@
   <div class="grid-wrap">
     <div class="senses">
       <div class="sense-body" *ngFor="let values of axes; let g = index" >
-        <span class="row-id">{{g + 1}}. </span>
-        <span *ngFor="let value of values; let h = index" [matTooltip]="'Вісь ' + g + ', цінність ' + h + ''" matTooltipPosition="after" class="value" [class]="value.class" >{{value.label}}</span>
+        <span [class]="'row-id ' + displayMode">{{g + 1}}. </span>
+        <span *ngFor="let value of values; let h = index" [matTooltip]="'Вісь ' + g + ', цінність ' + h + ''" matTooltipPosition="after" [class]="'value ' + value.class + ' ' + displayMode">{{value.label}}</span>
       </div>
       <!-- <ol>
         <li *ngFor="let values of axes">
@@ -25,8 +25,8 @@
   <div class="grid-wrap">
     <div class="senses">
       <div class="sense-body" *ngFor="let values of sets; let i = index" >
-        <span class="row-id">{{i + 1}}. </span>
-        <span *ngFor="let value of values; let j = index" class="value" [class]="value.class" >{{value.label}}</span>
+        <span [class]="'row-id ' + displayMode">{{i + 1}}. </span>
+        <span *ngFor="let value of values; let j = index" [class]="'value ' + value.class + ' ' + displayMode" >{{value.label}}</span>
       </div>
     </div>
     <!-- [matTooltip]="'Набір ' + i + ', цінність ' + j + ''" matTooltipPosition="after"  -->
@@ -39,8 +39,8 @@
   <div class="grid-wrap">
     <div class="senses">
       <div class="sense-body" *ngFor="let values of priorities; let k = index" >
-        <span class="row-id">{{k + 1}}. </span>
-        <span *ngFor="let value of values; let l = index" class="value" [class]="value.class" >{{value.label}}</span>
+        <span class="'row-id ' + displayMode">{{k + 1}}. </span>
+        <span *ngFor="let value of values; let l = index" [class]="'value ' + value.class + ' ' + displayMode" >{{value.label}}</span>
       </div>
     </div>
     <!-- [matTooltip]="'Сюжет ' + k + ', пріоритет ' + l + ''" matTooltipPosition="after" -->
