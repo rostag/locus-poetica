@@ -87,7 +87,7 @@ export class SequencerComponent implements OnInit {
   }
 
   createNoteTable() {
-    const nf = [];
+    const nf: any[] = [];
     for (let i=0; i< 9; i++) {
       nf[i] = [];
     }

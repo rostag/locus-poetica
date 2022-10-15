@@ -1,0 +1,29 @@
+:host {
+    display: block;
+    padding: 1rem;
+}
+
+pre {
+    font-family: monospace;
+}
+
+.grid-wrap {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr;
+    background-color: #fafafa;
+    padding: 1rem;
+    border: 1px solid #eee;
+}
+
+.flags,
+.flags2
+{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+}
+
+.textarea-input {
+    height: 100%;
+}
