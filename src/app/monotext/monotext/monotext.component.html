@@ -1,15 +1,17 @@
-<h1>monotext</h1>
+<h1>Convert string to monotext</h1>
+<p>A small utility for converting text to a unicode variant.</p>
 
 <div class="grid-wrap">
     
     <mat-form-field class="full-height" appearance="fill"> 
         <mat-label>Enter text to convert</mat-label>
-        <textarea matInput (keyup)="setText($event)" class="textarea-input"></textarea>
+        <textarea matInput (keydown)="setText($event)" class="textarea-input"></textarea>
     </mat-form-field>
 
     <div class="result">{{result}}</div>
 
     <div class="flags">
+        <div>Types:</div>
         <mat-checkbox [(ngModel)]="flags.monospace" (change)="render()">Monospace</mat-checkbox>
         <mat-checkbox [(ngModel)]="flags.script" (change)="render()">Script</mat-checkbox>
         <mat-checkbox [(ngModel)]="flags.fraktur" (change)="render()">Fraktur</mat-checkbox>
@@ -19,6 +21,7 @@
     </div>
     
     <div class="flags2">
+        <div>Modifiers:</div>
         <mat-checkbox [(ngModel)]="flags2.bold" (change)="render()">Bold</mat-checkbox>
         <mat-checkbox [(ngModel)]="flags2.italic" (change)="render()">Italic</mat-checkbox>
         <mat-checkbox [(ngModel)]="flags2.underline" (change)="render()">Underline</mat-checkbox>
@@ -27,33 +30,96 @@
     
 </div>
 
+<h2>Examples:</h2>
+
+<table class="tbs">
+    <thead>
+    <tr>
+    <th align="left">Flag</th>
+    <th align="center">Short</th>
+    <th align="left">Description</th>
+    <th align="left">Example</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td align="left">monospace</td>
+    <td align="center">m</td>
+    <td align="left">Monospace text (default)</td>
+    <td align="left">𝙼𝚘𝚗𝚘𝚜𝚙𝚊𝚌𝚎&ensp;𝚝𝚎𝚡𝚝!</td>
+    </tr>
+    <tr>
+    <td align="left">script</td>
+    <td align="center">c</td>
+    <td align="left">Script </td>
+    <td align="left">𝒻𝒶𝓃𝒸𝓎 𝓈𝒸𝓇𝒾𝓅𝓉</td>
+    </tr>
+    <tr>
+    <td align="left">fraktur</td>
+    <td align="center">f</td>
+    <td align="left">Fraktur </td>
+    <td align="left">𝔖𝔭𝔩𝔢𝔫𝔡𝔦𝔡 𝔣𝔯𝔞𝔨𝔱𝔲𝔯</td>
+    </tr>
+    <tr>
+    <td align="left">double</td>
+    <td align="center">d</td>
+    <td align="left">Double-struck </td>
+    <td align="left">𝔻𝕠𝕦𝕓𝕝𝕖-𝕤𝕥𝕣𝕦𝕔𝕜</td>
+    </tr>
+    <tr>
+    <td align="left">sans</td>
+    <td align="center">s</td>
+    <td align="left">Sans-serif</td>
+    <td align="left">𝖲𝖺𝗇𝗌. 𝖲𝖾𝗋𝗂𝖿𝗌.</td>
+    </tr>
+    <tr>
+    <td align="left">greek</td>
+    <td align="center">g</td>
+    <td align="left">Greek<sup>1</sup></td>
+    <td align="left">𝛂𝛔𝛅𝛇𝛈𝛉𝛋𝛌</td>
+    </tr>
+    <tr>
+    <td align="left">bold</td>
+    <td align="center">b</td>
+    <td align="left">Bold (modifier)</td>
+    <td align="left">𝐛𝓸𝖑𝛅 𝘁𝗲𝘅𝘁</td>
+    </tr>
+    <tr>
+    <td align="left">italic</td>
+    <td align="center">i</td>
+    <td align="left">Italic (modifier)<sup>2</sup></td>
+    <td align="left">𝑖𝘵𝛼𝑙𝘪𝑐</td>
+    </tr>
+    </tbody>
+    </table>
+
 <pre>---- Monotext Help ----
 Converts text to a unicode variant
 
 Usage:
-    monotext [flags] [text]
+    Select Type ans Modifier
 
-Flags:
     Types:
-    -monospace -m   Monospace text (default)
-    -script    -c   Script (!)
-    -fraktur   -f   Fraktur (!)
-    -double    -d   Double-struck (!)
-    -sans      -s   Sans-serif
-    -greek     -g   Greek (characters might not yield their respective greek version)
-                    This doesn't have a regular version!
+    Monospace text (default)
+    Script (!)
+    Fraktur (!)
+    Double-struck (!)
+    Sans-serif
+    Greek (characters might not yield their respective greek version. Doesn't have a regular version!
 
     (!): Some characters do not exist in the regular version of this set (i.e. without bold/italic)
 
     Modifiers:
-    -bold      -b   Bold
+    Bold
         Can be used with: script, fraktur, sans and greek
         Serif is used when no type is specified
-    -italic    -i   Italic
+    Italic
         Can be used with: sans and greek
         Serif is used when no type is specified
-    -underline -u   Underline
+    Underline
         Can be used with any
-    -strike    -k   Strike-through
+    Strike-through
         Can be used with any
 </pre>
+
+<a href="https://github.com/MightyPork/monotext">Based on MightyPork/monotext</a>

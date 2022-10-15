@@ -17,10 +17,10 @@ export class MonotextComponent implements OnInit {
   textInput = 'hi';
 
   flags = {
-    monospace: false,
+    monospace: true,
     script: false,
     fraktur: false,
-    double: true,
+    double: false,
     sans: false,
     greek: false,
   }
@@ -33,7 +33,7 @@ export class MonotextComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.monoService.mono(['-greek', '-bold'], 'hello')
+    this.render();
   }
 
   setText(evt: InputEvent) {

@@ -27,3 +27,21 @@ pre {
 .textarea-input {
     height: 100%;
 }
+
+h2 {
+    margin: 1rem;
+}
+
+.tbs {
+    margin-top: 1rem;
+}
+
+.tbs th {
+    background-color: #eee;
+}
+
+.tbs th,
+.tbs td {
+    border: 1px solid #eee;
+    padding: .3rem;
+}

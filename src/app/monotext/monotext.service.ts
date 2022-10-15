@@ -171,7 +171,7 @@ export class MonotextService {
           flags.push(modFlags[flag as ModFlag])
         } else if (flag as any === 'help') {
           output = helpText;
-          return;
+          return output;
         } else {
           flags = flags.concat(flagChars.split(''))
         }
@@ -193,8 +193,8 @@ export class MonotextService {
   
     type = flags.sort().join('')
     if (!offsets.hasOwnProperty(type) && !underline && !strike) {
-      output = `No such combination: ${type}. Use -help for help\n`;
-      return;
+      output = `No such combination: ${type}. Check help text below.`;
+      return output;
     }
     if (!underline && !strike && !type) type = 'm'
 
