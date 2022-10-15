@@ -18,6 +18,10 @@ const routes: Routes = [
   { 
     path: 'latynizator', 
     loadChildren: () => import('./latynizator/latynizator.module').then(m => m.LatynizatorModule)
+  },
+  { 
+    path: 'monotext', 
+    loadChildren: () => import('./monotext/monotext.module').then(m => m.MonotextModule)
   }
 ];
 @NgModule({
