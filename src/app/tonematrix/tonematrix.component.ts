@@ -1,5 +1,6 @@
-/** Ported to Angular Module from original implementaion 
- * by Andre Michelle in pure ts: https://andremichelle.github.io/tonematrix/ */
+/** Ported to Angular Module from original Tonematrix implementaion
+ *  by Andre Michelle in pure ts: https://andremichelle.github.io/tonematrix/ 
+ **/
 
 import { Component, OnInit } from '@angular/core';
 import { Model } from './tonematrix/model';
@@ -13,10 +14,9 @@ import { Audio } from './tonematrix/audio';
 })
 export class TonematrixComponent implements OnInit {
 
-  // readonly canvas: HTMLCanvasElement = !;
   readonly model: Model = new Model()
-  view: View;
   readonly audio: Audio = new Audio(this.model)
+  view: View;
 
   constructor() { }
 
@@ -46,7 +46,5 @@ export class TonematrixComponent implements OnInit {
         document.querySelectorAll("body svg.preloader").forEach(element => element.remove())
         document.querySelectorAll("body main").forEach(element => element.classList.remove("invisible"))
     })
-    console.debug("boot complete.")
   }
-
 }

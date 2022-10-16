@@ -1,15 +1,24 @@
 import {ArrayUtils} from "../lib/common"
 import {Model} from "./model.js"
 
+const matrixWidth = 16;
+const matrixHeight = 16;
+
+const cellWidth = 32;
+const cellHeight = 32;
+const cellBorderWidth = 1;
+const canvasWidth = matrixWidth * cellWidth;
+const canvasHeight = matrixHeight * cellHeight;
+
 export class View {
     private readonly graphics: CanvasRenderingContext2D = this.canvas.getContext("2d")!
     private readonly stepTextureOn: HTMLCanvasElement = View.createStepTexture("#FFFFFF", "#DADADA")
     private readonly stepTextureOff: HTMLCanvasElement = View.createStepTexture("#4F4F4F", "#2A2A2A")
-    private readonly wavesData: ImageData = new ImageData(16, 16)
-    private readonly waves = View.create2dContext(16)
+    private readonly wavesData: ImageData = new ImageData(matrixWidth, matrixHeight)
+    private readonly waves = View.create2dContext(matrixWidth)
     private readonly fluidMaps: Float32Array[][] = [
-        ArrayUtils.fill(16, () => new Float32Array(16)),
-        ArrayUtils.fill(16, () => new Float32Array(16))
+        ArrayUtils.fill(matrixWidth, () => new Float32Array(matrixWidth)),
+        ArrayUtils.fill(matrixHeight, () => new Float32Array(matrixHeight))
     ]
 
     private fluidMapIndex: number = 0
@@ -17,8 +26,8 @@ export class View {
 
     constructor(private readonly model: Model,
                 private readonly canvas: HTMLCanvasElement) {
-        this.canvas.width = 512
-        this.canvas.height = 512
+        this.canvas.width = canvasWidth
+        this.canvas.height = canvasHeight
         this.initEvents()
         this.processAnimationFrame()
     }
@@ -46,7 +55,7 @@ export class View {
             const scale = this.canvas.width / clientRect.width
             const x = ((clientX - clientRect.left) * scale) >> 5
             const y = ((clientY - clientRect.top) * scale) >> 5
-            if (x < 0 || x >= 16 || y < 0 || y >= 16) return
+            if (x < 0 || x >= matrixWidth || y < 0 || y >= matrixHeight) return
             if (event.type === "mousedown" || event.type === "touchstart") {
                 drawValue = !this.getStep(x, y)
             }
@@ -70,19 +79,19 @@ export class View {
         }, {capture: true})
     }
 
-    private setStep(x, y, value) {
+    private setStep(x: number, y: number, value: boolean) {
         this.model.pattern.setStep(x, y, value)
         if (value) {
             this.touchFluid(x, y)
         }
     }
 
-    private touchFluid(x, y) {
+    private touchFluid(x: number, y: number) {
         this.fluidMaps[0][y][x] = -1.0
         this.fluidMaps[1][y][x] = -1.0
     }
 
-    private getStep(x, y) {
+    private getStep(x: number, y: number) {
         return this.model.pattern.getStep(x, y)
     }
 
@@ -90,17 +99,17 @@ export class View {
         this.touchActives()
         this.processFluid()
         this.graphics.imageSmoothingEnabled = false
-        this.graphics.clearRect(0, 0, 512, 512)
-        for (let y = 0; y < 16; y++) {
-            for (let x = 0; x < 16; x++) {
+        this.graphics.clearRect(0, 0, canvasWidth, canvasHeight)
+        for (let y = 0; y < matrixHeight; y++) {
+            for (let x = 0; x < matrixWidth; x++) {
                 const texture = this.model.pattern.getStep(x, y) ? this.stepTextureOn : this.stepTextureOff
                 this.graphics.drawImage(texture, x << 5, y << 5)
             }
         }
         this.graphics.save()
         this.graphics.globalCompositeOperation = "lighter"
-        this.graphics.filter = "blur(8px)"
-        this.graphics.drawImage(this.waves.canvas, 0, 0, 512, 512)
+        // this.graphics.filter = "blur(8px)"
+        this.graphics.drawImage(this.waves.canvas, 0, 0, canvasWidth, canvasHeight)
         this.graphics.restore()
         requestAnimationFrame(this.processAnimationFrame)
     }
@@ -108,7 +117,7 @@ export class View {
     private touchActives() {
         if (this.stepIndex !== this.model.stepIndex) {
             this.stepIndex = this.model.stepIndex
-            for (let y = 0; y < 16; ++y) {
+            for (let y = 0; y < matrixHeight; ++y) {
                 if (this.model.pattern.getStep(this.stepIndex, y)) {
                     this.touchFluid(this.stepIndex, y)
                 }
@@ -122,16 +131,16 @@ export class View {
         const wavesData: ImageData = this.wavesData
         const data: Uint8ClampedArray = wavesData.data
         const damp: number = 0.86
-        for (let y = 0; y < 16; ++y) {
+        for (let y = 0; y < matrixHeight; ++y) {
             const f0 = fma[y - 1]
             const f1 = fma[y]
             const f2 = fma[y + 1]
-            for (let x = 0; x < 16; ++x) {
+            for (let x = 0; x < matrixWidth; ++x) {
                 let amp: number = 0.0
                 if (x > 0) amp += f1[x - 1]
                 if (y > 0) amp += f0[x]
-                if (x < 15) amp += f1[x + 1]
-                if (y < 15) amp += f2[x]
+                if (x < matrixWidth - 1) amp += f1[x + 1]
+                if (y < matrixHeight - 1) amp += f2[x]
                 amp = (amp * 0.5 - fmb[y][x]) * damp
                 if (amp < -1.0) {
                     amp = -1.0
@@ -151,17 +160,13 @@ export class View {
         this.waves.putImageData(wavesData, 0, 0)
     }
 
-    get domElement() {
-        return this.canvas
-    }
-
     private static createStepTexture(outline: string, inline: string): HTMLCanvasElement {
-        const texture: CanvasRenderingContext2D = View.create2dContext(32)
+        const texture: CanvasRenderingContext2D = View.create2dContext(cellWidth)
         texture.save()
         texture.fillStyle = outline
-        texture.fillRect(2, 2, 28, 28)
+        texture.fillRect(cellBorderWidth, cellBorderWidth, cellWidth - cellBorderWidth * 2, cellWidth - cellBorderWidth * 2)
         texture.fillStyle = inline
-        texture.fillRect(4, 4, 24, 24)
+        texture.fillRect(cellBorderWidth * 2, cellBorderWidth * 2, cellWidth - cellBorderWidth * 4, cellWidth - cellBorderWidth * 4)
         texture.restore()
         return texture.canvas
     }
