@@ -1,4 +1,4 @@
-export const matrixSize = 64;
+export const matrixSize = 16;
 
 export class Pattern {
     private readonly data = new Uint32Array(matrixSize)
