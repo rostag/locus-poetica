@@ -1,14 +1,18 @@
 import {ArrayUtils} from "../lib/common"
-import {Model} from "./model.js"
+import {matrixSize, Model} from "./model"
 
-const matrixWidth = 16;
-const matrixHeight = 16;
+const matrixWidth = matrixSize
+const matrixHeight = matrixSize
 
-const cellWidth = 32;
-const cellHeight = 32;
-const cellBorderWidth = 1;
-const canvasWidth = matrixWidth * cellWidth;
-const canvasHeight = matrixHeight * cellHeight;
+const mRatio = 5
+
+const cellWidth = 32
+const cellHeight = 32
+const cellBorderWidth = 1
+const canvasWidth = matrixWidth * cellWidth
+const canvasHeight = matrixHeight * cellHeight
+
+const fluidDamp: number = 0.86; // 0.86
 
 export class View {
     private readonly graphics: CanvasRenderingContext2D = this.canvas.getContext("2d")!
@@ -53,8 +57,8 @@ export class View {
                 return
             }
             const scale = this.canvas.width / clientRect.width
-            const x = ((clientX - clientRect.left) * scale) >> 5
-            const y = ((clientY - clientRect.top) * scale) >> 5
+            const x = ((clientX - clientRect.left) * scale) >> mRatio
+            const y = ((clientY - clientRect.top) * scale) >> mRatio
             if (x < 0 || x >= matrixWidth || y < 0 || y >= matrixHeight) return
             if (event.type === "mousedown" || event.type === "touchstart") {
                 drawValue = !this.getStep(x, y)
@@ -103,7 +107,7 @@ export class View {
         for (let y = 0; y < matrixHeight; y++) {
             for (let x = 0; x < matrixWidth; x++) {
                 const texture = this.model.pattern.getStep(x, y) ? this.stepTextureOn : this.stepTextureOff
-                this.graphics.drawImage(texture, x << 5, y << 5)
+                this.graphics.drawImage(texture, x << mRatio, y << mRatio)
             }
         }
         this.graphics.save()
@@ -130,7 +134,6 @@ export class View {
         const fmb = this.fluidMaps[1 - this.fluidMapIndex]
         const wavesData: ImageData = this.wavesData
         const data: Uint8ClampedArray = wavesData.data
-        const damp: number = 0.86
         for (let y = 0; y < matrixHeight; ++y) {
             const f0 = fma[y - 1]
             const f1 = fma[y]
@@ -141,7 +144,7 @@ export class View {
                 if (y > 0) amp += f0[x]
                 if (x < matrixWidth - 1) amp += f1[x + 1]
                 if (y < matrixHeight - 1) amp += f2[x]
-                amp = (amp * 0.5 - fmb[y][x]) * damp
+                amp = (amp * 0.5 - fmb[y][x]) * fluidDamp
                 if (amp < -1.0) {
                     amp = -1.0
                 } else if (amp > 1.0) {

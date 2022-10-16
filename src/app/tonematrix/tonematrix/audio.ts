@@ -1,4 +1,9 @@
-import {Model} from "./model.js"
+import {matrixSize, Model} from "./model"
+
+const mSize = matrixSize;
+const xLimit = mSize - 1;
+
+const BPM = 120.0;
 
 const midiToFrequency = (note: number): number => {
     return 440.0 * Math.pow(2.0, (note + 3.0) / 12.0 - 6.0)
@@ -10,8 +15,8 @@ export class Audio {
     static ADDITIONAL_LATENCY = 0.005
     static SEMIQUAVER = 1.0 / 16.0
     static RELEASE_TIME = 0.250
-    static VOICE_GAIN = 0.75
-    static NOTES = new Float32Array([
+    static VOICE_GAIN = 1
+    static NOTESONE = new Float32Array([
         midiToFrequency(96),
         midiToFrequency(93),
         midiToFrequency(91),
@@ -27,8 +32,28 @@ export class Audio {
         midiToFrequency(67),
         midiToFrequency(65),
         midiToFrequency(62),
-        midiToFrequency(60)
+        midiToFrequency(60),
+        //
+        midiToFrequency(59),
+        midiToFrequency(58),
+        midiToFrequency(57),
+        midiToFrequency(56),
+        midiToFrequency(55),
+        midiToFrequency(54),
+        midiToFrequency(53),
+        midiToFrequency(52),
+        midiToFrequency(51),
+        midiToFrequency(50),
+        midiToFrequency(49),
+        midiToFrequency(48),
+        midiToFrequency(47),
+        midiToFrequency(46),
+        midiToFrequency(45),
+        midiToFrequency(44),
     ])
+    static SEMITONES = new Float32Array(mSize);
+
+    static NOTES = Audio.SEMITONES;
 
     private readonly context = new AudioContext()
     private readonly voiceMix: GainNode = this.context.createGain()
@@ -36,9 +61,14 @@ export class Audio {
     private nextScheduleTime: number = 0.0
     private absoluteTime: number = 0.0
     private intervalId: number = -1
-    private bpm: number = 120.0
+    private bpm: number = BPM;
 
     constructor(private readonly model: Model) {
+
+        for (let i = 0; i <= mSize; i++) {
+            Audio.SEMITONES[mSize - i] = midiToFrequency(i + 60)
+        }
+
         this.buildFxChain()
 
         if (this.context.state === "running") {
@@ -101,8 +131,8 @@ export class Audio {
         while (barPosition < t1) {
             if (barPosition >= t0) {
                 const time = this.computeStartOffset(barPosition)
-                const x = index & 15
-                for (let y = 0; y < 16; y++) {
+                const x = index & xLimit
+                for (let y = 0; y < matrixSize; y++) {
                     if (this.model.pattern.getStep(x, y)) {
                         this.playVoice(time, y)
                     }
@@ -111,7 +141,7 @@ export class Audio {
             barPosition = ++index * Audio.SEMIQUAVER
         }
         const bars = this.secondsToBars(this.absoluteTime + Audio.SCHEDULE_TIME)
-        this.model.stepIndex = (Math.floor(bars / Audio.SEMIQUAVER) - 1) & 15
+        this.model.stepIndex = (Math.floor(bars / Audio.SEMIQUAVER) - 1) & xLimit
     }
 
     private computeStartOffset(barPosition: number): number {
@@ -147,7 +177,7 @@ export class Audio {
 
     private buildFxChain(): void {
         const delay: DelayNode = this.context.createDelay()
-        delay.delayTime.value = this.barsToSeconds(3.0 / 16.0)
+        delay.delayTime.value = this.barsToSeconds(3.0 / mSize)
         const feedbackGain: GainNode = this.context.createGain()
         feedbackGain.gain.value = 0.4
         const wetGain: GainNode = this.context.createGain()
