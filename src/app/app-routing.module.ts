@@ -22,7 +22,8 @@ const routes: Routes = [
   { 
     path: 'monotext', 
     loadChildren: () => import('./monotext/monotext.module').then(m => m.MonotextModule)
-  }
+  },
+  { path: 'tonematrix', loadChildren: () => import('./tonematrix/tonematrix.module').then(m => m.TonematrixModule) }
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

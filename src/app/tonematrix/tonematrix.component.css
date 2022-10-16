@@ -1,0 +1,38 @@
+@import 'common';
+
+div.enabled-audio {
+    top: 16px;
+    left: 50%;
+    color: orange;
+    transform: translate(-50%, 0);
+    position: absolute;
+    visibility: hidden;
+}
+
+canvas {
+    width: min(512px, 80vmin);
+    height: min(512px, 80vmin);
+    filter: blur(1px);
+    position: relative;
+}
+
+footer {
+    margin-top: 16px;
+    display: flex;
+    justify-content: space-between;
+}
+
+footer button {
+    color: inherit;
+    border: none;
+    outline: none;
+    appearance: none;
+    padding: 8px;
+    cursor: pointer;
+    background-color: #666;
+    border-radius: 1px;
+}
+
+footer button:active {
+    background-color: aqua
+}
