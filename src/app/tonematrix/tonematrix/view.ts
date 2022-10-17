@@ -37,16 +37,19 @@ export class View {
         this.canvas.height = canvasHeight
         this.initEvents()
         this.processAnimationFrame()
-        this.initSequence(2, 5);
+        this.setSequenceByStepAndStartInterval(2, 0, 4, 0);
+        this.setSequenceByStepAndStartInterval(4, 0, 4, 0);
     }
 
-    initSequence(step: number = 1, interval = 4) {
+    setSequenceByStepAndStartInterval(step: number = 4, stepStep = 0, interval = 4, intStep = 0) {
+        let s = step;
         let i = interval;
         let y = matrixSize - 1;
-        for (let x = 0; x < matrixSize; x += step ) {
-            y = y - i;
-            i--;
+        for (let x = 0; x < matrixSize; x += s ) {
             this.setStep(x, y, true, false);
+            i = Math.max(1, i - intStep);
+            s = Math.max(1, s-stepStep);
+            y = y - i;
         }
     }
 
