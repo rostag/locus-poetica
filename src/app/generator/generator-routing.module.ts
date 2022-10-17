@@ -6,16 +6,11 @@ import { GeneratorComponent } from './components/generator/generator.component';
 import { ModelAxesComponent } from './components/model-axes/model-axes.component';
 import { PoetryXComponent } from './components/poetry-x/poetry-x.component';
 import { PoetryComponent } from './components/poetry/poetry.component';
-import { SequencerComponent } from './components/sequencer/sequencer.component';
 
 const routes: Routes = [{
   path: '',
   pathMatch: 'full',
   redirectTo: 'axes',
-}, {
-  path: 'sequencer',
-  pathMatch: 'full',
-  component: SequencerComponent
 }, {
   path: 'multi',
   pathMatch: 'full',
