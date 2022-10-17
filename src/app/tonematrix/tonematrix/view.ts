@@ -1,6 +1,9 @@
 import {ArrayUtils} from "../lib/common"
 import {matrixSize, Model} from "./model"
 
+const NO_FLUID = true;
+const NO_ANIMATION = false;
+
 const matrixWidth = matrixSize
 const matrixHeight = matrixSize
 
@@ -34,6 +37,17 @@ export class View {
         this.canvas.height = canvasHeight
         this.initEvents()
         this.processAnimationFrame()
+        this.initSequence(2, 5);
+    }
+
+    initSequence(step: number = 1, interval = 4) {
+        let i = interval;
+        let y = matrixSize - 1;
+        for (let x = 0; x < matrixSize; x += step ) {
+            y = y - i;
+            i--;
+            this.setStep(x, y, true, false);
+        }
     }
 
     private initEvents() {
@@ -83,9 +97,9 @@ export class View {
         }, {capture: true})
     }
 
-    private setStep(x: number, y: number, value: boolean) {
+    private setStep(x: number, y: number, value: boolean, draw = true) {
         this.model.pattern.setStep(x, y, value)
-        if (value) {
+        if (value && draw) {
             this.touchFluid(x, y)
         }
     }
@@ -100,6 +114,9 @@ export class View {
     }
 
     private processAnimationFrame = () => {
+        if (NO_ANIMATION) {
+            return;
+        }
         this.touchActives()
         this.processFluid()
         this.graphics.imageSmoothingEnabled = false
@@ -130,6 +147,9 @@ export class View {
     }
 
     private processFluid() {
+        if (NO_FLUID) {
+            return;
+        }
         const fma = this.fluidMaps[this.fluidMapIndex]
         const fmb = this.fluidMaps[1 - this.fluidMapIndex]
         const wavesData: ImageData = this.wavesData
