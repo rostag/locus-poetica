@@ -15,7 +15,7 @@ export class Audio {
     static ADDITIONAL_LATENCY = 0.005
     static SEMIQUAVER = 1.0 / 16.0
     static RELEASE_TIME = 0.250
-    static VOICE_GAIN = 1
+    static VOICE_GAIN = 9
     static NOTESONE = new Float32Array([
         midiToFrequency(96),
         midiToFrequency(93),
@@ -66,7 +66,7 @@ export class Audio {
     constructor(private readonly model: Model) {
 
         for (let i = 0; i <= mSize; i++) {
-            Audio.SEMITONES[mSize - i] = midiToFrequency(i + 60)
+            Audio.SEMITONES[mSize - i] = midiToFrequency(i + 57)
         }
 
         this.buildFxChain()

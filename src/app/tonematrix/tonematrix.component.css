@@ -20,7 +20,7 @@
     min-height: 100vh;
     /* mobile viewport bug fix */
     min-width: -webkit-fill-available;
-    min-height: -webkit-fill-available;
+    /* min-height: -webkit-fill-available; */
 }
 
 * {
@@ -81,4 +81,9 @@ footer button:active {
 
 .copy a {
     color: #999;
+}
+
+
+::ng-deep .app-footer {
+    display: none;
 }

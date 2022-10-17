@@ -24,6 +24,7 @@ export class Pattern {
     }
 
     setStep(x: number, y: number, value: boolean): void {
+        // console.log('step', x, y, value);
         if (value) {
             this.data[y] |= 1 << x
         } else {
