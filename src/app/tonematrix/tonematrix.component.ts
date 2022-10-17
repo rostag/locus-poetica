@@ -28,7 +28,7 @@ export class TonematrixComponent implements OnInit {
     }
     (document.querySelector("button#link") as HTMLButtonElement).onclick = (event: MouseEvent) => {
         event.preventDefault()
-        navigator.clipboard.writeText(`https://tonematrix.audiotool.com/#${this.model.pattern.serialize()}`)
+        navigator.clipboard.writeText(`https://rostag.github.io/locus-poetica/tonematrix/#${this.model.pattern.serialize()}`)
     }
     ;
     (document.querySelector("button#studio") as HTMLButtonElement).onclick = (event: MouseEvent) => {
