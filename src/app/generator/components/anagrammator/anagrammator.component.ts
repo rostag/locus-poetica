@@ -11,6 +11,7 @@ export class AnagrammatorComponent implements OnInit {
 
   shuffle = false;
   resultMustStartWith = false;
+  toUseRutenia = false;
 
   sourceWord = 'WORD';
   filterBy = '';
@@ -43,6 +44,11 @@ export class AnagrammatorComponent implements OnInit {
   toggleStartWith(event: any) {
     this.resultMustStartWith = event?.currentTarget?.checked;
     this.anagrammate();
+  }
+
+  toggleUseRuteniaFont(event: any) {
+    this.toUseRutenia = event?.currentTarget?.checked;
+    document.querySelector('#result-render')?.classList.toggle('rootenia', this.toUseRutenia );
   }
 
   combineItems(items: any[], max = this.maxIterations, start = 0, divider = '') {

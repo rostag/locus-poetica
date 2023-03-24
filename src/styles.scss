@@ -1,7 +1,16 @@
+@font-face{
+    font-family: 'RuteniaAkcidentaRegular';
+    font-style: normal;
+    font-weight: 500;
+    src: url('assets/fonts/RuteniaAkcidenta-Regular.woff2') format('woff2');
+    src: url('assets/fonts/RuteniaAkcidenta-Regular.woff') format('woff');
+}
+
 :root {
     --main-font: "IM Fell English" !important;
     --secondary-font: Roboto, "Helvetica Neue", sans-serif;
     --mono-font: Monaco, 'Courier New', Courier, monospace;
+    --rutenia-akcidenta-font: "RuteniaAkcidentaRegular", 'Courier New', Courier, monospace;
     --clr-theme-bg: #ffcc00;
   }
 
