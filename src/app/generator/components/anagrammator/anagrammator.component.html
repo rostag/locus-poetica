@@ -5,10 +5,18 @@
   <div>Show only results which have this sub-string:</div>
   <input type="text" (keyup)="setFilter($event)">
   <div>
-    <label><input type="checkbox" (change)="toggleShuffling($event)" checked>Shuffle results</label>
+    <label class="chb"><input type="checkbox" (change)="toggleShuffling($event)" [checked]="shuffle"><span>Shuffle results</span></label>
+    <label class="chb"><input type="checkbox" (change)="toggleStartWith($event)" [checked]="resultMustStartWith"><span>Result must start with it</span></label>
+    <label class="chb"><input type="checkbox" (change)="toggleUseRuteniaFont($event)" [checked]="toUseRutenia"><span>Use Rutenia Font</span></label>
   </div>
-  <div>Results: {{anagrams?.length}} total, {{ filtered.length }} after filtering</div>
-  <div>
-    <pre>{{formattedResult}}</pre>
+
+  <div class="copyable" id="results">
+    <h3>Results: {{anagrams?.length}} total, {{ filtered.length }} after filtering. </h3>
+    <div class="data-value">
+      <pre id="result-render">{{formattedResult}}</pre>
+    </div>
+    <span class="copied">copied</span>
+    <span class="copy" (click)="copyResults('results')"></span>
   </div>
+
 </div>

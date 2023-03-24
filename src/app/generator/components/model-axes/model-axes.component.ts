@@ -29,6 +29,13 @@ export class ModelAxesComponent implements OnInit {
     this.displayMode = displayMode.value;
   }
   
+  // кот, шот, чи ляр, чи лар
+  shotbular: IObjValuesCollection = [
+    [{ label: 'КОТ', class: 'axe-1 val-1' }, { label: 'ШОТ', class: 'axe-1 val-2' }, { label: 'ШЬОТ', class: 'axe-1 val-2' }],
+    [{ label: 'БУ', class: 'axe-2 val-1' }],
+    [{ label: 'ЛАР', class: 'axe-2 val-1' }, { label: 'ЛЯР', class: 'axe-2 val-2' }],
+  ]
+
   // axes: IObjValuesCollection = [
   //   [{ label: 'A', class: 'axe-1 val-1' }, { label: 'B', class: 'axe-1 val-2' }, { label: 'C', class: 'axe-1 val-3' }],
   //   [{ label: 'D', class: 'axe-2 val-1' }, { label: 'E', class: 'axe-2 val-2' }, { label: 'F', class: 'axe-2 val-3' }],
@@ -60,7 +67,7 @@ export class ModelAxesComponent implements OnInit {
 
   axesMap = new Map<string, IObjValuesCollection>();
 
-  axes: IObjValuesCollection = this.axesPoetry;
+  axes: IObjValuesCollection = this.shotbular;
 
   showIndex = false;
 

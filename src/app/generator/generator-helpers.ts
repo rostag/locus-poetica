@@ -93,3 +93,17 @@ export function cleanUpWord(word: string, syllablesSeparator?: string): string {
   }
   return r.toLowerCase();
 }
+
+export function copyToClipboardWithVisualResponse(el, text) {
+  const responseElement = el.querySelector('.copied');
+  if (text) {
+      navigator.clipboard.writeText(text).then(function() {
+          responseElement.classList.add('show-success');
+          setTimeout(() => {
+              responseElement.classList.remove('show-success');
+          }, 2000);
+      }, function(err) {
+          console.error('Async: Could not copy text: ', err);
+      });
+  }
+}

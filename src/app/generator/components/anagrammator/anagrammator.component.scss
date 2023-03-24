@@ -1,11 +1,24 @@
 :host {
   display: block;
 
+  .rootenia {
+    font-family: var(--rutenia-akcidenta-font) !important;
+  }
+
   .container {
     margin: 1em;
 
     &* {
       font-size: 30px;
+    }
+
+    .chb {
+      display: inline-block;
+      span {
+        line-height: 1.1;
+        margin-right: 0.5rem;
+        vertical-align: super;
+      }
     }
 
     input {
@@ -23,7 +36,6 @@
       margin-top: 0;
       font-size: 80px;
       line-height: 90px;
-      font-family: var(--main-font);
     }
   }
 
@@ -39,4 +51,84 @@
   .axe-item {
     line-height: normal;
   }
+
+  /* Copyable */
+
+  .copyable {
+    position: relative;
+    margin-top: 2rem;
+  }
+
+  .copyable h3 {
+      line-height: 1.8rem;
+      font-size: 1.3rem;
+      margin-bottom: .3rem;
+  }
+
+  .data-value {
+      font-size: .96rem;
+  }
+
+  .copy {
+      background-color: var(--clr-theme-bg);
+      display: inline-block;
+      position: absolute;
+      left: 0;
+      top: -32px;
+      width: 16px;
+      height: 16px;
+      background-image: url('../../../../assets/images/copy-icon.svg');
+      background-size: 50%;
+      background-repeat: no-repeat;
+      background-position: 50% 50%;
+      border-radius: 16px;
+      padding: 6px;
+  }
+
+  .copy:hover {
+      background-color: var(--clr-theme-bg);
+      cursor: pointer;
+      box-shadow: 2px 2px 8px var(--clr-theme-bg);
+  }
+
+  .copied {
+      opacity: 0;
+      font-size: .7rem;
+      font-weight: 500;
+      color: var(--clr-theme-bg);
+      position: absolute;
+      top: -16px;
+      left: 48px;
+  }
+
+  .show-success {
+      animation:
+          50ms ease-in slidein,
+          1s ease-in 50ms slideout;
+  }
+
+  @keyframes slidein {
+      from {
+          transform: translateY(0vh);
+          opacity: 0;
+      }
+      to {
+          transform: translateY(0vh);
+          opacity: 1;
+      }
+  }
+
+  @keyframes slideout {    
+      from {
+          transform: translateY(0vh);
+          opacity: 1;
+      }
+      to {
+          transform: translateY(-5vh);
+          opacity: 0;
+      }
+  }
+
+/* End: Copyable */
+
 }
