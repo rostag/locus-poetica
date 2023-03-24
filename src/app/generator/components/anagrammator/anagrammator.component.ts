@@ -9,8 +9,10 @@ import { copyToClipboardWithVisualResponse } from '../../generator-helpers';
 
 export class AnagrammatorComponent implements OnInit {
 
+  shuffle = false;
+  resultMustStartWith = false;
+
   sourceWord = 'WORD';
-  shuffle = true;
   filterBy = '';
   anagrams = [''];
   filtered = [''];
@@ -35,6 +37,11 @@ export class AnagrammatorComponent implements OnInit {
 
   toggleShuffling(event: any) {
     this.shuffle = event?.currentTarget?.checked;
+    this.anagrammate();
+  }
+
+  toggleStartWith(event: any) {
+    this.resultMustStartWith = event?.currentTarget?.checked;
     this.anagrammate();
   }
 
@@ -69,7 +76,7 @@ export class AnagrammatorComponent implements OnInit {
     this.iteration = 0;
 
     this.anagrams = this.combineItems(this.sourceWord.split(''), this.maxIterations, 0, '');
-    this.filtered = this.filterBy ? this.anagrams.filter(anagram => anagram.indexOf(this.filterBy) === 0) : this.anagrams;
+    this.filtered = this.filterBy ? this.anagrams.filter(anagram => this.resultMustStartWith ? anagram.indexOf(this.filterBy) === 0 : anagram.indexOf(this.filterBy) !== -1) : this.anagrams;
     const shuffled = this.shuffle ? this.shuffleArray(this.filtered) : this.filtered;
 
     this.formattedResult = shuffled.join('\n');
