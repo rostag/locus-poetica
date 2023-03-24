@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { copyToClipboardWithVisualResponse } from '../../generator-helpers';
 
 @Component({
   selector: 'app-anagrammator',
@@ -72,5 +73,10 @@ export class AnagrammatorComponent implements OnInit {
     const shuffled = this.shuffle ? this.shuffleArray(this.filtered) : this.filtered;
 
     this.formattedResult = shuffled.join('\n');
+  }
+
+  copyResults(copyId: string) {
+    const el = document.querySelector('#' + copyId);
+    copyToClipboardWithVisualResponse(el, this.filtered);
   }
 }

@@ -7,8 +7,14 @@
   <div>
     <label><input type="checkbox" (change)="toggleShuffling($event)" checked>Shuffle results</label>
   </div>
-  <div>Results: {{anagrams?.length}} total, {{ filtered.length }} after filtering</div>
-  <div>
-    <pre>{{formattedResult}}</pre>
+
+  <div class="copyable" id="results">
+    <h3>Results: {{anagrams?.length}} total, {{ filtered.length }} after filtering. </h3>
+    <div class="data-value">
+      <pre>{{formattedResult}}</pre>
+    </div>
+    <span class="copied">copied</span>
+    <span class="copy" (click)="copyResults('results')"></span>
   </div>
+
 </div>
