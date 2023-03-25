@@ -10,14 +10,16 @@ import { copyToClipboardWithVisualResponse } from '../../generator-helpers';
 export class AnagrammatorComponent implements OnInit {
 
   shuffle = false;
-  resultMustStartWith = false;
   toUseRutenia = false;
 
   sourceWord = 'WORD';
-  filterBy = '';
   anagrams = [''];
   filtered = [''];
   formattedResult = '';
+  
+  startWith = '';
+  hasPart = '';
+  endWith = '';
 
   maxIterations = 10000000000;
   iteration: number;
@@ -31,21 +33,26 @@ export class AnagrammatorComponent implements OnInit {
     this.anagrammate();
   }
 
-  setFilter(event: any) {
-    this.filterBy = event?.target?.value;
-    this.anagrammate();
-  }
-
   toggleShuffling(event: any) {
     this.shuffle = event?.currentTarget?.checked;
     this.anagrammate();
   }
 
-  toggleStartWith(event: any) {
-    this.resultMustStartWith = event?.currentTarget?.checked;
+  setStartWith(evt) {
+    this.startWith = evt.target.value;
     this.anagrammate();
-  }
+  }  
+ 
+  setHasPart(evt) {
+    this.hasPart = evt.target.value;
+    this.anagrammate();
+  }  
 
+  setEndWith(evt) {
+    this.endWith = evt.target.value;
+    this.anagrammate();
+  }  
+ 
   toggleUseRuteniaFont(event: any) {
     this.toUseRutenia = event?.currentTarget?.checked;
     document.querySelector('#result-render')?.classList.toggle('rootenia', this.toUseRutenia );
@@ -82,7 +89,11 @@ export class AnagrammatorComponent implements OnInit {
     this.iteration = 0;
 
     this.anagrams = this.combineItems(this.sourceWord.split(''), this.maxIterations, 0, '');
-    this.filtered = this.filterBy ? this.anagrams.filter(anagram => this.resultMustStartWith ? anagram.indexOf(this.filterBy) === 0 : anagram.indexOf(this.filterBy) !== -1) : this.anagrams;
+    const filteredByStart = this.startWith ? this.anagrams.filter(str => str.indexOf(this.startWith) === 0) : this.anagrams;
+    const filteredByEnd = this.endWith ? filteredByStart.filter(str => str.lastIndexOf(this.endWith) === str.length - this.endWith.length) : filteredByStart;
+    const filteredByHasPart = this.hasPart ? filteredByEnd.filter(str => str.indexOf(this.hasPart) !== -1) : filteredByEnd;
+    this.filtered = filteredByHasPart;
+
     const shuffled = this.shuffle ? this.shuffleArray(this.filtered) : this.filtered;
 
     this.formattedResult = shuffled.join('\n');

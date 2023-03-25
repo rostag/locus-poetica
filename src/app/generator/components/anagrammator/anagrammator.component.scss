@@ -8,6 +8,12 @@
   .container {
     margin: 1em;
 
+    .filters {
+      display: grid;
+      grid-template-columns: 30% 30% 30%;
+      gap: 3%;
+    }
+
     &* {
       font-size: 30px;
     }
@@ -23,7 +29,6 @@
 
     input {
       font-size: 30px;
-      margin: 0.5em 0;
 
       &[type=checkbox] {
         width: .7em;
@@ -56,13 +61,14 @@
 
   .copyable {
     position: relative;
-    margin-top: 2rem;
+    margin-top: 1rem;
   }
 
   .copyable h3 {
       line-height: 1.8rem;
       font-size: 1.3rem;
-      margin-bottom: .3rem;
+      margin-bottom: .7rem;
+      display: flex;
   }
 
   .data-value {
@@ -72,9 +78,6 @@
   .copy {
       background-color: var(--clr-theme-bg);
       display: inline-block;
-      position: absolute;
-      left: 0;
-      top: -32px;
       width: 16px;
       height: 16px;
       background-image: url('../../../../assets/images/copy-icon.svg');
@@ -83,6 +86,7 @@
       background-position: 50% 50%;
       border-radius: 16px;
       padding: 6px;
+      margin-left: 8px;
   }
 
   .copy:hover {
@@ -96,9 +100,7 @@
       font-size: .7rem;
       font-weight: 500;
       color: var(--clr-theme-bg);
-      position: absolute;
-      top: -16px;
-      left: 48px;
+      top: -20px;
   }
 
   .show-success {

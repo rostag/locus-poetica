@@ -1,22 +1,38 @@
 <div class="container">
   <h1>Anagramator</h1>
-  <div>Enter string to make anagram of:</div>
-  <input type="text" (keyup)="setSourceString($event)" value="WORD">
-  <div>Show only results which have this sub-string:</div>
-  <input type="text" (keyup)="setFilter($event)">
+  <mat-form-field class="input word" appearance="outline">
+    <mat-label>Enter string to make anagram of:</mat-label>
+    <input type="text" matInput value="WORD" (keyup)="setSourceString($event)">
+  </mat-form-field>
+  <div>Show only results which:</div>
+  <div class="filters">
+    <mat-form-field class="input start-with" (keyup)="setStartWith($event)" appearance="outline">
+      <mat-label>Start with:</mat-label>
+      <input type="text" matInput placeholder="">
+    </mat-form-field>
+    <mat-form-field class="input have-part" (keyup)="setHasPart($event)" appearance="outline">
+      <mat-label>Include:</mat-label>
+      <input type="text" matInput placeholder="">
+    </mat-form-field>
+    <mat-form-field class="input end-with" (keyup)="setEndWith($event)" appearance="outline">
+      <mat-label>End with:</mat-label>
+      <input type="text" matInput placeholder="">
+    </mat-form-field>
+  </div>
+
   <div>
     <label class="chb"><input type="checkbox" (change)="toggleShuffling($event)" [checked]="shuffle"><span>Shuffle results</span></label>
-    <label class="chb"><input type="checkbox" (change)="toggleStartWith($event)" [checked]="resultMustStartWith"><span>Result must start with it</span></label>
     <label class="chb"><input type="checkbox" (change)="toggleUseRuteniaFont($event)" [checked]="toUseRutenia"><span>Use Rutenia Font</span></label>
   </div>
 
   <div class="copyable" id="results">
-    <h3>Results: {{anagrams?.length}} total, {{ filtered.length }} after filtering. </h3>
+    <h3>
+      <span>Results: {{anagrams?.length}} total, {{ filtered.length }} after filtering.</span>
+      <span class="copy" (click)="copyResults('results')"></span>
+      <span class="copied">copied</span>
+    </h3>
     <div class="data-value">
       <pre id="result-render">{{formattedResult}}</pre>
     </div>
-    <span class="copied">copied</span>
-    <span class="copy" (click)="copyResults('results')"></span>
   </div>
-
 </div>
