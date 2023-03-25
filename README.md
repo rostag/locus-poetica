@@ -12,8 +12,6 @@ Different text generation toys. Mostly mechanical and random.
 
 `npm run deploy-pages`
 
-Generated with [Angular CLI](https://github.com/angular/angular-cli) v9.0.7.
-
 ## Make fun not war
 
 Support Ukraine: [KOLO](https://www.koloua.com/en)
