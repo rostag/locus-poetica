@@ -19,12 +19,10 @@
       <input type="text" matInput placeholder="">
     </mat-form-field>
   </div>
-
   <div>
     <label class="chb"><input type="checkbox" (change)="toggleShuffling($event)" [checked]="shuffle"><span>Shuffle results</span></label>
     <label class="chb"><input type="checkbox" (change)="toggleUseRuteniaFont($event)" [checked]="toUseRutenia"><span>Use Rutenia Font</span></label>
   </div>
-
   <div class="copyable" id="results">
     <h3>
       <span>Results: {{anagrams?.length}} total, {{ filtered.length }} after filtering.</span>

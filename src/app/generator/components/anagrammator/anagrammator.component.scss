@@ -105,8 +105,8 @@
 
   .show-success {
       animation:
-          50ms ease-in slidein,
-          1s ease-in 50ms slideout;
+          40ms ease-in slidein,
+          1s ease-in 40ms slideout;
   }
 
   @keyframes slidein {
@@ -130,7 +130,6 @@
           opacity: 0;
       }
   }
-
-/* End: Copyable */
+  /* End: Copyable */
 
 }
