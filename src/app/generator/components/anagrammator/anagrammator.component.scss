@@ -1,6 +1,10 @@
 :host {
   display: block;
 
+  h1 {
+    font-size: 40px;
+  }
+
   pre#result-render {
     margin-top: 0;
     font-size: 50px;
@@ -25,10 +29,6 @@
       display: grid;
       grid-template-columns: 30% 30% 30%;
       gap: 3%;
-    }
-
-    &* {
-      font-size: 30px;
     }
 
     .chb {

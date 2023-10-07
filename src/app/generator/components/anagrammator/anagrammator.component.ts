@@ -8,11 +8,11 @@ import { copyToClipboardWithVisualResponse } from '../../generator-helpers';
 })
 export class AnagrammatorComponent implements OnInit {
   
-  sourceWord = "Символ";
+  sourceWord = "імла";
   divider = "";
-  capitalizeOutput = true;
-  shuffle = true;
+  shuffle = false;
   toUseRutenia = false;
+  capitalizeOutput = true;
 
   anagrams = [""];
   filtered = [""];
