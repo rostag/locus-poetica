@@ -1,31 +1,32 @@
 <div class="container">
-  <h1>Anagramator</h1>
+  <h1>Анаграматор</h1>
   <mat-form-field class="input word" appearance="outline">
-    <mat-label>Enter string to make anagram of:</mat-label>
-    <input type="text" matInput value="WORD" (keyup)="setSourceString($event)">
+    <mat-label>Зробити анаграму з:</mat-label>
+    <input type="text" matInput value="Слово" (keyup)="setSourceString($event)">
   </mat-form-field>
-  <div>Show only results which:</div>
+  <div>Фільтр результатів:</div>
   <div class="filters">
     <mat-form-field class="input start-with" (keyup)="setStartWith($event)" appearance="outline">
-      <mat-label>Start with:</mat-label>
+      <mat-label>Починати з:</mat-label>
       <input type="text" matInput placeholder="">
     </mat-form-field>
     <mat-form-field class="input have-part" (keyup)="setHasPart($event)" appearance="outline">
-      <mat-label>Include:</mat-label>
+      <mat-label>Включити:</mat-label>
       <input type="text" matInput placeholder="">
     </mat-form-field>
     <mat-form-field class="input end-with" (keyup)="setEndWith($event)" appearance="outline">
-      <mat-label>End with:</mat-label>
+      <mat-label>Закінчувати з:</mat-label>
       <input type="text" matInput placeholder="">
     </mat-form-field>
   </div>
   <div>
-    <label class="chb"><input type="checkbox" (change)="toggleShuffling($event)" [checked]="shuffle"><span>Shuffle results</span></label>
-    <label class="chb"><input type="checkbox" (change)="toggleUseRuteniaFont($event)" [checked]="toUseRutenia"><span>Use Rutenia Font</span></label>
+    <label class="chb"><input type="checkbox" (change)="toggleCapitalizeOutput($event)" [checked]="capitalizeOutput"><span>З великої</span></label>
+    <label class="chb"><input type="checkbox" (change)="toggleShuffling($event)" [checked]="shuffle"><span>Випадково</span></label>
+    <label class="chb"><input type="checkbox" (change)="toggleUseRuteniaFont($event)" [checked]="toUseRutenia"><span>Рутенією</span></label>
   </div>
   <div class="copyable" id="results">
     <h3>
-      <span>Results: {{anagrams?.length}} total, {{ filtered.length }} after filtering.</span>
+      <span>Результати: {{anagrams?.length}} усього, {{ filtered.length }} після фільтру.</span>
       <span class="copy" (click)="copyResults('results')"></span>
       <span class="copied">copied</span>
     </h3>
