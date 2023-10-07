@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { copyToClipboardWithVisualResponse } from '../../generator-helpers';
 
 @Component({
@@ -7,12 +7,13 @@ import { copyToClipboardWithVisualResponse } from '../../generator-helpers';
   styleUrls: ["./anagrammator.component.scss"],
 })
 export class AnagrammatorComponent implements OnInit {
-
-  capitalizeOutput = false;
-  shuffle = false;
+  
+  sourceWord = "Символ";
+  divider = "";
+  capitalizeOutput = true;
+  shuffle = true;
   toUseRutenia = false;
 
-  sourceWord = "";
   anagrams = [""];
   filtered = [""];
   formattedResult = "";
@@ -25,6 +26,11 @@ export class AnagrammatorComponent implements OnInit {
   iteration: number;
 
   ngOnInit() {
+    this.anagrammate();
+  }
+
+  setDivider($event: KeyboardEvent) {
+    this.divider = ($event.currentTarget as HTMLInputElement).value;
     this.anagrammate();
   }
 
@@ -82,11 +88,12 @@ export class AnagrammatorComponent implements OnInit {
         (remaining = "") => {
           const res = [item].concat(remaining);
           const id = item + remaining;
-          result[id] = res.join(divider);
+          let joined: string = res.join("");
           if (this.capitalizeOutput) {
-            result[id] = result[id].toLowerCase();
-            result[id] = result[id].substring(0, 1).toUpperCase() + result[id].substring(1);
-          }      
+            joined = joined.toLowerCase();
+            joined = joined.charAt(0).toUpperCase() + joined.substring(1);
+          }
+          result[id] = joined;
         }
       );
     });
@@ -111,10 +118,10 @@ export class AnagrammatorComponent implements OnInit {
     this.iteration = 0;
 
     this.anagrams = this.combineItems(
-      this.sourceWord.split(""),
+      this.sourceWord.split(this.divider),
       this.maxIterations,
       0,
-      ""
+      this.divider
     );
     const filteredByStart = this.startWith
       ? this.anagrams.filter((str) => str.indexOf(this.startWith) === 0)

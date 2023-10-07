@@ -1,9 +1,15 @@
 <div class="container">
   <h1>Анаграматор</h1>
-  <mat-form-field class="input word" appearance="outline">
-    <mat-label>Зробити анаграму з:</mat-label>
-    <input type="text" matInput value="Слово" (keyup)="setSourceString($event)">
-  </mat-form-field>
+  <div class="inputs">
+    <mat-form-field class="input word" appearance="outline">
+      <mat-label>Зробити анаграму з:</mat-label>
+      <input type="text" matInput [value]="sourceWord" (keyup)="setSourceString($event)">
+    </mat-form-field>
+    <mat-form-field class="input word" appearance="outline">
+      <mat-label>Розділовий знак:</mat-label>
+      <input type="text" matInput [value]="divider" (keyup)="setDivider($event)">
+    </mat-form-field>
+  </div>
   <div>Фільтр результатів:</div>
   <div class="filters">
     <mat-form-field class="input start-with" (keyup)="setStartWith($event)" appearance="outline">
