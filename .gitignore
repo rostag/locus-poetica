@@ -48,3 +48,4 @@ Thumbs.db
 src/app/generator/components/swear.samples.md
 PoetryToSpeech
 src/assets/wav/minus.wav
+node_modules
