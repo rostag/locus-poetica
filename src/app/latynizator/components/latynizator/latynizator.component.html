@@ -1,16 +1,16 @@
 <div>
   <h1>
-    Латинізатор
+    Latynizator
   </h1>
   <form class="latynize-form" [formGroup]="latForm">
     <mat-form-field class="latynize-full-width" appearance="fill">
-      <mat-label>Текст українською</mat-label>
+      <mat-label>Vvedit' tekst ukraїns'koju</mat-label>
       <textarea formControlName="text" matInput placeholder="Місце для тексту..."></textarea>
     </mat-form-field>
   </form>
   <h2>
-    Latynized:
+    Pereklad uvedenogo tekstu ukraїns'koju latynkoju:
   </h2>
-  <!-- <button class="copy-button" mat-button (click)="copyText($event)">Copy</button> -->
   <p class="output">{{ output }}</p>
+  <button class="copy-button" mat-raised-button (click)="copyToClipboard($event)">Skopijuvaty</button>
 </div>

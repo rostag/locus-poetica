@@ -29,20 +29,16 @@ export class LatynizatorComponent implements OnInit {
     })
   }
 
-
   // TODO - Move to helper
-  public copyText(event: MouseEvent) {
+  public copyToClipboard(event: MouseEvent) {
     event.preventDefault;
     event.stopPropagation();
-    let val = '';
     const selBox = document.createElement('textarea');
     selBox.style.position = 'fixed';
     selBox.style.left = '0';
     selBox.style.top = '0';
     selBox.style.opacity = '0';
-    const today = new Date().toDateString();
-    // const framework = this.dictionary.name + ' / ' + this.rhyme.name;
-    // selBox.value = `${framework} - ${today} \n\n${val} \n* * *\n\n`;
+    selBox.value = this.output;
     document.body.appendChild(selBox);
     selBox.focus();
     selBox.select();
