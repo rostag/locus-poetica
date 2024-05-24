@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import { latynka } from 'src/app/generator/components/models/latynka.model';
 import { latynize } from 'src/app/generator/generator-helpers';
 
 /*
@@ -15,6 +16,8 @@ export class LatynizatorComponent implements OnInit {
 
   latForm: UntypedFormGroup;
   output: string;
+
+  replacements = Object.entries(latynka);
 
   constructor(private fb: UntypedFormBuilder) {}
 

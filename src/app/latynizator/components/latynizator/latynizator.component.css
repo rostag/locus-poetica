@@ -13,3 +13,39 @@
 .latynize-full-width .mat-input-element {
     min-height: 100px;
 }
+
+.replacements {
+    font-size: large;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+
+    .r-row {
+        flex: 3 3 100px;
+        margin: 0.5em;
+        border: 1px solid #ccc;
+        padding: 0.75rem;
+        font-size: 1.5em;
+
+        .character {
+            font-weight: bold;
+            width: 2rem;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .arrow {
+            color: gray;
+            width: 2rem;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .replacement {
+            font-weight: bold;
+            width: 2rem;
+            display: inline-block;
+            text-align: center;
+        }
+    }
+}

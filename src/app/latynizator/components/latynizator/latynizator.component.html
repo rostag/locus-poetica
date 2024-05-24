@@ -1,16 +1,31 @@
 <div>
-  <h1>
-    Latynizator
-  </h1>
+  <h1>Latynizator</h1>
   <form class="latynize-form" [formGroup]="latForm">
     <mat-form-field class="latynize-full-width" appearance="fill">
       <mat-label>Vvedit' tekst ukraїns'koju</mat-label>
-      <textarea formControlName="text" matInput placeholder="Місце для тексту..."></textarea>
+      <textarea
+        formControlName="text"
+        matInput
+        placeholder="Місце для тексту..."
+      ></textarea>
     </mat-form-field>
   </form>
-  <h2>
-    Pereklad uvedenogo tekstu ukraїns'koju latynkoju:
-  </h2>
+  <h2>Pereklad uvedenogo tekstu ukraїns'koju latynkoju:</h2>
   <p class="output">{{ output }}</p>
-  <button class="copy-button" mat-raised-button (click)="copyToClipboard($event)">Skopijuvaty</button>
+  <button
+    class="copy-button"
+    mat-raised-button
+    (click)="copyToClipboard($event)"
+  >
+    Skopijuvaty
+  </button>
+
+  <p>&nbsp;</p>
+  <hr />
+  <h3>Tablycja zamin:</h3>
+  <div class="replacements">
+    <div *ngFor="let entry of replacements; let i = index" class="r-row">
+      <span class="character">{{ entry[0] }}</span><span class="arrow">→</span><span class="replacement">{{ entry[1] }}</span>
+    </div>
+  </div>
 </div>
