@@ -5,8 +5,7 @@
 }
 
 .latynize-full-width {
-    min-width: 500px;
-    height: 200px;
+    min-width: 320px;
     display: block;
 }
 
@@ -18,6 +17,11 @@ h2 {
     margin: 1rem 0 1rem 0;
 }
 
+.copy-button {
+    padding: .2rem;
+    font-weight: normal;
+}
+
 .replacements {
     font-size: large;
     display: flex;
@@ -27,9 +31,8 @@ h2 {
     
     .r-row {
         flex: 3 3 100px;
-        /* border: 1px solid #eee; */
-        padding: 0.5rem;
-        font-size: 1.5rem;
+        padding: 0.25rem 0 0.25rem 0.5rem;
+        font-size: 1.2rem;
         border-radius: .5rem;
         background-color: #eee;
 
@@ -38,10 +41,11 @@ h2 {
             width: 1.2rem;
             display: inline-block;
             text-align: center;
+            color: #333;
         }
 
         .arrow {
-            color: gray;
+            color: #777;
             width: 2.5rem;
             display: inline-block;
             text-align: center;
@@ -54,6 +58,8 @@ h2 {
             display: inline-block;
             text-align: center;
             padding: .2rem;
+            border: 1px solid #777;
+            border-radius: 4px;
         }
     }
 }
