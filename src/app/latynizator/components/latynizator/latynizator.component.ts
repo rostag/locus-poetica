@@ -14,6 +14,13 @@ import { latynize } from 'src/app/generator/generator-helpers';
 })
 export class LatynizatorComponent implements OnInit {
 
+  updateReplacement($event: any, index: number) {
+    const value = $event.target.value;
+    const targetPair = this.replacements[index];
+    latynka[targetPair[0]] = value;
+    this.updateOutput();
+  }
+
   latForm: UntypedFormGroup;
   output: string;
 
@@ -21,15 +28,25 @@ export class LatynizatorComponent implements OnInit {
 
   constructor(private fb: UntypedFormBuilder) {}
 
-  
   public ngOnInit() {
-    const textControl = this.fb.control('', Validators.required);
+    const textControl = this.fb.control(`Не журюсь я, а не спиться
+Часом до півночі,
+Усе світять ті блискучі
+Твої чорні очі. `, Validators.required);
     this.latForm = this.fb.group({
       text: textControl
     })
     textControl.valueChanges.subscribe((val) => {
-      this.output = latynize(val)
+      this.updateOutput()
     })
+
+    requestAnimationFrame(() => {
+      this.updateOutput();
+    })
+  }
+
+  updateOutput() {
+    this.output = latynize(this.latForm.get('text')?.value);
   }
 
   // TODO - Move to helper
