@@ -1,4 +1,8 @@
-export const latynka = {
+export const setLatynka = (newLatynka) => {
+    latynka = newLatynka;
+}
+
+export let latynka = {
     'А': 'A',
     'а': 'a',
     'Б': 'B',
