@@ -18,7 +18,11 @@
   <p class="output">{{ output }}</p>
   
   <hr />
-  <h2>Tablycja zamin</h2>
+  <h2><span>Tablycja zamin:</span>&nbsp;<button
+    class="copy-button"
+    mat-raised-button
+    (click)="replacementsToClipboard($event)"
+  >Skopijuvaty Zaminy</button></h2>
   <div class="replacements">
     <div
       *ngFor="let entry of replacements; let i = index"

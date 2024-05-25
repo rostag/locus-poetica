@@ -49,21 +49,31 @@ export class LatynizatorComponent implements OnInit {
     this.output = latynize(this.latForm.get('text')?.value);
   }
 
-  // TODO - Move to helper
-  public copyToClipboard(event: MouseEvent) {
-    event.preventDefault;
-    event.stopPropagation();
+  private setCopyBox(value: string) {
     const selBox = document.createElement('textarea');
     selBox.style.position = 'fixed';
     selBox.style.left = '0';
     selBox.style.top = '0';
     selBox.style.opacity = '0';
-    selBox.value = this.output;
+    selBox.value = value;
     document.body.appendChild(selBox);
     selBox.focus();
     selBox.select();
     document.execCommand('copy');
     document.body.removeChild(selBox);
+  }
+
+  // TODO - Move to helper
+  public copyToClipboard(event: MouseEvent) {
+    event.preventDefault;
+    event.stopPropagation();
+    this.setCopyBox(this.output);
+  }
+
+  public replacementsToClipboard(event: MouseEvent) {
+    event.preventDefault;
+    event.stopPropagation();
+    this.setCopyBox(JSON.stringify(latynka, null, 2));
   }
 
 }
