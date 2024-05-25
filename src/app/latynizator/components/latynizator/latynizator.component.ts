@@ -48,14 +48,10 @@ export class LatynizatorComponent implements OnInit {
     });
   }
 
-  // TODO - implement
   switchDirection() {
-    console.log("Switching direction", this.replacements);
     const rev = this.replacements.map((pair) => pair.reverse());
     setLatynka(Object.fromEntries(rev));
     this.replacements = Object.entries(latynka);
-    console.log("Switched to", this.replacements);
-
     this.updateOutput();
   }
 
