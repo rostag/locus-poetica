@@ -5,8 +5,8 @@
 .menu {
     margin: 8px;
     display: inline-grid;
-    grid-template-columns: 2fr 1fr;
-    column-gap: 2em;
+    grid-template-columns: 16fr 0;
+    column-gap: 1em;
 }
 
 .menu-item {
