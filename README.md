@@ -10,7 +10,8 @@ Different text generation toys. Mostly mechanical and random.
 
 ## Deployment
 
-`npm run deploy-pages`
+1. Merge to `main`
+2. Run `npm run deploy-pages`
 
 ## Make fun not war
 
@@ -20,18 +21,18 @@ Support Ukraine: [KOLO](https://www.koloua.com/en)
 
 A small utility for converting text to a unicode variant.
 
-| Flag      | Short | Description                   | Example           |
-|:--------- |:-----:|:----------------------------- |:----------------- |
-| monospace |   m   | Monospace text (default)      | 𝙼𝚘𝚗𝚘𝚜𝚙𝚊𝚌𝚎 𝚝𝚎𝚡𝚝! |
-| script    |   c   | Script                        | 𝒻𝒶𝓃𝒸𝓎 𝓈𝒸𝓇𝒾𝓅𝓉   |
-| fraktur   |   f   | Fraktur                       | 𝔖𝔭𝔩𝔢𝔫𝔡𝔦𝔡 𝔣𝔯𝔞𝔨𝔱𝔲𝔯  |
-| double    |   d   | Double-struck (1)             | 𝔻𝕠𝕦𝕓𝕝𝕖-𝕤𝕥𝕣𝕦𝕔𝕜  |
-| sans      |   s   | Sans-serif                    | 𝖲𝖺𝗇𝗌. 𝖲𝖾𝗋𝗂𝖿𝗌.     |
-| greek     |   g   | Greek (2)                     | 𝛂𝛔𝛅𝛇𝛈𝛉𝛋𝛌       |
-| bold      |   b   | Bold (modifier)               | 𝐛𝓸𝖑𝛅 𝘁𝗲𝘅𝘁        |
-| italic    |   i   | Italic (modifier) (3)         | 𝑖𝘵𝛼𝑙𝘪𝑐             |
-| underline |   u   | Underline (modifier)          | 𝚞̲𝚗̲𝚍̲𝚎̲𝚛̲𝚕̲𝚒̲𝚗̲𝚎̲𝚍̲ |
-| strike    |   k   | Strike-through (modifier)     | 𝚜̶𝚝̶𝚛̶𝚞̶𝚌̶𝚔̶ ̶𝚋̶𝚢̶ ̶𝚕̶𝚒̶𝚐̶𝚑̶𝚝̶𝚗̶𝚒̶𝚗̶𝚐̶ |
+| Flag      | Short | Description               | Example             |
+| :-------- | :---: | :------------------------ | :------------------ |
+| monospace |   m   | Monospace text (default)  | 𝙼𝚘𝚗𝚘𝚜𝚙𝚊𝚌𝚎 𝚝𝚎𝚡𝚝!     |
+| script    |   c   | Script                    | 𝒻𝒶𝓃𝒸𝓎 𝓈𝒸𝓇𝒾𝓅𝓉        |
+| fraktur   |   f   | Fraktur                   | 𝔖𝔭𝔩𝔢𝔫𝔡𝔦𝔡 𝔣𝔯𝔞𝔨𝔱𝔲𝔯    |
+| double    |   d   | Double-struck (1)         | 𝔻𝕠𝕦𝕓𝕝𝕖-𝕤𝕥𝕣𝕦𝕔𝕜       |
+| sans      |   s   | Sans-serif                | 𝖲𝖺𝗇𝗌. 𝖲𝖾𝗋𝗂𝖿𝗌.       |
+| greek     |   g   | Greek (2)                 | 𝛂𝛔𝛅𝛇𝛈𝛉𝛋𝛌            |
+| bold      |   b   | Bold (modifier)           | 𝐛𝓸𝖑𝛅 𝘁𝗲𝘅𝘁           |
+| italic    |   i   | Italic (modifier) (3)     | 𝑖𝘵𝛼𝑙𝘪𝑐              |
+| underline |   u   | Underline (modifier)      | 𝚞̲𝚗̲𝚍̲𝚎̲𝚛̲𝚕̲𝚒̲𝚗̲𝚎̲𝚍̲          |
+| strike    |   k   | Strike-through (modifier) | 𝚜̶𝚝̶𝚛̶𝚞̶𝚌̶𝚔̶ ̶𝚋̶𝚢̶ ̶𝚕̶𝚒̶𝚐̶𝚑̶𝚝̶𝚗̶𝚒̶𝚗̶𝚐̶ |
 
 1): Not all characters exist in the regular (i.e. non-bold/italic) version of this set
 
