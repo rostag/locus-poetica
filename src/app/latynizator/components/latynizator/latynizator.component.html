@@ -10,24 +10,29 @@
       ></textarea>
     </mat-form-field>
   </form>
-  <h2><span>Tekst ukraїnsjkoju latynkoju:</span>&nbsp;<button
-    class="copy-button"
-    mat-raised-button
-    (click)="copyToClipboard($event)"
-  >Skopijuvaty</button></h2>
+  <h2>
+    <span>Tekst ukrajinsjkoju latynkoju:</span>&nbsp;<button
+      class="copy-button"
+      mat-raised-button
+      (click)="copyToClipboard($event)"
+    >
+      Skopijuvaty
+    </button>
+  </h2>
   <p class="output">{{ output }}</p>
   <button mat-raised-button (click)="switchDirection()">Revers</button>
   <hr />
-  <h2><span>Tablycja zamin:</span>&nbsp;<button
-    class="copy-button"
-    mat-raised-button
-    (click)="replacementsToClipboard($event)"
-  >Skopijuvaty Zaminy</button></h2>
-  <div class="replacements">
-    <div
-      *ngFor="let entry of replacements; let i = index"
-      class="r-row"
+  <h2>
+    <span>Tablycja zamin:</span>&nbsp;<button
+      class="copy-button"
+      mat-raised-button
+      (click)="replacementsToClipboard($event)"
     >
+      Skopijuvaty Zaminy
+    </button>
+  </h2>
+  <div class="replacements">
+    <div *ngFor="let entry of replacements; let i = index" class="r-row">
       <span class="character">{{ entry[0] }}</span
       ><span class="arrow">→</span>
       <input
