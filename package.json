@@ -24,7 +24,7 @@
     "@angular/router": "^14.2.3",
     "@material/tooltip": "^14.0.0",
     "angular-highcharts": "^14.1.7",
-    "atft": "^1.5.1",
+    "atft": "^1.6.5",
     "dagre": "^0.8.5",
     "highcharts": "^10.2.1",
     "lodash": "^4.17.21",
