@@ -15,9 +15,10 @@ type IObjValues = IObjValue[];
 type IObjValuesCollection = IObjValues[];
 
 @Component({
-  selector: 'app-model-axes',
-  templateUrl: './model-axes.component.html',
-  styleUrls: ['./model-axes.component.scss'],
+    selector: 'app-model-axes',
+    templateUrl: './model-axes.component.html',
+    styleUrls: ['./model-axes.component.scss'],
+    standalone: false
 })
 
 export class ModelAxesComponent implements OnInit {

@@ -19,9 +19,10 @@ import {
 // ankursethi.in/2016/01/13/build-a-sampler-with-angular-2-webaudio-and-webmidi-lesson-1-introduction-to-the-webaudio-api
 
 @Component({
-  selector: "app-audio",
-  templateUrl: "./audio.component.html",
-  styleUrls: ["./audio.component.scss"],
+    selector: "app-audio",
+    templateUrl: "./audio.component.html",
+    styleUrls: ["./audio.component.scss"],
+    standalone: false
 })
 export class AudioComponent implements OnInit, OnDestroy {
   @Input() name = "Audio Loop";

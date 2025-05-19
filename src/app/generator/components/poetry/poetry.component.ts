@@ -15,9 +15,10 @@ import { Dictionary, Line, OOPTimelineMode, Poetry, PoetryService, Strophae, Wor
  */
 
 @Component({
-  selector: 'app-poetry',
-  templateUrl: './poetry.component.html',
-  styleUrls: ['./poetry.component.scss']
+    selector: 'app-poetry',
+    templateUrl: './poetry.component.html',
+    styleUrls: ['./poetry.component.scss'],
+    standalone: false
 })
 export class PoetryComponent implements OnInit {
 

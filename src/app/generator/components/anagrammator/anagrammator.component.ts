@@ -2,9 +2,10 @@ import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { copyToClipboardWithVisualResponse } from '../../generator-helpers';
 
 @Component({
-  selector: "app-anagrammator",
-  templateUrl: "./anagrammator.component.html",
-  styleUrls: ["./anagrammator.component.scss"],
+    selector: "app-anagrammator",
+    templateUrl: "./anagrammator.component.html",
+    styleUrls: ["./anagrammator.component.scss"],
+    standalone: false
 })
 export class AnagrammatorComponent implements OnInit {
   

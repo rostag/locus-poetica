@@ -7,9 +7,10 @@ import { ISample } from "../generator/generator.component";
 // ankursethi.in/2016/01/13/build-a-sampler-with-angular-2-webaudio-and-webmidi-lesson-1-introduction-to-the-webaudio-api
 
 @Component({
-  selector: "app-sample",
-  templateUrl: "./sample.component.html",
-  styleUrls: ["./sample.component.scss"],
+    selector: "app-sample",
+    templateUrl: "./sample.component.html",
+    styleUrls: ["./sample.component.scss"],
+    standalone: false
 })
 export class SampleComponent implements OnInit {
   @Input() set sample(value: ISample) {

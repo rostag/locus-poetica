@@ -49,9 +49,10 @@ export const generatorState: IGeneratorState = {
   }],
 }
 @Component({
-  selector: 'app-generator',
-  templateUrl: './generator.component.html',
-  styleUrls: ['./generator.component.scss']
+    selector: 'app-generator',
+    templateUrl: './generator.component.html',
+    styleUrls: ['./generator.component.scss'],
+    standalone: false
 })
 
 export class GeneratorComponent {

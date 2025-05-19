@@ -2,9 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { MonotextService } from '../monotext.service';
 
 @Component({
-  selector: 'app-monotext',
-  templateUrl: './monotext.component.html',
-  styleUrls: ['./monotext.component.css']
+    selector: 'app-monotext',
+    templateUrl: './monotext.component.html',
+    styleUrls: ['./monotext.component.css'],
+    standalone: false
 })
 export class MonotextComponent implements OnInit {
 

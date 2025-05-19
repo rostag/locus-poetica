@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-c-news',
-  templateUrl: './c-news.component.html',
-  styleUrls: ['./c-news.component.scss']
+    selector: 'app-c-news',
+    templateUrl: './c-news.component.html',
+    styleUrls: ['./c-news.component.scss'],
+    standalone: false
 })
 export class CNewsComponent implements OnInit {
 

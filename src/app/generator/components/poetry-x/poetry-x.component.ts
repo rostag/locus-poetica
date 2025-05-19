@@ -2,9 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { dumyMoiDumy, syllablesWeightedDict } from '../models/poetry.model';
 
 @Component({
-  selector: 'app-poetry-x',
-  templateUrl: './poetry-x.component.html',
-  styleUrls: ['./poetry-x.component.scss']
+    selector: 'app-poetry-x',
+    templateUrl: './poetry-x.component.html',
+    styleUrls: ['./poetry-x.component.scss'],
+    standalone: false
 })
 
 export class PoetryXComponent implements OnInit {
