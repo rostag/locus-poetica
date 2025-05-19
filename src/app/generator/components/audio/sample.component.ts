@@ -1,5 +1,5 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
-import { MatSliderChange } from '@angular/material/slider'
+import { MatLegacySliderChange as MatSliderChange } from '@angular/material/legacy-slider'
 import { interval, Subject } from 'rxjs';
 import { timeInterval, takeUntil } from 'rxjs/operators';
 import { ISample } from '../generator/generator.component';

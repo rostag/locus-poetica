@@ -1,6 +1,6 @@
 import { Component, OnInit, Output, EventEmitter, Input, OnDestroy } from '@angular/core';
 import { UntypedFormControl, UntypedFormGroup } from '@angular/forms';
-import { MatSliderChange } from '@angular/material/slider'
+import { MatLegacySliderChange as MatSliderChange } from '@angular/material/legacy-slider'
 import { interval, of, Subject } from 'rxjs';
 import { timeInterval, takeUntil } from 'rxjs/operators';
 import { generatorState, IGeneratorState, ISample } from '../generator/generator.component';

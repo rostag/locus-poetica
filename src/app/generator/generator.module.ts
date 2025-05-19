@@ -8,16 +8,16 @@ import { PoetryXComponent } from './components/poetry-x/poetry-x.component';
 import { PoetryComponent } from './components/poetry/poetry.component';
 import { PoetryService } from './components/services/poetry.service';
 import { GeneratorRoutingModule } from './generator-routing.module';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatSelectModule } from '@angular/material/select';
-import { MatSliderModule } from '@angular/material/slider';
-import { MatButtonModule } from '@angular/material/button';
+import { MatLegacyFormFieldModule as MatFormFieldModule } from '@angular/material/legacy-form-field';
+import { MatLegacySelectModule as MatSelectModule } from '@angular/material/legacy-select';
+import { MatLegacySliderModule as MatSliderModule } from '@angular/material/legacy-slider';
+import { MatLegacyButtonModule as MatButtonModule } from '@angular/material/legacy-button';
 import { MatIconModule } from '@angular/material/icon';
-import { MatInputModule } from '@angular/material/input';
+import { MatLegacyInputModule as MatInputModule } from '@angular/material/legacy-input';
 import { SampleComponent } from './components/audio/sample.component';
 import { AnagrammatorComponent } from './components/anagrammator/anagrammator.component';
 import { ModelAxesComponent } from './components/model-axes/model-axes.component';
-import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatLegacyTooltipModule as MatTooltipModule } from '@angular/material/legacy-tooltip';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
 
 @NgModule({

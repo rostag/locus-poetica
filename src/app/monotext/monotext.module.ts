@@ -2,9 +2,9 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MonotextComponent } from './monotext/monotext.component';
 import { MonotextRoutingModule } from './monotext-routing.module';
-import { MatCheckboxModule} from '@angular/material/checkbox';
+import { MatLegacyCheckboxModule as MatCheckboxModule} from '@angular/material/legacy-checkbox';
 import { FormsModule } from '@angular/forms';
-import { MatInputModule } from '@angular/material/input';
+import { MatLegacyInputModule as MatInputModule } from '@angular/material/legacy-input';
 
 @NgModule({
   declarations: [
