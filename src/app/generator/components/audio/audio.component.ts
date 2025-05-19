@@ -7,7 +7,7 @@ import {
   OnDestroy,
 } from "@angular/core";
 import { UntypedFormControl, UntypedFormGroup } from "@angular/forms";
-// import { MatLegacySliderChange as MatSliderChange } from '@angular/material/legacy-slider'
+import { MatSliderChange } from "@angular/material/slider";
 import { interval, of, Subject } from "rxjs";
 import { timeInterval, takeUntil } from "rxjs/operators";
 import {
@@ -19,10 +19,10 @@ import {
 // ankursethi.in/2016/01/13/build-a-sampler-with-angular-2-webaudio-and-webmidi-lesson-1-introduction-to-the-webaudio-api
 
 @Component({
-    selector: "app-audio",
-    templateUrl: "./audio.component.html",
-    styleUrls: ["./audio.component.scss"],
-    standalone: false
+  selector: "app-audio",
+  templateUrl: "./audio.component.html",
+  styleUrls: ["./audio.component.scss"],
+  standalone: false,
 })
 export class AudioComponent implements OnInit, OnDestroy {
   @Input() name = "Audio Loop";
@@ -156,14 +156,14 @@ export class AudioComponent implements OnInit, OnDestroy {
     sample.bufferSource.start(0);
   }
 
-  //   public setControlValue(evt: MatSliderChange) {
-  //     this.audioBeat.emit(this.audio);
-  //     this._sampleFreq = evt.value as number;
-  //   }
-  public setControlValue(evt: any) {
+  public setControlValue(evt: MatSliderChange) {
     this.audioBeat.emit(this.audio);
     this._sampleFreq = evt.value as number;
   }
+  // public setControlValue(evt: any) {
+  //   this.audioBeat.emit(this.audio);
+  //   this._sampleFreq = evt.value as number;
+  // }
 
   public y(x: number) {
     return Math.round(Math.exp(x));

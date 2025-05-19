@@ -1,7 +1,17 @@
 <div>
-  <mat-slider min="400" max="2000" [step]="10" [thumbLabel]="true" (change)="setControlValue($event)"></mat-slider>
-  <div>{{sampleFreq}} ms</div>
-  <button mat-button color="primary" [disabled]="loadingSample" (click)="playLoop(sample.name)">
-    <mat-icon>play_arrow</mat-icon>{{sample.name}}
+  <mat-slider
+    min="400"
+    max="2000"
+    [step]="10"
+    (change)="setControlValue($event)"
+  ></mat-slider>
+  <div>{{ sampleFreq }} ms</div>
+  <button
+    mat-button
+    color="primary"
+    [disabled]="loadingSample"
+    (click)="playLoop(sample.name)"
+  >
+    <mat-icon>play_arrow</mat-icon>{{ sample.name }}
   </button>
 </div>
