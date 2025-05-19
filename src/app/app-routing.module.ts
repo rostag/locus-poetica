@@ -33,6 +33,11 @@ const routes: Routes = [
     loadChildren: () =>
       import("./tonematrix/tonematrix.module").then((m) => m.TonematrixModule),
   },
+  {
+    path: "soundflow",
+    loadChildren: () =>
+      import("./soundflow/soundflow.module").then((m) => m.SoundflowModule),
+  },
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
