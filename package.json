@@ -8,11 +8,11 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "move-to-docs": "mv ./dist/browser ./docs",
-    "deploy-pages-0": "ng build --configuration production --output-path dist --base-href 'https://rostag.github.io/locus-poetica/'",
-    "deploy-pages": "ng build --configuration production --output-path dist --base-href 'https://rostag.github.io/locus-poetica/' && git add . && git commit -m 'build' && git push -f",
-    "github-build": "ng build --configuration production --base-href 'https://rostag.github.io/locus-poetica/'",
-    "github-deploy": "npx angular-cli-ghpages --dir=docs --no-silent"
+    "deploy-pages": "ng build --configuration production --output-path dist --base-href 'https://rostag.github.io/locus-poetica/' && mv dist/browser docs && git add . && git commit -m 'build' && git push -f",
+    "ghpages-build": "ng build --configuration production --output-path dist --base-href 'https://rostag.github.io/locus-poetica/'",
+    "test-move-to-docs": "mv dist/browser docs && git add . && git commit -m 'build' && git push -f",
+    "test-ghpages-publish": "npx angular-cli-ghpages --dir=docs --no-silent",
+    "test-ghpages-deploy": "npm run ghpages-build && npm run move-to-docs && npm run ghpages-publish"
   },
   "private": true,
   "dependencies": {
