@@ -8,7 +8,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "deploy-pages": "ng build --configuration production --output-path dist --base-href 'https://rostag.github.io/locus-poetica/' && rm -rf docs/* mv dist/browser docs && git add . && git commit -m 'build' && git push -f",
+    "deploy-pages": "ng build --configuration production --output-path dist --base-href 'https://rostag.github.io/locus-poetica/' && rm -rf ./docs/* && mv dist/browser docs && git add . && git commit -m 'build' && git push -f",
     "ghpages-build": "ng build --configuration production --output-path dist --base-href 'https://rostag.github.io/locus-poetica/'",
     "test-move-to-docs": "mv dist/browser docs && git add . && git commit -m 'build' && git push -f",
     "test-ghpages-publish": "npx angular-cli-ghpages --dir=docs --no-silent",
