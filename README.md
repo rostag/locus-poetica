@@ -1,8 +1,8 @@
-# PoetryGen
+# Locus Poetica
 
 ## What is this
 
-Different text generation toys. Mostly mechanical and random.
+Text and sound generation toys. Mostly mechanical and random.
 
 ## Demo
 
@@ -12,18 +12,6 @@ Different text generation toys. Mostly mechanical and random.
 
 1. Merge to `main`
 2. Run `npm run deploy-pages`
-
-### Red on
-
-https://senoritadeveloper.medium.com/deploy-an-angular-application-to-github-pages-65573194595a
-
-`git remote set-url origin https://...locus-poetica.git`
-
-`npx angular-cli-ghpages --dir=docs/locus-poetica --no-silent`
-
-## Make life not war
-
-Support Ukraine: [KOLO](https://www.koloua.com/en)
 
 ## 𝚖𝚘𝚗𝚘𝚝𝚎𝚡𝚝 module
 
@@ -58,5 +46,8 @@ Presuming you have node installed, run the file directly with `./monotext.js`
 or run it with node: `node monotext.js`.
 
 You can also create a symlink (`ln -s path/to/monotext.js destination/path`) in
-`/usr/local/bin` or whatever is in your `PATH` and then run it directly anywhere with the
-filename you specified for it's destination.
+`/usr/local/bin` or whatever is in your `PATH` and then run it directly anywhere with the filename you specified for it's destination.
+
+## Make life not war
+
+Support Ukraine: [KOLO](https://www.koloua.com/en)
