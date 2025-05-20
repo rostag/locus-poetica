@@ -45,11 +45,11 @@ export class SoundflowComponent implements OnInit {
   private randLen = 1;
   private duration = 9000;
 
-  private createSvg(): void {
+  private initFlow(): void {
     this.svgr = d3
-      .select("figure#bar")
+      .select("#soundflow")
       .append("svg")
-      .style("border", "1px solid #fc0")
+      .style("border", "1px solid #ccc")
       .attr("viewBox", [0, 0, this.width, this.height]);
     // .style("border", "1px solid #fc0")
     // .attr("width", this.width + this.margin * 2)
@@ -59,33 +59,33 @@ export class SoundflowComponent implements OnInit {
 
     this.svgr.on("click", (event) => {
       var e = d3.pointer(event);
-      console.log("svgr click", event);
       this.addArc(this.arcs, e[0], e[1]);
     });
-
-    // Button reset
-    this.svgr
-      .append("circle")
-      .attr("cx", 30)
-      .attr("cy", 30)
-      .attr("stroke", "black")
-      .style("fill", "yellow")
-      .attr("r", 20)
-      .on("click", (event) => {
-        console.log(event, this.arcs);
-        event.preventDefault();
-        event.stopPropagation();
-        this.arcs.forEach((path: any) => {
-          // FIXME
-          path.datum().colliding = true;
-          path.selectAll("*").interrupt();
-          this.deflate(path);
-        });
-      });
 
     d3.timer(() => {
       this.collisionDetection(this.arcs);
     }, 1000);
+
+    this.setupAudio();
+
+    // Reset Button
+    // this.svgr
+    //   .append("circle")
+    //   .attr("cx", 30)
+    //   .attr("cy", 30)
+    //   .attr("stroke", "black")
+    //   .style("fill", "yellow")
+    //   .attr("r", 20)
+    //   .on("click", (event) => {
+    //     event.preventDefault();
+    //     event.stopPropagation();
+    //     this.arcs.forEach((path: any) => {
+    //       // FIXME
+    //       path.datum().colliding = true;
+    //       path.selectAll("*").interrupt();
+    //       this.deflate(path);
+    //     });
+    //   });
   }
 
   private randomize() {
@@ -210,6 +210,8 @@ export class SoundflowComponent implements OnInit {
   private mainGain = 1;
   private envGain = 0.1;
 
+  private minVolume = 0.00001;
+
   private createNoteTable() {
     const noteFreq: any[] = []; // TODO type
     for (let i = 0; i < 9; i++) {
@@ -279,49 +281,53 @@ export class SoundflowComponent implements OnInit {
     );
 
     const osc = this.audioContext.createOscillator();
-
     const time = this.audioContext.currentTime;
-
     const rampInTime = time + attTime;
     const rampOutTime = time + noteLength - relTime;
 
-    console.log(
-      `${freq}Hz, ${noteLength.toFixed(2)} sec, ${attTime.toFixed(
+    console.debug(
+      `Tone: ${freq}Hz, ${noteLength.toFixed(2)} sec, ${attTime.toFixed(
         2
       )} att / ${relTime.toFixed(2)} rel.`
     );
 
     this.sweepEnv = new GainNode(this.audioContext);
     this.sweepEnv.gain.cancelScheduledValues(time);
-    this.sweepEnv.gain.setValueAtTime(0, time);
+    this.sweepEnv.gain.setValueAtTime(this.minVolume, time);
     this.sweepEnv.gain.linearRampToValueAtTime(this.envGain, rampInTime);
-    this.sweepEnv.gain.linearRampToValueAtTime(0, rampOutTime);
+    this.sweepEnv.gain.linearRampToValueAtTime(this.minVolume, rampOutTime);
 
     osc.connect(this.sweepEnv).connect(this.mainGainNode);
-    // osc.connect(mainGainNode);
     osc.type = "sine";
     osc.frequency.value = freq;
     osc.start();
-    // osc.stop(noteLen);
     return osc;
   }
 
   private noteOn(radiusId: string) {
-    console.log("note on", radiusId);
+    console.debug("note on", radiusId);
     this.noteOff(radiusId);
     this.oscList[radiusId] = this.playTone(radiusId);
   }
 
   private noteOff(radiusId: string) {
-    if (this.oscList[radiusId]) {
-      console.log("note off", radiusId);
-      this.oscList[radiusId].stop();
+    const oscToOff = this.oscList[radiusId];
+    if (oscToOff) {
+      console.debug("note off", radiusId, oscToOff);
+      const sweepOff = new GainNode(this.audioContext);
+      sweepOff.gain.linearRampToValueAtTime(this.minVolume, 0.1);
+      oscToOff
+        .connect(sweepOff)
+        .connect(this.sweepEnv)
+        .connect(this.mainGainNode);
+      setTimeout(() => {
+        oscToOff.stop();
+      }, 110);
       delete this.oscList[radiusId];
     }
   }
 
   ngOnInit(): void {
-    this.createSvg();
-    this.setupAudio();
+    this.initFlow();
   }
 }
