@@ -3,6 +3,7 @@
 // Collide force - https://d3js.org/d3-force/collide
 
 import { Component, OnInit } from "@angular/core";
+import { RouterModule } from "@angular/router";
 import * as d3 from "d3";
 
 type OscItem = {
@@ -11,7 +12,7 @@ type OscItem = {
 
 @Component({
   selector: "app-soundflow",
-  imports: [],
+  imports: [RouterModule],
   templateUrl: "./soundflow.component.html",
   styleUrl: "./soundflow.component.css",
   standalone: true,
