@@ -13,7 +13,15 @@ Different text generation toys. Mostly mechanical and random.
 1. Merge to `main`
 2. Run `npm run deploy-pages`
 
-## Make fun not war
+### Red on
+
+https://senoritadeveloper.medium.com/deploy-an-angular-application-to-github-pages-65573194595a
+
+`git remote set-url origin https://...locus-poetica.git`
+
+`npx angular-cli-ghpages --dir=docs/locus-poetica --no-silent`
+
+## Make life not war
 
 Support Ukraine: [KOLO](https://www.koloua.com/en)
 
