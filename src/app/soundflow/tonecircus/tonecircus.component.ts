@@ -5,19 +5,20 @@
 import { Component, OnInit } from "@angular/core";
 import { RouterModule } from "@angular/router";
 import * as d3 from "d3";
+import * as Tone from "tone";
 
 type OscItem = {
   [index: number]: OscillatorNode;
 };
 
 @Component({
-  selector: "app-soundflow",
+  selector: "app-tonecircus",
   imports: [RouterModule],
-  templateUrl: "./soundflow.component.html",
-  styleUrl: "./soundflow.component.css",
+  templateUrl: "./tonecircus.component.html",
+  styleUrl: "./tonecircus.component.css",
   standalone: true,
 })
-export class SoundflowComponent implements OnInit {
+export class TonecircusComponent implements OnInit {
   private margin = 50;
   private width = 750 - this.margin * 2;
   private height = 400 - this.margin * 2;
@@ -37,7 +38,9 @@ export class SoundflowComponent implements OnInit {
   private randLen = 1;
   private duration = 9000;
 
-  private initFlow(): void {
+  private audioStarted = false;
+
+  private async initFlow() {
     this.svgr = d3
       .select("#soundflow")
       .append("svg")
@@ -50,6 +53,13 @@ export class SoundflowComponent implements OnInit {
     // .attr("transform", "translate(" + this.margin + "," + this.margin + ")");
 
     this.svgr.on("click", (event) => {
+      if (!this.audioStarted) {
+        (async () => {
+          await Tone.start();
+          console.log("audio is ready");
+          this.audioStarted = true;
+        })();
+      }
       var e = d3.pointer(event);
       this.addArc(this.arcs, e[0], e[1]);
     });
@@ -78,13 +88,19 @@ export class SoundflowComponent implements OnInit {
     //       this.deflate(path);
     //     });
     //   });
+
+    // this.randomizeArcs();
   }
 
-  private randomize() {
-    // for (let i = 0; i < randLen; i++) {
-    //   duration = Math.round(Math.random() * 5000 + 8000);
-    //   addArc(arcs, Math.random() * width, Math.random() * height, );
-    // }
+  private randomizeArcs() {
+    for (let i = 0; i < this.randLen; i++) {
+      this.duration = Math.round(Math.random() * 5000 + 8000);
+      this.addArc(
+        this.arcs,
+        Math.random() * this.width,
+        Math.random() * this.height
+      );
+    }
   }
 
   private addArc(arcs, x, y) {
@@ -219,17 +235,6 @@ export class SoundflowComponent implements OnInit {
   private setupAudio() {
     this.noteFreq = this.createNoteTable();
 
-    this.mainGainNode = this.audioContext.createGain();
-    this.mainGainNode.connect(this.audioContext.destination);
-    this.mainGainNode.gain.value = this.mainGain;
-
-    this.sineTerms = new Float32Array([0, 0, 1, 0, 1]);
-    this.cosineTerms = new Float32Array(this.sineTerms.length);
-    this.customWaveform = this.audioContext.createPeriodicWave(
-      this.cosineTerms,
-      this.sineTerms
-    );
-
     for (let i = 0; i < this.oscList.length; i++) {
       this.oscList[i] = {};
     }
@@ -272,10 +277,10 @@ export class SoundflowComponent implements OnInit {
       freq
     );
 
-    const osc = this.audioContext.createOscillator();
-    const time = this.audioContext.currentTime;
-    const rampInTime = time + attTime;
-    const rampOutTime = time + noteLength - relTime;
+    //create a synth and connect it to the main output (your speakers)
+    const synth = new Tone.AMSynth().toDestination();
+    //play a freq for the duration of an 8th note
+    synth.triggerAttackRelease(freq / 6, noteLength);
 
     console.debug(
       `Tone: ${freq}Hz, ${noteLength.toFixed(2)} sec, ${attTime.toFixed(
@@ -283,17 +288,7 @@ export class SoundflowComponent implements OnInit {
       )} att / ${relTime.toFixed(2)} rel.`
     );
 
-    this.sweepEnv = new GainNode(this.audioContext);
-    this.sweepEnv.gain.cancelScheduledValues(time);
-    this.sweepEnv.gain.setValueAtTime(this.minVolume, time);
-    this.sweepEnv.gain.linearRampToValueAtTime(this.envGain, rampInTime);
-    this.sweepEnv.gain.linearRampToValueAtTime(this.minVolume, rampOutTime);
-
-    osc.connect(this.sweepEnv).connect(this.mainGainNode);
-    osc.type = "sine";
-    osc.frequency.value = freq;
-    osc.start();
-    return osc;
+    return synth;
   }
 
   private noteOn(radiusId: string) {
@@ -306,15 +301,6 @@ export class SoundflowComponent implements OnInit {
     const oscToOff = this.oscList[radiusId];
     if (oscToOff) {
       console.debug("note off", radiusId, oscToOff);
-      const sweepOff = new GainNode(this.audioContext);
-      sweepOff.gain.linearRampToValueAtTime(this.minVolume, 0.1);
-      oscToOff
-        .connect(sweepOff)
-        .connect(this.sweepEnv)
-        .connect(this.mainGainNode);
-      setTimeout(() => {
-        oscToOff.stop();
-      }, 110);
       delete this.oscList[radiusId];
     }
   }
