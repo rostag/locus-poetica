@@ -16,11 +16,9 @@
     "moduleResolution": "node",
     "importHelpers": true,
     "target": "ES2022",
-    "lib": [
-      "es2019",
-      "dom"
-    ],
-    "useDefineForClassFields": false
+    "lib": ["es2023", "dom"],
+    "useDefineForClassFields": false,
+    "skipLibCheck": true
   },
   "angularCompilerOptions": {
     "fullTemplateTypeCheck": true,
