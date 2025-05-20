@@ -10,7 +10,7 @@
     "e2e": "ng e2e",
     "deploy-pages": "ng build --configuration production --base-href 'https://rostag.github.io/locus-poetica/browser/' && git add . && git commit -m 'build' && git push -f",
     "github-build": "ng build --configuration production --base-href 'https://rostag.github.io/locus-poetica/'",
-    "github-deploy": "npx angular-cli-ghpages --dir=docs/browser --no-silent"
+    "github-deploy": "npx angular-cli-ghpages --dir=docs --no-silent"
   },
   "private": true,
   "dependencies": {
