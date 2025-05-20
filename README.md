@@ -6,7 +6,7 @@ Different text generation toys. Mostly mechanical and random.
 
 ## Demo
 
-[rostag.github.io](https://rostag.github.io/)
+[rostag.github.io/locus-poetica](https://rostag.github.io/locus-poetica)
 
 ## Deployment
 
