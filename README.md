@@ -8,11 +8,6 @@ Text and sound generation toys. Mostly mechanical and random.
 
 [rostag.github.io/locus-poetica](https://rostag.github.io/locus-poetica)
 
-## Deployment
-
-1. Merge to `main`
-2. Run `npm run deploy-pages`
-
 ## 𝚖𝚘𝚗𝚘𝚝𝚎𝚡𝚝 module
 
 A small utility for converting text to a unicode variant.
