@@ -15,9 +15,10 @@ import { latynize } from "src/app/generator/generator-helpers";
 */
 
 @Component({
-  selector: "app-latynizator",
-  templateUrl: "./latynizator.component.html",
-  styleUrls: ["./latynizator.component.css"],
+    selector: "app-latynizator",
+    templateUrl: "./latynizator.component.html",
+    styleUrls: ["./latynizator.component.css"],
+    standalone: false
 })
 export class LatynizatorComponent implements OnInit {
   latForm: UntypedFormGroup;

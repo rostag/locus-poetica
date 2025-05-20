@@ -1,24 +1,49 @@
 <div>
   <div class="title row">
-    <div class="name">{{name}} {{sampleFreq}}ms</div>
-    <div class="close-button"><button mat-icon-button (click)="close(audio)"><mat-icon size="16">close</mat-icon></button></div>
+    <div class="name">{{ name }} {{ sampleFreq }}ms</div>
+    <div class="close-button">
+      <button mat-icon-button (click)="close(audio)">
+        <mat-icon size="16">close</mat-icon>
+      </button>
+    </div>
   </div>
   <div class="controls">
-    <button *ngIf="!playingSample" mat-icon-button [disabled]="loadingSample" (click)="play()"
-      class="play">
+    <button
+      *ngIf="!playingSample"
+      mat-icon-button
+      [disabled]="loadingSample"
+      (click)="play()"
+      class="play"
+    >
       <mat-icon inline="true">play_circle_outline</mat-icon>
     </button>
-    <button *ngIf="playingSample" mat-icon-button color="accent" [disabled]="loadingSample" (click)="stopLoop('')"
-      class="stop">
+    <button
+      *ngIf="playingSample"
+      mat-icon-button
+      color="accent"
+      [disabled]="loadingSample"
+      (click)="stopLoop('')"
+      class="stop"
+    >
       <mat-icon inline="true">stop_circle_filled</mat-icon>
     </button>
-    <mat-slider min="400" max="2000" step="100" [thumbLabel]="true" (input)="setControlValue($event)"></mat-slider>
+    <mat-slider
+      min="400"
+      max="2000"
+      step="100"
+      (input)="setControlValue($event)"
+    ></mat-slider>
   </div>
   <div class="row">
     <div class="samples grid-row">
-      <button class="sample-button" mat-flat-button *ngFor="let sample of samples" [disabled]="loadingSample"
-        (click)="playLoop(sample.name)">
-        <mat-icon>play_arrow</mat-icon>{{sample.name}}
+      <button
+        class="sample-button"
+        mat-flat-button
+        *ngFor="let sample of samples"
+        [disabled]="loadingSample"
+        (click)="playLoop(sample.name)"
+      >
+        <mat-icon>play_arrow</mat-icon>{{ sample.name }}
       </button>
     </div>
   </div>

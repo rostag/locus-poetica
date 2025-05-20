@@ -5,7 +5,8 @@ import { PerspectiveCamera, Renderer, Scene } from "three";
 @Component({
     selector: 'app-compass-nav',
     templateUrl: './nav.component.html',
-    styleUrls: ['./nav.component.css']
+    styleUrls: ['./nav.component.css'],
+    standalone: false
 })
 
 export class NavComponent {

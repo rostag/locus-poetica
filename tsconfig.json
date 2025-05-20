@@ -4,22 +4,21 @@
     "baseUrl": "./",
     "outDir": "./dist/out-tsc",
     "noImplicitAny": false,
+    "esModuleInterop": true,
     "noImplicitReturns": true,
     "noImplicitThis": true,
     "noFallthroughCasesInSwitch": true,
     "strictNullChecks": true,
     "sourceMap": true,
     "declaration": false,
-    "downlevelIteration": true,
     "experimentalDecorators": true,
     "module": "es2020",
     "moduleResolution": "node",
     "importHelpers": true,
-    "target": "es2020",
-    "lib": [
-      "es2019",
-      "dom"
-    ]
+    "target": "ES2022",
+    "lib": ["es2023", "dom"],
+    "useDefineForClassFields": false,
+    "skipLibCheck": true
   },
   "angularCompilerOptions": {
     "fullTemplateTypeCheck": true,

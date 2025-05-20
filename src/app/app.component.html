@@ -4,14 +4,8 @@
     <span>
       <a [routerLink]="['latynizator']">latynize</a> &middot;
       <a [routerLink]="['generator/anagrammator']">anagramize</a> &middot;
-      <a [routerLink]="['monotext']">monotextize</a> &middot;
-      <a [routerLink]="['tonematrix']">tone-matrix</a> &middot;
-      <a [routerLink]="['generator/axes']">axes</a> &middot;
-      <!-- <a [routerLink]="['generator/c-news']">c-news</a> &middot; -->
-      <a [routerLink]="['generator/poetry-x']">px</a> &middot;
-      <!-- <a [routerLink]="['generator/poet-helper']">ph</a> &middot; -->
-      <!-- <a [routerLink]="['compass']">compass</a> &middot;  -->
-      <a [routerLink]="['generator/multi']">mm</a>
+      <a [routerLink]="['tonematrix']">tonix</a> &middot;
+      <a [routerLink]="['soundflow']">soundflow</a>
     </span>
   </div>
 </nav>
@@ -20,8 +14,15 @@
 
 <footer class="app-footer">
   <small
-    >&copy; 2020-2024
-    <a href="https://www.facebook.com/rastislavr/">Rastislavr</a>.
-    <a href="https://github.com/rostag/locus-poetica">GitHub</a></small
-  >
+    >&copy; 2020-2025
+    <a href="https://www.facebook.com/rastislavr/">Rastislavr</a> &middot;
+    <a href="https://github.com/rostag/locus-poetica">GitHub</a> &middot;
+    <a [routerLink]="['monotext']">monotextize</a> &middot;
+    <a [routerLink]="['generator/axes']">axes</a> &middot;
+    <!-- <a [routerLink]="['generator/c-news']">c-news</a> &middot; -->
+    <a [routerLink]="['generator/poetry-x']">px</a> &middot;
+    <!-- <a [routerLink]="['generator/poet-helper']">ph</a> &middot; -->
+    <!-- <a [routerLink]="['compass']">compass</a> &middot; -->
+    <a [routerLink]="['generator/multi']">mm</a> &middot;
+  </small>
 </footer>

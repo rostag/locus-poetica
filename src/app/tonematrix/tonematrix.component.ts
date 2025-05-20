@@ -8,9 +8,10 @@ import { View } from './tonematrix/view';
 import { Audio } from './tonematrix/audio';
 
 @Component({
-  selector: 'app-tonematrix',
-  templateUrl: './tonematrix.component.html',
-  styleUrls: ['./tonematrix.component.css']
+    selector: 'app-tonematrix',
+    templateUrl: './tonematrix.component.html',
+    styleUrls: ['./tonematrix.component.css'],
+    standalone: false
 })
 export class TonematrixComponent implements OnInit {
 
