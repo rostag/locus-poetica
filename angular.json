@@ -16,7 +16,7 @@
             "outputPath": {
               "base": "docs"
             },
-            "index": "src/index.html",
+            "index": "src/404.html",
             "polyfills": ["src/polyfills.ts"],
             "tsConfig": "tsconfig.app.json",
             "baseHref": "/",
