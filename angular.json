@@ -14,7 +14,7 @@
           "builder": "@angular-devkit/build-angular:application",
           "options": {
             "outputPath": {
-              "base": "locus-poetica"
+              "base": "docs/browser"
             },
             "index": "src/404.html",
             "polyfills": ["src/polyfills.ts"],
