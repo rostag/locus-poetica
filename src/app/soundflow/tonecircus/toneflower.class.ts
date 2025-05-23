@@ -7,7 +7,6 @@ export class ToneFlower {
   private config: ToneFlowerConfig;
 
   constructor() {
-    console.log("tone flower");
     this.config = {
       leaves: [],
       baseRadius: 10,
@@ -23,11 +22,6 @@ export class ToneFlower {
       toneCircus,
     };
     this.config.leaves.push(leaf);
-    console.log(
-      "add c:",
-      toneCircus,
-      JSON.stringify(this.config.leaves, null, 2)
-    );
   }
 
   public get leaves() {
