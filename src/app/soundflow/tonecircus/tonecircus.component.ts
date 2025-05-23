@@ -24,6 +24,7 @@ type OscItem = {
   standalone: true,
 })
 export class TonecircusComponent implements OnInit {
+  private baseFlower: ToneFlower;
   private toneFlower1: ToneFlower;
   private toneFlower2: ToneFlower;
   private toneFlower3: ToneFlower;
@@ -50,6 +51,11 @@ export class TonecircusComponent implements OnInit {
   private audioStarted = false;
 
   private initToneFlowers() {
+    this.baseFlower = new ToneFlower();
+    this.baseFlower.cx = 150;
+    this.baseFlower.cy = 230;
+    this.baseFlower.addCircus(TONE_CIRCUS_PRESETS[1]);
+
     this.toneFlower1 = new ToneFlower();
     this.toneFlower1.cx = 150;
     this.toneFlower1.cy = 230;
@@ -124,41 +130,41 @@ export class TonecircusComponent implements OnInit {
       .attr("d", this.arc);
     arcs.push(arcPath);
     if (!isLeaf) {
-      this.inflate(arcPath);
+      this.appear(null, arcPath);
     }
   }
 
   private collisionDetection(orig) {
     const paths = [...orig];
     paths.forEach((path: any) => {
-      const datumA = path.datum();
+      const datumPath = path.datum();
       const myIndex = paths.indexOf(path);
       const others = paths.toSpliced(myIndex, 1);
       // console.log('A -', paths.map(p=>p.datum().name).join(', '));
       // console.log('B -', others.map(p=>p.datum().name).join(', '));
       others.forEach((other) => {
-        const datumB = other.datum();
-        const aX = datumA.cx;
-        const aY = datumA.cy;
-        const bX = datumB.cx;
-        const bY = datumB.cy;
-        const radiusA = datumA.outerRadius;
-        const radiusB = datumB.outerRadius;
+        const datumOther = other.datum();
+        const aX = datumPath.cx;
+        const aY = datumPath.cy;
+        const bX = datumOther.cx;
+        const bY = datumOther.cy;
+        const radiusA = datumPath.outerRadius;
+        const radiusB = datumOther.outerRadius;
         const a = aX - bX;
         const b = aY - bY;
         const distance = Math.sqrt(a * a + b * b);
         // console.log(`a(${aX},${aY})|${radiusA}, b(${bX}, ${bY})|${radiusB}, dx=${a}, dy=${b}, D=${distance}, rSum=${radiusA + radiusB}`)
-        if (distance < radiusA + radiusB && !datumB.colliding) {
+        if (distance < radiusA + radiusB && !datumOther.colliding) {
           path.selectAll("*").interrupt();
           other.selectAll("*").interrupt();
           // deflate(path);
-          if (!datumB.isLeaf) {
-            this.deflate(other);
+          if (!datumOther.isLeaf) {
+            this.collide(path, other);
           }
         }
-        this.drawCollideStatus(other);
+        this.drawCircus(other);
       });
-      this.drawCollideStatus(path);
+      this.drawCircus(path);
     });
   }
 
@@ -184,7 +190,7 @@ export class TonecircusComponent implements OnInit {
         e[1],
         this.innRad,
         this.outRad,
-        this.toneFlower1.leaves[0].toneCircus,
+        this.baseFlower.leaves[0].toneCircus,
         false
       );
     });
@@ -227,37 +233,39 @@ export class TonecircusComponent implements OnInit {
   //   }
   // }
 
-  private inflate(arcPath) {
-    arcPath
-      .transition()
+  private appear(a, b) {
+    b.transition()
       .duration(this.duration)
       .attrTween("d", this.radiusTween(this.maxRad))
       .ease(this.ease);
   }
 
-  private deflate(arcPath) {
-    const datum = arcPath.datum();
-    datum.colliding = true;
-    const growth = datum.outerRadius / this.maxRad;
-    const radiusId = this.maxRad - datum.outerRadius; // parseInt
+  private collide(leaf, water) {
+    const datumLeaf = leaf.datum();
+    const datumWater = water.datum();
+    datumWater.colliding = true;
+    const growth = datumWater.outerRadius / this.maxRad;
+    const radiusId = this.maxRad - datumWater.outerRadius;
     const durationCalibrated = this.duration * growth;
-    this.noteOn(radiusId.toString());
-    arcPath
+    this.noteOn(radiusId.toString(), datumLeaf.toneCircus);
+    water
       .transition()
       .duration(durationCalibrated)
       .attrTween("d", this.radiusTween(this.minRad))
       .ease(this.ease)
       .on("end", (datum) => {
         datum.colliding = false;
-        this.inflate(arcPath);
-        this.noteOff(radiusId.toString());
+        this.appear(leaf, water);
+        this.noteOff(radiusId.toString(), datumLeaf.toneCircus);
       });
   }
 
-  private drawCollideStatus(path) {
+  private drawCircus(path) {
     const datum = path.datum();
+    const tc: ToneCircusProps = datum.toneCircus;
     if (!datum.isLeaf) {
-      path.style("fill", datum.colliding === true ? "#f00" : "#333");
+      path.style("stroke", datum.colliding === true ? tc.color : "#333");
+      path.style("fill", "none");
     }
   }
 
@@ -320,7 +328,34 @@ export class TonecircusComponent implements OnInit {
     return result;
   }
 
-  private playTone(freq) {
+  private freqToOctave(frequency) {
+    const referenceFrequency = 440; // A4
+    const octave = Math.log2(frequency / referenceFrequency) + 4;
+    return octave;
+  }
+
+  private playNote(freq, toneCircus: ToneCircusProps) {
+    const octave = this.freqToOctave(freq);
+    const note = toneCircus.note + octave;
+
+    console.log(`play ${note} (${freq})`);
+    const synth = new Tone.PolySynth(Tone.Synth).toDestination();
+    const now = Tone.now();
+
+    synth.triggerAttack(note, now + 0.05);
+    // synth.triggerAttack("F4", now + 0.5);
+    // synth.triggerAttack("A4", now + 1);
+    // synth.triggerAttack("C5", now + 1.5);
+    // synth.triggerAttack("E5", now + 2);
+    synth.triggerRelease([note], now + 0.3);
+  }
+
+  private playTone(freq, toneCircus: ToneCircusProps) {
+    if (toneCircus && toneCircus.note) {
+      this.playNote(freq, toneCircus);
+      return;
+    }
+
     // Range 1 - 600 to 1.5 - 0.1 // 1 - 600
     let noteLength = this.range(
       { min: 1, max: this.maxRad },
@@ -352,18 +387,18 @@ export class TonecircusComponent implements OnInit {
     return synth;
   }
 
-  private noteOn(radiusId: string) {
+  private noteOn(radiusId: string, toneCircus: ToneCircusProps) {
     // console.debug("note on", radiusId);
-    this.noteOff(radiusId);
-    this.oscList[radiusId] = this.playTone(radiusId);
+    // this.noteOff(radiusId, toneCircus);
+    this.oscList[radiusId] = this.playTone(radiusId, toneCircus);
   }
 
-  private noteOff(radiusId: string) {
-    const oscToOff = this.oscList[radiusId];
-    if (oscToOff) {
-      // console.debug("note off", radiusId, oscToOff);
-      delete this.oscList[radiusId];
-    }
+  private noteOff(radiusId: string, toneCircus: ToneCircusProps) {
+    // const oscToOff = this.oscList[radiusId];
+    // if (oscToOff) {
+    // console.debug("note off", radiusId, oscToOff);
+    // delete this.oscList[radiusId];
+    // }
   }
 
   ngOnInit(): void {
