@@ -178,7 +178,15 @@ export class TonecircusComponent implements OnInit {
         })();
       }
       var e = d3.pointer(event);
-      // this.addArc(this.arcs, e[0], e[1]);
+      this.addArc(
+        this.arcs,
+        e[0],
+        e[1],
+        this.innRad,
+        this.outRad,
+        this.toneFlower1.leaves[0].toneCircus,
+        false
+      );
     });
 
     d3.timer(() => {
