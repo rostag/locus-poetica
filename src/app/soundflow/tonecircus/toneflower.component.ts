@@ -6,11 +6,13 @@ import { Component, OnInit } from "@angular/core";
 import { RouterModule } from "@angular/router";
 import * as d3 from "d3";
 import {
-  TONE_CIRCUS_PRESETS,
-  ToneCircusProps,
-} from "src/app/soundflow/tonecircus/tonecircus.model";
+  BushModel,
+  IDLEAVES,
+  ToneCircusModel,
+} from "src/app/soundflow/tonecircus/toneflower.model";
 import { ToneFlower } from "src/app/soundflow/tonecircus/toneflower.class";
 import * as Tone from "tone";
+import { F } from "@angular/cdk/scrolling-module.d-ud2XrbF8";
 
 type OscItem = {
   [index: number]: OscillatorNode;
@@ -19,15 +21,12 @@ type OscItem = {
 @Component({
   selector: "app-tonecircus",
   imports: [RouterModule],
-  templateUrl: "./tonecircus.component.html",
-  styleUrl: "./tonecircus.component.css",
+  templateUrl: "./toneflower.component.html",
+  styleUrl: "./toneflower.component.css",
   standalone: true,
 })
-export class TonecircusComponent implements OnInit {
+export class ToneFlowerComponent implements OnInit {
   private baseFlower: ToneFlower;
-  private toneFlower1: ToneFlower;
-  private toneFlower2: ToneFlower;
-  private toneFlower3: ToneFlower;
 
   private margin = 50;
   private width = 750 - this.margin * 2;
@@ -54,33 +53,26 @@ export class TonecircusComponent implements OnInit {
     this.baseFlower = new ToneFlower();
     this.baseFlower.cx = 150;
     this.baseFlower.cy = 230;
-    this.baseFlower.addCircus(TONE_CIRCUS_PRESETS[1]);
+    this.baseFlower.addLeaf(1);
 
-    this.toneFlower1 = new ToneFlower();
-    this.toneFlower1.cx = 150;
-    this.toneFlower1.cy = 230;
-    TONE_CIRCUS_PRESETS.slice(1, 6).forEach((preset) => {
-      this.toneFlower1.addCircus(preset);
+    const bush1: BushModel = {
+      flowers: [
+        [6, 6, 6, 9],
+        [2, 11, 10],
+        [8, 5, 1],
+      ],
+    };
+    const flowerPlaces = [
+      [150, 230],
+      [80, 132],
+      [165, 60],
+    ];
+
+    bush1.flowers.map((flowerIds, i) => {
+      const flower = new ToneFlower();
+      flower.seed(flowerIds, flowerPlaces[i]);
+      this.drawFlower(flower);
     });
-
-    this.toneFlower2 = new ToneFlower();
-    this.toneFlower2.cx = 200;
-    this.toneFlower2.cy = 120;
-
-    TONE_CIRCUS_PRESETS.slice(5, 8).forEach((preset) => {
-      this.toneFlower2.addCircus(preset);
-    });
-
-    this.toneFlower3 = new ToneFlower();
-    this.toneFlower3.cx = 110;
-    this.toneFlower3.cy = 70;
-    TONE_CIRCUS_PRESETS.slice(8, 12).forEach((preset) => {
-      this.toneFlower3.addCircus(preset);
-    });
-
-    this.drawFlower(this.toneFlower1);
-    this.drawFlower(this.toneFlower2);
-    this.drawFlower(this.toneFlower3);
   }
 
   private drawFlower(flower: ToneFlower) {
@@ -106,7 +98,7 @@ export class TonecircusComponent implements OnInit {
     y: number,
     innerRadius: number,
     outerRadius: number,
-    toneCircus: ToneCircusProps,
+    toneCircus: ToneCircusModel,
     isLeaf = false
   ) {
     const arcX = x,
@@ -262,7 +254,7 @@ export class TonecircusComponent implements OnInit {
 
   private drawCircus(path) {
     const datum = path.datum();
-    const tc: ToneCircusProps = datum.toneCircus;
+    const tc: ToneCircusModel = datum.toneCircus;
     if (!datum.isLeaf) {
       path.style("stroke", datum.colliding === true ? tc.color : "#333");
       path.style("fill", "none");
@@ -334,7 +326,7 @@ export class TonecircusComponent implements OnInit {
     return octave;
   }
 
-  private playNote(freq, toneCircus: ToneCircusProps) {
+  private playNote(freq, toneCircus: ToneCircusModel) {
     const octave = this.freqToOctave(freq);
     const note = toneCircus.note + octave;
 
@@ -350,7 +342,7 @@ export class TonecircusComponent implements OnInit {
     synth.triggerRelease([note], now + 0.3);
   }
 
-  private playTone(freq, toneCircus: ToneCircusProps) {
+  private playTone(freq, toneCircus: ToneCircusModel) {
     if (toneCircus && toneCircus.note) {
       this.playNote(freq, toneCircus);
       return;
@@ -387,13 +379,13 @@ export class TonecircusComponent implements OnInit {
     return synth;
   }
 
-  private noteOn(radiusId: string, toneCircus: ToneCircusProps) {
+  private noteOn(radiusId: string, toneCircus: ToneCircusModel) {
     // console.debug("note on", radiusId);
     // this.noteOff(radiusId, toneCircus);
     this.oscList[radiusId] = this.playTone(radiusId, toneCircus);
   }
 
-  private noteOff(radiusId: string, toneCircus: ToneCircusProps) {
+  private noteOff(radiusId: string, toneCircus: ToneCircusModel) {
     // const oscToOff = this.oscList[radiusId];
     // if (oscToOff) {
     // console.debug("note off", radiusId, oscToOff);
