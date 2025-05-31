@@ -7,12 +7,10 @@ import { RouterModule } from "@angular/router";
 import * as d3 from "d3";
 import {
   BushModel,
-  IDLEAVES,
-  ToneCircusModel,
+  LeafIdn,
 } from "src/app/soundflow/tonecircus/toneflower.model";
 import { ToneFlower } from "src/app/soundflow/tonecircus/toneflower.class";
 import * as Tone from "tone";
-import { F } from "@angular/cdk/scrolling-module.d-ud2XrbF8";
 
 type OscItem = {
   [index: number]: OscillatorNode;
@@ -55,11 +53,18 @@ export class ToneFlowerComponent implements OnInit {
     this.baseFlower.cy = 230;
     this.baseFlower.addLeaf(1);
 
+    // const bush1: BushModel = {
+    //   flowers: [
+    //     [6, 6, 6, 9,],
+    //     [2, 11, 10],
+    //     [8, 5, 1],
+    //   ],
+    // };
     const bush1: BushModel = {
       flowers: [
-        [6, 6, 6, 9],
-        [2, 11, 10],
-        [8, 5, 1],
+        [1, 2, 3, 5],
+        [6, 7, 8],
+        [9, 11],
       ],
     };
     const flowerPlaces = [
@@ -86,7 +91,7 @@ export class ToneFlowerComponent implements OnInit {
         centerY,
         index === 0 ? 0 : radius,
         radius + flower.leafWidth,
-        leaf.toneCircus,
+        leaf.leafIdn,
         true
       );
     });
@@ -98,7 +103,7 @@ export class ToneFlowerComponent implements OnInit {
     y: number,
     innerRadius: number,
     outerRadius: number,
-    toneCircus: ToneCircusModel,
+    leafIdn: LeafIdn,
     isLeaf = false
   ) {
     const arcX = x,
@@ -115,10 +120,10 @@ export class ToneFlowerComponent implements OnInit {
         cy: y,
         collided: false,
         name: "p" + this.c++,
-        toneCircus,
+        leafIdn,
         isLeaf,
       })
-      .style("fill", toneCircus.colorHex)
+      .style("fill", leafIdn.colorHex)
       .attr("d", this.arc);
     arcs.push(arcPath);
     if (!isLeaf) {
@@ -182,7 +187,7 @@ export class ToneFlowerComponent implements OnInit {
         e[1],
         this.innRad,
         this.outRad,
-        this.baseFlower.leaves[0].toneCircus,
+        this.baseFlower.leaves[0].leafIdn,
         false
       );
     });
@@ -239,7 +244,7 @@ export class ToneFlowerComponent implements OnInit {
     const growth = datumWater.outerRadius / this.maxRad;
     const radiusId = this.maxRad - datumWater.outerRadius;
     const durationCalibrated = this.duration * growth;
-    this.noteOn(radiusId.toString(), datumLeaf.toneCircus);
+    this.noteOn(radiusId.toString(), datumLeaf.leafIdn);
     water
       .transition()
       .duration(durationCalibrated)
@@ -248,13 +253,13 @@ export class ToneFlowerComponent implements OnInit {
       .on("end", (datum) => {
         datum.colliding = false;
         this.appear(leaf, water);
-        this.noteOff(radiusId.toString(), datumLeaf.toneCircus);
+        this.noteOff(radiusId.toString(), datumLeaf.leafIdn);
       });
   }
 
   private drawCircus(path) {
     const datum = path.datum();
-    const tc: ToneCircusModel = datum.toneCircus;
+    const tc: LeafIdn = datum.leafIdn;
     if (!datum.isLeaf) {
       path.style("stroke", datum.colliding === true ? tc.color : "#333");
       path.style("fill", "none");
@@ -326,9 +331,9 @@ export class ToneFlowerComponent implements OnInit {
     return octave;
   }
 
-  private playNote(freq, toneCircus: ToneCircusModel) {
+  private playNote(freq, leafIdn: LeafIdn) {
     const octave = this.freqToOctave(freq);
-    const note = toneCircus.note + octave;
+    const note = leafIdn.note + octave;
 
     console.log(`play ${note} (${freq})`);
     const synth = new Tone.PolySynth(Tone.Synth).toDestination();
@@ -342,9 +347,9 @@ export class ToneFlowerComponent implements OnInit {
     synth.triggerRelease([note], now + 0.3);
   }
 
-  private playTone(freq, toneCircus: ToneCircusModel) {
-    if (toneCircus && toneCircus.note) {
-      this.playNote(freq, toneCircus);
+  private playTone(freq, leafIdn: LeafIdn) {
+    if (leafIdn && leafIdn.note) {
+      this.playNote(freq, leafIdn);
       return;
     }
 
@@ -379,13 +384,13 @@ export class ToneFlowerComponent implements OnInit {
     return synth;
   }
 
-  private noteOn(radiusId: string, toneCircus: ToneCircusModel) {
+  private noteOn(radiusId: string, leafIdn: LeafIdn) {
     // console.debug("note on", radiusId);
-    // this.noteOff(radiusId, toneCircus);
-    this.oscList[radiusId] = this.playTone(radiusId, toneCircus);
+    // this.noteOff(radiusId, leafIdn);
+    this.oscList[radiusId] = this.playTone(radiusId, leafIdn);
   }
 
-  private noteOff(radiusId: string, toneCircus: ToneCircusModel) {
+  private noteOff(radiusId: string, leafIdn: LeafIdn) {
     // const oscToOff = this.oscList[radiusId];
     // if (oscToOff) {
     // console.debug("note off", radiusId, oscToOff);

@@ -1,4 +1,4 @@
-export type ToneCircusModel = {
+export type LeafIdn = {
   color: string;
   num: number;
   note: string;
@@ -7,7 +7,8 @@ export type ToneCircusModel = {
 
 export type LeafModel = {
   order: number;
-  toneCircus: ToneCircusModel;
+  leafIdn: LeafIdn;
+  assignedNumber: number;
 };
 
 export type ToneFlowerModel = {
@@ -22,7 +23,7 @@ export type BushModel = {
   flowers: number[][];
 };
 
-export const IDLEAVES: ToneCircusModel[] = [
+export const LEAF_IDNS: LeafIdn[] = [
   { num: 1, color: "čornyj", note: "C", colorHex: "#151210" },
   { num: 2, color: "červonyj", note: "C#", colorHex: "#9F352B" },
   { num: 3, color: "pomarančevyj", note: "D", colorHex: "#AA482E" },

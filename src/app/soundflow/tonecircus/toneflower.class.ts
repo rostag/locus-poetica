@@ -1,5 +1,6 @@
 import {
-  IDLEAVES,
+  LEAF_IDNS,
+  LeafModel,
   ToneFlowerModel,
 } from "src/app/soundflow/tonecircus/toneflower.model";
 
@@ -27,9 +28,10 @@ export class ToneFlower {
   }
 
   public addLeaf(leafId: number) {
-    const leaf = {
+    const leaf: LeafModel = {
       order: this.config.leaves.length,
-      toneCircus: IDLEAVES.find((preset) => preset.num === leafId)!,
+      leafIdn: LEAF_IDNS.find((preset) => preset.num === leafId)!,
+      assignedNumber: 2,
     };
 
     this.config.leaves.push(leaf);
