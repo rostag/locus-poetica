@@ -1,5 +1,5 @@
 import {
-  BushModel,
+  BushCode,
   LeafIdn,
 } from "src/app/soundflow/tonecircus/toneflower.model";
 
@@ -17,7 +17,7 @@ const places = [
   [165, 60],
 ];
 
-export const SAMPLE_BUSHES: BushModel[] = [
+export const SAMPLE_BUSHES: BushCode[] = [
   {
     flowers: [
       [
@@ -128,7 +128,7 @@ export const SAMPLE_BUSHES: BushModel[] = [
   },
 ];
 
-export const PLAY_BUSH: BushModel = {
+export const PLAY_BUSH: BushCode = {
   flowers: [[[1, 1]]],
   places: [[156, 170]],
 };

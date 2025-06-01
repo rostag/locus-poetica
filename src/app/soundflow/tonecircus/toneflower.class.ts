@@ -3,14 +3,14 @@ import {
   LEAF_IDNS,
 } from "src/app/soundflow/tonecircus/toneflower.constants";
 import {
-  BushModel,
+  BushCode,
   LeafIdn,
   LeafModel,
-  ToneFlowerModel,
+  FlowerModel,
 } from "src/app/soundflow/tonecircus/toneflower.model";
 
 export class ToneFlower {
-  private model: ToneFlowerModel;
+  private model: FlowerModel;
 
   constructor() {
     this.model = {
@@ -34,7 +34,7 @@ export class ToneFlower {
     this.model.leaves.push(leaf);
   }
 
-  public seed(bushModel: BushModel, flowerIndex: number) {
+  public seed(bushModel: BushCode, flowerIndex: number) {
     const flowerIdns: number[][] = bushModel.flowers[flowerIndex];
     const place: number[] = bushModel.places[flowerIndex];
 

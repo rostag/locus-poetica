@@ -10,7 +10,7 @@ import { FormsModule } from "@angular/forms";
 import { RouterModule } from "@angular/router";
 import * as d3 from "d3";
 import {
-  BushModel,
+  BushCode,
   LeafIdn,
   LeafModel,
 } from "src/app/soundflow/tonecircus/toneflower.model";
@@ -78,7 +78,7 @@ export class ToneFlowerComponent implements OnInit {
     this.playFlower.cy = 230;
     this.playFlower.seed(PLAY_BUSH, 0);
 
-    const bush: BushModel = SAMPLE_BUSHES[IC.bushId];
+    const bush: BushCode = SAMPLE_BUSHES[IC.bushId];
 
     bush.flowers.map((flowerIdn, i) => {
       const flower = new ToneFlower();

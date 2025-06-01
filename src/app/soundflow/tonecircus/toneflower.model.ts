@@ -11,7 +11,7 @@ export type LeafModel = {
   leafNum: number;
 };
 
-export type ToneFlowerModel = {
+export type FlowerModel = {
   leaves: LeafModel[];
   baseRadius: number;
   leafWidth: number;
@@ -19,13 +19,22 @@ export type ToneFlowerModel = {
   cy: number;
 };
 
+export type FlowerInstanceModel = FlowerModel & {
+  flowerX: number;
+  flowerY: number;
+};
+
 /**
- * export const PLAY_BUSH: BushModel = {
+ * export const PLAY_BUSH: BushCode = {
  * flowers: [[1,1]],
  * places: [[156, 170]]
  * };
  */
-export type BushModel = {
+export type BushCode = {
   flowers: number[][][];
   places: number[][];
+};
+
+export type BushModel = {
+  flowerInstance: FlowerInstanceModel[];
 };
