@@ -73,14 +73,14 @@ export class ToneFlowerComponent implements OnInit {
     this.playFlower = new ToneFlower();
     this.playFlower.cx = 150;
     this.playFlower.cy = 230;
-    this.playFlower.seed([1], PLAY_BUSH.places[0]);
+    this.playFlower.seed(PLAY_BUSH, 0);
 
     const bush: BushModel = SAMPLE_BUSHES[0];
 
-    bush.flowers.map((flowerIds, i) => {
+    bush.flowers.map((flowerIdn, i) => {
       const flower = new ToneFlower();
       this.flowers.push(flower);
-      flower.seed(flowerIds, bush.places[i]);
+      flower.seed(bush, i);
       this.drawFlower(flower);
     });
   }
@@ -102,8 +102,13 @@ export class ToneFlowerComponent implements OnInit {
     });
   }
 
+  private showPadLine = false;
+  public toggleLine() {
+    this.showPadLine = !this.showPadLine;
+  }
+
   private getSectionData = (leafModel: LeafModel) => {
-    const assignedNumber = leafModel.assignedNumber;
+    const assignedNumber = leafModel.leafNum;
     const sections = new Array(assignedNumber);
     const s = 360 / assignedNumber;
     sections.fill(s, 0, assignedNumber);
@@ -120,7 +125,9 @@ export class ToneFlowerComponent implements OnInit {
     isLeaf = false
   ) {
     const data = this.getSectionData(leafModel);
-    const padAngle = (12 - data.length) * this.padAngle; // 36 / ;
+
+    // const padAngle = (12 - data.length) * this.padAngle; // 36 / ;
+    const padAngle = this.padAngle; // 36 / ;
     const pie2 = d3.pie().padAngle(padAngle); // adjusted pad angle (good)
     const arc = d3.arc().innerRadius(innerRadius).outerRadius(outerRadius);
 
@@ -132,14 +139,17 @@ export class ToneFlowerComponent implements OnInit {
       .attr("fill", (d, i) => [leafModel.leafIdn.colorHex])
       .attr("transform", (d, i) => `translate(${x}, ${y})`);
 
-    // g.append("g")
-    //   .attr("fill", "none")
-    //   .attr("stroke-width", ".5px")
-    //   .attr("stroke", leafIdn.colorHex)
-    //   .selectAll("path")
-    //   .data((arcs) => arcs)
-    //   .join("path")
-    //   .attr("d", arc.padAngle(0));
+    if (this.showPadLine) {
+      g.append("g")
+        .attr("fill", "none")
+        // .attr("stroke-width", Math.ceil(leafModel.leafNum / 2) + "px")
+        .attr("stroke-width", ".25px")
+        .attr("stroke", leafModel.leafIdn.colorHex)
+        .selectAll("path")
+        .data((arcs) => arcs)
+        .join("path")
+        .attr("d", arc.padAngle(0));
+    }
 
     g.append("g")
       .attr("stroke", "#ffffff")
@@ -178,6 +188,7 @@ export class ToneFlowerComponent implements OnInit {
         isLeaf,
       })
       // .style("fill", leafModel.leafIdn.colorHex)
+      .style("fill", "#fff")
       .attr("d", this.arcGen);
     this.drawPie(arcs, x, y, innerRadius, outerRadius, leafModel, isLeaf);
     arcs.push(arcPath);
@@ -437,7 +448,7 @@ export class ToneFlowerComponent implements OnInit {
     setInterval(() => {
       this.clearFlowers();
       this.drawFlowers();
-    }, 200);
+    }, 50);
   }
 
   ngOnInit(): void {

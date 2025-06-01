@@ -1,4 +1,5 @@
 import {
+  BushModel,
   LEAF_IDNS,
   LeafModel,
   ToneFlowerModel,
@@ -17,24 +18,30 @@ export class ToneFlower {
     };
   }
 
-  private addLeaf(leafId: number) {
+  private addLeaf(leafIdn: number[]) {
+    const leafIdnn = LEAF_IDNS.find((preset) => preset.num === leafIdn[0])!;
+    const leafNum = leafIdn[1];
     const leaf: LeafModel = {
       leafOrder: this.model.leaves.length,
-      leafIdn: LEAF_IDNS.find((preset) => preset.num === leafId)!,
-      assignedNumber: Math.round(Math.random() * 12),
+      leafIdn: leafIdnn,
+      leafNum,
     };
 
     this.model.leaves.push(leaf);
   }
 
-  public seed(leaveIds: number[], place: number[]) {
+  public seed(bushModel: BushModel, flowerIndex: number) {
+    const flowerIdns: number[][] = bushModel.flowers[flowerIndex];
+    const place: number[] = bushModel.places[flowerIndex];
+    const leafNum = flowerIdns[1];
+
     this.cx = place[0];
     this.cy = place[1];
 
-    const buttId = this.getCenterColor(leaveIds);
-    this.addLeaf(buttId);
+    // const buttId = this.getCenterColor(leaveIdnn);
+    // this.addLeaf(buttId, leaveIdnn[0][1]);
 
-    leaveIds.map((leafId) => this.addLeaf(leafId));
+    flowerIdns.map((leafIdn) => this.addLeaf(leafIdn));
   }
 
   public burn() {
@@ -58,14 +65,17 @@ export class ToneFlower {
     8+5+1=14. 14-12=2
     2 – červonyj centr
   */
-  public getCenterColor(leaveIds: number[]) {
-    const sum = leaveIds.reduce((acc, leaf) => {
-      return acc + leaf;
-    }, 0);
-    const centerId = sum % 12;
-    console.log("get c", sum, leaveIds, centerId);
-    return centerId;
-  }
+
+  // public getCenterColor(leaveIds: number[][]) {
+  //   const sum = leaveIds
+  //     .map((leaf) => leaf[0])
+  //     .reduce((acc, leaf) => {
+  //       return acc + leaf;
+  //     }, 0);
+  //   const centerId = sum % 12;
+  //   console.log("get c", sum, leaveIds, centerId);
+  //   return centerId;
+  // }
 
   public get leaves() {
     return this.model.leaves;

@@ -2,11 +2,11 @@
   <p>Natysnitj na bilomu poli dva čy biljše raziv.</p>
 </div>
 <div class="controls" style="margin-left: 2.5rem">
-  <mat-slider min="0" max=".1" step="0.01" discrete>
+  <mat-slider min="0" max=".3" step="0.01" discrete style="width: 500px">
     <input matSliderThumb [(ngModel)]="padAngle" />
   </mat-slider>
-  <input matInput type="text" [ngModel]="padAngle" />
-  <button (click)="clearFlowers()">clr</button>
+  <input matInput type="text" [ngModel]="padAngle" style="width: 32px" />
+  <button (click)="toggleLine()">pokazuvaty liniju</button>
 </div>
 <figure id="tonecircus"></figure>
 <div style="margin: 2.5rem">

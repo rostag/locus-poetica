@@ -8,7 +8,7 @@ export type LeafIdn = {
 export type LeafModel = {
   leafOrder: number;
   leafIdn: LeafIdn;
-  assignedNumber: number;
+  leafNum: number;
 };
 
 export type ToneFlowerModel = {
@@ -19,8 +19,14 @@ export type ToneFlowerModel = {
   cy: number;
 };
 
+/**
+ * export const PLAY_BUSH: BushModel = {
+ * flowers: [[1,1]],
+ * places: [[156, 170]]
+ * };
+ */
 export type BushModel = {
-  flowers: number[][];
+  flowers: number[][][];
   places: number[][];
 };
 
