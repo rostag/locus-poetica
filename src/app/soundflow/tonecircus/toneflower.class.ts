@@ -5,16 +5,26 @@ import {
 } from "src/app/soundflow/tonecircus/toneflower.model";
 
 export class ToneFlower {
-  private config: ToneFlowerModel;
+  private model: ToneFlowerModel;
 
   constructor() {
-    this.config = {
+    this.model = {
       leaves: [],
       baseRadius: 10,
       leafWidth: 10,
       cx: 10,
       cy: 10,
     };
+  }
+
+  private addLeaf(leafId: number) {
+    const leaf: LeafModel = {
+      leafOrder: this.model.leaves.length,
+      leafIdn: LEAF_IDNS.find((preset) => preset.num === leafId)!,
+      assignedNumber: Math.round(Math.random() * 12),
+    };
+
+    this.model.leaves.push(leaf);
   }
 
   public seed(leaveIds: number[], place: number[]) {
@@ -27,14 +37,8 @@ export class ToneFlower {
     leaveIds.map((leafId) => this.addLeaf(leafId));
   }
 
-  public addLeaf(leafId: number) {
-    const leaf: LeafModel = {
-      order: this.config.leaves.length,
-      leafIdn: LEAF_IDNS.find((preset) => preset.num === leafId)!,
-      assignedNumber: 2,
-    };
-
-    this.config.leaves.push(leaf);
+  public burn() {
+    this.model.leaves = [];
   }
 
   /**
@@ -64,30 +68,30 @@ export class ToneFlower {
   }
 
   public get leaves() {
-    return this.config.leaves;
+    return this.model.leaves;
   }
 
   public get baseRadius() {
-    return this.config.baseRadius;
+    return this.model.baseRadius;
   }
 
   public get leafWidth() {
-    return this.config.leafWidth;
+    return this.model.leafWidth;
   }
 
   public get cx() {
-    return this.config.cx;
+    return this.model.cx;
   }
 
   public get cy() {
-    return this.config.cy;
+    return this.model.cy;
   }
 
   public set cx(value: number) {
-    this.config.cx = value;
+    this.model.cx = value;
   }
 
   public set cy(value: number) {
-    this.config.cy = value;
+    this.model.cy = value;
   }
 }

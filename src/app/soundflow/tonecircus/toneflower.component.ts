@@ -3,14 +3,22 @@
 // Collide force - https://d3js.org/d3-force/collide
 
 import { Component, OnInit } from "@angular/core";
+import { MatSliderModule } from "@angular/material/slider";
+import { FormsModule } from "@angular/forms";
+
 import { RouterModule } from "@angular/router";
 import * as d3 from "d3";
 import {
   BushModel,
   LeafIdn,
+  LeafModel,
 } from "src/app/soundflow/tonecircus/toneflower.model";
 import { ToneFlower } from "src/app/soundflow/tonecircus/toneflower.class";
 import * as Tone from "tone";
+import {
+  PLAY_BUSH,
+  SAMPLE_BUSHES,
+} from "src/app/soundflow/tonecircus/toneflower.constants";
 
 type OscItem = {
   [index: number]: OscillatorNode;
@@ -18,13 +26,13 @@ type OscItem = {
 
 @Component({
   selector: "app-tonecircus",
-  imports: [RouterModule],
+  imports: [RouterModule, MatSliderModule, FormsModule],
   templateUrl: "./toneflower.component.html",
   styleUrl: "./toneflower.component.css",
   standalone: true,
 })
 export class ToneFlowerComponent implements OnInit {
-  private baseFlower: ToneFlower;
+  private playFlower: ToneFlower;
 
   private margin = 50;
   private width = 750 - this.margin * 2;
@@ -40,51 +48,39 @@ export class ToneFlowerComponent implements OnInit {
 
   private svgr;
   private arcs = [];
-  private arc = d3.arc().startAngle(0).endAngle(this.tau);
+  private arcGen = d3.arc().startAngle(0).endAngle(this.tau);
   private c = 0;
   private randLen = 1;
   private duration = 9000;
 
   private audioStarted = false;
 
-  private initToneFlowers() {
-    this.baseFlower = new ToneFlower();
-    this.baseFlower.cx = 150;
-    this.baseFlower.cy = 230;
-    this.baseFlower.addLeaf(1);
+  public padAngle = 0.001;
 
-    // const bush1: BushModel = {
-    //   flowers: [
-    //     [6, 6, 6, 9],
-    //     [2, 11, 10],
-    //     [8, 5, 1],
-    //   ],
-    // };
-    const bush1: BushModel = {
-      flowers: [
-        [1, 2, 3, 4],
-        [5, 6, 7],
-        [8, 9, 10],
-      ],
-    };
-    // const bush1: BushModel = {
-    //   flowers: [
-    //     [
-    //       12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11,
-    //       12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11,
-    //       12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1,
-    //     ],
-    //   ],
-    // };
-    const flowerPlaces = [
-      [150, 230],
-      [80, 132],
-      [165, 60],
-    ];
+  private flowers: ToneFlower[] = [];
 
-    bush1.flowers.map((flowerIds, i) => {
+  public clearFlowers() {
+    this.svgr.selectAll("*").remove();
+
+    this.flowers.forEach((flower) => {
+      flower.burn();
+    });
+
+    this.arcs = [];
+  }
+
+  private drawFlowers() {
+    this.playFlower = new ToneFlower();
+    this.playFlower.cx = 150;
+    this.playFlower.cy = 230;
+    this.playFlower.seed([1], PLAY_BUSH.places[0]);
+
+    const bush: BushModel = SAMPLE_BUSHES[0];
+
+    bush.flowers.map((flowerIds, i) => {
       const flower = new ToneFlower();
-      flower.seed(flowerIds, flowerPlaces[i]);
+      this.flowers.push(flower);
+      flower.seed(flowerIds, bush.places[i]);
       this.drawFlower(flower);
     });
   }
@@ -100,30 +96,31 @@ export class ToneFlowerComponent implements OnInit {
         centerY,
         index === 0 ? 0 : radius,
         radius + flower.leafWidth,
-        leaf.leafIdn,
+        leaf,
         true
       );
     });
   }
 
-  private getSectionData = (leafIdn: LeafIdn) => {
-    const sections = new Array(leafIdn.num);
-    const s = 360 / leafIdn.num;
-    sections.fill(s, 0, leafIdn.num);
+  private getSectionData = (leafModel: LeafModel) => {
+    const assignedNumber = leafModel.assignedNumber;
+    const sections = new Array(assignedNumber);
+    const s = 360 / assignedNumber;
+    sections.fill(s, 0, assignedNumber);
     return sections;
   };
 
-  private addPie(
+  private drawPie(
     arcs,
     x: number,
     y: number,
     innerRadius: number,
     outerRadius: number,
-    leafIdn: LeafIdn,
+    leafModel: LeafModel,
     isLeaf = false
   ) {
-    const data = this.getSectionData(leafIdn);
-    const padAngle = (12 - data.length) * 0.00001; // 36 / ;
+    const data = this.getSectionData(leafModel);
+    const padAngle = (12 - data.length) * this.padAngle; // 36 / ;
     const pie2 = d3.pie().padAngle(padAngle); // adjusted pad angle (good)
     const arc = d3.arc().innerRadius(innerRadius).outerRadius(outerRadius);
 
@@ -132,7 +129,7 @@ export class ToneFlowerComponent implements OnInit {
       .selectAll("g")
       .data(() => [pie2(data)])
       .join("g")
-      .attr("fill", (d, i) => [leafIdn.colorHex])
+      .attr("fill", (d, i) => [leafModel.leafIdn.colorHex])
       .attr("transform", (d, i) => `translate(${x}, ${y})`);
 
     // g.append("g")
@@ -160,7 +157,7 @@ export class ToneFlowerComponent implements OnInit {
     y: number,
     innerRadius: number,
     outerRadius: number,
-    leafIdn: LeafIdn,
+    leafModel: LeafModel,
     isLeaf = false
   ) {
     const arcX = x,
@@ -177,17 +174,16 @@ export class ToneFlowerComponent implements OnInit {
         cy: y,
         collided: false,
         name: "p" + this.c++,
-        leafIdn,
+        leafModel,
         isLeaf,
       })
-      .style("fill", leafIdn.colorHex);
-    // .attr("d", this.arc);
+      // .style("fill", leafModel.leafIdn.colorHex)
+      .attr("d", this.arcGen);
+    this.drawPie(arcs, x, y, innerRadius, outerRadius, leafModel, isLeaf);
     arcs.push(arcPath);
     if (!isLeaf) {
       this.appear(null, arcPath);
     }
-
-    this.addPie(arcs, x, y, innerRadius, outerRadius, leafIdn, isLeaf);
   }
 
   private collisionDetection(orig) {
@@ -246,7 +242,7 @@ export class ToneFlowerComponent implements OnInit {
         e[1],
         this.innRad,
         this.outRad,
-        this.baseFlower.leaves[0].leafIdn,
+        this.playFlower.leaves[0],
         false
       );
     });
@@ -256,26 +252,6 @@ export class ToneFlowerComponent implements OnInit {
     }, 1000);
 
     this.setupAudio();
-
-    // Reset Button
-    // this.svgr
-    //   .append("circle")
-    //   .attr("cx", 30)
-    //   .attr("cy", 30)
-    //   .attr("stroke", "black")
-    //   .style("fill", "yellow")
-    //   .attr("r", 20)
-    //   .on("click", (event) => {
-    //     event.preventDefault();
-    //     event.stopPropagation();
-    //     this.arcs.forEach((path: any) => {
-    //       // FIXME
-    //       path.datum().colliding = true;
-    //       path.selectAll("*").interrupt();
-    //       this.deflate(path);
-    //     });
-    //   });
-    // this.randomizeArcs();
   }
 
   // private randomizeArcs() {
@@ -296,22 +272,22 @@ export class ToneFlowerComponent implements OnInit {
       .ease(this.ease);
   }
 
-  private collide(leaf, water) {
+  private collide(leaf, playLeaf) {
     const datumLeaf = leaf.datum();
-    const datumWater = water.datum();
+    const datumWater = playLeaf.datum();
     datumWater.colliding = true;
     const growth = datumWater.outerRadius / this.maxRad;
     const radiusId = this.maxRad - datumWater.outerRadius;
     const durationCalibrated = this.duration * growth;
     this.noteOn(radiusId.toString(), datumLeaf.leafIdn);
-    water
+    playLeaf
       .transition()
       .duration(durationCalibrated)
       .attrTween("d", this.radiusTween(this.minRad))
       .ease(this.ease)
       .on("end", (datum) => {
         datum.colliding = false;
-        this.appear(leaf, water);
+        this.appear(leaf, playLeaf);
         this.noteOff(radiusId.toString(), datumLeaf.leafIdn);
       });
   }
@@ -336,7 +312,7 @@ export class ToneFlowerComponent implements OnInit {
       return (t) => {
         d.innerRadius = interpolateInner(t);
         d.outerRadius = interpolateOuter(t);
-        return this.arc(d);
+        return this.arcGen(d);
       };
     };
   }
@@ -446,7 +422,7 @@ export class ToneFlowerComponent implements OnInit {
   private noteOn(radiusId: string, leafIdn: LeafIdn) {
     // console.debug("note on", radiusId);
     // this.noteOff(radiusId, leafIdn);
-    this.oscList[radiusId] = this.playTone(radiusId, leafIdn);
+    // this.oscList[radiusId] = this.playTone(radiusId, leafIdn);
   }
 
   private noteOff(radiusId: string, leafIdn: LeafIdn) {
@@ -457,8 +433,16 @@ export class ToneFlowerComponent implements OnInit {
     // }
   }
 
+  private renderCycle() {
+    setInterval(() => {
+      this.clearFlowers();
+      this.drawFlowers();
+    }, 200);
+  }
+
   ngOnInit(): void {
     this.initFlow();
-    this.initToneFlowers();
+    // this.drawFlowers();
+    this.renderCycle();
   }
 }

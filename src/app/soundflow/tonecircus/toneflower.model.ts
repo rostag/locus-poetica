@@ -6,7 +6,7 @@ export type LeafIdn = {
 };
 
 export type LeafModel = {
-  order: number;
+  leafOrder: number;
   leafIdn: LeafIdn;
   assignedNumber: number;
 };
@@ -21,6 +21,7 @@ export type ToneFlowerModel = {
 
 export type BushModel = {
   flowers: number[][];
+  places: number[][];
 };
 
 export const LEAF_IDNS: LeafIdn[] = [
