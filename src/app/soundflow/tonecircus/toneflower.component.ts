@@ -11,7 +11,7 @@ import { RouterModule } from "@angular/router";
 import * as d3 from "d3";
 import {
   BushCode,
-  LeafIdn,
+  IDN,
   LeafModel,
 } from "src/app/soundflow/tonecircus/toneflower.model";
 import { ToneFlower } from "src/app/soundflow/tonecircus/toneflower.class";
@@ -308,7 +308,7 @@ export class ToneFlowerComponent implements OnInit {
 
   private drawCircus(path) {
     const datum = path.datum();
-    const tc: LeafIdn = datum.leafIdn;
+    const tc: IDN = datum.leafIdn;
     if (!datum.isLeaf) {
       path.style("stroke", datum.colliding === true ? tc.color : "#333");
       path.style("fill", "none");
@@ -380,7 +380,7 @@ export class ToneFlowerComponent implements OnInit {
     return octave;
   }
 
-  private playNote(freq, leafIdn: LeafIdn) {
+  private playNote(freq, leafIdn: IDN) {
     const octave = this.freqToOctave(freq);
     const note = leafIdn.note + octave;
 
@@ -396,7 +396,7 @@ export class ToneFlowerComponent implements OnInit {
     synth.triggerRelease([note], now + 0.3);
   }
 
-  private playTone(freq, leafIdn: LeafIdn) {
+  private playTone(freq, leafIdn: IDN) {
     if (leafIdn && leafIdn.note) {
       this.playNote(freq, leafIdn);
       return;
@@ -433,13 +433,13 @@ export class ToneFlowerComponent implements OnInit {
     return synth;
   }
 
-  private noteOn(radiusId: string, leafIdn: LeafIdn) {
+  private noteOn(radiusId: string, leafIdn: IDN) {
     // console.debug("note on", radiusId);
     // this.noteOff(radiusId, leafIdn);
     // this.oscList[radiusId] = this.playTone(radiusId, leafIdn);
   }
 
-  private noteOff(radiusId: string, leafIdn: LeafIdn) {
+  private noteOff(radiusId: string, leafIdn: IDN) {
     // const oscToOff = this.oscList[radiusId];
     // if (oscToOff) {
     // console.debug("note off", radiusId, oscToOff);

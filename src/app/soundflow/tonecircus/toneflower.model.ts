@@ -1,4 +1,4 @@
-export type LeafIdn = {
+export type IDN = {
   color: string;
   idn: number;
   note: string;
@@ -7,22 +7,22 @@ export type LeafIdn = {
 
 export type LeafModel = {
   leafOrder: number;
-  leafIdn: LeafIdn;
+  leafIdn: IDN;
   leafNum: number;
 };
 
 export type FlowerModel = {
   leaves: LeafModel[];
-  baseRadius: number;
-  leafWidth: number;
-  cx: number;
-  cy: number;
-};
-
-export type FlowerInstanceModel = FlowerModel & {
   flowerX: number;
   flowerY: number;
+  buttSize: number;
+  leafWidth: number;
 };
+
+// export type FlowerInstanceModel = FlowerModel & {
+//   flowerX: number;
+//   flowerY: number;
+// };
 
 /**
  * export const PLAY_BUSH: BushCode = {
@@ -36,5 +36,5 @@ export type BushCode = {
 };
 
 export type BushModel = {
-  flowerInstance: FlowerInstanceModel[];
+  flowers: FlowerModel[];
 };

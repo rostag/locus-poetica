@@ -1,10 +1,7 @@
-import {
-  IC,
-  LEAF_IDNS,
-} from "src/app/soundflow/tonecircus/toneflower.constants";
+import { IC, IDNS } from "src/app/soundflow/tonecircus/toneflower.constants";
 import {
   BushCode,
-  LeafIdn,
+  IDN,
   LeafModel,
   FlowerModel,
 } from "src/app/soundflow/tonecircus/toneflower.model";
@@ -15,15 +12,15 @@ export class ToneFlower {
   constructor() {
     this.model = {
       leaves: [],
-      baseRadius: IC.flowerBaseRadius,
+      buttSize: IC.flowerButtSize,
       leafWidth: IC.flowerLeafWidth,
-      cx: 10,
-      cy: 10,
+      flowerX: 10,
+      flowerY: 10,
     };
   }
 
   private addLeaf(idn: number[]) {
-    const leafIdn: LeafIdn = LEAF_IDNS.find((preset) => preset.idn === idn[0])!;
+    const leafIdn: IDN = IDNS.find((preset) => preset.idn === idn[0])!;
     const leafNum: number = idn[1];
     const leaf: LeafModel = {
       leafOrder: this.model.leaves.length,
@@ -85,7 +82,7 @@ export class ToneFlower {
   }
 
   public get baseRadius() {
-    return this.model.baseRadius;
+    return this.model.buttSize;
   }
 
   public get leafWidth() {
@@ -93,18 +90,18 @@ export class ToneFlower {
   }
 
   public get cx() {
-    return this.model.cx;
+    return this.model.flowerX;
   }
 
   public get cy() {
-    return this.model.cy;
+    return this.model.flowerY;
   }
 
   public set cx(value: number) {
-    this.model.cx = value;
+    this.model.flowerX = value;
   }
 
   public set cy(value: number) {
-    this.model.cy = value;
+    this.model.flowerY = value;
   }
 }
