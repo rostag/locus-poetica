@@ -28,7 +28,7 @@ export class ToneFlowerComponent implements OnInit {
 
   private margin = 50;
   private width = 750 - this.margin * 2;
-  private height = 400 - this.margin * 2;
+  private height = 600 - this.margin * 2;
 
   private tau = 2 * Math.PI;
   private minRad = 0;
@@ -55,18 +55,27 @@ export class ToneFlowerComponent implements OnInit {
 
     // const bush1: BushModel = {
     //   flowers: [
-    //     [6, 6, 6, 9,],
+    //     [6, 6, 6, 9],
     //     [2, 11, 10],
     //     [8, 5, 1],
     //   ],
     // };
     const bush1: BushModel = {
       flowers: [
-        [1, 2, 3, 5],
-        [6, 7, 8],
-        [9, 11],
+        [1, 2, 3, 4],
+        [5, 6, 7],
+        [8, 9, 10],
       ],
     };
+    // const bush1: BushModel = {
+    //   flowers: [
+    //     [
+    //       12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11,
+    //       12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11,
+    //       12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1,
+    //     ],
+    //   ],
+    // };
     const flowerPlaces = [
       [150, 230],
       [80, 132],
@@ -97,6 +106,54 @@ export class ToneFlowerComponent implements OnInit {
     });
   }
 
+  private getSectionData = (leafIdn: LeafIdn) => {
+    const sections = new Array(leafIdn.num);
+    const s = 360 / leafIdn.num;
+    sections.fill(s, 0, leafIdn.num);
+    return sections;
+  };
+
+  private addPie(
+    arcs,
+    x: number,
+    y: number,
+    innerRadius: number,
+    outerRadius: number,
+    leafIdn: LeafIdn,
+    isLeaf = false
+  ) {
+    const data = this.getSectionData(leafIdn);
+    const padAngle = (12 - data.length) * 0.00001; // 36 / ;
+    const pie2 = d3.pie().padAngle(padAngle); // adjusted pad angle (good)
+    const arc = d3.arc().innerRadius(innerRadius).outerRadius(outerRadius);
+
+    const g = this.svgr
+      .append("g")
+      .selectAll("g")
+      .data(() => [pie2(data)])
+      .join("g")
+      .attr("fill", (d, i) => [leafIdn.colorHex])
+      .attr("transform", (d, i) => `translate(${x}, ${y})`);
+
+    // g.append("g")
+    //   .attr("fill", "none")
+    //   .attr("stroke-width", ".5px")
+    //   .attr("stroke", leafIdn.colorHex)
+    //   .selectAll("path")
+    //   .data((arcs) => arcs)
+    //   .join("path")
+    //   .attr("d", arc.padAngle(0));
+
+    g.append("g")
+      .attr("stroke", "#ffffff")
+      .attr("stroke-width", ".25px")
+      .attr("stroke-linejoin", "round")
+      .selectAll("path")
+      .data((arcs) => arcs)
+      .join("path")
+      .attr("d", arc.padAngle(padAngle));
+  }
+
   private addArc(
     arcs,
     x: number,
@@ -123,12 +180,14 @@ export class ToneFlowerComponent implements OnInit {
         leafIdn,
         isLeaf,
       })
-      .style("fill", leafIdn.colorHex)
-      .attr("d", this.arc);
+      .style("fill", leafIdn.colorHex);
+    // .attr("d", this.arc);
     arcs.push(arcPath);
     if (!isLeaf) {
       this.appear(null, arcPath);
     }
+
+    this.addPie(arcs, x, y, innerRadius, outerRadius, leafIdn, isLeaf);
   }
 
   private collisionDetection(orig) {
