@@ -1,7 +1,5 @@
 import { IC, IDNS } from "src/app/soundflow/tonecircus/toneflower.constants";
 import {
-  BushCode,
-  IDN,
   LeafModel,
   FlowerModel,
 } from "src/app/soundflow/tonecircus/toneflower.model";
@@ -19,29 +17,18 @@ export class ToneFlower {
     };
   }
 
-  private addLeaf(idn: number[]) {
-    const leafIdn: IDN = IDNS.find((preset) => preset.idn === idn[0])!;
-    const leafNum: number = idn[1];
-    const leaf: LeafModel = {
-      leafOrder: this.model.leaves.length,
-      leafIdn: leafIdn,
-      leafNum,
-    };
-
+  private addLeaf(leaf: LeafModel) {
     this.model.leaves.push(leaf);
   }
 
-  public seed(bushModel: BushCode, flowerIndex: number) {
-    const flowerIdns: number[][] = bushModel.flowers[flowerIndex];
-    const place: number[] = bushModel.places[flowerIndex];
-
-    this.cx = place[0];
-    this.cy = place[1];
+  public seed(flowerModel: FlowerModel) {
+    this.cx = flowerModel.flowerX;
+    this.cy = flowerModel.flowerY;
 
     // const buttId = this.getButtColor(flowerIdns);
     // this.addLeaf(buttId[1]);
 
-    flowerIdns.map((leafIdn) => this.addLeaf(leafIdn));
+    flowerModel.leaves.map((leaf) => this.addLeaf(leaf));
   }
 
   public burn() {

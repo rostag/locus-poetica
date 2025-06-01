@@ -5,7 +5,7 @@ import {
 } from "src/app/soundflow/tonecircus/toneflower.model";
 
 export const IC = {
-  bushId: 0,
+  bushId: 1,
   padAngle: 0.01,
   padAngleMax: 2,
   flowerButtSize: 12,
@@ -34,9 +34,26 @@ export const IDNS: IDN[] = [
 ];
 
 const byIdnId = (idnid: number) =>
-  IDNS.find((idn) => (idn.idn = idnid)) || IDNS[0];
+  IDNS.find((idn) => idn.idn === idnid) || IDNS[0];
 
 export const SAMPLE_BUSHMODELS: BushModel[] = [
+  {
+    flowers: [
+      {
+        flowerX: 156,
+        flowerY: 170,
+        buttSize: IC.flowerButtSize,
+        leafWidth: IC.flowerLeafWidth,
+        leaves: [
+          {
+            leafIdn: byIdnId(1),
+            leafNum: 1,
+            leafOrder: 0,
+          },
+        ],
+      },
+    ],
+  },
   {
     flowers: [
       {
@@ -132,7 +149,7 @@ export const SAMPLE_BUSHMODELS: BushModel[] = [
   },
 ];
 
-export const SAMPLE_BUSHES: BushCode[] = [
+export const SAMPLE_BUSH_CODES: BushCode[] = [
   {
     flowers: [
       [
@@ -243,7 +260,4 @@ export const SAMPLE_BUSHES: BushCode[] = [
   },
 ];
 
-export const PLAY_BUSH: BushCode = {
-  flowers: [[[1, 1]]],
-  places: [[156, 170]],
-};
+export const PLAY_BUSH: BushModel = SAMPLE_BUSHMODELS[0];

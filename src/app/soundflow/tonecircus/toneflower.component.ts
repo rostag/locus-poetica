@@ -4,23 +4,23 @@
 // PIE - padAngle: https://observablehq.com/@d3/arc-pad-angle
 
 import { Component, OnInit } from "@angular/core";
-import { MatSliderModule } from "@angular/material/slider";
 import { FormsModule } from "@angular/forms";
+import { MatSliderModule } from "@angular/material/slider";
 
 import { RouterModule } from "@angular/router";
 import * as d3 from "d3";
-import {
-  BushCode,
-  IDN,
-  LeafModel,
-} from "src/app/soundflow/tonecircus/toneflower.model";
 import { ToneFlower } from "src/app/soundflow/tonecircus/toneflower.class";
-import * as Tone from "tone";
 import {
   IC,
   PLAY_BUSH,
-  SAMPLE_BUSHES,
+  SAMPLE_BUSHMODELS,
 } from "src/app/soundflow/tonecircus/toneflower.constants";
+import {
+  BushModel,
+  IDN,
+  LeafModel,
+} from "src/app/soundflow/tonecircus/toneflower.model";
+import * as Tone from "tone";
 
 type OscItem = {
   [index: number]: OscillatorNode;
@@ -76,14 +76,14 @@ export class ToneFlowerComponent implements OnInit {
     this.playFlower = new ToneFlower();
     this.playFlower.cx = 150;
     this.playFlower.cy = 230;
-    this.playFlower.seed(PLAY_BUSH, 0);
+    this.playFlower.seed(PLAY_BUSH.flowers[0]);
 
-    const bush: BushCode = SAMPLE_BUSHES[IC.bushId];
+    const bush: BushModel = SAMPLE_BUSHMODELS[IC.bushId];
 
-    bush.flowers.map((flowerIdn, i) => {
+    bush.flowers.map((flowerModel, i) => {
       const flower = new ToneFlower();
       this.flowers.push(flower);
-      flower.seed(bush, i);
+      flower.seed(flowerModel);
       this.drawFlower(flower);
     });
   }
@@ -109,6 +109,12 @@ export class ToneFlowerComponent implements OnInit {
   public toggleLine() {
     this.showPadLine = !this.showPadLine;
   }
+
+  public padAngleBgStyle = 0; // 1, 2
+  public toggleBgStyle = () => {
+    this.padAngleBgStyle =
+      this.padAngleBgStyle > 1 ? 0 : this.padAngleBgStyle + 1;
+  };
 
   private getSectionData = (leafModel: LeafModel) => {
     const assignedNumber = leafModel.leafNum;
@@ -164,6 +170,17 @@ export class ToneFlowerComponent implements OnInit {
       .attr("d", arc.padAngle(padAngle));
   }
 
+  private getArcBgStyle = (leafModel: LeafModel) => {
+    switch (this.padAngleBgStyle) {
+      case 0:
+        return leafModel.leafIdn.colorHex;
+      case 1:
+        return "#fff";
+      default:
+        return "#000";
+    }
+  };
+
   private addArc(
     arcs,
     x: number,
@@ -190,9 +207,9 @@ export class ToneFlowerComponent implements OnInit {
         leafModel,
         isLeaf,
       })
-      // .style("fill", leafModel.leafIdn.colorHex)
-      .style("fill", "#fff")
+      .style("fill", this.getArcBgStyle(leafModel))
       .attr("d", this.arcGen);
+
     this.drawPie(arcs, x, y, innerRadius, outerRadius, leafModel, isLeaf);
     arcs.push(arcPath);
     if (!isLeaf) {
