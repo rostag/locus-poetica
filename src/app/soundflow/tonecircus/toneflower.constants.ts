@@ -1,5 +1,9 @@
 import { BushModel } from "src/app/soundflow/tonecircus/toneflower.model";
 
+export const IC = {
+  bushId: 1,
+};
+
 const ASSIGNED_SEED = [1, 2, 3];
 
 const places = [

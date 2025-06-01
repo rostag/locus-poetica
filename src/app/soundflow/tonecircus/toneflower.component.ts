@@ -16,6 +16,7 @@ import {
 import { ToneFlower } from "src/app/soundflow/tonecircus/toneflower.class";
 import * as Tone from "tone";
 import {
+  IC,
   PLAY_BUSH,
   SAMPLE_BUSHES,
 } from "src/app/soundflow/tonecircus/toneflower.constants";
@@ -75,7 +76,7 @@ export class ToneFlowerComponent implements OnInit {
     this.playFlower.cy = 230;
     this.playFlower.seed(PLAY_BUSH, 0);
 
-    const bush: BushModel = SAMPLE_BUSHES[0];
+    const bush: BushModel = SAMPLE_BUSHES[IC.bushId];
 
     bush.flowers.map((flowerIdn, i) => {
       const flower = new ToneFlower();
