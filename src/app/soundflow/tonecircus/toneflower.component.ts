@@ -1,6 +1,7 @@
 // D3.js, ReactJS TS - https://medium.com/@prncher/a-visual-experience-of-sampling-data-using-d3-js-reactjs-and-typescript-43b3bb603c3c
 // Visualizing Sound With D3 and Web Audio API - https://medium.com/swlh/visualizing-sound-with-d3-and-web-audio-api-435ffea88f30
 // Collide force - https://d3js.org/d3-force/collide
+// PIE - padAngle: https://observablehq.com/@d3/arc-pad-angle
 
 import { Component, OnInit } from "@angular/core";
 import { MatSliderModule } from "@angular/material/slider";
@@ -56,7 +57,8 @@ export class ToneFlowerComponent implements OnInit {
 
   private audioStarted = false;
 
-  public padAngle = 0.001;
+  public IC = IC;
+  public padAngle = IC.padAngle;
 
   private flowers: ToneFlower[] = [];
 

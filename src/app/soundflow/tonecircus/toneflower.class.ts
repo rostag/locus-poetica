@@ -1,6 +1,10 @@
 import {
-  BushModel,
+  IC,
   LEAF_IDNS,
+} from "src/app/soundflow/tonecircus/toneflower.constants";
+import {
+  BushModel,
+  LeafIdn,
   LeafModel,
   ToneFlowerModel,
 } from "src/app/soundflow/tonecircus/toneflower.model";
@@ -11,19 +15,19 @@ export class ToneFlower {
   constructor() {
     this.model = {
       leaves: [],
-      baseRadius: 10,
-      leafWidth: 10,
+      baseRadius: IC.flowerBaseRadius,
+      leafWidth: IC.flowerLeafWidth,
       cx: 10,
       cy: 10,
     };
   }
 
-  private addLeaf(leafIdn: number[]) {
-    const leafIdnn = LEAF_IDNS.find((preset) => preset.num === leafIdn[0])!;
-    const leafNum = leafIdn[1];
+  private addLeaf(idn: number[]) {
+    const leafIdn: LeafIdn = LEAF_IDNS.find((preset) => preset.idn === idn[0])!;
+    const leafNum: number = idn[1];
     const leaf: LeafModel = {
       leafOrder: this.model.leaves.length,
-      leafIdn: leafIdnn,
+      leafIdn: leafIdn,
       leafNum,
     };
 
@@ -33,13 +37,12 @@ export class ToneFlower {
   public seed(bushModel: BushModel, flowerIndex: number) {
     const flowerIdns: number[][] = bushModel.flowers[flowerIndex];
     const place: number[] = bushModel.places[flowerIndex];
-    const leafNum = flowerIdns[1];
 
     this.cx = place[0];
     this.cy = place[1];
 
-    // const buttId = this.getCenterColor(leaveIdnn);
-    // this.addLeaf(buttId, leaveIdnn[0][1]);
+    // const buttId = this.getButtColor(flowerIdns);
+    // this.addLeaf(buttId[1]);
 
     flowerIdns.map((leafIdn) => this.addLeaf(leafIdn));
   }
@@ -54,28 +57,28 @@ export class ToneFlower {
     1. Skladaju čysla po koljorah jaki vyjšly (ti, ščo smugy) i vidnimaju 12, poky ne otrymaju čyslo vid 1 do 12 – ce bude kolir centru
 
     2. Nyžnje kolo (try blakytnyh i zolotyj): 
-    6+6+6+9=27. 27-12=15. 15-12=3. 
-    3 – pomarančevyj centr
+      6 + 6 + 6 + 9 = 27. 27 - 12 = 15. 15 - 12 = 3. 
+      3 – pomarančevyj centr
 
     3. Serednje kolo (červonyj, sribnyj, perlynovyj):
-    2+11+10=23. 23-12=11.
-    11 – sribnyj centr
+      2 + 11 + 10 = 23. 23 - 12 = 11.
+      11 – sribnyj centr
 
     4. Verhnje kolo (fioletovyj, zelenyj, čornyj):
-    8+5+1=14. 14-12=2
-    2 – červonyj centr
+      8 + 5 + 1 = 14. 14 - 12 = 2
+      2 – červonyj centr
   */
 
-  // public getCenterColor(leaveIds: number[][]) {
-  //   const sum = leaveIds
-  //     .map((leaf) => leaf[0])
-  //     .reduce((acc, leaf) => {
-  //       return acc + leaf;
-  //     }, 0);
-  //   const centerId = sum % 12;
-  //   console.log("get c", sum, leaveIds, centerId);
-  //   return centerId;
-  // }
+  public getButtColor(leaveIds: number[][]) {
+    const sum = leaveIds
+      .map((leaf) => leaf[0])
+      .reduce((acc, leaf) => {
+        return acc + leaf;
+      }, 0);
+    const centerId = sum % 12;
+    console.log("get c", sum, leaveIds, centerId);
+    return centerId;
+  }
 
   public get leaves() {
     return this.model.leaves;

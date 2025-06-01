@@ -1,10 +1,15 @@
-import { BushModel } from "src/app/soundflow/tonecircus/toneflower.model";
+import {
+  BushModel,
+  LeafIdn,
+} from "src/app/soundflow/tonecircus/toneflower.model";
 
 export const IC = {
-  bushId: 1,
+  bushId: 0,
+  padAngle: 0.01,
+  padAngleMax: 2,
+  flowerBaseRadius: 12,
+  flowerLeafWidth: 10,
 };
-
-const ASSIGNED_SEED = [1, 2, 3];
 
 const places = [
   [150, 230],
@@ -127,3 +132,18 @@ export const PLAY_BUSH: BushModel = {
   flowers: [[[1, 1]]],
   places: [[156, 170]],
 };
+
+export const LEAF_IDNS: LeafIdn[] = [
+  { idn: 1, color: "čornyj", note: "C", colorHex: "#151210" },
+  { idn: 2, color: "červonyj", note: "C#", colorHex: "#9F352B" },
+  { idn: 3, color: "pomarančevyj", note: "D", colorHex: "#AA482E" },
+  { idn: 4, color: "žovtyj", note: "D#", colorHex: "#D1B170" },
+  { idn: 5, color: "zelenyj", note: "E", colorHex: "#366C2C" },
+  { idn: 6, color: "blakytnyj", note: "F", colorHex: "#4D86B3" },
+  { idn: 7, color: "synij", note: "F#", colorHex: "#163063" },
+  { idn: 8, color: "fioletovyj", note: "G", colorHex: "#9091B6" },
+  { idn: 9, color: "zolotyj", note: "G#", colorHex: "#BE9C5C" },
+  { idn: 10, color: "perlynovyj", note: "A", colorHex: "#E5E3D5" },
+  { idn: 11, color: "sribnyj", note: "A#", colorHex: "#DBDFE5" },
+  { idn: 12, color: "bilyj", note: "B", colorHex: "#B7B9B4" },
+];
