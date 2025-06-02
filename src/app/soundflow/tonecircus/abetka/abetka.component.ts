@@ -1,9 +1,15 @@
-import { Component, OnInit } from "@angular/core";
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnInit,
+  signal,
+} from "@angular/core";
 import { FormsModule } from "@angular/forms";
 import { MatSliderModule } from "@angular/material/slider";
 import { MatIconModule } from "@angular/material/icon";
 import { MatDividerModule } from "@angular/material/divider";
 import { MatButtonModule } from "@angular/material/button";
+import { MatExpansionModule } from "@angular/material/expansion";
 
 import { RouterModule } from "@angular/router";
 
@@ -16,11 +22,15 @@ import { RouterModule } from "@angular/router";
     MatButtonModule,
     MatDividerModule,
     MatIconModule,
+    MatExpansionModule,
   ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+
   templateUrl: "./abetka.component.html",
   styleUrl: "./abetka.component.css",
   standalone: true,
 })
 export class AbetkaComponent implements OnInit {
+  readonly panelOpenState = signal(false);
   ngOnInit(): void {}
 }
