@@ -3,7 +3,7 @@ export type NumberByLetter = {
   cardinal: number;
   letters: string[];
 };
-export const NUMBERS_BY_LETTERS_UA: NumberByLetter[] = [
+export const ORDINALS_BY_LETTERS_UA: NumberByLetter[] = [
   { cardinal: 1, letters: ["А", "Ї", "Ф"] },
   { cardinal: 2, letters: ["Б", "Й", "Х"] },
   { cardinal: 3, letters: ["В", "К", "Ц"] },
@@ -16,4 +16,16 @@ export const NUMBERS_BY_LETTERS_UA: NumberByLetter[] = [
   { cardinal: 10, letters: ["З", "С"] },
   { cardinal: 11, letters: ["И", "Т"] },
   { cardinal: 12, letters: ["І", "У"] },
+];
+
+export const CARDINALS_BY_LETTERS_UA: NumberByLetter[] = [
+  { cardinal: 1, letters: ["А", "З", "О", "Ч"] },
+  { cardinal: 2, letters: ["Б", "И", "П", "Ш"] },
+  { cardinal: 3, letters: ["В", "І", "Р", "Щ"] },
+  { cardinal: 4, letters: ["Г", "Ї", "С", "Ь"] },
+  { cardinal: 5, letters: ["Ґ", "Й", "Т", "Ю"] },
+  { cardinal: 6, letters: ["Д", "К", "У", "Я"] },
+  { cardinal: 7, letters: ["Е", "Л", "Ф"] },
+  { cardinal: 8, letters: ["Є", "М", "Х"] },
+  { cardinal: 9, letters: ["Ж", "Н", "Ц"] },
 ];
