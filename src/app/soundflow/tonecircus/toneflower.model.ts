@@ -1,6 +1,6 @@
 export type IDN = {
   color: string;
-  idn: number;
+  cardinal: number;
   note: string;
   colorHex: string;
 };

@@ -1,0 +1,34 @@
+<div class="section">
+  <!-- Kolir -->
+  <mat-form-field appearance="outline">
+    <mat-label>Kolir</mat-label>
+    <input matInput placeholder="Kolir" [(ngModel)]="idn.color" />
+    <mat-icon matSuffix></mat-icon>
+    <mat-hint></mat-hint>
+  </mat-form-field>
+
+  <!-- Cardinal -->
+  <mat-form-field appearance="outline">
+    <mat-label>Chyslo</mat-label>
+    <input matInput placeholder="" [(ngModel)]="idn.cardinal" />
+    <mat-icon matSuffix></mat-icon>
+    <mat-hint></mat-hint>
+  </mat-form-field>
+
+  <!-- Nota -->
+  <mat-form-field appearance="outline">
+    <mat-label>Nota</mat-label>
+    <input matInput placeholder="" [(ngModel)]="idn.note" />
+    <mat-icon matSuffix></mat-icon>
+    <mat-hint></mat-hint>
+  </mat-form-field>
+
+  <!-- Color Hex -->
+  <mat-form-field appearance="outline">
+    <mat-label>Kod Koljoru</mat-label>
+    <input matInput placeholder="" [(ngModel)]="idn.colorHex" />
+    <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+    <mat-hint></mat-hint>
+  </mat-form-field>
+  <!-- <pre>!{{ JSON.stringify(idn, null, 2) }}</pre> -->
+</div>

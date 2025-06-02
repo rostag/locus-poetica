@@ -9,6 +9,7 @@ import { MatSliderModule } from "@angular/material/slider";
 
 import { RouterModule } from "@angular/router";
 import * as d3 from "d3";
+import { FlowerInputComponent } from "src/app/soundflow/tonecircus/flowerinput/flowerinput.component";
 import { ToneFlower } from "src/app/soundflow/tonecircus/toneflower.class";
 import {
   IC,
@@ -28,12 +29,14 @@ type OscItem = {
 
 @Component({
   selector: "app-tonecircus",
-  imports: [RouterModule, MatSliderModule, FormsModule],
+  imports: [RouterModule, MatSliderModule, FormsModule, FlowerInputComponent],
   templateUrl: "./toneflower.component.html",
   styleUrl: "./toneflower.component.css",
   standalone: true,
 })
 export class ToneFlowerComponent implements OnInit {
+  public showSettings = true;
+
   private playFlower: ToneFlower;
 
   private margin = 50;

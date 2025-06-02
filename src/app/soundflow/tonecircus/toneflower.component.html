@@ -23,6 +23,9 @@
   <button (click)="toggleBgStyle()" style="margin-right: 12px">
     kolir fonu
   </button>
+  @if (showSettings) {
+  <app-flowerinput />
+  }
 </div>
 <figure id="tonecircus"></figure>
 <div style="margin: 2.5rem">

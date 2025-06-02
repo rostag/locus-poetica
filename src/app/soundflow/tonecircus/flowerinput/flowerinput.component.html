@@ -1,0 +1,10 @@
+<div class="section">
+  @for (leafModel of leaves; track leafModel.leafIdn) {
+  <app-idn [idn]="leafModel.leafIdn" />
+  } @empty {
+  <li>Nema elementiv</li>
+  }
+  <button matIconButton>
+    <mat-icon>add</mat-icon>
+  </button>
+</div>

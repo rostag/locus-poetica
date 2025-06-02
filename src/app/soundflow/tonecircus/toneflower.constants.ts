@@ -19,22 +19,22 @@ const places = [
 ];
 
 export const IDNS: IDN[] = [
-  { idn: 1, color: "čornyj", note: "C", colorHex: "#151210" },
-  { idn: 2, color: "červonyj", note: "C#", colorHex: "#9F352B" },
-  { idn: 3, color: "pomarančevyj", note: "D", colorHex: "#AA482E" },
-  { idn: 4, color: "žovtyj", note: "D#", colorHex: "#D1B170" },
-  { idn: 5, color: "zelenyj", note: "E", colorHex: "#366C2C" },
-  { idn: 6, color: "blakytnyj", note: "F", colorHex: "#4D86B3" },
-  { idn: 7, color: "synij", note: "F#", colorHex: "#163063" },
-  { idn: 8, color: "fioletovyj", note: "G", colorHex: "#9091B6" },
-  { idn: 9, color: "zolotyj", note: "G#", colorHex: "#BE9C5C" },
-  { idn: 10, color: "perlynovyj", note: "A", colorHex: "#E5E3D5" },
-  { idn: 11, color: "sribnyj", note: "A#", colorHex: "#DBDFE5" },
-  { idn: 12, color: "bilyj", note: "B", colorHex: "#B7B9B4" },
+  { cardinal: 1, color: "čornyj", note: "C", colorHex: "#151210" },
+  { cardinal: 2, color: "červonyj", note: "C#", colorHex: "#9F352B" },
+  { cardinal: 3, color: "pomarančevyj", note: "D", colorHex: "#AA482E" },
+  { cardinal: 4, color: "žovtyj", note: "D#", colorHex: "#D1B170" },
+  { cardinal: 5, color: "zelenyj", note: "E", colorHex: "#366C2C" },
+  { cardinal: 6, color: "blakytnyj", note: "F", colorHex: "#4D86B3" },
+  { cardinal: 7, color: "synij", note: "F#", colorHex: "#163063" },
+  { cardinal: 8, color: "fioletovyj", note: "G", colorHex: "#9091B6" },
+  { cardinal: 9, color: "zolotyj", note: "G#", colorHex: "#BE9C5C" },
+  { cardinal: 10, color: "perlynovyj", note: "A", colorHex: "#E5E3D5" },
+  { cardinal: 11, color: "sribnyj", note: "A#", colorHex: "#DBDFE5" },
+  { cardinal: 12, color: "bilyj", note: "B", colorHex: "#B7B9B4" },
 ];
 
 const byIdnId = (idnid: number) =>
-  IDNS.find((idn) => idn.idn === idnid) || IDNS[0];
+  IDNS.find((idn) => idn.cardinal === idnid) || IDNS[0];
 
 export const SAMPLE_BUSHMODELS: BushModel[] = [
   {
