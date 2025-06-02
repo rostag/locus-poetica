@@ -9,6 +9,7 @@ import { MatSliderModule } from "@angular/material/slider";
 
 import { RouterModule } from "@angular/router";
 import * as d3 from "d3";
+import { AbetkaComponent } from "src/app/soundflow/tonecircus/abetka/abetka.component";
 import { FlowerInputComponent } from "src/app/soundflow/tonecircus/flowerinput/flowerinput.component";
 import { ToneFlower } from "src/app/soundflow/tonecircus/toneflower.class";
 import {
@@ -29,7 +30,13 @@ type OscItem = {
 
 @Component({
   selector: "app-tonecircus",
-  imports: [RouterModule, MatSliderModule, FormsModule, FlowerInputComponent],
+  imports: [
+    RouterModule,
+    MatSliderModule,
+    FormsModule,
+    FlowerInputComponent,
+    AbetkaComponent,
+  ],
   templateUrl: "./toneflower.component.html",
   styleUrl: "./toneflower.component.css",
   standalone: true,
