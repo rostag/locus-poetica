@@ -12,6 +12,7 @@ import { MatButtonModule } from "@angular/material/button";
 import { MatExpansionModule } from "@angular/material/expansion";
 
 import { RouterModule } from "@angular/router";
+import { numberByWord } from "src/app/soundflow/tonecircus/helpers/abetka.helper";
 
 @Component({
   selector: "app-abetka",
@@ -31,6 +32,11 @@ import { RouterModule } from "@angular/router";
   standalone: true,
 })
 export class AbetkaComponent implements OnInit {
-  readonly panelOpenState = signal(false);
+  readonly panelOpenState = signal(true);
+
+  public example1 = "Ростислав";
+  public JSON = JSON;
+  public numberByWord = numberByWord;
+
   ngOnInit(): void {}
 }

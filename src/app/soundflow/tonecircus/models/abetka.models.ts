@@ -1,0 +1,19 @@
+// abetka.models.ts
+export type NumberByLetter = {
+  cardinal: number;
+  letters: string[];
+};
+export const NUMBERS_BY_LETTERS_UA: NumberByLetter[] = [
+  { cardinal: 1, letters: ["А", "Ї", "Ф"] },
+  { cardinal: 2, letters: ["Б", "Й", "Х"] },
+  { cardinal: 3, letters: ["В", "К", "Ц"] },
+  { cardinal: 4, letters: ["Г", "Л", "Ч"] },
+  { cardinal: 5, letters: ["Ґ", "М", "Ш"] },
+  { cardinal: 6, letters: ["Д", "Н", "Щ"] },
+  { cardinal: 7, letters: ["Е", "О", "Ь"] },
+  { cardinal: 8, letters: ["Є", "П", "Ю"] },
+  { cardinal: 9, letters: ["Ж", "Р", "Я"] },
+  { cardinal: 10, letters: ["З", "С"] },
+  { cardinal: 11, letters: ["И", "Т"] },
+  { cardinal: 12, letters: ["І", "У"] },
+];
