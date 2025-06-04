@@ -19,12 +19,14 @@ import {
   ordinalByWord,
 } from "src/app/soundflow/tonecircus/helpers/abetka.helper";
 import { IdnNameSource } from "src/app/soundflow/tonecircus/models/abetka.models";
+import { MatFormFieldModule } from "@angular/material/form-field";
 
 @Component({
   selector: "app-get-ordinal",
   imports: [
     RouterModule,
     MatSliderModule,
+    MatFormFieldModule,
     FormsModule,
     MatButtonModule,
     MatDividerModule,
