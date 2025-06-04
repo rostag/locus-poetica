@@ -11,6 +11,7 @@ import { RouterModule } from "@angular/router";
 import * as d3 from "d3";
 import { AbetkaComponent } from "src/app/soundflow/tonecircus/abetka/abetka.component";
 import { FlowerInputComponent } from "src/app/soundflow/tonecircus/flowerinput/flowerinput.component";
+import { GetOrdinalComponent } from "src/app/soundflow/tonecircus/get-ordinal/get-ordinal.component";
 import { ToneFlower } from "src/app/soundflow/tonecircus/toneflower.class";
 import {
   IC,
@@ -36,6 +37,7 @@ type OscItem = {
     FormsModule,
     FlowerInputComponent,
     AbetkaComponent,
+    GetOrdinalComponent,
   ],
   templateUrl: "./toneflower.component.html",
   styleUrl: "./toneflower.component.css",

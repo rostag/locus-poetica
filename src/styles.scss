@@ -1,4 +1,4 @@
-@font-face{
+@font-face {
     font-family: 'RuteniaAkcidentaRegular';
     font-style: normal;
     font-weight: 500;
@@ -13,7 +13,7 @@
     --mono-font: Monaco, 'Courier New', Courier, monospace;
     --rutenia-akcidenta-font: "RuteniaAkcidentaRegular", 'Courier New', Courier, monospace;
     --clr-theme-bg: #ffcc00;
-  }
+}
 
 html,
 body {
@@ -73,4 +73,8 @@ pre {
 
 .app-footer {
     padding: 0.3rem 0.5rem;
+}
+
+.flex-row {
+    display: flex;
 }

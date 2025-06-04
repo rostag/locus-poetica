@@ -35,9 +35,7 @@ export class IdnComponent implements OnInit {
 
   @Input({ required: true }) idn!: IDN;
 
-  private initForm() {
-    console.log("iform");
-  }
+  private initForm() {}
 
   ngOnInit(): void {
     this.initForm();

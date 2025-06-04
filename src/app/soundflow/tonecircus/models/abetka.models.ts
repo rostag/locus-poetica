@@ -1,4 +1,33 @@
 // abetka.models.ts
+export type IdnNameSource = {
+  imja: string;
+  pobatjkovi: string;
+  prizvyščeNeoficijne: string;
+  prizvyščeOficijne: string;
+};
+
+export type IdnDateSource = {
+  denj: string;
+  misjacj: string;
+  rik: string;
+};
+
+export type IdnFinalSource = {
+  a: string;
+  b: string;
+  c: string;
+};
+
+// export type IdnOutput = {
+//   : string;
+//   pobatjkovi: string;
+//   prizvyščeNeoficijne: string;
+//   prizvyščeOficijne: string;
+//   denj: string;
+//   misjacj: string;
+//   rik: string;
+// };
+
 export type NumberByLetter = {
   cardinal: number;
   letters: string[];
