@@ -1,16 +1,18 @@
+import { IDN } from "src/app/soundflow/tonecircus/toneflower.model";
+
 // abetka.models.ts
-export type IdnNameSource = {
+export type IdnNameIn = {
   imja: string;
   pobatjkovi: string;
-  prizvyščeNeoficijne: string;
-  prizvyščeOficijne: string;
+  prizvysceNeoficijne: string;
+  prizvyšče: string;
 };
 
-export type IdnNameResult = {
-  imja: number | null;
-  pobatjkovi: number | null;
-  prizvyščeNeoficijne: number | null;
-  prizvyščeOficijne: number | null;
+export type IdnNameOut = {
+  imja: IDN | null;
+  pobatjkovi: IDN | null;
+  prizvysceNeoficijne: IDN | null;
+  prizvysce: IDN | null;
 };
 
 export type IdnDateSource = {
@@ -28,8 +30,8 @@ export type IdnFinalSource = {
 // export type IdnOutput = {
 //   : string;
 //   pobatjkovi: string;
-//   prizvyščeNeoficijne: string;
-//   prizvyščeOficijne: string;
+//   prizvysceNeoficijne: string;
+//   prizvysce: string;
 //   denj: string;
 //   misjacj: string;
 //   rik: string;

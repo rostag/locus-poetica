@@ -1,59 +1,55 @@
 <div class="flex-row">
-  <div class="section">
-    <h3>Rozrahunok koljoru ta zvuku</h3>
-    <pre><b>1 - A Ї Ф
-2 - Б Й Х
-3 - В К Ц
-4 - Г Л Ч
-5 - Ґ М Ш
-6 - Д Н Щ
-7 - Е О Ь
-8 - Є П Ю
-9 - Ж Р Я
-10 - З С
-11 - И Т
-12 - І У
-</b></pre>
-    <div class="section">
-      <!-- Ordinal By Name -->
-      <!-- Im'ja
-Po-batjkovi
-Prizvyšče neoficijne
-Prizvyšče oficijne -->
-      <mat-form-field appearance="outline">
-        <mat-label>Im'ja</mat-label>
-        <input matInput placeholder="" [(ngModel)]="nameSrc.imja" />
-        <!-- <span matPrefix>$&nbsp;</span> -->
-        <span matSuffix>{{ nameOut.imja }}</span>
-      </mat-form-field>
-
-      <!-- <em>Avtomatyčnyj rezuljtat: {{ example1 }} -
-        {{ ordinalByWord(example1) }}</em>
-      <em>Avtomatyčnyj rezuljtat: {{ example1date }} -
-        {{ ordinalByDate(example1date) }}</em> -->
+  <div class="flex-row">
+    <div>
+      <h3>Rozrahunok koljoru ta zvuku</h3>
+      <!-- Im'ja -->
+      <div class="flex-row">
+        <mat-form-field appearance="outline">
+          <mat-label>Im'ja</mat-label>
+          <input matInput [(ngModel)]="nameIn.imja" (input)="setResult()" />
+        </mat-form-field>
+        <app-idn [idn]="nameOut.imja"></app-idn>
+      </div>
+      <div class="flex-row">
+        <mat-form-field appearance="outline">
+          <mat-label>Po-batjkovi</mat-label>
+          <input
+            matInput
+            [(ngModel)]="nameIn.pobatjkovi"
+            (input)="setResult()"
+          />
+        </mat-form-field>
+        <app-idn [idn]="nameOut.imja"></app-idn>
+      </div>
+      <div class="flex-row">
+        <mat-form-field appearance="outline">
+          <mat-label>Prizvyšče neoficijne</mat-label>
+          <input
+            matInput
+            [(ngModel)]="nameIn.pobatjkovi"
+            (input)="setResult()"
+          />
+        </mat-form-field>
+        <app-idn [idn]="nameOut.imja"></app-idn>
+      </div>
+      <div class="flex-row">
+        <mat-form-field appearance="outline">
+          <mat-label>Prizvyšče</mat-label>
+          <input
+            matInput
+            [(ngModel)]="nameIn.prizvysceNeoficijne"
+            (input)="setResult()"
+          />
+        </mat-form-field>
+        <app-idn [idn]="nameOut.prizvysce"></app-idn>
+      </div>
     </div>
     <div>
       <h3>2. Rozrahunok čysla</h3>
-      <pre><b>1 - А З О Ч
-2 - Б И П Ш
-3 - В І Р Щ
-4 - Г Ї С Ь
-5 - Ґ Й Т Ю
-6 - Д К У Я 
-7 - Е Л Ф
-8 - Є М Х
-9 - Ж Н Ц</b></pre>
-      <!-- <em>Avtomatyčnyj rezuljtat: {{ example2 }} -
-        {{ cardinalByWord(example2) }}</em>
-      <em>Avtomatyčnyj rezuljtat: {{ example2date }} -
-        {{ cardinalByDate(example2date) }}</em> -->
     </div>
     <div>
-      <h2>3. Pidsumok</h2>
-      <pre>
-V roboti...
-</pre
-      >
+      <h3>3. Pidsumok</h3>
+      V roboti...
     </div>
   </div>
 </div>

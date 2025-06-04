@@ -14,7 +14,7 @@ function ordinalByLetter(letter: string) {
         letters.includes(letter.toLocaleUpperCase())
       );
     })?.cardinal || 0;
-  console.log(letter, ordinal);
+  // console.log(letter, ordinal);
 
   return ordinal;
 }
@@ -22,7 +22,7 @@ function ordinalByLetter(letter: string) {
 export function ordinalByWord(word: string) {
   const letters = word.split("");
   const sum = letters.reduce((acc, letter) => acc + ordinalByLetter(letter), 0);
-  return sum;
+  return reduceNumber(sum);
 }
 
 // 24.08.1991 r.
@@ -47,7 +47,7 @@ function cardinalByLetter(letter: string) {
         letters.includes(letter.toLocaleUpperCase())
       );
     })?.cardinal || 0;
-  console.log(letter, cardinal);
+  // console.log(letter, cardinal);
 
   return cardinal;
 }
@@ -88,5 +88,5 @@ export function cardinalByDate(dateString: string) {
 }
 
 export function getIdnByNumber(ordinal: number) {
-  return IDNS.find((IDN) => IDN.cardinal === ordinal);
+  return IDNS.find((IDN) => IDN.ordinal === ordinal);
 }

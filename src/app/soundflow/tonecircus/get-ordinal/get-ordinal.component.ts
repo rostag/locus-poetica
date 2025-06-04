@@ -15,15 +15,17 @@ import { RouterModule } from "@angular/router";
 import {
   cardinalByDate,
   cardinalByWord,
+  getIdnByNumber,
   ordinalByDate,
   ordinalByWord,
 } from "src/app/soundflow/tonecircus/helpers/abetka.helper";
 import {
-  IdnNameResult,
-  IdnNameSource,
+  IdnNameOut,
+  IdnNameIn,
 } from "src/app/soundflow/tonecircus/models/abetka.models";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from "@angular/material/input";
+import { IdnComponent } from "../idn/idn.component";
 
 @Component({
   selector: "app-get-ordinal",
@@ -37,6 +39,7 @@ import { MatInputModule } from "@angular/material/input";
     MatDividerModule,
     MatIconModule,
     MatExpansionModule,
+    IdnComponent,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 
@@ -47,18 +50,18 @@ import { MatInputModule } from "@angular/material/input";
 export class GetOrdinalComponent implements OnInit {
   public JSON = JSON;
 
-  public nameSrc: IdnNameSource = {
+  public nameIn: IdnNameIn = {
     imja: "Ростислав",
     pobatjkovi: "Олександрович",
-    prizvyščeNeoficijne: "Титаренко",
-    prizvyščeOficijne: "Сірик",
+    prizvysceNeoficijne: "Титаренко",
+    prizvyšče: "Сірик",
   };
 
-  public nameOut: IdnNameResult = {
+  public nameOut: IdnNameOut = {
     imja: null,
     pobatjkovi: null,
-    prizvyščeNeoficijne: null,
-    prizvyščeOficijne: null,
+    prizvysceNeoficijne: null,
+    prizvysce: null,
   };
 
   public ordinalByWord = ordinalByWord;
@@ -67,5 +70,20 @@ export class GetOrdinalComponent implements OnInit {
   public cardinalByWord = cardinalByWord;
   public cardinalByDate = cardinalByDate;
 
-  ngOnInit(): void {}
+  setResult() {
+    const ona = ordinalByWord(this.nameIn.imja);
+    this.nameOut.imja = getIdnByNumber(ona) || null;
+    this.nameOut.pobatjkovi =
+      getIdnByNumber(ordinalByWord(this.nameIn.pobatjkovi)) || null;
+    this.nameOut.prizvysceNeoficijne =
+      getIdnByNumber(ordinalByWord(this.nameIn.prizvysceNeoficijne)) || null;
+    this.nameOut.prizvysce =
+      getIdnByNumber(ordinalByWord(this.nameIn.prizvyšče)) || null;
+
+    console.log("res", ona, this.nameOut.imja);
+  }
+
+  ngOnInit(): void {
+    this.setResult();
+  }
 }

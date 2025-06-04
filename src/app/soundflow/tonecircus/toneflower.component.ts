@@ -35,7 +35,6 @@ type OscItem = {
     RouterModule,
     MatSliderModule,
     FormsModule,
-    FlowerInputComponent,
     AbetkaComponent,
     GetOrdinalComponent,
   ],
