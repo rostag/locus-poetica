@@ -6,6 +6,13 @@ export type IdnNameSource = {
   prizvyščeOficijne: string;
 };
 
+export type IdnNameResult = {
+  imja: number | null;
+  pobatjkovi: number | null;
+  prizvyščeNeoficijne: number | null;
+  prizvyščeOficijne: number | null;
+};
+
 export type IdnDateSource = {
   denj: string;
   misjacj: string;

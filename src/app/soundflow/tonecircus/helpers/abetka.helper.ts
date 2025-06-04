@@ -5,6 +5,7 @@ import {
   NumberByLetter,
   ORDINALS_BY_LETTERS_UA,
 } from "src/app/soundflow/tonecircus/models/abetka.models";
+import { IDNS } from "src/app/soundflow/tonecircus/toneflower.constants";
 
 function ordinalByLetter(letter: string) {
   const ordinal =
@@ -84,4 +85,8 @@ export function cardinalByDate(dateString: string) {
   const year = reduceNumber(parseInt(parts[2], 10));
 
   return reduceNumber(day + month + year) % 12;
+}
+
+export function getIdnByNumber(ordinal: number) {
+  return IDNS.find((IDN) => IDN.cardinal === ordinal);
 }

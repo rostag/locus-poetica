@@ -18,8 +18,12 @@ import {
   ordinalByDate,
   ordinalByWord,
 } from "src/app/soundflow/tonecircus/helpers/abetka.helper";
-import { IdnNameSource } from "src/app/soundflow/tonecircus/models/abetka.models";
+import {
+  IdnNameResult,
+  IdnNameSource,
+} from "src/app/soundflow/tonecircus/models/abetka.models";
 import { MatFormFieldModule } from "@angular/material/form-field";
+import { MatInputModule } from "@angular/material/input";
 
 @Component({
   selector: "app-get-ordinal",
@@ -27,6 +31,7 @@ import { MatFormFieldModule } from "@angular/material/form-field";
     RouterModule,
     MatSliderModule,
     MatFormFieldModule,
+    MatInputModule,
     FormsModule,
     MatButtonModule,
     MatDividerModule,
@@ -47,6 +52,13 @@ export class GetOrdinalComponent implements OnInit {
     pobatjkovi: "Олександрович",
     prizvyščeNeoficijne: "Титаренко",
     prizvyščeOficijne: "Сірик",
+  };
+
+  public nameOut: IdnNameResult = {
+    imja: null,
+    pobatjkovi: null,
+    prizvyščeNeoficijne: null,
+    prizvyščeOficijne: null,
   };
 
   public ordinalByWord = ordinalByWord;

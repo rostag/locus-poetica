@@ -23,6 +23,8 @@ Prizvyšče oficijne -->
       <mat-form-field appearance="outline">
         <mat-label>Im'ja</mat-label>
         <input matInput placeholder="" [(ngModel)]="nameSrc.imja" />
+        <!-- <span matPrefix>$&nbsp;</span> -->
+        <span matSuffix>{{ nameOut.imja }}</span>
       </mat-form-field>
 
       <!-- <em>Avtomatyčnyj rezuljtat: {{ example1 }} -
