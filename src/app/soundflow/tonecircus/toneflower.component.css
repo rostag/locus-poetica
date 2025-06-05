@@ -3,3 +3,9 @@
   display: flex;
   gap: 1rem;
 }
+
+.bushcont {
+  margin-top: 0.5rem;
+  width: 50%;
+  height: 100%;
+}

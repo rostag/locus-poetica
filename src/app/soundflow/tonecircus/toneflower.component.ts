@@ -48,8 +48,8 @@ export class ToneFlowerComponent implements OnInit {
   private playFlower: ToneFlower;
 
   private margin = 50;
-  private width = 750 - this.margin * 2;
-  private height = 600 - this.margin * 2;
+  private width = 350 - this.margin * 2;
+  private height = 500 - this.margin * 2;
 
   private tau = 2 * Math.PI;
   private minRad = 0;
@@ -166,7 +166,7 @@ export class ToneFlowerComponent implements OnInit {
       .selectAll("g")
       .data(() => [pie2(data)])
       .join("g")
-      .attr("fill", (d, i) => [leafModel.leafIdn.colorHex])
+      .attr("fill", (d, i) => [leafModel.leafIdn?.colorHex])
       .attr("transform", (d, i) => `translate(${x}, ${y})`);
 
     if (this.showPadLine) {
@@ -192,6 +192,9 @@ export class ToneFlowerComponent implements OnInit {
   }
 
   private getArcBgStyle = (leafModel: LeafModel) => {
+    if (!leafModel || !leafModel.leafIdn) {
+      return "#fff";
+    }
     switch (this.padAngleBgStyle) {
       case 0:
         return leafModel.leafIdn.colorHex;
@@ -276,7 +279,7 @@ export class ToneFlowerComponent implements OnInit {
     this.bush = SAMPLE_BUSHMODELS[IC.bushId];
 
     this.svgr = d3
-      .select("#tonecircus")
+      .select("#bushwrap")
       .append("svg")
       .style("border", "1px solid #ccc")
       .attr("viewBox", [0, 0, this.width, this.height]);

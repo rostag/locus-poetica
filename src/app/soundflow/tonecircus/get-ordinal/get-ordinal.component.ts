@@ -120,8 +120,6 @@ export class GetOrdinalComponent implements OnInit {
     this.dateOut.jadro =
       getIdnByNumber(ordinalByNumber("" + obd + obm + obr)) || null;
 
-    console.log("res", obd, this.dateOut);
-
     const leafImja: LeafModel = {
       leafOrder: 0,
       leafIdn: this.nameOut.imja!,

@@ -1,6 +1,7 @@
-.flex-row {
-  margin-left: 2.5rem;
-  display: flex;
-  gap: 1rem;
-  align-items: flex-start;
+.get-ordinal {
+  margin-top: 1rem;
+}
+
+.get-ordinal app-idn {
+  margin-top: 1rem;
 }

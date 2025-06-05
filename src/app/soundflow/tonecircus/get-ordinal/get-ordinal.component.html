@@ -1,98 +1,88 @@
-<div class="flex-row">
-  <div class="flex-row">
-    <div>
-      <h3>Rozrahunok koljoru ta zvuku</h3>
-      <!-- Im'ja -->
-      <div class="flex-row">
-        <mat-form-field appearance="outline">
-          <mat-label>Im'ja</mat-label>
-          <input matInput [(ngModel)]="nameIn.imja" (input)="setResult()" />
-        </mat-form-field>
-        <app-idn [idn]="nameOut.imja"></app-idn>
-      </div>
-      <!-- Po bat'kovi -->
-      <div class="flex-row">
-        <mat-form-field appearance="outline">
-          <mat-label>Po-batjkovi</mat-label>
-          <input
-            matInput
-            [(ngModel)]="nameIn.pobatjkovi"
-            (input)="setResult()"
-          />
-        </mat-form-field>
-        <app-idn [idn]="nameOut.pobatjkovi"></app-idn>
-      </div>
-      <!-- prizvysceNeoficijne -->
-      <div class="flex-row">
-        <mat-form-field appearance="outline">
-          <mat-label>Prizvyšče neoficijne</mat-label>
-          <input
-            matInput
-            [(ngModel)]="nameIn.prizvysceNeoficijne"
-            (input)="setResult()"
-          />
-        </mat-form-field>
-        <app-idn [idn]="nameOut.prizvysceNeoficijne"></app-idn>
-      </div>
-      <!-- Prizvyšče -->
-      <div class="flex-row">
-        <mat-form-field appearance="outline">
-          <mat-label>Prizvyšče</mat-label>
-          <input
-            matInput
-            [(ngModel)]="nameIn.prizvysce"
-            (input)="setResult()"
-          />
-        </mat-form-field>
-        <app-idn [idn]="nameOut.prizvysce"></app-idn>
-      </div>
-      <!-- Jadro -->
-      <div class="flex-row">
-        <mat-form-field appearance="outline">
-          <mat-label>Rik</mat-label>
-          <input matInput value="Jadro" disabled="" />
-        </mat-form-field>
-        <app-idn [idn]="nameOut.jadro"></app-idn>
-      </div>
-      <!-- Denj -->
-      <div class="flex-row">
-        <mat-form-field appearance="outline">
-          <mat-label>Denj</mat-label>
-          <input matInput [(ngModel)]="dateIn.denj" (input)="setResult()" />
-        </mat-form-field>
-        <app-idn [idn]="dateOut.denj"></app-idn>
-      </div>
-      <!-- Misjacj -->
-      <div class="flex-row">
-        <mat-form-field appearance="outline">
-          <mat-label>Misjacj</mat-label>
-          <input matInput [(ngModel)]="dateIn.misjacj" (input)="setResult()" />
-        </mat-form-field>
-        <app-idn [idn]="dateOut.misjacj"></app-idn>
-      </div>
-      <!-- Rik -->
-      <div class="flex-row">
-        <mat-form-field appearance="outline">
-          <mat-label>Rik</mat-label>
-          <input matInput [(ngModel)]="dateIn.rik" (input)="setResult()" />
-        </mat-form-field>
-        <app-idn [idn]="dateOut.rik"></app-idn>
-      </div>
-      <!-- Jadro -->
-      <div class="flex-row">
-        <mat-form-field appearance="outline">
-          <mat-label>Rik</mat-label>
-          <input matInput value="Jadro" disabled="" />
-        </mat-form-field>
-        <app-idn [idn]="dateOut.jadro"></app-idn>
-      </div>
+<div class="flex-row get-ordinal">
+  <div>
+    <h3>Rozrahunok</h3>
+    <!-- Im'ja -->
+    <div class="flex-row">
+      <mat-form-field appearance="outline">
+        <mat-label>Im'ja</mat-label>
+        <input matInput [(ngModel)]="nameIn.imja" (input)="setResult()" />
+      </mat-form-field>
+      <app-idn [idn]="nameOut.imja"></app-idn>
     </div>
-    <!-- <div>
+    <!-- Po bat'kovi -->
+    <div class="flex-row">
+      <mat-form-field appearance="outline">
+        <mat-label>Po-batjkovi</mat-label>
+        <input matInput [(ngModel)]="nameIn.pobatjkovi" (input)="setResult()" />
+      </mat-form-field>
+      <app-idn [idn]="nameOut.pobatjkovi"></app-idn>
+    </div>
+    <!-- prizvysceNeoficijne -->
+    <div class="flex-row">
+      <mat-form-field appearance="outline">
+        <mat-label>Prizvyšče neoficijne</mat-label>
+        <input
+          matInput
+          [(ngModel)]="nameIn.prizvysceNeoficijne"
+          (input)="setResult()"
+        />
+      </mat-form-field>
+      <app-idn [idn]="nameOut.prizvysceNeoficijne"></app-idn>
+    </div>
+    <!-- Prizvyšče -->
+    <div class="flex-row">
+      <mat-form-field appearance="outline">
+        <mat-label>Prizvyšče</mat-label>
+        <input matInput [(ngModel)]="nameIn.prizvysce" (input)="setResult()" />
+      </mat-form-field>
+      <app-idn [idn]="nameOut.prizvysce"></app-idn>
+    </div>
+    <!-- Jadro -->
+    <div class="flex-row">
+      <mat-form-field appearance="outline">
+        <mat-label>Jadro Imeni</mat-label>
+        <input matInput value="Jadro Imeni" disabled="" />
+      </mat-form-field>
+      <app-idn [idn]="nameOut.jadro"></app-idn>
+    </div>
+    <!-- Denj -->
+    <div class="flex-row">
+      <mat-form-field appearance="outline">
+        <mat-label>Denj</mat-label>
+        <input matInput [(ngModel)]="dateIn.denj" (input)="setResult()" />
+      </mat-form-field>
+      <app-idn [idn]="dateOut.denj"></app-idn>
+    </div>
+    <!-- Misjacj -->
+    <div class="flex-row">
+      <mat-form-field appearance="outline">
+        <mat-label>Misjacj</mat-label>
+        <input matInput [(ngModel)]="dateIn.misjacj" (input)="setResult()" />
+      </mat-form-field>
+      <app-idn [idn]="dateOut.misjacj"></app-idn>
+    </div>
+    <!-- Rik -->
+    <div class="flex-row">
+      <mat-form-field appearance="outline">
+        <mat-label>Rik</mat-label>
+        <input matInput [(ngModel)]="dateIn.rik" (input)="setResult()" />
+      </mat-form-field>
+      <app-idn [idn]="dateOut.rik"></app-idn>
+    </div>
+    <!-- Jadro -->
+    <div class="flex-row">
+      <mat-form-field appearance="outline">
+        <mat-label>Jadro Daty</mat-label>
+        <input matInput value="Jadro Daty" disabled="" />
+      </mat-form-field>
+      <app-idn [idn]="dateOut.jadro"></app-idn>
+    </div>
+  </div>
+  <!-- <div>
       <h3>2. Rozrahunok čysla</h3>
     </div>
     <div>
       <h3>3. Pidsumok</h3>
       V roboti...
     </div> -->
-  </div>
 </div>
