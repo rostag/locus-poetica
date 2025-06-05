@@ -15,7 +15,8 @@
     matInput
     type="text"
     [ngModel]="padAngle"
-    style="width: 32px; margin-right: 12px"
+    (input)="setPadAngle($event)"
+    style="width: 48px; margin-right: 12px"
   />
   <button (click)="toggleLine()" style="margin-right: 12px">
     pokazuvaty liniju

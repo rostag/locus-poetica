@@ -8,7 +8,7 @@ import {
 export const IC = {
   bushId: 1,
   padAngle: 0.01,
-  padAngleMax: 2,
+  padAngleMax: 0.1,
   flowerButtSize: 12,
   flowerLeafWidth: 10,
 };

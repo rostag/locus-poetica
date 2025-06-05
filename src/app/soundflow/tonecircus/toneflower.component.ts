@@ -71,6 +71,10 @@ export class ToneFlowerComponent implements OnInit {
   public IC = IC;
   public padAngle = IC.padAngle;
 
+  setPadAngle(evt: any) {
+    this.padAngle = parseFloat(evt.target.value) || 0.01;
+  }
+
   private flowers: ToneFlower[] = [];
 
   private bush: BushModel;
