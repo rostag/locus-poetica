@@ -4,3 +4,21 @@
   flex-direction: row;
   align-items: center;
 }
+
+.kolir {
+  width: 7rem;
+}
+
+.kolirHex {
+  width: 3rem;
+}
+
+.nota {
+  width: 5rem;
+}
+
+.chyslo {
+  font-weight: bold;
+  width: 2rem;
+  text-align: right;
+}

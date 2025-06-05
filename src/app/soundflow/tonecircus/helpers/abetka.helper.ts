@@ -22,7 +22,7 @@ function ordinalByLetter(letter: string) {
 export function ordinalByWord(word: string) {
   const letters = word.split("");
   const sum = letters.reduce((acc, letter) => acc + ordinalByLetter(letter), 0);
-  return reduceNumber(sum);
+  return sum % 12;
 }
 
 // 24.08.1991 r.
@@ -38,6 +38,10 @@ export function ordinalByDate(dateString: string) {
   const year = parseInt(parts[2], 10) % 12;
 
   return (day + month + year) % 12;
+}
+
+export function ordinalByNumber(numString: string) {
+  return parseInt(numString, 10) % 12 || 12;
 }
 
 function cardinalByLetter(letter: string) {

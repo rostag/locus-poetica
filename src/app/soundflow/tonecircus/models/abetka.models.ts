@@ -5,7 +5,7 @@ export type IdnNameIn = {
   imja: string;
   pobatjkovi: string;
   prizvysceNeoficijne: string;
-  prizvyšče: string;
+  prizvysce: string;
 };
 
 export type IdnNameOut = {
@@ -13,12 +13,20 @@ export type IdnNameOut = {
   pobatjkovi: IDN | null;
   prizvysceNeoficijne: IDN | null;
   prizvysce: IDN | null;
+  jadro: IDN | null;
 };
 
-export type IdnDateSource = {
+export type IdnDateIn = {
   denj: string;
   misjacj: string;
   rik: string;
+};
+
+export type IdnDateOut = {
+  denj: IDN | null;
+  misjacj: IDN | null;
+  rik: IDN | null;
+  jadro: IDN | null;
 };
 
 export type IdnFinalSource = {

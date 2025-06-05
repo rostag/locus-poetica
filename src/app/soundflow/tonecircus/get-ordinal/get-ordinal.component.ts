@@ -17,11 +17,14 @@ import {
   cardinalByWord,
   getIdnByNumber,
   ordinalByDate,
+  ordinalByNumber,
   ordinalByWord,
 } from "src/app/soundflow/tonecircus/helpers/abetka.helper";
 import {
   IdnNameOut,
   IdnNameIn,
+  IdnDateIn,
+  IdnDateOut,
 } from "src/app/soundflow/tonecircus/models/abetka.models";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from "@angular/material/input";
@@ -54,7 +57,7 @@ export class GetOrdinalComponent implements OnInit {
     imja: "Ростислав",
     pobatjkovi: "Олександрович",
     prizvysceNeoficijne: "Титаренко",
-    prizvyšče: "Сірик",
+    prizvysce: "Сірик",
   };
 
   public nameOut: IdnNameOut = {
@@ -62,6 +65,20 @@ export class GetOrdinalComponent implements OnInit {
     pobatjkovi: null,
     prizvysceNeoficijne: null,
     prizvysce: null,
+    jadro: null,
+  };
+
+  public dateIn: IdnDateIn = {
+    denj: "24",
+    misjacj: "08",
+    rik: "1991",
+  };
+
+  public dateOut: IdnDateOut = {
+    denj: null,
+    misjacj: null,
+    rik: null,
+    jadro: null,
   };
 
   public ordinalByWord = ordinalByWord;
@@ -71,16 +88,29 @@ export class GetOrdinalComponent implements OnInit {
   public cardinalByDate = cardinalByDate;
 
   setResult() {
-    const ona = ordinalByWord(this.nameIn.imja);
-    this.nameOut.imja = getIdnByNumber(ona) || null;
-    this.nameOut.pobatjkovi =
-      getIdnByNumber(ordinalByWord(this.nameIn.pobatjkovi)) || null;
-    this.nameOut.prizvysceNeoficijne =
-      getIdnByNumber(ordinalByWord(this.nameIn.prizvysceNeoficijne)) || null;
-    this.nameOut.prizvysce =
-      getIdnByNumber(ordinalByWord(this.nameIn.prizvyšče)) || null;
+    // Imja
+    const obImja = ordinalByWord(this.nameIn.imja);
+    const obPobat = ordinalByWord(this.nameIn.pobatjkovi);
+    const obPrNeof = ordinalByWord(this.nameIn.prizvysceNeoficijne);
+    const obPr = ordinalByWord(this.nameIn.prizvysce);
+    this.nameOut.imja = getIdnByNumber(obImja) || null;
+    this.nameOut.pobatjkovi = getIdnByNumber(obPobat) || null;
+    this.nameOut.prizvysceNeoficijne = getIdnByNumber(obPrNeof) || null;
+    this.nameOut.prizvysce = getIdnByNumber(obPr) || null;
+    this.nameOut.jadro =
+      getIdnByNumber(cardinalByWord(this.nameIn.imja)) || null;
 
-    console.log("res", ona, this.nameOut.imja);
+    // Data
+    const obd = ordinalByNumber(this.dateIn.denj);
+    const obm = ordinalByNumber(this.dateIn.misjacj);
+    const obr = ordinalByNumber(this.dateIn.rik);
+    this.dateOut.denj = getIdnByNumber(obd) || null;
+    this.dateOut.misjacj = getIdnByNumber(obm) || null;
+    this.dateOut.rik = getIdnByNumber(obr) || null;
+    this.dateOut.jadro =
+      getIdnByNumber(ordinalByNumber("" + obd + obm + obr)) || null;
+
+    console.log("res", obd, this.dateOut);
   }
 
   ngOnInit(): void {
