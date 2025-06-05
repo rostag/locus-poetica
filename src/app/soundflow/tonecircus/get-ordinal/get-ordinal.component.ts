@@ -118,7 +118,7 @@ export class GetOrdinalComponent implements OnInit {
     this.dateOut.misjacj = getIdnByNumber(obm) || null;
     this.dateOut.rik = getIdnByNumber(obr) || null;
     this.dateOut.jadro =
-      getIdnByNumber(ordinalByNumber("" + obd + obm + obr)) || null;
+      getIdnByNumber(ordinalByNumber("" + (obd + obm + obr))) || null;
 
     const leafImja: LeafModel = {
       leafOrder: 0,

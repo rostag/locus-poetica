@@ -203,7 +203,7 @@ export class ToneFlowerComponent implements OnInit {
       case 0:
         return leafModel.leafIdn.colorHex;
       case 1:
-        return "#fff";
+        return "#B7B9B4"; // bily
       default:
         return "#000";
     }

@@ -31,7 +31,7 @@ export const IDNS: IDN[] = [
   { ordinal: 9, color: "zolotyj", note: "G#", colorHex: "#BE9C5C" },
   { ordinal: 10, color: "perlynovyj", note: "A", colorHex: "#E5E3D5" },
   { ordinal: 11, color: "sribnyj", note: "A#", colorHex: "#DBDFE5" },
-  { ordinal: 12, color: "bilyj", note: "B", colorHex: "#B7B9B4" },
+  { ordinal: 12, color: "bilyj", note: "B", colorHex: "#ffffff" },
 ];
 
 const byIdnId = (idnid: number) =>
