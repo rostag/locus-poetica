@@ -53,16 +53,16 @@ export class ToneFlower {
       2 – červonyj centr
   */
 
-  public getButtColor(leaveIds: number[][]) {
-    const sum = leaveIds
-      .map((leaf) => leaf[0])
-      .reduce((acc, leaf) => {
-        return acc + leaf;
-      }, 0);
-    const centerId = sum % 12;
-    console.log("get c", sum, leaveIds, centerId);
-    return centerId;
-  }
+  // public getButtColor(leaveIds: number[][]) {
+  //   const sum = leaveIds
+  //     .map((leaf) => leaf[0])
+  //     .reduce((acc, leaf) => {
+  //       return acc + leaf;
+  //     }, 0);
+  //   const centerId = sum % 12;
+  //   console.log("get c", sum, leaveIds, centerId);
+  //   return centerId;
+  // }
 
   public get leaves() {
     return this.model.leaves;
