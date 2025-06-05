@@ -1,7 +1,9 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  EventEmitter,
   OnInit,
+  Output,
   signal,
 } from "@angular/core";
 import { FormsModule } from "@angular/forms";
@@ -14,6 +16,7 @@ import { MatExpansionModule } from "@angular/material/expansion";
 import { RouterModule } from "@angular/router";
 import {
   cardinalByDate,
+  cardinalByNumber,
   cardinalByWord,
   getIdnByNumber,
   ordinalByDate,
@@ -29,6 +32,12 @@ import {
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from "@angular/material/input";
 import { IdnComponent } from "../idn/idn.component";
+import {
+  BushModel,
+  FlowerModel,
+  LeafModel,
+} from "src/app/soundflow/tonecircus/toneflower.model";
+import { IC } from "src/app/soundflow/tonecircus/toneflower.constants";
 
 @Component({
   selector: "app-get-ordinal",
@@ -51,6 +60,7 @@ import { IdnComponent } from "../idn/idn.component";
   standalone: true,
 })
 export class GetOrdinalComponent implements OnInit {
+  @Output() onBushUpdate = new EventEmitter<BushModel>();
   public JSON = JSON;
 
   public nameIn: IdnNameIn = {
@@ -111,6 +121,78 @@ export class GetOrdinalComponent implements OnInit {
       getIdnByNumber(ordinalByNumber("" + obd + obm + obr)) || null;
 
     console.log("res", obd, this.dateOut);
+
+    const leafImja: LeafModel = {
+      leafOrder: 0,
+      leafIdn: this.nameOut.imja!,
+      leafNum: cardinalByWord(this.nameIn.imja),
+    };
+    const leafPob: LeafModel = {
+      leafOrder: 0,
+      leafIdn: this.nameOut.pobatjkovi!,
+      leafNum: cardinalByWord(this.nameIn.pobatjkovi),
+    };
+    const leafPN: LeafModel = {
+      leafOrder: 0,
+      leafIdn: this.nameOut.prizvysceNeoficijne!,
+      leafNum: cardinalByWord(this.nameIn.prizvysceNeoficijne),
+    };
+    const leafPriz: LeafModel = {
+      leafOrder: 0,
+      leafIdn: this.nameOut.prizvysce!,
+      leafNum: cardinalByWord(this.nameIn.prizvysce),
+    };
+    const leafJadro: LeafModel = {
+      leafOrder: 0,
+      leafIdn: this.nameOut.jadro!,
+      leafNum: cardinalByWord(this.nameIn.imja),
+    };
+
+    const nameFlower: FlowerModel = {
+      leaves: [leafJadro, leafImja, leafPob, leafPN, leafPriz],
+      flowerX: 150, // 150
+      flowerY: 230, // 230
+      buttSize: IC.flowerButtSize,
+      leafWidth: IC.flowerLeafWidth,
+    };
+
+    // Data
+    const leafDen: LeafModel = {
+      leafOrder: 0,
+      leafIdn: this.dateOut.denj!,
+      leafNum: cardinalByNumber(this.dateIn.denj),
+    };
+    const leafMis: LeafModel = {
+      leafOrder: 0,
+      leafIdn: this.dateOut.misjacj!,
+      leafNum: cardinalByNumber(this.dateIn.denj),
+    };
+    const leafRik: LeafModel = {
+      leafOrder: 0,
+      leafIdn: this.dateOut.rik!,
+      leafNum: cardinalByNumber(this.dateIn.denj),
+    };
+    const leafJadroDate: LeafModel = {
+      leafOrder: 0,
+      leafIdn: this.dateOut.jadro!,
+      leafNum: cardinalByDate(
+        this.dateIn.denj + "." + this.dateIn.misjacj + "." + this.dateIn.rik
+      ),
+    };
+
+    const dateFlower: FlowerModel = {
+      leaves: [leafJadroDate, leafDen, leafMis, leafRik],
+      flowerX: 80, // 150
+      flowerY: 132, // 230
+      buttSize: IC.flowerButtSize,
+      leafWidth: IC.flowerLeafWidth,
+    };
+
+    const newBush: BushModel = {
+      flowers: [nameFlower, dateFlower],
+    };
+
+    this.onBushUpdate.emit(newBush);
   }
 
   ngOnInit(): void {

@@ -73,6 +73,8 @@ export class ToneFlowerComponent implements OnInit {
 
   private flowers: ToneFlower[] = [];
 
+  private bush: BushModel;
+
   public clearFlowers() {
     this.svgr.selectAll("*").remove();
 
@@ -83,20 +85,28 @@ export class ToneFlowerComponent implements OnInit {
     this.arcs = [];
   }
 
-  private drawFlowers() {
-    this.playFlower = new ToneFlower();
-    this.playFlower.cx = 150;
-    this.playFlower.cy = 230;
-    this.playFlower.seed(PLAY_BUSH.flowers[0]);
-
-    const bush: BushModel = SAMPLE_BUSHMODELS[IC.bushId];
-
+  private drawBush() {
+    const bush: BushModel = this.bush;
     bush.flowers.map((flowerModel, i) => {
       const flower = new ToneFlower();
       this.flowers.push(flower);
       flower.seed(flowerModel);
       this.drawFlower(flower);
     });
+  }
+
+  private drawFlowers() {
+    this.playFlower = new ToneFlower();
+    this.playFlower.cx = 150;
+    this.playFlower.cy = 230;
+    this.playFlower.seed(PLAY_BUSH.flowers[0]);
+
+    this.drawBush();
+  }
+
+  getBush(bush: BushModel) {
+    this.bush = bush;
+    this.drawBush();
   }
 
   private drawFlower(flower: ToneFlower) {
@@ -263,6 +273,8 @@ export class ToneFlowerComponent implements OnInit {
   }
 
   private async initFlow() {
+    this.bush = SAMPLE_BUSHMODELS[IC.bushId];
+
     this.svgr = d3
       .select("#tonecircus")
       .append("svg")

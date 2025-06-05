@@ -91,6 +91,10 @@ export function cardinalByDate(dateString: string) {
   return reduceNumber(day + month + year) % 12;
 }
 
+export function cardinalByNumber(numString: string) {
+  return reduceNumber(parseInt(numString, 10));
+}
+
 export function getIdnByNumber(ordinal: number) {
   return IDNS.find((IDN) => IDN.ordinal === ordinal);
 }
