@@ -163,12 +163,12 @@ export class GetOrdinalComponent implements OnInit {
     const leafMis: LeafModel = {
       leafOrder: 0,
       leafIdn: this.dateOut.misjacj!,
-      leafNum: cardinalByNumber(this.dateIn.denj),
+      leafNum: cardinalByNumber(this.dateIn.misjacj),
     };
     const leafRik: LeafModel = {
       leafOrder: 0,
       leafIdn: this.dateOut.rik!,
-      leafNum: cardinalByNumber(this.dateIn.denj),
+      leafNum: cardinalByNumber(this.dateIn.rik),
     };
     const leafJadroDate: LeafModel = {
       leafOrder: 0,

@@ -92,7 +92,13 @@ export function cardinalByDate(dateString: string) {
 }
 
 export function cardinalByNumber(numString: string) {
-  return reduceNumber(parseInt(numString, 10));
+  const digits = numString.split("");
+  const sum = digits.reduce((acc, digit) => acc + parseInt(digit, 10), 0);
+  if (sum > 12) {
+    return cardinalByNumber("" + sum);
+  } else {
+    return sum;
+  }
 }
 
 export function getIdnByNumber(ordinal: number) {
