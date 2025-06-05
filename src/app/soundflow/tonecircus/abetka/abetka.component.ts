@@ -37,7 +37,7 @@ import {
   standalone: true,
 })
 export class AbetkaComponent implements OnInit {
-  readonly panelOpenState = signal(true);
+  readonly panelOpenState = signal(false);
 
   public example1 = "Ростислав";
   public example1date = "24.08.1991";
