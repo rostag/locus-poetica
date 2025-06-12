@@ -7,6 +7,9 @@
 
 .kolir {
   width: 7rem;
+  padding: 6px;
+  text-align: center;
+  vertical-align: center;
 }
 
 .kolirHex {
@@ -21,4 +24,8 @@
   font-weight: bold;
   width: 2rem;
   text-align: right;
+}
+
+.color-picker {
+  height: 3rem;
 }

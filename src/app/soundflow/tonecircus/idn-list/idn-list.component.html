@@ -1,0 +1,8 @@
+<h3>Nalaštuvannja</h3>
+<div>
+  @for (idn of IDNS; track idn) {
+  <app-idn [idn]="idn" />
+  } @empty {
+  <li>Nema elementiv</li>
+  }
+</div>

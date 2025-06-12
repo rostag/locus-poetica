@@ -1,10 +1,16 @@
 <div class="section">
-  <!-- Kolir -->
   @if (idn) {
   <div class="flex-row gap-1">
     <div class="chyslo">{{ idn.ordinal }}</div>
-    <div class="kolirHex" [style]="'background-color: ' + idn.colorHex"></div>
-    <div class="flex-row kolir">{{ idn.color }}</div>
+    <div class="kolirHex p-1">
+      <input class="color-picker" type="color" [(ngModel)]="idn.colorHex" />
+    </div>
+    <div class="fkolir">
+      <div>
+        {{ idn.color }}
+      </div>
+      <div class="text-sm p-1">{{ idn.colorHex }}</div>
+    </div>
     <div class="nota">Nota: {{ idn.note }}</div>
   </div>
   }

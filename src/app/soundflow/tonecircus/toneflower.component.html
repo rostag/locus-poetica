@@ -24,11 +24,11 @@
   <button (click)="toggleBgStyle()" style="margin-right: 12px">
     kolir fonu
   </button>
-  @if (showSettings) {
-  <!-- <app-flowerinput /> -->
-  }
 </div>
-<div class="flex-row">
+<div class="flex-row ml-1">
+  <!-- @if (showSettings) {
+  <app-idn-list />
+  } -->
   <div class="bushcont"><figure id="bushwrap"></figure></div>
   <app-get-ordinal (onBushUpdate)="getBush($event)" />
 </div>

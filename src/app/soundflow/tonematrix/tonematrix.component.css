@@ -1,0 +1,89 @@
+:host {
+    --color: #2A2A2A;
+    --background-color: black;
+
+    margin: 0;
+    padding: 16px;
+    overflow: hidden;
+    position: relative;
+    font-family: 'Open Sans', sans-serif;
+    -webkit-overflow-scrolling: touch;
+    touch-action: manipulation;
+    color: var(--color);
+    background-color: var(--background-color);
+    width: -webkit-fill-available;
+    height: -webkit-fill-available;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 100vw;
+    min-height: 100vh;
+    /* mobile viewport bug fix */
+    min-width: -webkit-fill-available;
+    /* min-height: -webkit-fill-available; */
+}
+
+* {
+    user-select: none;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.invisible {
+    visibility: hidden !important;
+}
+
+.enabled-audio {
+    top: 16px;
+    text-align: center;
+}
+
+canvas {
+    width: min(512px, 80vmin);
+    height: min(512px, 80vmin);
+    filter: blur(1px);
+    position: relative;
+}
+
+.tone-footer {
+    margin-top: 16px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.tone-footer button {
+    color: inherit;
+    border: none;
+    outline: none;
+    appearance: none;
+    padding: 8px;
+    cursor: pointer;
+    background-color: #666;
+    border-radius: 1px;
+}
+
+footer button:active {
+    background-color: aqua
+}
+
+.copy {
+    font-size: .6rem;
+    color: #555;
+    text-align: center;
+}
+
+.copy a {
+    color: #999;
+}
+
+
+::ng-deep .app-footer {
+    display: none;
+}
