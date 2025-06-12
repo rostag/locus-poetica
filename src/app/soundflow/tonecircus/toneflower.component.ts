@@ -38,7 +38,6 @@ type OscItem = {
     FormsModule,
     AbetkaComponent,
     GetOrdinalComponent,
-    IdnListComponent,
   ],
   templateUrl: "./toneflower.component.html",
   styleUrl: "./toneflower.component.css",
