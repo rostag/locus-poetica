@@ -24,7 +24,6 @@ import {
   LeafModel,
 } from "src/app/soundflow/tonecircus/toneflower.model";
 import * as Tone from "tone";
-import { IdnListComponent } from "./idn-list/idn-list.component";
 
 type OscItem = {
   [index: number]: OscillatorNode;

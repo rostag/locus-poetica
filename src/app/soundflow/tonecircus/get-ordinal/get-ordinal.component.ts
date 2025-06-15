@@ -97,6 +97,35 @@ export class GetOrdinalComponent implements OnInit {
   public cardinalByWord = cardinalByWord;
   public cardinalByDate = cardinalByDate;
 
+  /**
+   * Розрахунок кольору та звуку 
+1 - A Ї Ф
+2 - Б Й Х
+3 - В К Ц
+4 - Г Л Ч
+5 - Ґ М Ш
+6 - Д Н Щ
+7 - Е О Ь
+8 - Є П Ю
+9 - Ж Р Я
+10 - З С
+11 - И Т
+12 - І У 
+
+Для слова (імені) – все складаємо і далі віднімаємо 12, поки не отримаємо число  від 1 до 12.
+Для дати – від цілого числа віднімаємо 12, поки не отримаємо число  від 1 до 12. 
+
+Приклад:
+Ростислав
+9+7+10+11+11+10+4+1+3=66. 
+66-(12×5)=6 (блакитний колір/нота фа) 
+
+24.08.1991 р.
+24-12=12 (білий/сі); 
+8 (фіолетовий/соль); 
+1991-(12×165)=11 (срібний/ля#); 
+сумма (серединка): 12+8+11=31. 31-(12×2)=7 (синій/фа#)
+   */
   setResult() {
     // Imja
     const obImja = ordinalByWord(this.nameIn.imja);
@@ -111,26 +140,26 @@ export class GetOrdinalComponent implements OnInit {
       getIdnByNumber(cardinalByWord(this.nameIn.imja)) || null;
 
     // Data
-    const obd = ordinalByNumber(this.dateIn.denj);
-    const obm = ordinalByNumber(this.dateIn.misjacj);
-    const obr = ordinalByNumber(this.dateIn.rik);
-    this.dateOut.denj = getIdnByNumber(obd) || null;
-    this.dateOut.misjacj = getIdnByNumber(obm) || null;
-    this.dateOut.rik = getIdnByNumber(obr) || null;
+    const obDen = ordinalByNumber(this.dateIn.denj);
+    const obMisjac = ordinalByNumber(this.dateIn.misjacj);
+    const obRik = ordinalByNumber(this.dateIn.rik);
+    this.dateOut.denj = getIdnByNumber(obDen) || null;
+    this.dateOut.misjacj = getIdnByNumber(obMisjac) || null;
+    this.dateOut.rik = getIdnByNumber(obRik) || null;
     this.dateOut.jadro =
-      getIdnByNumber(ordinalByNumber("" + (obd + obm + obr))) || null;
+      getIdnByNumber(ordinalByNumber("" + (obDen + obMisjac + obRik))) || null;
 
     const leafImja: LeafModel = {
       leafOrder: 0,
       leafIdn: this.nameOut.imja!,
       leafNum: cardinalByWord(this.nameIn.imja),
     };
-    const leafPob: LeafModel = {
+    const leafPobatkovi: LeafModel = {
       leafOrder: 0,
       leafIdn: this.nameOut.pobatjkovi!,
       leafNum: cardinalByWord(this.nameIn.pobatjkovi),
     };
-    const leafPN: LeafModel = {
+    const leafPrizNeof: LeafModel = {
       leafOrder: 0,
       leafIdn: this.nameOut.prizvysceNeoficijne!,
       leafNum: cardinalByWord(this.nameIn.prizvysceNeoficijne),
@@ -147,7 +176,7 @@ export class GetOrdinalComponent implements OnInit {
     };
 
     const nameFlower: FlowerModel = {
-      leaves: [leafJadro, leafImja, leafPob, leafPN, leafPriz],
+      leaves: [leafJadro, leafImja, leafPobatkovi, leafPrizNeof, leafPriz],
       flowerX: 150, // 150
       flowerY: 230, // 230
       buttSize: IC.flowerButtSize,
@@ -184,6 +213,41 @@ export class GetOrdinalComponent implements OnInit {
       flowerY: 132, // 230
       buttSize: IC.flowerButtSize,
       leafWidth: IC.flowerLeafWidth,
+    };
+
+    // Поєднання
+    // Pokazuju na prykladi tvogo portretu, jak rahuvaty pojednannja
+    // Rozrahunok pojednannja imeni ta daty narodžennja
+
+    // 1.⁠ ⁠vlasne im'ja + denj narodžennja
+    // 2.⁠ ⁠po batjkovi + masjacj narodžennja
+    // 3.⁠ ⁠prizvyšče neoficijne + prizvyšče + rik narodžennja
+    // 4.⁠ ⁠jadro = summa pokaznykiv
+
+    // Pryklad (kolir/zvuk)
+    // 1.⁠ ⁠6 (blakytnyj/fa) + 2 (červonyj/do#) = 8 (fioletovyj/solj)
+    // 2.⁠ ⁠6 (blakytnyj/fa) + 11 (sribnyj/lja#) = 17. 17 - 12 = 5 (zelenyj/mi)
+    // 3.⁠ ⁠6 (blakytnyj/fa) + 9 (zolotyj/solj#) + 10 (perlynovyj/lja) = 25. 25 - (12×2) = 1 (čornyj/do)
+    // 4.⁠ ⁠8 (fioletovyj/solj) + 5 (zelenyj/mi) + 1 (čornyj/do) = 14. 14 - 12 = 2 (červonyj/do#)
+
+    // Pryklad (čyslo)
+    // 1.⁠ ⁠3+8=11. 1+1=2
+    // 2.⁠ ⁠6+2=8
+    // 3.⁠ ⁠3+9+7=19. 1+9=10. 1+0=1
+    // 4.⁠ ⁠2+8+1=11. 1+1=2
+
+    // P.S. Jak variant, №4 možna skladaty naprjamu vid iznačaljnyh pokaznykiv jadra:
+    // 4.⁠ ⁠3 (pomarančevyj/re) + 11 (sribnyj/lja#) = 14. 14 - 12 = 2 (červonyj/do#)
+    //     3+8=11. 1+1=2
+
+    const obImjaDen = ordinalByNumber("" + obImja + obDen);
+    const obPoBatMisjac = ordinalByNumber("" + obPobat + obMisjac);
+    const obPrizNeofPrizRik = ordinalByNumber("" + obPrNeof + obPr + obRik);
+
+    const leafImjaDen: LeafModel = {
+      leafOrder: 0,
+      leafIdn: getIdnByNumber(obImjaDen)!,
+      leafNum: cardinalByWord(this.nameIn.imja),
     };
 
     const newBush: BushModel = {

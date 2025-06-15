@@ -4,8 +4,8 @@ import {
   CARDINALS_BY_LETTERS_UA,
   NumberByLetter,
   ORDINALS_BY_LETTERS_UA,
-} from "src/app/soundflow/tonecircus/models/abetka.models";
-import { IDNS } from "src/app/soundflow/tonecircus/toneflower.constants";
+} from "./../models/abetka.models";
+import { IDNS } from "../../tonecircus/toneflower.constants";
 
 function ordinalByLetter(letter: string) {
   const ordinal =
@@ -94,7 +94,7 @@ export function cardinalByDate(dateString: string) {
 export function cardinalByNumber(numString: string) {
   const digits = numString.split("");
   const sum = digits.reduce((acc, digit) => acc + parseInt(digit, 10), 0);
-  if (sum > 12) {
+  if (sum > 9) {
     return cardinalByNumber("" + sum);
   } else {
     return sum;
