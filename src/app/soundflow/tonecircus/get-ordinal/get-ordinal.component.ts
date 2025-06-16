@@ -28,6 +28,7 @@ import {
   IdnNameIn,
   IdnDateIn,
   IdnDateOut,
+  IdnPojedOut,
 } from "src/app/soundflow/tonecircus/models/abetka.models";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from "@angular/material/input";
@@ -79,15 +80,22 @@ export class GetOrdinalComponent implements OnInit {
   };
 
   public dateIn: IdnDateIn = {
-    denj: "24",
-    misjacj: "08",
-    rik: "1991",
+    denj: "26",
+    misjacj: "11",
+    rik: "1978",
   };
 
   public dateOut: IdnDateOut = {
     denj: null,
     misjacj: null,
     rik: null,
+    jadro: null,
+  };
+
+  public pojedOut: IdnPojedOut = {
+    imjaDenj: null,
+    pobatMisjacj: null,
+    prNeofPrRik: null,
     jadro: null,
   };
 
@@ -240,18 +248,56 @@ export class GetOrdinalComponent implements OnInit {
     // 4.⁠ ⁠3 (pomarančevyj/re) + 11 (sribnyj/lja#) = 14. 14 - 12 = 2 (červonyj/do#)
     //     3+8=11. 1+1=2
 
-    const obImjaDen = ordinalByNumber("" + obImja + obDen);
-    const obPoBatMisjac = ordinalByNumber("" + obPobat + obMisjac);
-    const obPrizNeofPrizRik = ordinalByNumber("" + obPrNeof + obPr + obRik);
+    const obImjaDen = ordinalByDate("" + obImja + "." + obDen);
+    const obPoBatMisjac = ordinalByDate("" + obPobat + "." + obMisjac);
+    const obPrizNeofPrizRik = ordinalByDate(
+      "" + obPrNeof + "." + obPr + "." + obRik
+    );
+    const obPojednanoJadro = ordinalByDate(
+      "" + obImjaDen + "." + obPoBatMisjac + "." + obPrizNeofPrizRik
+    );
+
+    this.pojedOut.imjaDenj = getIdnByNumber(obImjaDen)!;
+    this.pojedOut.pobatMisjacj = getIdnByNumber(obPoBatMisjac)!;
+    this.pojedOut.prNeofPrRik = getIdnByNumber(obPrizNeofPrizRik)!;
+    this.pojedOut.jadro = getIdnByNumber(obPojednanoJadro)!;
 
     const leafImjaDen: LeafModel = {
       leafOrder: 0,
-      leafIdn: getIdnByNumber(obImjaDen)!,
-      leafNum: cardinalByWord(this.nameIn.imja),
+      leafIdn: this.pojedOut.imjaDenj,
+      leafNum: 1, // cardinalByNumber("" + obImjaDen),
+    };
+    const leafPoBatMisjac: LeafModel = {
+      leafOrder: 0,
+      leafIdn: this.pojedOut.pobatMisjacj,
+      leafNum: 1, // cardinalByNumber("" + obPoBatMisjac),
+    };
+    const leafPrizNeofPrizRik: LeafModel = {
+      leafOrder: 0,
+      leafIdn: this.pojedOut.prNeofPrRik,
+      leafNum: 1, // cardinalByNumber("" + obPrizNeofPrizRik),
+    };
+    const leafPojednanoJadro: LeafModel = {
+      leafOrder: 0,
+      leafIdn: this.pojedOut.jadro,
+      leafNum: 1, // cardinalByNumber("" + obPojednanoJadro),
+    };
+
+    const pojedFlower: FlowerModel = {
+      leaves: [
+        leafPojednanoJadro,
+        leafImjaDen,
+        leafPoBatMisjac,
+        leafPrizNeofPrizRik,
+      ],
+      flowerX: 165, // 150
+      flowerY: 60, // 230
+      buttSize: IC.flowerButtSize,
+      leafWidth: IC.flowerLeafWidth,
     };
 
     const newBush: BushModel = {
-      flowers: [nameFlower, dateFlower],
+      flowers: [nameFlower, dateFlower, pojedFlower],
     };
 
     this.onBushUpdate.emit(newBush);

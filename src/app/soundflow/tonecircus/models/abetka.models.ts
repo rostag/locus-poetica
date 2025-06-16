@@ -29,6 +29,13 @@ export type IdnDateOut = {
   jadro: IDN | null;
 };
 
+export type IdnPojedOut = {
+  imjaDenj: IDN | null;
+  pobatMisjacj: IDN | null;
+  prNeofPrRik: IDN | null;
+  jadro: IDN | null;
+};
+
 export type IdnFinalSource = {
   a: string;
   b: string;

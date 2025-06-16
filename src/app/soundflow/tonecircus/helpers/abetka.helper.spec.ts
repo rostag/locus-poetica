@@ -1,5 +1,7 @@
 import {
+  cardinalByDate,
   cardinalByNumber,
+  cardinalByWord,
   ordinalByDate,
   ordinalByWord,
 } from "./abetka.helper";
@@ -19,6 +21,7 @@ describe("Abetka", () => {
   /**
     Ірина: 3 (помаранчевий); 18.9 (запис — якщо одна цифра, 
     це буде колір, якщо число з крапкою, то це розрахунок портретного числа)
+    Ірина: 3+3+2+9+1=18. 1+8=9
     Вікторівна: 7; 37.1
     Юлія: 9; 21.3
     Василівна: 3; 33.6
@@ -33,14 +36,16 @@ describe("Abetka", () => {
     ["Василівна", 3, "33.6"],
     ["Григорій", 10, "25.7"],
     ["Вікторович", 10, "28.1"],
+    ["Ростислав", 6, "30.3"],
   ];
 
-  it("should get ordinal by word", () => {
+  it("should get ordinal and cardinal by word", () => {
     nameCases.forEach((nameCase: NameCase) => {
       const name = nameCase[0];
       const ordinal = nameCase[1];
-      const portraitNum = nameCase[2];
+      const portraitNum = parseInt(nameCase[2].split(".")[1], 10);
       expect(ordinalByWord(name)).toEqual(ordinal);
+      expect(cardinalByWord(name)).toEqual(portraitNum);
     });
   });
 
@@ -53,7 +58,7 @@ describe("Abetka", () => {
    * 27.10.1997: 6; 18.9
    */
   const dateCases = [
-    ["24.08.1991", 7, ""],
+    ["24.08.1991", 7, "30.7"],
     ["09.07.1972", 8, "17.8"],
     ["24.08.1992", 8, "17.8"],
     ["20.02.2014", 8, "11.2"],
@@ -62,12 +67,15 @@ describe("Abetka", () => {
     ["27.10.1997", 6, "18.9"],
     // ["09.11.2014", ],
     // ["01.10.2023", ],
-    ["28.06.2022", 4, "???"],
+    ["28.06.2022", 4, "???.4"],
   ];
   it("should get ordinal by date", () => {
     expect(ordinalByDate("24.08.1991")).toEqual(7);
     dateCases.forEach((dateCase: NameCase) => {
       expect(ordinalByDate(dateCase[0])).toEqual(dateCase[1]);
+      expect(cardinalByDate(dateCase[0])).toEqual(
+        parseInt(dateCase[2].split(".")[1], 10)
+      );
     });
   });
 

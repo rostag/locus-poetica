@@ -1,6 +1,6 @@
 <div class="flex-row get-ordinal">
   <div>
-    <h3>Rozrahunok</h3>
+    <h3>Rozrahunok - Imja</h3>
     <!-- Im'ja -->
     <div class="flex-row">
       <mat-form-field appearance="outline">
@@ -45,6 +45,7 @@
       </mat-form-field>
       <app-idn [idn]="nameOut.jadro"></app-idn>
     </div>
+    <h3>Data</h3>
     <!-- Denj -->
     <div class="flex-row">
       <mat-form-field appearance="outline">
@@ -77,12 +78,47 @@
       </mat-form-field>
       <app-idn [idn]="dateOut.jadro"></app-idn>
     </div>
-  </div>
-  <!-- <div>
+
+    <h3>Pojednannja</h3>
+    <!-- Imja + Denj -->
+    <div class="flex-row">
+      <mat-form-field appearance="outline">
+        <mat-label>Im'ja + denj</mat-label>
+        <input matInput value="im'ja + denj" disabled="" />
+      </mat-form-field>
+      <app-idn [idn]="pojedOut.imjaDenj"></app-idn>
+    </div>
+    <!-- P⁠o batjkovi + masjacj -->
+    <div class="flex-row">
+      <mat-form-field appearance="outline">
+        <mat-label>Oo batjkovi + masjacj</mat-label>
+        <input matInput value="po batjkovi + masjacj" disabled="" />
+      </mat-form-field>
+      <app-idn [idn]="pojedOut.pobatMisjacj"></app-idn>
+    </div>
+    <!-- Pr Neof + Pr + Rik -->
+    <div class="flex-row">
+      <mat-form-field appearance="outline">
+        <mat-label>Pr Neof + Pr + Rik</mat-label>
+        <input matInput value="Pr Neof + Pr + Rik" disabled="" />
+      </mat-form-field>
+      <app-idn [idn]="pojedOut.prNeofPrRik"></app-idn>
+    </div>
+    <!-- Jadro -->
+    <div class="flex-row">
+      <mat-form-field appearance="outline">
+        <mat-label>Jadro</mat-label>
+        <input matInput value="Jadro" disabled="" />
+      </mat-form-field>
+      <app-idn [idn]="pojedOut.jadro"></app-idn>
+    </div>
+
+    <!-- <div>
       <h3>2. Rozrahunok čysla</h3>
     </div>
     <div>
       <h3>3. Pidsumok</h3>
       V roboti...
     </div> -->
+  </div>
 </div>
