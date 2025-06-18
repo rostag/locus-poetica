@@ -5,7 +5,7 @@
     <div class="flex-row">
       <mat-form-field appearance="outline">
         <mat-label>Im'ja</mat-label>
-        <input matInput [(ngModel)]="nameIn.imja" (input)="setResult()" />
+        <input matInput [(ngModel)]="nameIn.imja" (input)="setData()" />
       </mat-form-field>
       <app-idn [idn]="nameOut.imja"></app-idn>
     </div>
@@ -13,7 +13,7 @@
     <div class="flex-row">
       <mat-form-field appearance="outline">
         <mat-label>Po-batjkovi</mat-label>
-        <input matInput [(ngModel)]="nameIn.pobatjkovi" (input)="setResult()" />
+        <input matInput [(ngModel)]="nameIn.pobatjkovi" (input)="setData()" />
       </mat-form-field>
       <app-idn [idn]="nameOut.pobatjkovi"></app-idn>
     </div>
@@ -24,7 +24,7 @@
         <input
           matInput
           [(ngModel)]="nameIn.prizvysceNeoficijne"
-          (input)="setResult()"
+          (input)="setData()"
         />
       </mat-form-field>
       <app-idn [idn]="nameOut.prizvysceNeoficijne"></app-idn>
@@ -33,7 +33,7 @@
     <div class="flex-row">
       <mat-form-field appearance="outline">
         <mat-label>Prizvyšče</mat-label>
-        <input matInput [(ngModel)]="nameIn.prizvysce" (input)="setResult()" />
+        <input matInput [(ngModel)]="nameIn.prizvysce" (input)="setData()" />
       </mat-form-field>
       <app-idn [idn]="nameOut.prizvysce"></app-idn>
     </div>
@@ -50,7 +50,7 @@
     <div class="flex-row">
       <mat-form-field appearance="outline">
         <mat-label>Denj</mat-label>
-        <input matInput [(ngModel)]="dateIn.denj" (input)="setResult()" />
+        <input matInput [(ngModel)]="dateIn.denj" (input)="setData()" />
       </mat-form-field>
       <app-idn [idn]="dateOut.denj"></app-idn>
     </div>
@@ -58,7 +58,7 @@
     <div class="flex-row">
       <mat-form-field appearance="outline">
         <mat-label>Misjacj</mat-label>
-        <input matInput [(ngModel)]="dateIn.misjacj" (input)="setResult()" />
+        <input matInput [(ngModel)]="dateIn.misjacj" (input)="setData()" />
       </mat-form-field>
       <app-idn [idn]="dateOut.misjacj"></app-idn>
     </div>
@@ -66,7 +66,7 @@
     <div class="flex-row">
       <mat-form-field appearance="outline">
         <mat-label>Rik</mat-label>
-        <input matInput [(ngModel)]="dateIn.rik" (input)="setResult()" />
+        <input matInput [(ngModel)]="dateIn.rik" (input)="setData()" />
       </mat-form-field>
       <app-idn [idn]="dateOut.rik"></app-idn>
     </div>

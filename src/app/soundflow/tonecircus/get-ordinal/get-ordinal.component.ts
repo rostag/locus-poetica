@@ -39,6 +39,7 @@ import {
   LeafModel,
 } from "src/app/soundflow/tonecircus/toneflower.model";
 import { IC } from "src/app/soundflow/tonecircus/toneflower.constants";
+import { BUSH_SAMPLES } from "src/app/soundflow/tonecircus/constants/sample.constants";
 
 @Component({
   selector: "app-get-ordinal",
@@ -105,6 +106,17 @@ export class GetOrdinalComponent implements OnInit {
   public cardinalByWord = cardinalByWord;
   public cardinalByDate = cardinalByDate;
 
+  public setInputs() {
+    const sample = BUSH_SAMPLES[0].split(",");
+    this.nameIn.imja = sample[0];
+    this.nameIn.pobatjkovi = sample[1];
+    this.nameIn.prizvysceNeoficijne = sample[2];
+    this.nameIn.prizvysce = sample[3];
+    this.dateIn.denj = sample[4];
+    this.dateIn.misjacj = sample[5];
+    this.dateIn.rik = sample[6];
+  }
+
   /**
    * Розрахунок кольору та звуку 
 1 - A Ї Ф
@@ -134,7 +146,7 @@ export class GetOrdinalComponent implements OnInit {
 1991-(12×165)=11 (срібний/ля#); 
 сумма (серединка): 12+8+11=31. 31-(12×2)=7 (синій/фа#)
    */
-  setResult() {
+  setData() {
     // Imja
     const imjaNomer = ordinalByWord(this.nameIn.imja);
     const imjaCyslo = cardinalByWord(this.nameIn.imja);
@@ -320,6 +332,7 @@ export class GetOrdinalComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.setResult();
+    this.setInputs();
+    this.setData();
   }
 }
