@@ -90,4 +90,12 @@ describe("Abetka", () => {
       expect(cardinalByNumber(c[0])).toEqual(c[1]);
     });
   });
+
+  it("should get cardinalByNameAndDate", () => {
+    expect(
+      cardinalByNumber(
+        "" + cardinalByWord("Ростислав") + cardinalByNumber("26")
+      )
+    ).toEqual(2);
+  });
 });

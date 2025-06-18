@@ -136,51 +136,59 @@ export class GetOrdinalComponent implements OnInit {
    */
   setResult() {
     // Imja
-    const obImja = ordinalByWord(this.nameIn.imja);
-    const obPobat = ordinalByWord(this.nameIn.pobatjkovi);
-    const obPrNeof = ordinalByWord(this.nameIn.prizvysceNeoficijne);
-    const obPr = ordinalByWord(this.nameIn.prizvysce);
-    this.nameOut.imja = getIdnByNumber(obImja) || null;
-    this.nameOut.pobatjkovi = getIdnByNumber(obPobat) || null;
-    this.nameOut.prizvysceNeoficijne = getIdnByNumber(obPrNeof) || null;
-    this.nameOut.prizvysce = getIdnByNumber(obPr) || null;
-    this.nameOut.jadro =
-      getIdnByNumber(cardinalByWord(this.nameIn.imja)) || null;
+    const imjaNomer = ordinalByWord(this.nameIn.imja);
+    const imjaCyslo = cardinalByWord(this.nameIn.imja);
+    const pobatNomer = ordinalByWord(this.nameIn.pobatjkovi);
+    const pobatCyslo = cardinalByWord(this.nameIn.pobatjkovi);
+    const prizNeofNomer = ordinalByWord(this.nameIn.prizvysceNeoficijne);
+    const prizNeofCyslo = cardinalByWord(this.nameIn.prizvysceNeoficijne);
+    const prizNomer = ordinalByWord(this.nameIn.prizvysce);
+    const prizCyslo = cardinalByWord(this.nameIn.prizvysce);
+    this.nameOut.imja = getIdnByNumber(imjaNomer) || null;
+    this.nameOut.pobatjkovi = getIdnByNumber(pobatNomer) || null;
+    this.nameOut.prizvysceNeoficijne = getIdnByNumber(prizNeofNomer) || null;
+    this.nameOut.prizvysce = getIdnByNumber(prizNomer) || null;
+    this.nameOut.jadro = getIdnByNumber(imjaCyslo) || null;
 
     // Data
-    const obDen = ordinalByNumber(this.dateIn.denj);
-    const obMisjac = ordinalByNumber(this.dateIn.misjacj);
-    const obRik = ordinalByNumber(this.dateIn.rik);
-    this.dateOut.denj = getIdnByNumber(obDen) || null;
-    this.dateOut.misjacj = getIdnByNumber(obMisjac) || null;
-    this.dateOut.rik = getIdnByNumber(obRik) || null;
+    const denNomer = ordinalByNumber(this.dateIn.denj);
+    const denCyslo = cardinalByNumber(this.dateIn.denj);
+    const misjacNomer = ordinalByNumber(this.dateIn.misjacj);
+    const misjacCyslo = cardinalByNumber(this.dateIn.misjacj);
+    const rikNomer = ordinalByNumber(this.dateIn.rik);
+    const rikCyslo = cardinalByNumber(this.dateIn.rik);
+    this.dateOut.denj = getIdnByNumber(denNomer) || null;
+    this.dateOut.misjacj = getIdnByNumber(misjacNomer) || null;
+    this.dateOut.rik = getIdnByNumber(rikNomer) || null;
     this.dateOut.jadro =
-      getIdnByNumber(ordinalByNumber("" + (obDen + obMisjac + obRik))) || null;
+      getIdnByNumber(
+        ordinalByNumber("" + (denNomer + misjacNomer + rikNomer))
+      ) || null;
 
     const leafImja: LeafModel = {
       leafOrder: 0,
       leafIdn: this.nameOut.imja!,
-      leafNum: cardinalByWord(this.nameIn.imja),
+      leafNum: imjaCyslo,
     };
     const leafPobatkovi: LeafModel = {
       leafOrder: 0,
       leafIdn: this.nameOut.pobatjkovi!,
-      leafNum: cardinalByWord(this.nameIn.pobatjkovi),
+      leafNum: pobatCyslo,
     };
     const leafPrizNeof: LeafModel = {
       leafOrder: 0,
       leafIdn: this.nameOut.prizvysceNeoficijne!,
-      leafNum: cardinalByWord(this.nameIn.prizvysceNeoficijne),
+      leafNum: prizNeofCyslo,
     };
     const leafPriz: LeafModel = {
       leafOrder: 0,
       leafIdn: this.nameOut.prizvysce!,
-      leafNum: cardinalByWord(this.nameIn.prizvysce),
+      leafNum: prizCyslo,
     };
     const leafJadro: LeafModel = {
       leafOrder: 0,
       leafIdn: this.nameOut.jadro!,
-      leafNum: cardinalByWord(this.nameIn.imja),
+      leafNum: imjaCyslo,
     };
 
     const nameFlower: FlowerModel = {
@@ -195,17 +203,17 @@ export class GetOrdinalComponent implements OnInit {
     const leafDen: LeafModel = {
       leafOrder: 0,
       leafIdn: this.dateOut.denj!,
-      leafNum: cardinalByNumber(this.dateIn.denj),
+      leafNum: denCyslo,
     };
     const leafMis: LeafModel = {
       leafOrder: 0,
       leafIdn: this.dateOut.misjacj!,
-      leafNum: cardinalByNumber(this.dateIn.misjacj),
+      leafNum: misjacCyslo,
     };
     const leafRik: LeafModel = {
       leafOrder: 0,
       leafIdn: this.dateOut.rik!,
-      leafNum: cardinalByNumber(this.dateIn.rik),
+      leafNum: rikCyslo,
     };
     const leafJadroDate: LeafModel = {
       leafOrder: 0,
@@ -239,48 +247,56 @@ export class GetOrdinalComponent implements OnInit {
     // 4.⁠ ⁠8 (fioletovyj/solj) + 5 (zelenyj/mi) + 1 (čornyj/do) = 14. 14 - 12 = 2 (červonyj/do#)
 
     // Pryklad (čyslo)
-    // 1.⁠ ⁠3+8=11. 1+1=2
-    // 2.⁠ ⁠6+2=8
-    // 3.⁠ ⁠3+9+7=19. 1+9=10. 1+0=1
-    // 4.⁠ ⁠2+8+1=11. 1+1=2
+    // 1.⁠ ⁠3+8=11. 1+1=2 (де 3 - число Ростислава, 8 - число дня народження (26))
+    // 2.⁠ ⁠6+2=8 (6 - число Олександрович, 2 - число місяця (11: 1+1 = 2))
+    // 3.⁠ ⁠3+9+7=19. 1+9=10. 1+0=1 (ПрНеоф + ПрОф + Рік)
+    // 4.⁠ ⁠2+8+1=11. 1+1=2 ()
 
     // P.S. Jak variant, №4 možna skladaty naprjamu vid iznačaljnyh pokaznykiv jadra:
     // 4.⁠ ⁠3 (pomarančevyj/re) + 11 (sribnyj/lja#) = 14. 14 - 12 = 2 (červonyj/do#)
     //     3+8=11. 1+1=2
 
-    const obImjaDen = ordinalByDate("" + obImja + "." + obDen);
-    const obPoBatMisjac = ordinalByDate("" + obPobat + "." + obMisjac);
-    const obPrizNeofPrizRik = ordinalByDate(
-      "" + obPrNeof + "." + obPr + "." + obRik
+    const imjaDenNomer = ordinalByDate("" + imjaNomer + "." + denNomer);
+    const imjaDenCyslo = cardinalByNumber("" + imjaCyslo + denCyslo);
+    const poBatMisjacNomer = ordinalByDate("" + pobatNomer + "." + misjacNomer);
+    const poBatMisjacCyslo = cardinalByNumber("" + pobatCyslo + misjacCyslo);
+    const prizNeofPrizRikNomer = ordinalByDate(
+      "" + prizNeofNomer + "." + prizNomer + "." + rikNomer
     );
-    const obPojednanoJadro = ordinalByDate(
-      "" + obImjaDen + "." + obPoBatMisjac + "." + obPrizNeofPrizRik
+    const prizNeofPrizRikCyslo = cardinalByNumber(
+      "" + prizNeofCyslo + prizCyslo + rikCyslo
+    );
+    const pojednanoJadroNomer = ordinalByDate(
+      "" + imjaDenNomer + "." + poBatMisjacNomer + "." + prizNeofPrizRikNomer
+    );
+    const pojednanoJadroCyslo = cardinalByNumber(
+      "" + imjaDenCyslo + poBatMisjacCyslo + prizNeofPrizRikCyslo
     );
 
-    this.pojedOut.imjaDenj = getIdnByNumber(obImjaDen)!;
-    this.pojedOut.pobatMisjacj = getIdnByNumber(obPoBatMisjac)!;
-    this.pojedOut.prNeofPrRik = getIdnByNumber(obPrizNeofPrizRik)!;
-    this.pojedOut.jadro = getIdnByNumber(obPojednanoJadro)!;
+    this.pojedOut.imjaDenj = getIdnByNumber(imjaDenNomer)!;
+    this.pojedOut.pobatMisjacj = getIdnByNumber(poBatMisjacNomer)!;
+    this.pojedOut.prNeofPrRik = getIdnByNumber(prizNeofPrizRikNomer)!;
+    this.pojedOut.jadro = getIdnByNumber(pojednanoJadroNomer)!;
 
     const leafImjaDen: LeafModel = {
       leafOrder: 0,
       leafIdn: this.pojedOut.imjaDenj,
-      leafNum: 1, // cardinalByNumber("" + obImjaDen),
+      leafNum: imjaDenCyslo,
     };
     const leafPoBatMisjac: LeafModel = {
       leafOrder: 0,
       leafIdn: this.pojedOut.pobatMisjacj,
-      leafNum: 1, // cardinalByNumber("" + obPoBatMisjac),
+      leafNum: poBatMisjacCyslo,
     };
     const leafPrizNeofPrizRik: LeafModel = {
       leafOrder: 0,
       leafIdn: this.pojedOut.prNeofPrRik,
-      leafNum: 1, // cardinalByNumber("" + obPrizNeofPrizRik),
+      leafNum: prizNeofPrizRikCyslo,
     };
     const leafPojednanoJadro: LeafModel = {
       leafOrder: 0,
       leafIdn: this.pojedOut.jadro,
-      leafNum: 1, // cardinalByNumber("" + obPojednanoJadro),
+      leafNum: pojednanoJadroCyslo,
     };
 
     const pojedFlower: FlowerModel = {
