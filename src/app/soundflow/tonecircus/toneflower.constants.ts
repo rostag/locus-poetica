@@ -21,17 +21,17 @@ const places = [
 
 export const IDNS: IDN[] = [
   { ordinal: 1, color: "čornyj", note: "C", colorHex: "#151210" }, // noop
-  { ordinal: 2, color: "červonyj", note: "C#", colorHex: "#bd1e1e" }, // upd
-  { ordinal: 3, color: "pomarančevyj", note: "D", colorHex: "#db7b3b" }, // upd
-  { ordinal: 4, color: "žovtyj", note: "D#", colorHex: "#e0a536" }, // upd
-  { ordinal: 5, color: "zelenyj", note: "E", colorHex: "#32963a" }, // upd
-  { ordinal: 6, color: "blakytnyj", note: "F", colorHex: "#56acc7" }, // upd
-  { ordinal: 7, color: "synij", note: "F#", colorHex: "#0e6f9c" }, // upd
+  { ordinal: 2, color: "červonyj", note: "C#", colorHex: "#bd1e1e" }, // upd2
+  { ordinal: 3, color: "pomarančevyj", note: "D", colorHex: "#db7b3b" }, // upd2
+  { ordinal: 4, color: "žovtyj", note: "D#", colorHex: "#e0a536" }, // upd2
+  { ordinal: 5, color: "zelenyj", note: "E", colorHex: "#366C2C" }, // upd-noop
+  { ordinal: 6, color: "blakytnyj", note: "F", colorHex: "#4D86B3" }, // upd-noop
+  { ordinal: 7, color: "synij", note: "F#", colorHex: "#163063" }, // upd-noop
   { ordinal: 8, color: "fioletovyj", note: "G", colorHex: "#9091B6" }, // noop
   { ordinal: 9, color: "zolotyj", note: "G#", colorHex: "#BE9C5C" }, // noop
-  { ordinal: 10, color: "perlynovyj", note: "A", colorHex: "#f2f2dc" }, // upd
+  { ordinal: 10, color: "perlynovyj", note: "A", colorHex: "#E5E3D5" }, // upd-noop
   { ordinal: 11, color: "sribnyj", note: "A#", colorHex: "#DBDFE5" }, // noop
-  { ordinal: 12, color: "bilyj", note: "B", colorHex: "#f5f5f5" }, // upd
+  { ordinal: 12, color: "bilyj", note: "B", colorHex: "#f5f5f5" }, // upd2
 ];
 
 const byIdnId = (idnid: number) =>
