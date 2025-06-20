@@ -66,10 +66,10 @@ export class GetOrdinalComponent implements OnInit {
   public JSON = JSON;
 
   public nameIn: IdnNameIn = {
-    imja: "Ростислав",
-    pobatjkovi: "Олександрович",
-    prizvysceNeoficijne: "Титаренко",
-    prizvysce: "Сірик",
+    imja: "",
+    pobatjkovi: "",
+    prizvysceNeoficijne: "",
+    prizvysce: "",
   };
 
   public nameOut: IdnNameOut = {
@@ -81,9 +81,9 @@ export class GetOrdinalComponent implements OnInit {
   };
 
   public dateIn: IdnDateIn = {
-    denj: "26",
-    misjacj: "11",
-    rik: "1978",
+    denj: "",
+    misjacj: "",
+    rik: "",
   };
 
   public dateOut: IdnDateOut = {
@@ -149,18 +149,24 @@ export class GetOrdinalComponent implements OnInit {
   setData() {
     // Imja
     const imjaNomer = ordinalByWord(this.nameIn.imja);
-    const imjaCyslo = cardinalByWord(this.nameIn.imja);
     const pobatNomer = ordinalByWord(this.nameIn.pobatjkovi);
-    const pobatCyslo = cardinalByWord(this.nameIn.pobatjkovi);
     const prizNeofNomer = ordinalByWord(this.nameIn.prizvysceNeoficijne);
-    const prizNeofCyslo = cardinalByWord(this.nameIn.prizvysceNeoficijne);
     const prizNomer = ordinalByWord(this.nameIn.prizvysce);
+    const jadroNomer = ordinalByNumber(
+      "" + (imjaNomer + pobatNomer + prizNeofNomer + prizNomer)
+    );
+    const imjaCyslo = cardinalByWord(this.nameIn.imja);
+    const pobatCyslo = cardinalByWord(this.nameIn.pobatjkovi);
+    const prizNeofCyslo = cardinalByWord(this.nameIn.prizvysceNeoficijne);
     const prizCyslo = cardinalByWord(this.nameIn.prizvysce);
+    const jadroCyslo = cardinalByNumber(
+      "" + (imjaCyslo + pobatCyslo + prizNeofCyslo + prizCyslo)
+    );
     this.nameOut.imja = getIdnByNumber(imjaNomer) || null;
     this.nameOut.pobatjkovi = getIdnByNumber(pobatNomer) || null;
     this.nameOut.prizvysceNeoficijne = getIdnByNumber(prizNeofNomer) || null;
     this.nameOut.prizvysce = getIdnByNumber(prizNomer) || null;
-    this.nameOut.jadro = getIdnByNumber(imjaCyslo) || null;
+    this.nameOut.jadro = getIdnByNumber(jadroNomer) || null;
 
     // Data
     const denNomer = ordinalByNumber(this.dateIn.denj);
@@ -200,7 +206,7 @@ export class GetOrdinalComponent implements OnInit {
     const leafJadro: LeafModel = {
       leafOrder: 0,
       leafIdn: this.nameOut.jadro!,
-      leafNum: imjaCyslo,
+      leafNum: jadroCyslo,
     };
 
     const nameFlower: FlowerModel = {

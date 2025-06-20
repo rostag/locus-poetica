@@ -82,5 +82,3 @@ export const CARDINALS_BY_LETTERS_UA: NumberByLetter[] = [
   { cardinal: 8, letters: ["Є", "М", "Х"] },
   { cardinal: 9, letters: ["Ж", "Н", "Ц"] },
 ];
-
-export type DataSample = string;

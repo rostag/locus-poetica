@@ -1,24 +1,8 @@
-import {
-  DataSample,
-  IdnDateIn,
-  IdnNameIn,
-} from "src/app/soundflow/tonecircus/models/abetka.models";
-
-const nameInMazepa: IdnNameIn = {
-  imja: "Іван",
-  pobatjkovi: "Степанович",
-  prizvysceNeoficijne: "Колединський",
-  prizvysce: "Мазепа",
-};
-
-const nameInMazepaNarodyny: IdnDateIn = {
-  denj: "20",
-  misjacj: "03",
-  rik: "1639",
-};
-
-const dataMazepa: DataSample = "Іван,Степанович,Колединський,Мазепа,20,03,1639";
 export const BUSH_SAMPLES = [
+  "Богдан,Михайлович,Зеновій,Хмельницький,27,12,1595",
   "Іван,Степанович,Колединський,Мазепа,20,03,1639",
-  "Ростислав Олександрович Титаренко Сірик 26.11.1978",
+  "Елла,Олександрівна,Черкасенко,Басова,22,02,1986",
+  "Лілія,Олександрівна,Ярмак,Петренко,07,11,1990",
+  "Ростислав,Олександрович,Титаренко,Сірик,26,11,1978",
+  "Ірина,Вікторівна,Галаган,Бойко,03,07,1985",
 ];
