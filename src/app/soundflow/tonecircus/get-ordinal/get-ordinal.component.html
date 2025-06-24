@@ -7,7 +7,7 @@
         <mat-label>Im'ja</mat-label>
         <input matInput [(ngModel)]="nameIn.imja" (input)="setData()" />
       </mat-form-field>
-      <app-idn [idn]="nameOut.imja"></app-idn>
+      <app-idn [idn]="nameOut.imja" (onIdnUpdate)="setData()"></app-idn>
     </div>
     <!-- Po bat'kovi -->
     <div class="flex-row">
@@ -15,7 +15,7 @@
         <mat-label>Po-batjkovi</mat-label>
         <input matInput [(ngModel)]="nameIn.pobatjkovi" (input)="setData()" />
       </mat-form-field>
-      <app-idn [idn]="nameOut.pobatjkovi"></app-idn>
+      <app-idn [idn]="nameOut.pobatjkovi" (onIdnUpdate)="setData()"></app-idn>
     </div>
     <!-- prizvysceNeoficijne -->
     <div class="flex-row">
@@ -27,7 +27,10 @@
           (input)="setData()"
         />
       </mat-form-field>
-      <app-idn [idn]="nameOut.prizvysceNeoficijne"></app-idn>
+      <app-idn
+        [idn]="nameOut.prizvysceNeoficijne"
+        (onIdnUpdate)="setData()"
+      ></app-idn>
     </div>
     <!-- Prizvyšče -->
     <div class="flex-row">
@@ -35,7 +38,7 @@
         <mat-label>Prizvyšče</mat-label>
         <input matInput [(ngModel)]="nameIn.prizvysce" (input)="setData()" />
       </mat-form-field>
-      <app-idn [idn]="nameOut.prizvysce"></app-idn>
+      <app-idn [idn]="nameOut.prizvysce" (onIdnUpdate)="setData()"></app-idn>
     </div>
     <!-- Jadro -->
     <div class="flex-row">
@@ -43,7 +46,7 @@
         <mat-label>Jadro Imeni</mat-label>
         <input matInput value="Jadro Imeni" disabled="" />
       </mat-form-field>
-      <app-idn [idn]="nameOut.jadro"></app-idn>
+      <app-idn [idn]="nameOut.jadro" (onIdnUpdate)="setData()"></app-idn>
     </div>
     <h3>Data</h3>
     <!-- Denj -->
@@ -52,7 +55,7 @@
         <mat-label>Denj</mat-label>
         <input matInput [(ngModel)]="dateIn.denj" (input)="setData()" />
       </mat-form-field>
-      <app-idn [idn]="dateOut.denj"></app-idn>
+      <app-idn [idn]="dateOut.denj" (onIdnUpdate)="setData()"></app-idn>
     </div>
     <!-- Misjacj -->
     <div class="flex-row">
@@ -60,7 +63,7 @@
         <mat-label>Misjacj</mat-label>
         <input matInput [(ngModel)]="dateIn.misjacj" (input)="setData()" />
       </mat-form-field>
-      <app-idn [idn]="dateOut.misjacj"></app-idn>
+      <app-idn [idn]="dateOut.misjacj" (onIdnUpdate)="setData()"></app-idn>
     </div>
     <!-- Rik -->
     <div class="flex-row">
@@ -68,7 +71,7 @@
         <mat-label>Rik</mat-label>
         <input matInput [(ngModel)]="dateIn.rik" (input)="setData()" />
       </mat-form-field>
-      <app-idn [idn]="dateOut.rik"></app-idn>
+      <app-idn [idn]="dateOut.rik" (onIdnUpdate)="setData()"></app-idn>
     </div>
     <!-- Jadro -->
     <div class="flex-row">
@@ -76,7 +79,7 @@
         <mat-label>Jadro Daty</mat-label>
         <input matInput value="Jadro Daty" disabled="" />
       </mat-form-field>
-      <app-idn [idn]="dateOut.jadro"></app-idn>
+      <app-idn [idn]="dateOut.jadro" (onIdnUpdate)="setData()"></app-idn>
     </div>
 
     <h3>Pojednannja</h3>
@@ -86,7 +89,7 @@
         <mat-label>Im'ja + denj</mat-label>
         <input matInput value="im'ja + denj" disabled="" />
       </mat-form-field>
-      <app-idn [idn]="pojedOut.imjaDenj"></app-idn>
+      <app-idn [idn]="pojedOut.imjaDenj" (onIdnUpdate)="setData()"></app-idn>
     </div>
     <!-- P⁠o batjkovi + masjacj -->
     <div class="flex-row">
@@ -94,7 +97,10 @@
         <mat-label>Oo batjkovi + masjacj</mat-label>
         <input matInput value="po batjkovi + masjacj" disabled="" />
       </mat-form-field>
-      <app-idn [idn]="pojedOut.pobatMisjacj"></app-idn>
+      <app-idn
+        [idn]="pojedOut.pobatMisjacj"
+        (onIdnUpdate)="setData()"
+      ></app-idn>
     </div>
     <!-- Pr Neof + Pr + Rik -->
     <div class="flex-row">
@@ -102,7 +108,7 @@
         <mat-label>Pr Neof + Pr + Rik</mat-label>
         <input matInput value="Pr Neof + Pr + Rik" disabled="" />
       </mat-form-field>
-      <app-idn [idn]="pojedOut.prNeofPrRik"></app-idn>
+      <app-idn [idn]="pojedOut.prNeofPrRik" (onIdnUpdate)="setData()"></app-idn>
     </div>
     <!-- Jadro -->
     <div class="flex-row">
@@ -110,7 +116,7 @@
         <mat-label>Jadro</mat-label>
         <input matInput value="Jadro" disabled="" />
       </mat-form-field>
-      <app-idn [idn]="pojedOut.jadro"></app-idn>
+      <app-idn [idn]="pojedOut.jadro" (onIdnUpdate)="setData()"></app-idn>
     </div>
 
     <!-- <div>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, EventEmitter, OnInit, Output } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 import { MatSliderModule } from "@angular/material/slider";
 
@@ -34,8 +34,13 @@ import { IdnComponent } from "../idn/idn.component";
   standalone: true,
 })
 export class IdnListComponent implements OnInit {
+  emitData() {
+    this.onIdnUpdate.emit();
+  }
   public JSON = JSON;
   IDNS: IDN[] = IDNS;
+
+  @Output() onIdnUpdate = new EventEmitter();
 
   ngOnInit(): void {}
 }

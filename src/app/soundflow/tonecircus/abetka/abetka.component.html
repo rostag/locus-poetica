@@ -1,12 +1,12 @@
 <mat-accordion>
   <mat-expansion-panel
     hideToggle
-    [expanded]="panelOpenState"
+    [expanded]="panelOpenState()"
     (opened)="panelOpenState.set(true)"
     (closed)="panelOpenState.set(false)"
   >
     <mat-expansion-panel-header>
-      <mat-panel-title>Алгоритми</mat-panel-title>
+      <mat-panel-title>Algorytmy</mat-panel-title>
       <mat-panel-description></mat-panel-description>
     </mat-expansion-panel-header>
     <div>
@@ -117,6 +117,36 @@ seredyna: synja 7 (sim); fa#
  3+8=11. 1+1=2  
 </pre
       >
+    </div>
+
+    <div>
+      <p>KOLIR – NOTA</p>
+      <pre>
+1 •⁠ čornyй — do
+2 •⁠ červonyй – do#
+3 •⁠ pomarančevyй – re
+4 •⁠ žovtyй – re#
+5 •⁠ zelenyй – mi
+6 •⁠ blakytnyй – fa
+7 •⁠ syniй – fa#
+8 •⁠ fioletovyй – solj
+9 •⁠ zolotyй – solj#
+10 •⁠ perlynovyй – lja
+11 •⁠ sribnyй – lja#
+12 •⁠ bilyй – si
+
+</pre
+      >
+      <p>Dali</p>
+      <pre>
+- nalaštuvannja koljoriv
+- kulja - obʼjekt, ščo nese na sobi parametry i zvuku takoje (častota, gučnitj, dovžyna)
+- mitka vysoty i potočnoji gučnosti na kuli
+- pry zitknenni menšyj ne zvučytj
+- zaležnistj gučnosti vid rozmiru
+- pry zitknenni menšyj rozdiljajetjsja
+- <a [routerLink]="['tonetest']">tone test</a>, <a [routerLink]="['../']">sound flow</a>
+</pre>
     </div>
   </mat-expansion-panel>
 </mat-accordion>

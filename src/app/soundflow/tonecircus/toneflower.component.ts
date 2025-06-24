@@ -10,7 +10,6 @@ import { MatSliderModule } from "@angular/material/slider";
 import { RouterModule } from "@angular/router";
 import * as d3 from "d3";
 import { AbetkaComponent } from "src/app/soundflow/tonecircus/abetka/abetka.component";
-import { FlowerInputComponent } from "src/app/soundflow/tonecircus/flowerinput/flowerinput.component";
 import { GetOrdinalComponent } from "src/app/soundflow/tonecircus/get-ordinal/get-ordinal.component";
 import { ToneFlower } from "src/app/soundflow/tonecircus/toneflower.class";
 import {
@@ -24,6 +23,7 @@ import {
   LeafModel,
 } from "src/app/soundflow/tonecircus/toneflower.model";
 import * as Tone from "tone";
+import { IdnListComponent } from "./idn-list/idn-list.component";
 
 type OscItem = {
   [index: number]: OscillatorNode;
@@ -37,12 +37,14 @@ type OscItem = {
     FormsModule,
     AbetkaComponent,
     GetOrdinalComponent,
+    IdnListComponent,
   ],
   templateUrl: "./toneflower.component.html",
   styleUrl: "./toneflower.component.css",
   standalone: true,
 })
 export class ToneFlowerComponent implements OnInit {
+  // TODO Unblock to set IDN colors etc
   public showSettings = true;
 
   private playFlower: ToneFlower;
@@ -89,6 +91,11 @@ export class ToneFlowerComponent implements OnInit {
     this.arcs = [];
   }
 
+  public redrawBush() {
+    this.clearFlowers();
+    this.drawFlowers();
+  }
+
   private drawBush() {
     const bush: BushModel = this.bush;
     bush.flowers.map((flowerModel, i) => {
@@ -108,9 +115,10 @@ export class ToneFlowerComponent implements OnInit {
     this.drawBush();
   }
 
-  getBush(bush: BushModel) {
+  updateBush(bush: BushModel) {
     this.bush = bush;
     this.drawBush();
+    this.redrawBush();
   }
 
   private drawFlower(flower: ToneFlower) {
@@ -133,12 +141,14 @@ export class ToneFlowerComponent implements OnInit {
   private showPadLine = false;
   public toggleLine() {
     this.showPadLine = !this.showPadLine;
+    this.redrawBush();
   }
 
   public padAngleBgStyle = 0; // 1, 2
   public toggleBgStyle = () => {
     this.padAngleBgStyle =
       this.padAngleBgStyle > 1 ? 0 : this.padAngleBgStyle + 1;
+    this.redrawBush();
   };
 
   private getSectionData = (leafModel: LeafModel) => {
@@ -494,16 +504,16 @@ export class ToneFlowerComponent implements OnInit {
     // }
   }
 
-  private renderCycle() {
-    setInterval(() => {
-      this.clearFlowers();
-      this.drawFlowers();
-    }, 50);
-  }
+  // private renderCycle() {
+  //   setInterval(() => {
+  //     this.clearFlowers();
+  //     this.drawFlowers();
+  //   }, 50);
+  // }
 
   ngOnInit(): void {
     this.initFlow();
-    // this.drawFlowers();
-    this.renderCycle();
+    this.drawFlowers();
+    // this.renderCycle();
   }
 }

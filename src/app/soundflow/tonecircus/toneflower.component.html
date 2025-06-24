@@ -9,12 +9,17 @@
     discrete
     style="width: 500px"
   >
-    <input matSliderThumb [(ngModel)]="padAngle" />
+    <input
+      matSliderThumb
+      [(ngModel)]="padAngle"
+      (ngModelChange)="redrawBush()"
+    />
   </mat-slider>
   <input
     matInput
     type="text"
     [ngModel]="padAngle"
+    (ngModelChange)="redrawBush()"
     (input)="setPadAngle($event)"
     style="width: 48px; margin-right: 12px"
   />
@@ -26,40 +31,13 @@
   </button>
 </div>
 <div class="flex-row ml-1">
-  <!-- @if (showSettings) {
-  <app-idn-list />
-  } -->
+  @if (showSettings) {
+  <app-idn-list (onIdnUpdate)="redrawBush()" />
+  }
   <div class="bushcont"><figure id="bushwrap"></figure></div>
-  <app-get-ordinal (onBushUpdate)="getBush($event)" />
+  <app-get-ordinal (onBushUpdate)="updateBush($event)" />
 </div>
 
 <div style="margin: 2.5rem">
-  <p>KOLIR – NOTA</p>
-  <pre>
-•⁠ čornyй — do - #151210
-•⁠ červonyй – do# - #9F352B
-•⁠ pomarančevyй – re - #C18A2F
-•⁠ žovtyй – re# - #D1B170 (?)
-•⁠ zelenyй – mi - #366C2C
-•⁠ blakytnyй – fa - #4D86B3
-•⁠ syniй – fa# - #214A83, #163063
-•⁠ fioletovyй – solj - #554062
-•⁠ zolotyй – solj# - #BE9C5C
-•⁠ perlynovyй – lja - #C2C0B1
-•⁠ sribnyй – lja# - #B1B1AA
-•⁠ bilyй – si - #B7B9B4
-- korycnevyй - #865D2E
-</pre
-  >
-  <p>Dali</p>
-  <pre>
-- nalaštuvannja koljoriv
-- kulja - obʼjekt, ščo nese na sobi parametry i zvuku takoje (častota, gučnitj, dovžyna)
-- mitka vysoty i potočnoji gučnosti na kuli
-- pry zitknenni menšyj ne zvučytj
-- zaležnistj gučnosti vid rozmiru
-- pry zitknenni menšyj rozdiljajetjsja
-- <a [routerLink]="['tonetest']">tone test</a>, <a [routerLink]="['../']">sound flow</a>
-</pre>
   <app-abetka></app-abetka>
 </div>

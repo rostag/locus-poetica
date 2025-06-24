@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from "@angular/core";
+import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 import { MatSliderModule } from "@angular/material/slider";
 
@@ -31,12 +31,16 @@ import { MatInputModule } from "@angular/material/input";
   standalone: true,
 })
 export class IdnComponent implements OnInit {
+  emitColor() {
+    this.onIdnUpdate.emit(this.idn);
+  }
   public JSON = JSON;
 
   public selectedColor: string;
 
   @Input({ required: true }) idn!: IDN;
-
+  @Input({ required: false }) editMode = false;
+  @Output() onIdnUpdate = new EventEmitter<IDN>();
   private initForm() {}
 
   ngOnInit(): void {
