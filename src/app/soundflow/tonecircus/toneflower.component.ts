@@ -24,6 +24,7 @@ import {
 } from "src/app/soundflow/tonecircus/toneflower.model";
 import * as Tone from "tone";
 import { IdnListComponent } from "./idn-list/idn-list.component";
+import { MatButtonModule } from "@angular/material/button";
 
 type OscItem = {
   [index: number]: OscillatorNode;
@@ -34,6 +35,7 @@ type OscItem = {
   imports: [
     RouterModule,
     MatSliderModule,
+    MatButtonModule,
     FormsModule,
     AbetkaComponent,
     GetOrdinalComponent,
@@ -44,6 +46,11 @@ type OscItem = {
   standalone: true,
 })
 export class ToneFlowerComponent implements OnInit {
+  showChyslo = false;
+  toggleChyslo() {
+    this.showChyslo = !this.showChyslo;
+    this.redrawBush();
+  }
   // TODO Unblock to set IDN colors etc
   public showSettings = true;
 
@@ -248,7 +255,9 @@ export class ToneFlowerComponent implements OnInit {
       .style("fill", this.getArcBgStyle(leafModel))
       .attr("d", this.arcGen);
 
-    this.drawPie(arcs, x, y, innerRadius, outerRadius, leafModel, isLeaf);
+    if (this.showChyslo) {
+      this.drawPie(arcs, x, y, innerRadius, outerRadius, leafModel, isLeaf);
+    }
     arcs.push(arcPath);
     if (!isLeaf) {
       this.appear(null, arcPath);

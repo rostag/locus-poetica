@@ -1,7 +1,12 @@
-<div style="margin-left: 2.5rem">
-  <p>Natysnitj na bilomu poli dva čy biljše raziv.</p>
-</div>
-<div class="controls" style="margin-left: 2.5rem">
+<div style="margin: 1rem">
+  <button
+    matButton="elevated"
+    (click)="toggleChyslo()"
+    style="margin-right: 12px"
+  >
+    pokazuvaty chyslo
+  </button>
+  @if (showChyslo) {
   <mat-slider
     min="0"
     [max]="IC.padAngleMax"
@@ -23,12 +28,14 @@
     (input)="setPadAngle($event)"
     style="width: 48px; margin-right: 12px"
   />
-  <button (click)="toggleLine()" style="margin-right: 12px">
-    pokazuvaty liniju
-  </button>
-  <button (click)="toggleBgStyle()" style="margin-right: 12px">
+  <button
+    matButton="elevated"
+    (click)="toggleBgStyle()"
+    style="margin-right: 12px"
+  >
     kolir fonu
   </button>
+  }
 </div>
 <div class="flex-row ml-1">
   @if (showSettings) {

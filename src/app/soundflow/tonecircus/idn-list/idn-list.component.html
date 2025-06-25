@@ -1,5 +1,5 @@
-<h3>Nalaštuvannja</h3>
 <div>
+  <h4>Nalaštuvannja</h4>
   @for (idn of IDNS; track idn) {
   <app-idn [idn]="idn" (onIdnUpdate)="emitData()" [editMode]="true" />
   } @empty {
