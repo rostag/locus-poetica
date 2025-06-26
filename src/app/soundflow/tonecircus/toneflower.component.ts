@@ -13,6 +13,7 @@ import { AbetkaComponent } from "src/app/soundflow/tonecircus/abetka/abetka.comp
 import { GetOrdinalComponent } from "src/app/soundflow/tonecircus/get-ordinal/get-ordinal.component";
 import { ToneFlower } from "src/app/soundflow/tonecircus/toneflower.class";
 import {
+  BUSH_LOC,
   IC,
   PLAY_BUSH,
   SAMPLE_BUSHMODELS,
@@ -46,11 +47,6 @@ type OscItem = {
   standalone: true,
 })
 export class ToneFlowerComponent implements OnInit {
-  showChyslo = false;
-  toggleChyslo() {
-    this.showChyslo = !this.showChyslo;
-    this.redrawBush();
-  }
   // TODO Unblock to set IDN colors etc
   public showSettings = true;
 
@@ -157,6 +153,23 @@ export class ToneFlowerComponent implements OnInit {
       this.padAngleBgStyle > 1 ? 0 : this.padAngleBgStyle + 1;
     this.redrawBush();
   };
+
+  showChyslo = false;
+  toggleChyslo() {
+    this.showChyslo = !this.showChyslo;
+    this.padAngleBgStyle = 0;
+    this.redrawBush();
+  }
+
+  // move to setting
+  bushMarginTop = BUSH_LOC.marginTop();
+  setBushMarginTop(evt: any) {
+    this.bushMarginTop = parseFloat(evt.target.value);
+    BUSH_LOC.marginTop.set(this.bushMarginTop);
+    console.log(BUSH_LOC.marginTop());
+
+    this.redrawBush();
+  }
 
   private getSectionData = (leafModel: LeafModel) => {
     const assignedNumber = leafModel.leafNum;

@@ -2,6 +2,7 @@ import {
   ChangeDetectionStrategy,
   Component,
   EventEmitter,
+  Input,
   OnInit,
   Output,
   signal,
@@ -38,7 +39,11 @@ import {
   FlowerModel,
   LeafModel,
 } from "src/app/soundflow/tonecircus/toneflower.model";
-import { IC } from "src/app/soundflow/tonecircus/toneflower.constants";
+import {
+  IC,
+  PLANT_POINTS,
+  BUSH_LOC,
+} from "src/app/soundflow/tonecircus/toneflower.constants";
 import { BUSH_SAMPLES } from "src/app/soundflow/tonecircus/constants/sample.constants";
 
 @Component({
@@ -62,6 +67,9 @@ import { BUSH_SAMPLES } from "src/app/soundflow/tonecircus/constants/sample.cons
   standalone: true,
 })
 export class GetOrdinalComponent implements OnInit {
+  @Input() set refresh(val: number) {
+    this.setData();
+  }
   @Output() onBushUpdate = new EventEmitter<BushModel>();
   public JSON = JSON;
 
@@ -146,7 +154,7 @@ export class GetOrdinalComponent implements OnInit {
 1991-(12×165)=11 (срібний/ля#); 
 сумма (серединка): 12+8+11=31. 31-(12×2)=7 (синій/фа#)
    */
-  setData() {
+  public setData() {
     // Imja
     const imjaNomer = ordinalByWord(this.nameIn.imja);
     const pobatNomer = ordinalByWord(this.nameIn.pobatjkovi);
@@ -211,8 +219,8 @@ export class GetOrdinalComponent implements OnInit {
 
     const nameFlower: FlowerModel = {
       leaves: [leafJadro, leafImja, leafPobatkovi, leafPrizNeof, leafPriz],
-      flowerX: 150, // 150
-      flowerY: 230, // 230
+      flowerX: PLANT_POINTS[0][0],
+      flowerY: PLANT_POINTS[0][1] + BUSH_LOC.marginTop(), // 60
       buttSize: IC.flowerButtSize,
       leafWidth: IC.flowerLeafWidth,
     };
@@ -243,8 +251,8 @@ export class GetOrdinalComponent implements OnInit {
 
     const dateFlower: FlowerModel = {
       leaves: [leafJadroDate, leafDen, leafMis, leafRik],
-      flowerX: 80, // 150
-      flowerY: 132, // 230
+      flowerX: PLANT_POINTS[1][0],
+      flowerY: PLANT_POINTS[1][1] + BUSH_LOC.marginTop(),
       buttSize: IC.flowerButtSize,
       leafWidth: IC.flowerLeafWidth,
     };
@@ -317,6 +325,7 @@ export class GetOrdinalComponent implements OnInit {
       leafNum: pojednanoJadroCyslo,
     };
 
+    // 3
     const pojedFlower: FlowerModel = {
       leaves: [
         leafPojednanoJadro,
@@ -324,8 +333,8 @@ export class GetOrdinalComponent implements OnInit {
         leafPoBatMisjac,
         leafPrizNeofPrizRik,
       ],
-      flowerX: 165, // 150
-      flowerY: 60, // 230
+      flowerX: PLANT_POINTS[2][0],
+      flowerY: PLANT_POINTS[2][1] + BUSH_LOC.marginTop(),
       buttSize: IC.flowerButtSize,
       leafWidth: IC.flowerLeafWidth,
     };

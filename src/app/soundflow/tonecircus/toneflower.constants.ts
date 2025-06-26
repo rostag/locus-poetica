@@ -1,3 +1,4 @@
+import { signal } from "@angular/core";
 import {
   BushCode,
   BushModel,
@@ -13,9 +14,13 @@ export const IC = {
   flowerLeafWidth: 10,
 };
 
-const places = [
-  [150, 230],
-  [80, 132],
+export const BUSH_LOC = {
+  marginTop: signal(60),
+};
+
+export const PLANT_POINTS = [
+  [162, 231],
+  [80, 137],
   [165, 60],
 ];
 
@@ -41,8 +46,8 @@ export const SAMPLE_BUSHMODELS: BushModel[] = [
   {
     flowers: [
       {
-        flowerX: 156,
-        flowerY: 170,
+        flowerX: PLANT_POINTS[0][0],
+        flowerY: PLANT_POINTS[0][1] + BUSH_LOC.marginTop(),
         buttSize: IC.flowerButtSize,
         leafWidth: IC.flowerLeafWidth,
         leaves: [
@@ -91,8 +96,8 @@ export const SAMPLE_BUSHMODELS: BushModel[] = [
         ],
       },
       {
-        flowerX: 80,
-        flowerY: 132,
+        flowerX: PLANT_POINTS[1][0],
+        flowerY: PLANT_POINTS[1][1],
         buttSize: IC.flowerButtSize,
         leafWidth: IC.flowerLeafWidth,
         leaves: [
@@ -119,8 +124,8 @@ export const SAMPLE_BUSHMODELS: BushModel[] = [
         ],
       },
       {
-        flowerX: 165,
-        flowerY: 60,
+        flowerX: PLANT_POINTS[2][0],
+        flowerY: PLANT_POINTS[2][1],
         buttSize: IC.flowerButtSize,
         leafWidth: IC.flowerLeafWidth,
         leaves: [

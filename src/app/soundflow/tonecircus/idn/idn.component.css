@@ -1,15 +1,12 @@
 .section {
-  gap: 1rem;
+  gap: 0.7rem;
   display: flex;
   flex-direction: row;
   align-items: center;
 }
 
 .kolir {
-  width: 7rem;
-  padding: 6px;
-  text-align: center;
-  vertical-align: center;
+  width: 5rem;
 }
 
 .kolirHex {
@@ -17,12 +14,13 @@
 }
 
 .nota {
-  width: 5rem;
+  width: auto;
 }
 
 .chyslo {
   font-weight: bold;
-  width: 2rem;
+  width: 1rem;
+  margin-left: 0.25rem;
   text-align: right;
 }
 

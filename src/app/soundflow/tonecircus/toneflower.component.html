@@ -1,4 +1,14 @@
 <div style="margin: 1rem">
+  <label>Vidstup zgory: </label>
+  <input
+    matInput
+    type="number"
+    [ngModel]="bushMarginTop"
+    (ngModelChange)="redrawBush()"
+    (input)="setBushMarginTop($event)"
+    style="width: 48px; margin-right: 12px"
+  />
+
   <button
     matButton="elevated"
     (click)="toggleChyslo()"
@@ -22,7 +32,7 @@
   </mat-slider>
   <input
     matInput
-    type="text"
+    type="number"
     [ngModel]="padAngle"
     (ngModelChange)="redrawBush()"
     (input)="setPadAngle($event)"
@@ -37,12 +47,16 @@
   </button>
   }
 </div>
-<div class="flex-row ml-1">
+
+<div class="flex-row">
   @if (showSettings) {
   <app-idn-list (onIdnUpdate)="redrawBush()" />
   }
   <div class="bushcont"><figure id="bushwrap"></figure></div>
-  <app-get-ordinal (onBushUpdate)="updateBush($event)" />
+  <app-get-ordinal
+    (onBushUpdate)="updateBush($event)"
+    [refresh]="bushMarginTop"
+  />
 </div>
 
 <div style="margin: 2.5rem">
