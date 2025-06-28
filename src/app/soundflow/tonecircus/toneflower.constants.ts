@@ -24,6 +24,8 @@ export const PLANT_POINTS = [
   [165, 60],
 ];
 
+export const PLANT_CENTER = [125, 150];
+
 export const IDNS: IDN[] = [
   { ordinal: 1, color: "čornyj", note: "C", colorHex: "#151210" }, // noop
   { ordinal: 2, color: "červonyj", note: "C#", colorHex: "#bd1e1e" }, // upd

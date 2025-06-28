@@ -389,7 +389,7 @@ export class ToneFlowerComponent implements OnInit {
     const datum = path.datum();
     const tc: IDN = datum.leafIdn;
     if (!datum.isLeaf) {
-      path.style("stroke", datum.colliding === true ? tc.color : "#333");
+      path.style("stroke", datum.colliding === true ? tc?.color : "#eee");
       path.style("fill", "none");
     }
   }

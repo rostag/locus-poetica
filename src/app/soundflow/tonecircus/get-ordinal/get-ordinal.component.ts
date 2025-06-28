@@ -43,8 +43,10 @@ import {
   IC,
   PLANT_POINTS,
   BUSH_LOC,
+  PLANT_CENTER,
 } from "src/app/soundflow/tonecircus/toneflower.constants";
 import { BUSH_SAMPLES } from "src/app/soundflow/tonecircus/constants/sample.constants";
+import { MatCheckboxModule } from "@angular/material/checkbox";
 
 @Component({
   selector: "app-get-ordinal",
@@ -59,6 +61,7 @@ import { BUSH_SAMPLES } from "src/app/soundflow/tonecircus/constants/sample.cons
     MatIconModule,
     MatExpansionModule,
     IdnComponent,
+    MatCheckboxModule,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 
@@ -67,11 +70,22 @@ import { BUSH_SAMPLES } from "src/app/soundflow/tonecircus/constants/sample.cons
   standalone: true,
 })
 export class GetOrdinalComponent implements OnInit {
+  setUseDate(toUse: any) {
+    this.useDate = toUse;
+    this.setData();
+  }
+  setUseName(toUse: any) {
+    this.useName = toUse;
+    this.setData();
+  }
   @Input() set refresh(val: number) {
     this.setData();
   }
   @Output() onBushUpdate = new EventEmitter<BushModel>();
   public JSON = JSON;
+
+  public useName: boolean = true;
+  public useDate: boolean = true;
 
   public nameIn: IdnNameIn = {
     imja: "",
@@ -125,35 +139,6 @@ export class GetOrdinalComponent implements OnInit {
     this.dateIn.rik = sample[6];
   }
 
-  /**
-   * Розрахунок кольору та звуку 
-1 - A Ї Ф
-2 - Б Й Х
-3 - В К Ц
-4 - Г Л Ч
-5 - Ґ М Ш
-6 - Д Н Щ
-7 - Е О Ь
-8 - Є П Ю
-9 - Ж Р Я
-10 - З С
-11 - И Т
-12 - І У 
-
-Для слова (імені) – все складаємо і далі віднімаємо 12, поки не отримаємо число  від 1 до 12.
-Для дати – від цілого числа віднімаємо 12, поки не отримаємо число  від 1 до 12. 
-
-Приклад:
-Ростислав
-9+7+10+11+11+10+4+1+3=66. 
-66-(12×5)=6 (блакитний колір/нота фа) 
-
-24.08.1991 р.
-24-12=12 (білий/сі); 
-8 (фіолетовий/соль); 
-1991-(12×165)=11 (срібний/ля#); 
-сумма (серединка): 12+8+11=31. 31-(12×2)=7 (синій/фа#)
-   */
   public setData() {
     // Imja
     const imjaNomer = ordinalByWord(this.nameIn.imja);
@@ -219,8 +204,10 @@ export class GetOrdinalComponent implements OnInit {
 
     const nameFlower: FlowerModel = {
       leaves: [leafJadro, leafImja, leafPobatkovi, leafPrizNeof, leafPriz],
-      flowerX: PLANT_POINTS[0][0],
-      flowerY: PLANT_POINTS[0][1] + BUSH_LOC.marginTop(), // 60
+      flowerX: this.useDate ? PLANT_POINTS[0][0] : PLANT_CENTER[0],
+      flowerY:
+        (this.useDate ? PLANT_POINTS[0][1] : PLANT_CENTER[1]) +
+        BUSH_LOC.marginTop(), // 60
       buttSize: IC.flowerButtSize,
       leafWidth: IC.flowerLeafWidth,
     };
@@ -251,8 +238,10 @@ export class GetOrdinalComponent implements OnInit {
 
     const dateFlower: FlowerModel = {
       leaves: [leafJadroDate, leafDen, leafMis, leafRik],
-      flowerX: PLANT_POINTS[1][0],
-      flowerY: PLANT_POINTS[1][1] + BUSH_LOC.marginTop(),
+      flowerX: this.useName ? PLANT_POINTS[1][0] : PLANT_CENTER[0],
+      flowerY:
+        (this.useName ? PLANT_POINTS[1][1] : PLANT_CENTER[1]) +
+        BUSH_LOC.marginTop(),
       buttSize: IC.flowerButtSize,
       leafWidth: IC.flowerLeafWidth,
     };
@@ -339,8 +328,18 @@ export class GetOrdinalComponent implements OnInit {
       leafWidth: IC.flowerLeafWidth,
     };
 
+    const flowers: FlowerModel[] = [];
+    if (this.useName) {
+      flowers.push(nameFlower);
+    }
+    if (this.useDate) {
+      flowers.push(dateFlower);
+    }
+    if (this.useDate && this.useName) {
+      flowers.push(pojedFlower);
+    }
     const newBush: BushModel = {
-      flowers: [nameFlower, dateFlower, pojedFlower],
+      flowers,
     };
 
     this.onBushUpdate.emit(newBush);
