@@ -47,6 +47,9 @@ import {
 } from "src/app/soundflow/tonecircus/toneflower.constants";
 import { BUSH_SAMPLES } from "src/app/soundflow/tonecircus/constants/sample.constants";
 import { MatCheckboxModule } from "@angular/material/checkbox";
+import dayjs from "dayjs";
+import { kobzar } from "src/app/generator/components/models/poetry.model.kob";
+import { ukrMova1000 } from "src/app/generator/components/models/ukr.mova.1000.model";
 
 @Component({
   selector: "app-get-ordinal",
@@ -137,6 +140,32 @@ export class GetOrdinalComponent implements OnInit {
     this.dateIn.denj = sample[4];
     this.dateIn.misjacj = sample[5];
     this.dateIn.rik = sample[6];
+  }
+
+  public setDateInput(date: Date) {
+    const day = dayjs(date).date();
+    const month = dayjs(date).month();
+    const year = dayjs(date).year();
+    this.dateIn = {
+      denj: "" + day,
+      misjacj: "" + month,
+      rik: "" + year,
+    };
+  }
+
+  public setRandomWord() {
+    const dict = ukrMova1000.split("\n");
+    const l = dict.length;
+    const word1 = dict[Math.round(Math.random() * l)];
+    const word2 = dict[Math.round(Math.random() * l)];
+    const word3 = dict[Math.round(Math.random() * l)];
+    const word4 = dict[Math.round(Math.random() * l)];
+    this.nameIn = {
+      imja: word1,
+      pobatjkovi: word2,
+      prizvysceNeoficijne: word3,
+      prizvysce: word4,
+    };
   }
 
   public setData() {
@@ -347,6 +376,8 @@ export class GetOrdinalComponent implements OnInit {
 
   ngOnInit(): void {
     this.setInputs();
+    this.setDateInput(new Date());
+    this.setRandomWord();
     this.setData();
   }
 }
