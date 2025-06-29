@@ -148,7 +148,7 @@ export class GetOrdinalComponent implements OnInit {
     const year = dayjs(date).year();
     this.dateIn = {
       denj: "" + day,
-      misjacj: "" + month,
+      misjacj: "" + (month + 1),
       rik: "" + year,
     };
   }
