@@ -377,7 +377,7 @@ export class GetOrdinalComponent implements OnInit {
   ngOnInit(): void {
     this.setInputs();
     this.setDateInput(new Date());
-    this.setRandomWord();
+    // this.setRandomWord();
     this.setData();
   }
 }
