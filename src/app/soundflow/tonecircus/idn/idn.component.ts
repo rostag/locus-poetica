@@ -37,7 +37,7 @@ export class IdnComponent implements OnInit {
   public JSON = JSON;
 
   public selectedColor: string;
-
+  public showNote = false;
   @Input({ required: true }) idn!: IDN;
   @Input({ required: false }) editMode = false;
   @Output() onIdnUpdate = new EventEmitter<IDN>();

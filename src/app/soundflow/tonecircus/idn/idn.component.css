@@ -10,7 +10,7 @@
 }
 
 .kolirHex {
-  width: 3rem;
+  width: 2rem;
 }
 
 .nota {
@@ -25,5 +25,6 @@
 }
 
 .color-picker {
-  height: 3rem;
+  height: 2rem;
+  width: 2rem;
 }

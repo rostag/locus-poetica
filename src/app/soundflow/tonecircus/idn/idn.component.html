@@ -12,14 +12,17 @@
         (ngModelChange)="emitColor()"
       />
     </div>
-    }
+    } @if (editMode) {
     <div class="kolir">
       <div>
         {{ idn.color }}
       </div>
-      <div class="text-sm p-1">{{ idn.colorHex }}</div>
+
+      <div class="text-sm">{{ idn.colorHex }}</div>
     </div>
+    } @if( showNote) {
     <div class="nota">{{ idn.note }}</div>
+    }
   </div>
   }
 </div>
