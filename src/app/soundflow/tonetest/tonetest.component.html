@@ -1,11 +1,13 @@
 <div style="margin: 2.5rem; display: flex; flex: row; gap: 10px">
-  <pre>tone test</pre>
-  <button (click)="helloTone()">Hello Tone</button>
-  <button (click)="toneSynth()">Tone.Synth</button>
-  <button (click)="toneTransport()">Tone.Transport</button>
-  <button (click)="toneInstruments()">Tone.Instruments</button>
-  <button (click)="toneSamples()">Tone.Samples</button>
-  <button (click)="toneSampler()">Tone.Sampler</button>
-  <button (click)="toneEffects()">Tone.Effects</button>
-  <button (click)="toneSignals()">Tone.Signals</button>
+  <button (click)="toneTransportLoop()">
+    .transport loop: {{ targetBpm() }}, {{ targetDuration() }}
+  </button>
+  <button (click)="helloTone()">Hello.Tone</button>
+  <button (click)="toneSynth()">Tone.synth</button>
+  <button (click)="toneTransport()">.transport</button>
+  <button (click)="toneInstruments()">.instruments</button>
+  <button (click)="toneSamples()">.samples</button>
+  <button (click)="toneSampler()">.sampler</button>
+  <button (click)="toneEffects()">.effects</button>
+  <button (click)="toneSignals()">.signals</button>
 </div>

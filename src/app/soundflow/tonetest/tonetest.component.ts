@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, signal } from "@angular/core";
 import * as Tone from "tone";
 
 @Component({
@@ -66,6 +66,47 @@ export class TonetestComponent implements OnInit {
     Tone.getTransport().start();
     // ramp up to 800 bpm over 10 seconds
     Tone.getTransport().bpm.rampTo(800, 10);
+  }
+
+  readonly targetBpm = signal(800);
+  maxBpm = 22000;
+  readonly targetDuration = signal(4);
+  minDuration = 1;
+  maxDuration = 12;
+
+  private loopOver() {
+    setTimeout(() => {
+      this.transition();
+      this.loopOver();
+    }, this.targetDuration() * 1000);
+  }
+
+  private transition() {
+    this.targetBpm.set(Math.round(Math.random() * this.maxBpm));
+    this.targetDuration.set(
+      Math.round(Math.random() * this.maxDuration + this.minDuration)
+    );
+    console.log(this.targetBpm(), this.targetDuration());
+    Tone.getTransport().bpm.rampTo(this.targetBpm(), this.targetDuration());
+  }
+
+  public toneTransportLoop() {
+    const synthA = new Tone.FMSynth().toDestination();
+    const synthB = new Tone.AMSynth().toDestination();
+    //play a note every quarter-note
+    const loopA = new Tone.Loop((time) => {
+      synthA.triggerAttackRelease("C1", "8n", time);
+    }, "4n").start(0);
+    //play another note every off quarter-note, by starting it "8n"
+    const loopB = new Tone.Loop((time) => {
+      synthB.triggerAttackRelease("C3", "8n", time);
+    }, "4n").start("8n");
+    // all loops start when the Transport is started
+    Tone.getTransport().start();
+    // ramp up to 800 bpm over 10 seconds
+    Tone.getTransport().bpm.rampTo(this.targetBpm(), this.targetDuration());
+
+    this.loopOver();
   }
 
   public toneInstruments() {
