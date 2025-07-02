@@ -15,7 +15,7 @@ export const IC = {
 };
 
 export const BUSH_LOC = {
-  marginTop: signal(60),
+  marginTop: signal(20),
 };
 
 export const PLANT_POINTS = [
