@@ -69,7 +69,7 @@ export class TonetestComponent implements OnInit {
   }
 
   readonly targetBpm = signal(800);
-  maxBpm = 22000;
+  maxBpm = 2200;
   readonly targetDuration = signal(4);
   minDuration = 1;
   maxDuration = 12;
