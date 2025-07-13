@@ -19,11 +19,6 @@ export type FlowerModel = {
   leafWidth: number;
 };
 
-// export type FlowerInstanceModel = FlowerModel & {
-//   flowerX: number;
-//   flowerY: number;
-// };
-
 /**
  * export const PLAY_BUSH: BushCode = {
  * flowers: [[1,1]],

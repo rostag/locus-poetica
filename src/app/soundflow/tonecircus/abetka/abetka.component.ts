@@ -13,6 +13,7 @@ import { MatExpansionModule } from "@angular/material/expansion";
 
 import { RouterModule } from "@angular/router";
 import {
+  abetkaByName,
   cardinalByDate,
   cardinalByWord,
   ordinalByDate,
@@ -49,6 +50,7 @@ export class AbetkaComponent implements OnInit {
   public example2date = "24.08.1991";
   public cardinalByWord = cardinalByWord;
   public cardinalByDate = cardinalByDate;
+  public abetkaByName = abetkaByName;
 
   ngOnInit(): void {}
 }

@@ -1,9 +1,15 @@
 <div class="flex-row get-ordinal">
   <div>
-    <h3>
+    <h3 class="flex-row gap-1">
       <mat-checkbox [checked]="useName" (change)="setUseName($event.checked)">
         Imja
       </mat-checkbox>
+      <select (change)="handleAbetkaSelect($event)">
+        <option>Ukrajinsjka</option>
+        <option>Ukrajinsjka Latynka</option>
+        <option>Moskaljsjka</option>
+        <option>Anglijsjka</option>
+      </select>
     </h3>
 
     <!-- Im'ja -->

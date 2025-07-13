@@ -1,15 +1,15 @@
 // abetka.helper.ts
 
-import {
-  CARDINALS_BY_LETTERS_UA,
-  NumberByLetter,
-  ORDINALS_BY_LETTERS_UA,
-} from "./../models/abetka.models";
+import { Abetka, AbetkaName, NumberByLetter } from "./../models/abetka.models";
 import { IDNS } from "../../tonecircus/toneflower.constants";
+import {
+  ABETKA_STD,
+  ABETKY,
+} from "../../tonecircus/constants/abetka.constants";
 
-function ordinalByLetter(letter: string) {
+function ordinalByLetter(abetka: Abetka, letter: string) {
   const ordinal =
-    ORDINALS_BY_LETTERS_UA.find((ordinalByLetter: NumberByLetter) => {
+    abetka.ordinals.find((ordinalByLetter: NumberByLetter) => {
       return ordinalByLetter.letters.find((letters) =>
         letters.includes(letter.toLocaleUpperCase())
       );
@@ -19,9 +19,12 @@ function ordinalByLetter(letter: string) {
   return ordinal;
 }
 
-export function ordinalByWord(word: string) {
+export function ordinalByWord(abetka: Abetka, word: string) {
   const letters = word.split("");
-  const sum = letters.reduce((acc, letter) => acc + ordinalByLetter(letter), 0);
+  const sum = letters.reduce(
+    (acc, letter) => acc + ordinalByLetter(abetka, letter),
+    0
+  );
   return sum % 12 || 12;
 }
 
@@ -44,9 +47,9 @@ export function ordinalByNumber(numString: string) {
   return parseInt(numString, 10) % 12 || 12;
 }
 
-function cardinalByLetter(letter: string) {
+function cardinalByLetter(abetka: Abetka, letter: string) {
   const cardinal =
-    CARDINALS_BY_LETTERS_UA.find((cardinalByLetter: NumberByLetter) => {
+    abetka.cardinals.find((cardinalByLetter: NumberByLetter) => {
       return cardinalByLetter.letters.find((letters) =>
         letters.includes(letter.toLocaleUpperCase())
       );
@@ -68,10 +71,10 @@ function reduceNumber(num: number) {
   }
 }
 
-export function cardinalByWord(word: string) {
+export function cardinalByWord(abetka: Abetka, word: string) {
   const letters = word.split("");
   const sum = letters.reduce(
-    (acc, letter) => acc + cardinalByLetter(letter),
+    (acc, letter) => acc + cardinalByLetter(abetka, letter),
     0
   );
   if (sum > 9) {
@@ -103,4 +106,10 @@ export function cardinalByNumber(numString: string) {
 
 export function getIdnByNumber(ordinal: number) {
   return IDNS.find((IDN) => IDN.ordinal === ordinal);
+}
+
+export function abetkaByName(name: AbetkaName) {
+  const res = ABETKY?.find((a) => a.name === name) || ABETKA_STD;
+  console.log("abetka", res);
+  return res;
 }

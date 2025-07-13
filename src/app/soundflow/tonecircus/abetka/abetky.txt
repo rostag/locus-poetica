@@ -1,0 +1,80 @@
+/** UA LAT - Rozrahunok koljoru ta zvuku 
+    1 - A K Y
+    2 - B L Z
+    3 - C M Ž
+    4 - Č N
+    5 - D O
+    6 - E P
+    7 - F R
+    8 - G S
+    9 - Ĝ Š
+    10 - H T
+    11 - I U
+    12 - J V 
+*/
+
+/** UA LAT - Rozrahunok čysla
+    1 - A H R
+    2 - B I S
+    3 - C J Š
+    4 - Č K T
+    5 - D L U
+    6 - E M V
+    7 - F N Y
+    8 - G O Z
+    9 - Ĝ P Ž
+*/
+
+/** MSK - Rozrahunok koljoru ta zvuku
+1 - А Л Ч
+2 - Б М Ш
+3 - В Н Щ
+4 - Г О Ъ
+5 - Д П ЬІ
+6 - Е Р Ь
+7 - Ë С Э
+8 - Ж Т Ю
+9 - З У Я
+10 - И Ф
+11 - Й Х
+12 - К Ц 
+*/
+
+/** MSK - Rozrahunok čysla (mos.)
+1 - А И С Ъ
+2 - Б Й Т ЬІ
+3 - В К У Ь
+4 - Г Л Ф Э
+5 - Д М Х Ю
+6 - Е Н Ц Я
+7 - Ë О Ч
+8 - Ж П Ш
+9 - З Р Щ
+*/
+
+/** Angl - rozrahunok koljoru ta zvuku
+1 - A M Y
+2 - B N Z
+3 - C O
+4 - D P
+5 - E Q
+6 - F R
+7 - G S
+8 - H T
+9 - I U
+10 - J V
+11 - K W
+12 - L X 
+*/
+
+/** Angl - rozrahunok čysla (angl.)
+1 - A J S
+2 - B K T
+3 - C L U
+4 - D M V
+5 - E N W
+6 - F O X
+7 - G P Y
+8 - H Q Z
+9 - I R
+*/

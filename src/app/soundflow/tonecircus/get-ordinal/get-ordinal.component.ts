@@ -16,6 +16,7 @@ import { MatExpansionModule } from "@angular/material/expansion";
 
 import { RouterModule } from "@angular/router";
 import {
+  abetkaByName,
   cardinalByDate,
   cardinalByNumber,
   cardinalByWord,
@@ -30,6 +31,8 @@ import {
   IdnDateIn,
   IdnDateOut,
   IdnPojedOut,
+  Abetka,
+  AbetkaName,
 } from "src/app/soundflow/tonecircus/models/abetka.models";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from "@angular/material/input";
@@ -73,31 +76,28 @@ import { ukrMova1000 } from "src/app/generator/components/models/ukr.mova.1000.m
   standalone: true,
 })
 export class GetOrdinalComponent implements OnInit {
-  setUseDate(toUse: any) {
-    this.useDate = toUse;
-    this.setData();
-  }
-  setUseName(toUse: any) {
-    this.useName = toUse;
-    this.setData();
-  }
   @Input() set refresh(val: number) {
     this.setData();
   }
+
   @Output() onBushUpdate = new EventEmitter<BushModel>();
-  public JSON = JSON;
 
-  public useName: boolean = true;
-  public useDate: boolean = true;
+  JSON = JSON;
 
-  public nameIn: IdnNameIn = {
+  abetka: Abetka = abetkaByName("Ukrajinsjka");
+
+  useName: boolean = true;
+
+  useDate: boolean = true;
+
+  nameIn: IdnNameIn = {
     imja: "",
     pobatjkovi: "",
     prizvysceNeoficijne: "",
     prizvysce: "",
   };
 
-  public nameOut: IdnNameOut = {
+  nameOut: IdnNameOut = {
     imja: null,
     pobatjkovi: null,
     prizvysceNeoficijne: null,
@@ -105,33 +105,48 @@ export class GetOrdinalComponent implements OnInit {
     jadro: null,
   };
 
-  public dateIn: IdnDateIn = {
+  dateIn: IdnDateIn = {
     denj: "",
     misjacj: "",
     rik: "",
   };
 
-  public dateOut: IdnDateOut = {
+  dateOut: IdnDateOut = {
     denj: null,
     misjacj: null,
     rik: null,
     jadro: null,
   };
 
-  public pojedOut: IdnPojedOut = {
+  pojedOut: IdnPojedOut = {
     imjaDenj: null,
     pobatMisjacj: null,
     prNeofPrRik: null,
     jadro: null,
   };
 
-  public ordinalByWord = ordinalByWord;
-  public ordinalByDate = ordinalByDate;
+  ordinalByWord = ordinalByWord;
+  ordinalByDate = ordinalByDate;
+  cardinalByWord = cardinalByWord;
+  cardinalByDate = cardinalByDate;
 
-  public cardinalByWord = cardinalByWord;
-  public cardinalByDate = cardinalByDate;
+  handleAbetkaSelect(evt: Event) {
+    const val = (evt.currentTarget as any)?.value;
+    this.abetka = abetkaByName(val as AbetkaName);
+    this.setData();
+  }
 
-  public setInputs() {
+  setUseDate(toUse: any) {
+    this.useDate = toUse;
+    this.setData();
+  }
+
+  setUseName(toUse: any) {
+    this.useName = toUse;
+    this.setData();
+  }
+
+  setInputs() {
     const sample = BUSH_SAMPLES[0].split(",");
     this.nameIn.imja = sample[0];
     this.nameIn.pobatjkovi = sample[1];
@@ -142,7 +157,7 @@ export class GetOrdinalComponent implements OnInit {
     this.dateIn.rik = sample[6];
   }
 
-  public setDateInput(date: Date) {
+  setDateInput(date: Date) {
     const day = dayjs(date).date();
     const month = dayjs(date).month();
     const year = dayjs(date).year();
@@ -153,7 +168,7 @@ export class GetOrdinalComponent implements OnInit {
     };
   }
 
-  public setRandomWord() {
+  setRandomWord() {
     const dict = ukrMova1000.split("\n");
     const l = dict.length;
     const word1 = dict[Math.round(Math.random() * l)];
@@ -168,19 +183,25 @@ export class GetOrdinalComponent implements OnInit {
     };
   }
 
-  public setData() {
+  setData() {
     // Imja
-    const imjaNomer = ordinalByWord(this.nameIn.imja);
-    const pobatNomer = ordinalByWord(this.nameIn.pobatjkovi);
-    const prizNeofNomer = ordinalByWord(this.nameIn.prizvysceNeoficijne);
-    const prizNomer = ordinalByWord(this.nameIn.prizvysce);
+    const imjaNomer = ordinalByWord(this.abetka, this.nameIn.imja);
+    const pobatNomer = ordinalByWord(this.abetka, this.nameIn.pobatjkovi);
+    const prizNeofNomer = ordinalByWord(
+      this.abetka,
+      this.nameIn.prizvysceNeoficijne
+    );
+    const prizNomer = ordinalByWord(this.abetka, this.nameIn.prizvysce);
     const jadroNomer = ordinalByNumber(
       "" + (imjaNomer + pobatNomer + prizNeofNomer + prizNomer)
     );
-    const imjaCyslo = cardinalByWord(this.nameIn.imja);
-    const pobatCyslo = cardinalByWord(this.nameIn.pobatjkovi);
-    const prizNeofCyslo = cardinalByWord(this.nameIn.prizvysceNeoficijne);
-    const prizCyslo = cardinalByWord(this.nameIn.prizvysce);
+    const imjaCyslo = cardinalByWord(this.abetka, this.nameIn.imja);
+    const pobatCyslo = cardinalByWord(this.abetka, this.nameIn.pobatjkovi);
+    const prizNeofCyslo = cardinalByWord(
+      this.abetka,
+      this.nameIn.prizvysceNeoficijne
+    );
+    const prizCyslo = cardinalByWord(this.abetka, this.nameIn.prizvysce);
     const jadroCyslo = cardinalByNumber(
       "" + (imjaCyslo + pobatCyslo + prizNeofCyslo + prizCyslo)
     );
