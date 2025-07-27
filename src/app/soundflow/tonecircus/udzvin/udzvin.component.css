@@ -1,0 +1,11 @@
+:host {
+  display: block;
+}
+
+.get-ordinal {
+  margin-top: 0.5rem;
+}
+
+.get-ordinal app-idn {
+  margin-top: 0rem;
+}

@@ -1,0 +1,22 @@
+<div class="flex-row get-ordinal">
+  <div>
+    <h3 class="flex-row gap-1">
+      Mova
+      <select (change)="handleAbetkaSelect($event)">
+        <option>Ukrajinsjka</option>
+        <option>Ukrajinsjka Latynka</option>
+        <option>Moskaljsjka</option>
+        <option>Anglijsjka</option>
+      </select>
+    </h3>
+
+    <!-- Im'ja -->
+    <div class="flex-row">
+      <mat-form-field appearance="outline">
+        <mat-label>Slovo</mat-label>
+        <input matInput [(ngModel)]="nameIn.imja" (input)="setData()" />
+      </mat-form-field>
+      <app-idn [idn]="nameOut.imja" (onIdnUpdate)="setData()"></app-idn>
+    </div>
+  </div>
+</div>

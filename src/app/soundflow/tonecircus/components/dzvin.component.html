@@ -1,0 +1,61 @@
+<div style="margin-left: 1rem">
+  <label>Vidstup zgory: </label>
+  <input
+    matInput
+    type="number"
+    [ngModel]="bushMarginTop"
+    (ngModelChange)="redrawBush()"
+    (input)="setBushMarginTop($event)"
+    style="width: 48px; margin-right: 12px"
+  />
+
+  <button
+    matButton="elevated"
+    (click)="toggleChyslo()"
+    style="margin-right: 12px"
+  >
+    pokazuvaty chyslo
+  </button>
+  @if (showChyslo) {
+  <mat-slider
+    min="0"
+    [max]="IC.padAngleMax"
+    step="0.01"
+    discrete
+    style="width: 500px"
+  >
+    <input
+      matSliderThumb
+      [(ngModel)]="padAngle"
+      (ngModelChange)="redrawBush()"
+    />
+  </mat-slider>
+  <input
+    matInput
+    type="number"
+    [ngModel]="padAngle"
+    (ngModelChange)="redrawBush()"
+    (input)="setPadAngle($event)"
+    style="width: 48px; margin-right: 12px"
+  />
+  <button
+    matButton="elevated"
+    (click)="toggleBgStyle()"
+    style="margin-right: 12px"
+  >
+    kolir fonu
+  </button>
+  }
+</div>
+
+<div class="flex-row midwrap">
+  @if (showSettings) {
+  <app-idn-list (onIdnUpdate)="redrawBush()" />
+  }
+  <div class="bushcont"><figure id="bushwrap"></figure></div>
+  <app-udzvin (onBushUpdate)="updateBush($event)" [refresh]="bushMarginTop" />
+</div>
+
+<div style="margin: 2.5rem">
+  <app-abetka></app-abetka>
+</div>

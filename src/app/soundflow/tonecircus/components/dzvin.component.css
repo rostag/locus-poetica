@@ -1,0 +1,14 @@
+.controls {
+  margin-left: 2.5rem;
+  display: flex;
+  gap: 1rem;
+}
+
+.midwrap {
+  margin-right: 0.5rem;
+}
+
+.bushcont {
+  width: 50%;
+  min-width: 300px;
+}

@@ -36,6 +36,17 @@ export type IdnPojedOut = {
   jadro: IDN | null;
 };
 
+// Dzvin - Slovo
+// abetka.models.ts
+export type IdnSlovoIn = {
+  bukva: string[];
+};
+
+export type IdnSlovoOut = {
+  imja: IDN[] | null;
+  jadro: IDN | null;
+};
+
 export type IdnFinalSource = {
   a: string;
   b: string;
