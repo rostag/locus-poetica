@@ -14,9 +14,14 @@
     <div class="flex-row">
       <mat-form-field appearance="outline">
         <mat-label>Slovo</mat-label>
-        <input matInput [(ngModel)]="nameIn.imja" (input)="setData()" />
+        <input matInput [(ngModel)]="slovo" (input)="setData()" />
       </mat-form-field>
-      <app-idn [idn]="nameOut.imja" (onIdnUpdate)="setData()"></app-idn>
+      @for (item of idnOut.idnOut; track $index;) { {{ $index }}
+      <!-- <app-idn
+        [idn]="idnOut.idnOut[$index]"
+        (onIdnUpdate)="setData()"
+      ></app-idn> -->
+      }
     </div>
   </div>
 </div>

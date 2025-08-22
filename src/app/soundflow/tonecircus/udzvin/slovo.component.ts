@@ -29,8 +29,8 @@ import {
 import {
   Abetka,
   AbetkaName,
-  IdnNameIn,
-  IdnNameOut,
+  IdnSlovoIn,
+  IdnSlovoOut,
 } from "src/app/soundflow/tonecircus/models/abetka.models";
 import {
   BUSH_LOC,
@@ -47,7 +47,7 @@ import { IdnComponent } from "../idn/idn.component";
 import { ukrMova1000 } from "src/app/generator/components/models/ukr.mova.1000.model";
 
 @Component({
-  selector: "app-udzvin",
+  selector: "app-slovo",
   imports: [
     RouterModule,
     MatSliderModule,
@@ -58,21 +58,22 @@ import { ukrMova1000 } from "src/app/generator/components/models/ukr.mova.1000.m
     MatDividerModule,
     MatIconModule,
     MatExpansionModule,
-    IdnComponent,
     MatCheckboxModule,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 
-  templateUrl: "./udzvin.component.html",
-  styleUrl: "./udzvin.component.css",
+  templateUrl: "./slovo.component.html",
+  styleUrl: "./slovo.component.css",
   standalone: true,
 })
-export class UDzvinComponent implements OnInit {
+export class SlovoComponent implements OnInit {
   @Input() set refresh(val: number) {
     this.setData();
   }
 
   @Output() onBushUpdate = new EventEmitter<BushModel>();
+
+  slovo: string;
 
   JSON = JSON;
 
@@ -80,18 +81,12 @@ export class UDzvinComponent implements OnInit {
 
   useName: boolean = true;
 
-  nameIn: IdnNameIn = {
-    imja: "",
-    pobatjkovi: "",
-    prizvysceNeoficijne: "",
-    prizvysce: "",
+  slovoIn: IdnSlovoIn = {
+    slovo: "РОСТ",
   };
 
-  nameOut: IdnNameOut = {
-    imja: null,
-    pobatjkovi: null,
-    prizvysceNeoficijne: null,
-    prizvysce: null,
+  idnOut: IdnSlovoOut = {
+    idnOut: [],
     jadro: null,
   };
 
@@ -106,78 +101,62 @@ export class UDzvinComponent implements OnInit {
 
   setInputs() {
     const sample = BUSH_SAMPLES[0].split(",");
-    this.nameIn.imja = sample[0];
-    this.nameIn.pobatjkovi = sample[1];
-    this.nameIn.prizvysceNeoficijne = sample[2];
-    this.nameIn.prizvysce = sample[3];
+    this.slovo = sample.join("");
   }
 
   setRandomWord() {
     const dict = ukrMova1000.split("\n");
     const l = dict.length;
-    const word1 = dict[Math.round(Math.random() * l)];
-    const word2 = dict[Math.round(Math.random() * l)];
-    const word3 = dict[Math.round(Math.random() * l)];
-    const word4 = dict[Math.round(Math.random() * l)];
-    this.nameIn = {
-      imja: word1,
-      pobatjkovi: word2,
-      prizvysceNeoficijne: word3,
-      prizvysce: word4,
+    this.slovoIn = {
+      slovo: dict[Math.round(Math.random() * l)],
     };
   }
 
   setData() {
     // Imja
-    const imjaNomer = ordinalByWord(this.abetka, this.nameIn.imja);
-    const pobatNomer = ordinalByWord(this.abetka, this.nameIn.pobatjkovi);
-    const prizNeofNomer = ordinalByWord(
-      this.abetka,
-      this.nameIn.prizvysceNeoficijne
-    );
-    const prizNomer = ordinalByWord(this.abetka, this.nameIn.prizvysce);
+    const imjaNomer = ordinalByWord(this.abetka, this.slovo[0]);
+    const pobatNomer = ordinalByWord(this.abetka, this.slovo[1]);
+    const prizNeofNomer = ordinalByWord(this.abetka, this.slovo[2]);
+    const prizNomer = ordinalByWord(this.abetka, this.slovo[3]);
     const jadroNomer = ordinalByNumber(
       "" + (imjaNomer + pobatNomer + prizNeofNomer + prizNomer)
     );
-    const imjaCyslo = cardinalByWord(this.abetka, this.nameIn.imja);
-    const pobatCyslo = cardinalByWord(this.abetka, this.nameIn.pobatjkovi);
-    const prizNeofCyslo = cardinalByWord(
-      this.abetka,
-      this.nameIn.prizvysceNeoficijne
-    );
-    const prizCyslo = cardinalByWord(this.abetka, this.nameIn.prizvysce);
+    const imjaCyslo = cardinalByWord(this.abetka, this.slovo[0]);
+    const pobatCyslo = cardinalByWord(this.abetka, this.slovo[1]);
+    const prizNeofCyslo = cardinalByWord(this.abetka, this.slovo[2]);
+    const prizCyslo = cardinalByWord(this.abetka, this.slovo[3]);
     const jadroCyslo = cardinalByNumber(
       "" + (imjaCyslo + pobatCyslo + prizNeofCyslo + prizCyslo)
     );
-    this.nameOut.imja = getIdnByNumber(imjaNomer) || null;
-    this.nameOut.pobatjkovi = getIdnByNumber(pobatNomer) || null;
-    this.nameOut.prizvysceNeoficijne = getIdnByNumber(prizNeofNomer) || null;
-    this.nameOut.prizvysce = getIdnByNumber(prizNomer) || null;
-    this.nameOut.jadro = getIdnByNumber(jadroNomer) || null;
+    this.idnOut.idnOut[0] = getIdnByNumber(imjaNomer) || null;
+    this.idnOut.idnOut[1] = getIdnByNumber(pobatNomer) || null;
+    this.idnOut.idnOut[2] = getIdnByNumber(prizNeofNomer) || null;
+    this.idnOut.idnOut[3] = getIdnByNumber(prizNomer) || null;
+    this.idnOut.jadro = getIdnByNumber(jadroNomer) || null;
 
     const leafImja: LeafModel = {
       leafOrder: 0,
-      leafIdn: this.nameOut.imja!,
+      leafIdn: this.idnOut.idnOut[0]!,
       leafNum: imjaCyslo,
     };
     const leafPobatkovi: LeafModel = {
       leafOrder: 0,
-      leafIdn: this.nameOut.pobatjkovi!,
+      leafIdn: this.idnOut.idnOut[1]!,
       leafNum: pobatCyslo,
     };
     const leafPrizNeof: LeafModel = {
       leafOrder: 0,
-      leafIdn: this.nameOut.prizvysceNeoficijne!,
+      leafIdn: this.idnOut.idnOut[2]!,
       leafNum: prizNeofCyslo,
     };
     const leafPriz: LeafModel = {
       leafOrder: 0,
-      leafIdn: this.nameOut.prizvysce!,
+      leafIdn: this.idnOut.idnOut[3]!,
       leafNum: prizCyslo,
     };
     const leafJadro: LeafModel = {
       leafOrder: 0,
-      leafIdn: this.nameOut.jadro!,
+      leafIdn: this.idnOut.jadro!,
       leafNum: jadroCyslo,
     };
 

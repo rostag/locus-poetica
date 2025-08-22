@@ -20,7 +20,7 @@ import {
 import * as Tone from "tone";
 import { AbetkaComponent } from "../abetka/abetka.component";
 import { IdnListComponent } from "../idn-list/idn-list.component";
-import { UDzvinComponent } from "../udzvin/udzvin.component";
+import { SlovoComponent } from "../udzvin/slovo.component";
 
 type OscItem = {
   [index: number]: OscillatorNode;
@@ -35,7 +35,7 @@ type OscItem = {
     FormsModule,
     AbetkaComponent,
     IdnListComponent,
-    UDzvinComponent,
+    SlovoComponent,
   ],
   templateUrl: "./dzvin.component.html",
   styleUrl: "./dzvin.component.css",
