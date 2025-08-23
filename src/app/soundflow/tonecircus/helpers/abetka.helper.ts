@@ -11,7 +11,7 @@ function ordinalByLetter(abetka: Abetka, letter: string) {
   const ordinal =
     abetka.ordinals.find((ordinalByLetter: NumberByLetter) => {
       return ordinalByLetter.letters.find((letters) =>
-        letters.includes(letter.toLocaleUpperCase())
+        letters.match(new RegExp(letter, "i"))
       );
     })?.cardinal || 0;
   // console.log(letter, ordinal);
