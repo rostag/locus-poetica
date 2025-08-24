@@ -106,7 +106,7 @@ export const ORDINALS_BY_LETTERS_MSK: NumberByLetter[] = [
   { cardinal: 4, letters: ["Г", "О", "Ъ"] },
   { cardinal: 5, letters: ["Д", "П", "Ы"] },
   { cardinal: 6, letters: ["Е", "Р", "Ь"] },
-  { cardinal: 7, letters: ["\u0401", "С", "Э"] }, // замість Ё прийшлося вставити спецвираз \u0401, бо її не визнає світ =)
+  { cardinal: 7, letters: ["\u0401", "\u0451", "С", "Э"] }, // замість Ё ё прийшлося вставити спецвираз \u0401, бо її не визнає світ =)
   { cardinal: 8, letters: ["Ж", "Т", "Ю"] },
   { cardinal: 9, letters: ["З", "У", "Я"] },
   { cardinal: 10, letters: ["И", "Ф"] },
