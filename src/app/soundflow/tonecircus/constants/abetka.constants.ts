@@ -133,7 +133,7 @@ export const CARDINALS_BY_LETTERS_MSK: NumberByLetter[] = [
   { cardinal: 4, letters: ["Г", "Л", "Ф", "Э"] },
   { cardinal: 5, letters: ["Д", "М", "Х", "Ю"] },
   { cardinal: 6, letters: ["Е", "Н", "Ц", "Я"] },
-  { cardinal: 7, letters: ["Ë", "О", "Ч"] },
+  { cardinal: 7, letters: ["Ё", "О", "Ч"] },
   { cardinal: 8, letters: ["Ж", "П", "Ш"] },
   { cardinal: 9, letters: ["З", "Р", "Щ"] },
 ];
