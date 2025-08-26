@@ -51,7 +51,8 @@ function cardinalByLetter(abetka: Abetka, letter: string) {
   const cardinal =
     abetka.cardinals.find((cardinalByLetter: NumberByLetter) => {
       return cardinalByLetter.letters.find((letters) =>
-        letters.includes(letter.toLocaleUpperCase())
+        letters.match(new RegExp(letter, "i"))
+      // letters.includes(letter.toLocaleUpperCase()) // yo fix
       );
     })?.cardinal || 0;
   // console.log(letter, cardinal);
