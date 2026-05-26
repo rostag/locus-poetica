@@ -19,6 +19,14 @@ function ordinalByLetter(abetka: Abetka, letter: string) {
   return ordinal;
 }
 
+/**
+ * Compute the chromatic ordinal (1–12) of a word.
+ *
+ * Spec: openspec/specs/numerology-ordinal/spec.md — Requirement: ordinalByWord reduction
+ *
+ * Sums per-letter ordinals via {@link Abetka.ordinals} (case-insensitive),
+ * then reduces `sum % 12 || 12` so the result is always in [1, 12].
+ */
 export function ordinalByWord(abetka: Abetka, word: string) {
   const letters = word.split("");
   const sum = letters.reduce(
@@ -28,6 +36,17 @@ export function ordinalByWord(abetka: Abetka, word: string) {
   return sum % 12 || 12;
 }
 
+/**
+ * Compute the chromatic ordinal (1–12) of a date string "DD.MM.YYYY".
+ *
+ * Spec: openspec/specs/numerology-ordinal/spec.md — Requirement: ordinalByDate reduction
+ *
+ * Reduces each component (day, month, year) by `% 12 || 12`, then sums them
+ * and reduces again by `% 12 || 12`. Also used as a generic multi-value
+ * reducer for combination (pojednannja) ordinals.
+ *
+ * Example: 24.08.1991 → day=12, month=8, year=11, jadro=7
+ */
 // 24.08.1991 r.
 // 24-12=12 (bilyj/si);
 // 8 (fioletovyj/solj);
@@ -72,6 +91,14 @@ function reduceNumber(num: number) {
   }
 }
 
+/**
+ * Compute the pythagorean cardinal (1–9) of a word.
+ *
+ * Spec: openspec/specs/numerology-cardinal/spec.md — Requirement: cardinalByWord reduction
+ *
+ * Sums per-letter cardinals via {@link Abetka.cardinals} (case-insensitive),
+ * then recursively digit-sums until a single digit remains.
+ */
 export function cardinalByWord(abetka: Abetka, word: string) {
   const letters = word.split("");
   const sum = letters.reduce(
@@ -85,6 +112,14 @@ export function cardinalByWord(abetka: Abetka, word: string) {
   }
 }
 
+/**
+ * Compute the pythagorean cardinal of a date string "DD.MM.YYYY".
+ *
+ * Spec: openspec/specs/numerology-cardinal/spec.md — Requirement: cardinalByDate reduction
+ *
+ * Recursively digit-sums day, month, and year independently, sums the three
+ * results, then reduces the sum `% 12 || 12`.
+ */
 export function cardinalByDate(dateString: string) {
   const parts = dateString.split(".") || [1, 1, 1];
 

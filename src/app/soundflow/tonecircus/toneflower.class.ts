@@ -36,23 +36,27 @@ export class ToneFlower {
   }
 
   /**
-    Jak rahujetcja kolo vseredyni
-
-    1. Skladaju čysla po koljorah jaki vyjšly (ti, ščo smugy) i vidnimaju 12, poky ne otrymaju čyslo vid 1 do 12 – ce bude kolir centru
-
-    2. Nyžnje kolo (try blakytnyh i zolotyj): 
-      6 + 6 + 6 + 9 = 27. 27 - 12 = 15. 15 - 12 = 3. 
-      3 – pomarančevyj centr
-
-    3. Serednje kolo (červonyj, sribnyj, perlynovyj):
-      2 + 11 + 10 = 23. 23 - 12 = 11.
-      11 – sribnyj centr
-
-    4. Verhnje kolo (fioletovyj, zelenyj, čornyj):
-      8 + 5 + 1 = 14. 14 - 12 = 2
-      2 – červonyj centr
-  */
-
+   * [VARIANT — inactive] Alternative center (jadro) color calculation.
+   *
+   * Spec: openspec/changes/tonecircus-numerology-rules/design.md — Risks / Trade-offs, Open Questions
+   *
+   * Sums the ordinals of all leaf colors that appeared in a ring (the "stripes")
+   * and subtracts 12 repeatedly until a number in 1..12 remains — that ordinal
+   * is the center color.
+   *
+   * Worked examples (from the original numerological method):
+   *   - Lower flower (3× blakytnyj + zolotyj): 6+6+6+9 = 27 → 27-12=15 → 15-12=3 → pomarančevyj
+   *   - Middle flower (červonyj + sribnyj + perlynovyj): 2+11+10 = 23 → 23-12=11 → sribnyj
+   *   - Upper flower (fioletovyj + zelenyj + čornyj): 8+5+1 = 14 → 14-12=2 → červonyj
+   *
+   * This is mathematically equivalent to `sum % 12 || 12` — the same reduction
+   * used by `ordinalByNumber` for the active jadro calculation.
+   *
+   * TODO: This variant could eventually replace the current `% 12` jadro
+   * calculation in `GetOrdinalComponent`/`SlovoComponent` once the two
+   * approaches are confirmed equivalent across all alphabets and inputs.
+   * Kept here as a reference variant; see design.md "Open Questions".
+   */
   // public getButtColor(leaveIds: number[][]) {
   //   const sum = leaveIds
   //     .map((leaf) => leaf[0])

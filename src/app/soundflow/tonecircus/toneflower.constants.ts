@@ -22,6 +22,16 @@ export const PLANT_POINTS = [
 
 export const PLANT_CENTER = [125, 150];
 
+/**
+ * The 12-entry chromatic IDN (Identity-Number) table.
+ *
+ * Spec: openspec/specs/numerology-ordinal/spec.md — Requirement: IDN — color+note identity record
+ *
+ * Each IDN binds an ordinal (1–12) to a chromatic musical note (C, C#, D, …, B)
+ * and a color (Ukrainian color name + hex). This table is the result side of
+ * the ordinal reduction: any `ordinalByWord` / `ordinalByDate` output indexes
+ * into here to yield the visual + audible identity of a leaf.
+ */
 export const IDNS: IDN[] = [
   { ordinal: 1, color: "čornyj", note: "C", colorHex: "#151210" }, // noop
   { ordinal: 2, color: "červonyj", note: "C#", colorHex: "#bd1e1e" }, // upd

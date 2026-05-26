@@ -112,56 +112,43 @@ export class SlovoComponent implements OnInit {
     };
   }
 
+  /**
+   * Spec: openspec/specs/jednotka-kombinatsiya/spec.md
+   *   Requirement: SlovoComponent — variable-length word as per-character leaves
+   *
+   * Produces one leaf per character (capped at MAX_SLOVO_LEN) plus a jadro
+   * center leaf computed from the sum of all character ordinals.
+   */
   setData() {
-    // Imja
-    const imjaNomer = ordinalByWord(this.abetka, this.slovo[0]);
-    const pobatNomer = ordinalByWord(this.abetka, this.slovo[1]);
-    const prizNeofNomer = ordinalByWord(this.abetka, this.slovo[2]);
-    const prizNomer = ordinalByWord(this.abetka, this.slovo[3]);
+    const MAX_SLOVO_LEN = 10000;
+    const letters = (this.slovo || "").split("").slice(0, MAX_SLOVO_LEN);
+
+    const letterOrdinals = letters.map((c) => ordinalByWord(this.abetka, c));
+    const letterCardinals = letters.map((c) => cardinalByWord(this.abetka, c));
+
     const jadroNomer = ordinalByNumber(
-      "" + (imjaNomer + pobatNomer + prizNeofNomer + prizNomer)
+      "" + letterOrdinals.reduce((a, b) => a + b, 0)
     );
-    const imjaCyslo = cardinalByWord(this.abetka, this.slovo[0]);
-    const pobatCyslo = cardinalByWord(this.abetka, this.slovo[1]);
-    const prizNeofCyslo = cardinalByWord(this.abetka, this.slovo[2]);
-    const prizCyslo = cardinalByWord(this.abetka, this.slovo[3]);
     const jadroCyslo = cardinalByNumber(
-      "" + (imjaCyslo + pobatCyslo + prizNeofCyslo + prizCyslo)
+      "" + letterCardinals.reduce((a, b) => a + b, 0)
     );
-    this.idnOut.idnOut[0] = getIdnByNumber(imjaNomer) || null;
-    this.idnOut.idnOut[1] = getIdnByNumber(pobatNomer) || null;
-    this.idnOut.idnOut[2] = getIdnByNumber(prizNeofNomer) || null;
-    this.idnOut.idnOut[3] = getIdnByNumber(prizNomer) || null;
+
+    this.idnOut.idnOut = letterOrdinals.map((o) => getIdnByNumber(o) || null);
     this.idnOut.jadro = getIdnByNumber(jadroNomer) || null;
 
-    const leafImja: LeafModel = {
-      leafOrder: 0,
-      leafIdn: this.idnOut.idnOut[0]!,
-      leafNum: imjaCyslo,
-    };
-    const leafPobatkovi: LeafModel = {
-      leafOrder: 0,
-      leafIdn: this.idnOut.idnOut[1]!,
-      leafNum: pobatCyslo,
-    };
-    const leafPrizNeof: LeafModel = {
-      leafOrder: 0,
-      leafIdn: this.idnOut.idnOut[2]!,
-      leafNum: prizNeofCyslo,
-    };
-    const leafPriz: LeafModel = {
-      leafOrder: 0,
-      leafIdn: this.idnOut.idnOut[3]!,
-      leafNum: prizCyslo,
-    };
     const leafJadro: LeafModel = {
       leafOrder: 0,
       leafIdn: this.idnOut.jadro!,
       leafNum: jadroCyslo,
     };
+    const letterLeaves: LeafModel[] = letters.map((_c, i) => ({
+      leafOrder: i + 1,
+      leafIdn: this.idnOut.idnOut[i]!,
+      leafNum: letterCardinals[i],
+    }));
 
     const nameFlower: FlowerModel = {
-      leaves: [leafJadro, leafImja, leafPobatkovi, leafPrizNeof, leafPriz],
+      leaves: [leafJadro, ...letterLeaves],
       flowerX: PLANT_CENTER[0],
       flowerY: PLANT_CENTER[1] + BUSH_LOC.marginTop(),
       buttSize: IC.flowerButtSize,

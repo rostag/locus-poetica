@@ -3,6 +3,15 @@ import {
   NumberByLetter,
 } from "src/app/soundflow/tonecircus/models/abetka.models";
 
+/**
+ * Ukrainian Cyrillic letter → ordinal (1–12) mapping (kolir/zvuk).
+ *
+ * Spec: openspec/specs/numerology-ordinal/spec.md — Requirement: Letter-to-ordinal tables (1–12) for four alphabets
+ *
+ * Each letter resolves to a position in the chromatic 12-note scale, which in
+ * turn selects one of the 12 IDNs (color + musical note). Letters in the same
+ * group share an ordinal.
+ */
 // UA - Kolir zvuk
 export const ORDINALS_BY_LETTERS_UA: NumberByLetter[] = [
   { cardinal: 1, letters: ["А", "Ї", "Ф"] },
@@ -19,6 +28,15 @@ export const ORDINALS_BY_LETTERS_UA: NumberByLetter[] = [
   { cardinal: 12, letters: ["І", "У"] },
 ];
 
+/**
+ * Ukrainian Cyrillic letter → cardinal (1–9) mapping (chyslo / pythagorean).
+ *
+ * Spec: openspec/specs/numerology-cardinal/spec.md — Requirement: Letter-to-cardinal tables (1–9) for four alphabets
+ *
+ * Each letter resolves to a pythagorean digit (1–9). Word cardinals are the
+ * recursive digit-sum of letter cardinals, used as the segment count per
+ * concentric ring (leafNum) when the "chyslo" display mode is active.
+ */
 // UA - Cyslo
 export const CARDINALS_BY_LETTERS_UA: NumberByLetter[] = [
   { cardinal: 1, letters: ["А", "З", "О", "Ч"] },
