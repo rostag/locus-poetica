@@ -103,3 +103,13 @@ pre {
 .p-1 {
     padding: .1rem;
 }
+
+figure {
+    margin-inline-start: 2rem;
+    margin-inline-end: 2rem;
+
+    .bush-wrap {
+        box-shadow: .5rem .5rem 2rem #bbbbbb;
+        border: 1px solid #eeeeee;
+    }
+}

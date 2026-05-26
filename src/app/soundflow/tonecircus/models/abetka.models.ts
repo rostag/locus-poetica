@@ -36,6 +36,22 @@ export type IdnPojedOut = {
   jadro: IDN | null;
 };
 
+export type IdnRozpakovkaOut = {
+  jadroImeniDen: IDN | null;
+  imjaDen: IDN | null;
+  pobatMisjacj: IDN | null;
+  prNeofPrRik: IDN | null;
+};
+
+export type RozpakovkaRingRow = {
+  inputs: IDN[];
+  result: IDN;
+};
+
+export type IdnRozpakovkaRingIn = {
+  rows: RozpakovkaRingRow[];
+};
+
 // Dzvin - Slovo
 // abetka.models.ts
 export type IdnSlovoIn = {

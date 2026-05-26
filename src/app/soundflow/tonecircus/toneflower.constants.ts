@@ -11,7 +11,7 @@ export const IC = {
 };
 
 export const BUSH_LOC = {
-  marginTop: signal(20),
+  marginTop: signal(45),
 };
 
 export const PLANT_POINTS = [
@@ -21,6 +21,13 @@ export const PLANT_POINTS = [
 ];
 
 export const PLANT_CENTER = [125, 150];
+
+export const ROZP_POINTS = [
+  [125, 50], // flower 1 — top
+  [75, 140], // flower 2 — left
+  [175, 140], // flower 3 — right
+  [125, 240], // flower 4 — bottom
+];
 
 /**
  * The 12-entry chromatic IDN (Identity-Number) table.

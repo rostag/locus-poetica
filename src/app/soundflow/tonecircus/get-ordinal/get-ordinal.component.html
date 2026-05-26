@@ -135,6 +135,54 @@
       <app-idn [idn]="pojedOut.jadro" (onIdnUpdate)="setData()"></app-idn>
     </div>
 
+    <h3>Rozpakovka</h3>
+    <!-- Jadro imeni + jadro dnja -->
+    <div class="flex-row">
+      <mat-form-field appearance="outline">
+        <mat-label>Jadro imeni + jadro dnja</mat-label>
+        <input matInput value="Jadro imeni + jadro dnja" disabled="" />
+      </mat-form-field>
+      <app-idn
+        [idn]="rozpakovkaOut.jadroImeniDen"
+        (onIdnUpdate)="setData()"
+      ></app-idn>
+    </div>
+    <!-- Im'ja + denj -->
+    <div class="flex-row">
+      <mat-form-field appearance="outline">
+        <mat-label>Im'ja + denj</mat-label>
+        <input matInput value="im'ja + denj" disabled="" />
+      </mat-form-field>
+      <app-idn
+        [idn]="rozpakovkaOut.imjaDen"
+        (onIdnUpdate)="setData()"
+      ></app-idn>
+    </div>
+    <!-- Po batjkovi + misjacj -->
+    <div class="flex-row">
+      <mat-form-field appearance="outline">
+        <mat-label>Po batjkovi + misjacj</mat-label>
+        <input matInput value="po batjkovi + misjacj" disabled="" />
+      </mat-form-field>
+      <app-idn
+        [idn]="rozpakovkaOut.pobatMisjacj"
+        (onIdnUpdate)="setData()"
+      ></app-idn>
+    </div>
+    <!-- Pr Neof + Pr + Rik -->
+    <div class="flex-row">
+      <mat-form-field appearance="outline">
+        <mat-label>Pr Neof + Pr + Rik</mat-label>
+        <input matInput value="Pr Neof + Pr + Rik" disabled="" />
+      </mat-form-field>
+      <app-idn
+        [idn]="rozpakovkaOut.prNeofPrRik"
+        (onIdnUpdate)="setData()"
+      ></app-idn>
+    </div>
+
+    <!-- <app-rozpakovka-ring-view [data]="rozpakovkaRingIn" /> -->
+
     <!-- <div>
       <h3>2. Rozrahunok čysla</h3>
     </div>
