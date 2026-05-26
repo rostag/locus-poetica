@@ -11,4 +11,17 @@
 .bushcont {
   width: 50%;
   min-width: 300px;
+  &.left {
+    margin-left: 0.5rem;
+  }
+  &.right {
+    margin-left: -2rem;
+  }
+}
+
+.bushwrap {
+  .bush-wrap {
+    box-shadow: 0.5rem 0.5rem 2rem #cccccc;
+    border: 1px solid #eeeeee;
+  }
 }

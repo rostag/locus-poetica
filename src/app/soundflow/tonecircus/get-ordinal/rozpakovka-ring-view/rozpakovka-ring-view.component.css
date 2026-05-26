@@ -1,0 +1,22 @@
+.ring-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  padding: 8px 0;
+}
+
+.ring-span {
+  grid-column: 1 / -1;
+  justify-self: center;
+}
+
+.ring-item {
+  display: flex;
+  justify-content: center;
+}
+
+.ring-label {
+  font-size: 14px;
+  font-weight: bold;
+  fill: #555;
+}

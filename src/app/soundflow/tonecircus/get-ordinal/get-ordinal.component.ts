@@ -31,6 +31,8 @@ import {
   IdnDateIn,
   IdnDateOut,
   IdnPojedOut,
+  IdnRozpakovkaOut,
+  IdnRozpakovkaRingIn,
   Abetka,
   AbetkaName,
 } from "src/app/soundflow/tonecircus/models/abetka.models";
@@ -47,6 +49,7 @@ import {
   PLANT_POINTS,
   BUSH_LOC,
   PLANT_CENTER,
+  ROZP_POINTS,
 } from "src/app/soundflow/tonecircus/toneflower.constants";
 import { BUSH_SAMPLES } from "src/app/soundflow/tonecircus/constants/sample.constants";
 import { MatCheckboxModule } from "@angular/material/checkbox";
@@ -81,6 +84,7 @@ export class GetOrdinalComponent implements OnInit {
   }
 
   @Output() onBushUpdate = new EventEmitter<BushModel>();
+  @Output() onRozpakovkaBushUpdate = new EventEmitter<BushModel>();
 
   JSON = JSON;
 
@@ -124,6 +128,15 @@ export class GetOrdinalComponent implements OnInit {
     prNeofPrRik: null,
     jadro: null,
   };
+
+  rozpakovkaOut: IdnRozpakovkaOut = {
+    jadroImeniDen: null,
+    imjaDen: null,
+    pobatMisjacj: null,
+    prNeofPrRik: null,
+  };
+
+  rozpakovkaRingIn: IdnRozpakovkaRingIn | null = null;
 
   ordinalByWord = ordinalByWord;
   ordinalByDate = ordinalByDate;
@@ -189,21 +202,21 @@ export class GetOrdinalComponent implements OnInit {
     const pobatNomer = ordinalByWord(this.abetka, this.nameIn.pobatjkovi);
     const prizNeofNomer = ordinalByWord(
       this.abetka,
-      this.nameIn.prizvysceNeoficijne
+      this.nameIn.prizvysceNeoficijne,
     );
     const prizNomer = ordinalByWord(this.abetka, this.nameIn.prizvysce);
     const jadroNomer = ordinalByNumber(
-      "" + (imjaNomer + pobatNomer + prizNeofNomer + prizNomer)
+      "" + (imjaNomer + pobatNomer + prizNeofNomer + prizNomer),
     );
     const imjaCyslo = cardinalByWord(this.abetka, this.nameIn.imja);
     const pobatCyslo = cardinalByWord(this.abetka, this.nameIn.pobatjkovi);
     const prizNeofCyslo = cardinalByWord(
       this.abetka,
-      this.nameIn.prizvysceNeoficijne
+      this.nameIn.prizvysceNeoficijne,
     );
     const prizCyslo = cardinalByWord(this.abetka, this.nameIn.prizvysce);
     const jadroCyslo = cardinalByNumber(
-      "" + (imjaCyslo + pobatCyslo + prizNeofCyslo + prizCyslo)
+      "" + (imjaCyslo + pobatCyslo + prizNeofCyslo + prizCyslo),
     );
     this.nameOut.imja = getIdnByNumber(imjaNomer) || null;
     this.nameOut.pobatjkovi = getIdnByNumber(pobatNomer) || null;
@@ -218,13 +231,16 @@ export class GetOrdinalComponent implements OnInit {
     const misjacCyslo = cardinalByNumber(this.dateIn.misjacj);
     const rikNomer = ordinalByNumber(this.dateIn.rik);
     const rikCyslo = cardinalByNumber(this.dateIn.rik);
+    const jadroDateNomer = ordinalByNumber(
+      "" + (denNomer + misjacNomer + rikNomer),
+    );
+    const jadroDateCyslo = cardinalByDate(
+      this.dateIn.denj + "." + this.dateIn.misjacj + "." + this.dateIn.rik,
+    );
     this.dateOut.denj = getIdnByNumber(denNomer) || null;
     this.dateOut.misjacj = getIdnByNumber(misjacNomer) || null;
     this.dateOut.rik = getIdnByNumber(rikNomer) || null;
-    this.dateOut.jadro =
-      getIdnByNumber(
-        ordinalByNumber("" + (denNomer + misjacNomer + rikNomer))
-      ) || null;
+    this.dateOut.jadro = getIdnByNumber(jadroDateNomer) || null;
 
     const leafImja: LeafModel = {
       leafOrder: 0,
@@ -282,7 +298,7 @@ export class GetOrdinalComponent implements OnInit {
       leafOrder: 0,
       leafIdn: this.dateOut.jadro!,
       leafNum: cardinalByDate(
-        this.dateIn.denj + "." + this.dateIn.misjacj + "." + this.dateIn.rik
+        this.dateIn.denj + "." + this.dateIn.misjacj + "." + this.dateIn.rik,
       ),
     };
 
@@ -326,22 +342,34 @@ export class GetOrdinalComponent implements OnInit {
     const poBatMisjacNomer = ordinalByDate("" + pobatNomer + "." + misjacNomer);
     const poBatMisjacCyslo = cardinalByNumber("" + pobatCyslo + misjacCyslo);
     const prizNeofPrizRikNomer = ordinalByDate(
-      "" + prizNeofNomer + "." + prizNomer + "." + rikNomer
+      "" + prizNeofNomer + "." + prizNomer + "." + rikNomer,
     );
     const prizNeofPrizRikCyslo = cardinalByNumber(
-      "" + prizNeofCyslo + prizCyslo + rikCyslo
+      "" + prizNeofCyslo + prizCyslo + rikCyslo,
     );
     const pojednanoJadroNomer = ordinalByDate(
-      "" + imjaDenNomer + "." + poBatMisjacNomer + "." + prizNeofPrizRikNomer
+      "" + imjaDenNomer + "." + poBatMisjacNomer + "." + prizNeofPrizRikNomer,
     );
     const pojednanoJadroCyslo = cardinalByNumber(
-      "" + imjaDenCyslo + poBatMisjacCyslo + prizNeofPrizRikCyslo
+      "" + imjaDenCyslo + poBatMisjacCyslo + prizNeofPrizRikCyslo,
     );
 
     this.pojedOut.imjaDenj = getIdnByNumber(imjaDenNomer)!;
     this.pojedOut.pobatMisjacj = getIdnByNumber(poBatMisjacNomer)!;
     this.pojedOut.prNeofPrRik = getIdnByNumber(prizNeofPrizRikNomer)!;
     this.pojedOut.jadro = getIdnByNumber(pojednanoJadroNomer)!;
+
+    // Розпаковка
+    const jadroImeniDenNomer = ordinalByDate(
+      "" + jadroNomer + "." + jadroDateNomer,
+    );
+    const jadroImeniDenCyslo = cardinalByNumber(
+      "" + jadroCyslo + jadroDateCyslo,
+    );
+    this.rozpakovkaOut.jadroImeniDen = getIdnByNumber(jadroImeniDenNomer)!;
+    this.rozpakovkaOut.imjaDen = getIdnByNumber(imjaDenNomer)!;
+    this.rozpakovkaOut.pobatMisjacj = getIdnByNumber(poBatMisjacNomer)!;
+    this.rozpakovkaOut.prNeofPrRik = getIdnByNumber(prizNeofPrizRikNomer)!;
 
     const leafImjaDen: LeafModel = {
       leafOrder: 0,
@@ -387,6 +415,125 @@ export class GetOrdinalComponent implements OnInit {
     }
     if (this.useDate && this.useName) {
       flowers.push(pojedFlower);
+
+      const rozpakovkaBush: BushModel = {
+        flowers: [
+          {
+            leaves: [
+              {
+                leafOrder: 0,
+                leafIdn: this.rozpakovkaOut.jadroImeniDen!,
+                leafNum: jadroImeniDenCyslo,
+              },
+              {
+                leafOrder: 0,
+                leafIdn: this.nameOut.jadro!,
+                leafNum: jadroCyslo,
+              },
+              {
+                leafOrder: 0,
+                leafIdn: this.dateOut.jadro!,
+                leafNum: jadroDateCyslo,
+              },
+            ],
+            flowerX: ROZP_POINTS[0][0],
+            flowerY: ROZP_POINTS[0][1] + BUSH_LOC.marginTop(),
+            buttSize: IC.flowerButtSize,
+            leafWidth: IC.flowerLeafWidth,
+          },
+          {
+            leaves: [
+              {
+                leafOrder: 0,
+                leafIdn: this.rozpakovkaOut.imjaDen!,
+                leafNum: imjaDenCyslo,
+              },
+              { leafOrder: 0, leafIdn: this.nameOut.imja!, leafNum: imjaCyslo },
+              { leafOrder: 0, leafIdn: this.dateOut.denj!, leafNum: denCyslo },
+            ],
+            flowerX: ROZP_POINTS[1][0],
+            flowerY: ROZP_POINTS[1][1] + BUSH_LOC.marginTop(),
+            buttSize: IC.flowerButtSize,
+            leafWidth: IC.flowerLeafWidth,
+          },
+          {
+            leaves: [
+              {
+                leafOrder: 0,
+                leafIdn: this.rozpakovkaOut.pobatMisjacj!,
+                leafNum: poBatMisjacCyslo,
+              },
+              {
+                leafOrder: 0,
+                leafIdn: this.nameOut.pobatjkovi!,
+                leafNum: pobatCyslo,
+              },
+              {
+                leafOrder: 0,
+                leafIdn: this.dateOut.misjacj!,
+                leafNum: misjacCyslo,
+              },
+            ],
+            flowerX: ROZP_POINTS[2][0],
+            flowerY: ROZP_POINTS[2][1] + BUSH_LOC.marginTop(),
+            buttSize: IC.flowerButtSize,
+            leafWidth: IC.flowerLeafWidth,
+          },
+          {
+            leaves: [
+              {
+                leafOrder: 0,
+                leafIdn: this.rozpakovkaOut.prNeofPrRik!,
+                leafNum: prizNeofPrizRikCyslo,
+              },
+              {
+                leafOrder: 0,
+                leafIdn: this.nameOut.prizvysceNeoficijne!,
+                leafNum: prizNeofCyslo,
+              },
+              {
+                leafOrder: 0,
+                leafIdn: this.nameOut.prizvysce!,
+                leafNum: prizCyslo,
+              },
+              { leafOrder: 0, leafIdn: this.dateOut.rik!, leafNum: rikCyslo },
+            ],
+            flowerX: ROZP_POINTS[3][0],
+            flowerY: ROZP_POINTS[3][1] + BUSH_LOC.marginTop(),
+            buttSize: IC.flowerButtSize,
+            leafWidth: IC.flowerLeafWidth,
+          },
+        ],
+      };
+      this.onRozpakovkaBushUpdate.emit(rozpakovkaBush);
+
+      this.rozpakovkaRingIn = {
+        rows: [
+          {
+            inputs: [this.dateOut.jadro!, this.nameOut.jadro!],
+            result: this.rozpakovkaOut.jadroImeniDen!,
+          },
+          {
+            inputs: [this.dateOut.denj!, this.nameOut.imja!],
+            result: this.rozpakovkaOut.imjaDen!,
+          },
+          {
+            inputs: [this.dateOut.misjacj!, this.nameOut.pobatjkovi!],
+            result: this.rozpakovkaOut.pobatMisjacj!,
+          },
+          {
+            inputs: [
+              this.dateOut.rik!,
+              this.nameOut.prizvysce!,
+              this.nameOut.prizvysceNeoficijne!,
+            ],
+            result: this.rozpakovkaOut.prNeofPrRik!,
+          },
+        ],
+      };
+    } else {
+      this.rozpakovkaRingIn = null;
+      this.onRozpakovkaBushUpdate.emit({ flowers: [] });
     }
     const newBush: BushModel = {
       flowers,

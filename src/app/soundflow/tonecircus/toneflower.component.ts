@@ -16,6 +16,7 @@ import {
   BUSH_LOC,
   IC,
   PLAY_BUSH,
+  ROZP_POINTS,
   SAMPLE_BUSHMODELS,
 } from "src/app/soundflow/tonecircus/toneflower.constants";
 import {
@@ -84,6 +85,11 @@ export class ToneFlowerComponent implements OnInit {
 
   private bush: BushModel;
 
+  private rozpSvgr: any;
+  private rozpArcs = [];
+  private rozpFlowers: ToneFlower[] = [];
+  private rozpBush?: BushModel;
+
   public clearFlowers() {
     this.svgr.selectAll("*").remove();
 
@@ -92,11 +98,15 @@ export class ToneFlowerComponent implements OnInit {
     });
 
     this.arcs = [];
+    this.clearRozpFlowers();
   }
 
   public redrawBush() {
     this.clearFlowers();
     this.drawFlowers();
+    if (this.rozpBush) {
+      this.drawRozpBush(this.rozpBush);
+    }
   }
 
   private drawBush() {
@@ -124,19 +134,54 @@ export class ToneFlowerComponent implements OnInit {
     this.redrawBush();
   }
 
+  public clearRozpFlowers() {
+    if (this.rozpSvgr) {
+      this.rozpSvgr.selectAll("*").remove();
+    }
+    this.rozpFlowers.forEach((flower) => {
+      flower.burn();
+    });
+    this.rozpFlowers = [];
+    this.rozpArcs = [];
+  }
+
+  private drawRozpBush(bush: BushModel) {
+    bush.flowers.map((flowerModel) => {
+      const flower = new ToneFlower();
+      this.rozpFlowers.push(flower);
+      flower.seed(flowerModel);
+      this.drawFlowerInSvg(this.rozpSvgr, this.rozpArcs, flower);
+    });
+  }
+
+  updateRozpakovkaBush(bush: BushModel) {
+    this.rozpBush = bush;
+    this.clearRozpFlowers();
+    this.drawRozpBush(bush);
+  }
+
   private drawFlower(flower: ToneFlower) {
+    this.drawFlowerInSvg(this.svgr, this.arcs, flower);
+  }
+
+  private drawFlowerInSvg(
+    svgTarget: any,
+    arcsTarget: any[],
+    flower: ToneFlower,
+  ) {
     flower.leaves.forEach((leaf, index) => {
       const centerX = flower.cx;
       const centerY = flower.cy;
       const radius = flower.baseRadius + flower.leafWidth * index;
       this.addArc(
-        this.arcs,
+        svgTarget,
+        arcsTarget,
         centerX,
         centerY,
         index === 0 ? 0 : radius,
         radius + flower.leafWidth,
         leaf,
-        true
+        true,
       );
     });
   }
@@ -180,13 +225,14 @@ export class ToneFlowerComponent implements OnInit {
   };
 
   private drawPie(
+    svgTarget: any,
     arcs,
     x: number,
     y: number,
     innerRadius: number,
     outerRadius: number,
     leafModel: LeafModel,
-    isLeaf = false
+    isLeaf = false,
   ) {
     const data = this.getSectionData(leafModel);
 
@@ -195,7 +241,7 @@ export class ToneFlowerComponent implements OnInit {
     const pie2 = d3.pie().padAngle(padAngle); // adjusted pad angle (good)
     const arc = d3.arc().innerRadius(innerRadius).outerRadius(outerRadius);
 
-    const g = this.svgr
+    const g = svgTarget
       .append("g")
       .selectAll("g")
       .data(() => [pie2(data)])
@@ -240,17 +286,18 @@ export class ToneFlowerComponent implements OnInit {
   };
 
   private addArc(
+    svgTarget: any,
     arcs,
     x: number,
     y: number,
     innerRadius: number,
     outerRadius: number,
     leafModel: LeafModel,
-    isLeaf = false
+    isLeaf = false,
   ) {
     const arcX = x,
       arcY = y;
-    const g = this.svgr
+    const g = svgTarget
       .append("g")
       .attr("transform", "translate(" + arcX + "," + arcY + ")");
     const arcPath = g
@@ -269,7 +316,16 @@ export class ToneFlowerComponent implements OnInit {
       .attr("d", this.arcGen);
 
     if (this.showChyslo) {
-      this.drawPie(arcs, x, y, innerRadius, outerRadius, leafModel, isLeaf);
+      this.drawPie(
+        svgTarget,
+        arcs,
+        x,
+        y,
+        innerRadius,
+        outerRadius,
+        leafModel,
+        isLeaf,
+      );
     }
     arcs.push(arcPath);
     if (!isLeaf) {
@@ -317,7 +373,13 @@ export class ToneFlowerComponent implements OnInit {
     this.svgr = d3
       .select("#bushwrap")
       .append("svg")
-      .style("border", "1px solid #ccc")
+      .attr("class", "bush-wrap")
+      .attr("viewBox", [0, 0, this.width, this.height]);
+
+    this.rozpSvgr = d3
+      .select("#rozpakovka-bushwrap")
+      .append("svg")
+      .attr("class", "bush-wrap")
       .attr("viewBox", [0, 0, this.width, this.height]);
 
     this.svgr.on("click", (event) => {
@@ -330,13 +392,14 @@ export class ToneFlowerComponent implements OnInit {
       }
       var e = d3.pointer(event);
       this.addArc(
+        this.svgr,
         this.arcs,
         e[0],
         e[1],
         this.innRad,
         this.outRad,
         this.playFlower.leaves[0],
-        false
+        false,
       );
     });
 
@@ -399,7 +462,7 @@ export class ToneFlowerComponent implements OnInit {
     return (d) => {
       const interpolateInner = d3.interpolate(
         d.innerRadius,
-        newRadius - this.th
+        newRadius - this.th,
       );
       const interpolateOuter = d3.interpolate(d.outerRadius, newRadius);
       return (t) => {
@@ -485,17 +548,17 @@ export class ToneFlowerComponent implements OnInit {
     let noteLength = this.range(
       { min: 1, max: this.maxRad },
       { min: 1.5, max: 0.01 },
-      freq
+      freq,
     );
     let attTime = this.range(
       { min: 1, max: this.maxRad },
       { min: 0.1, max: 0.01 },
-      freq
+      freq,
     );
     let relTime = this.range(
       { min: 1, max: this.maxRad },
       { min: 1, max: 0.01 },
-      freq
+      freq,
     );
 
     //create a synth and connect it to the main output (your speakers)

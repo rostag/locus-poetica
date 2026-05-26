@@ -17,44 +17,50 @@
     pokazuvaty chyslo
   </button>
   @if (showChyslo) {
-  <mat-slider
-    min="0"
-    [max]="IC.padAngleMax"
-    step="0.01"
-    discrete
-    style="width: 500px"
-  >
+    <mat-slider
+      min="0"
+      [max]="IC.padAngleMax"
+      step="0.01"
+      discrete
+      style="width: 500px"
+    >
+      <input
+        matSliderThumb
+        [(ngModel)]="padAngle"
+        (ngModelChange)="redrawBush()"
+      />
+    </mat-slider>
     <input
-      matSliderThumb
-      [(ngModel)]="padAngle"
+      matInput
+      type="number"
+      [ngModel]="padAngle"
       (ngModelChange)="redrawBush()"
+      (input)="setPadAngle($event)"
+      style="width: 48px; margin-right: 12px"
     />
-  </mat-slider>
-  <input
-    matInput
-    type="number"
-    [ngModel]="padAngle"
-    (ngModelChange)="redrawBush()"
-    (input)="setPadAngle($event)"
-    style="width: 48px; margin-right: 12px"
-  />
-  <button
-    matButton="elevated"
-    (click)="toggleBgStyle()"
-    style="margin-right: 12px"
-  >
-    kolir fonu
-  </button>
+    <button
+      matButton="elevated"
+      (click)="toggleBgStyle()"
+      style="margin-right: 12px"
+    >
+      kolir fonu
+    </button>
   }
 </div>
 
-<div class="flex-row midwrap">
+<div class="flex-row midwrap" style="margin-right: 2.5rem">
   @if (showSettings) {
-  <app-idn-list (onIdnUpdate)="redrawBush()" />
+    <app-idn-list (onIdnUpdate)="redrawBush()" />
   }
-  <div class="bushcont"><figure id="bushwrap"></figure></div>
+  <div class="bushcont left">
+    <figure class="bushwrap" id="bushwrap"></figure>
+  </div>
+  <div class="bushcont right">
+    <figure class="bushwrap" id="rozpakovka-bushwrap"></figure>
+  </div>
   <app-get-ordinal
     (onBushUpdate)="updateBush($event)"
+    (onRozpakovkaBushUpdate)="updateRozpakovkaBush($event)"
     [refresh]="bushMarginTop"
   />
 </div>

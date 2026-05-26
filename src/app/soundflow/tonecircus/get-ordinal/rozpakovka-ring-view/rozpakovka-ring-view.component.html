@@ -1,0 +1,46 @@
+@if (data) {
+  <div class="ring-grid">
+
+    <!-- Row 1: 2 inputs -->
+    <div class="ring-item ring-span">
+      <svg viewBox="0 0 130 130" width="130" height="130">
+        <text x="8" y="18" class="ring-label">1.</text>
+        <circle cx="65" cy="65" r="62" [attr.fill]="data.rows[0].inputs[0].colorHex" />
+        <circle cx="65" cy="65" r="45" [attr.fill]="data.rows[0].inputs[1].colorHex" />
+        <circle cx="65" cy="65" r="28" [attr.fill]="data.rows[0].result.colorHex" />
+      </svg>
+    </div>
+
+    <!-- Row 2: 2 inputs -->
+    <div class="ring-item">
+      <svg viewBox="0 0 130 130" width="130" height="130">
+        <text x="8" y="18" class="ring-label">2.</text>
+        <circle cx="65" cy="65" r="62" [attr.fill]="data.rows[1].inputs[0].colorHex" />
+        <circle cx="65" cy="65" r="45" [attr.fill]="data.rows[1].inputs[1].colorHex" />
+        <circle cx="65" cy="65" r="28" [attr.fill]="data.rows[1].result.colorHex" />
+      </svg>
+    </div>
+
+    <!-- Row 3: 2 inputs -->
+    <div class="ring-item">
+      <svg viewBox="0 0 130 130" width="130" height="130">
+        <text x="8" y="18" class="ring-label">3.</text>
+        <circle cx="65" cy="65" r="62" [attr.fill]="data.rows[2].inputs[0].colorHex" />
+        <circle cx="65" cy="65" r="45" [attr.fill]="data.rows[2].inputs[1].colorHex" />
+        <circle cx="65" cy="65" r="28" [attr.fill]="data.rows[2].result.colorHex" />
+      </svg>
+    </div>
+
+    <!-- Row 4: 3 inputs -->
+    <div class="ring-item ring-span">
+      <svg viewBox="0 0 130 130" width="130" height="130">
+        <text x="8" y="18" class="ring-label">4.</text>
+        <circle cx="65" cy="65" r="62" [attr.fill]="data.rows[3].inputs[0].colorHex" />
+        <circle cx="65" cy="65" r="47" [attr.fill]="data.rows[3].inputs[1].colorHex" />
+        <circle cx="65" cy="65" r="32" [attr.fill]="data.rows[3].inputs[2].colorHex" />
+        <circle cx="65" cy="65" r="17" [attr.fill]="data.rows[3].result.colorHex" />
+      </svg>
+    </div>
+
+  </div>
+}

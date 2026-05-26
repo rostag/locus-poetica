@@ -49,3 +49,25 @@ src/app/generator/components/swear.samples.md
 PoetryToSpeech
 src/assets/wav/minus.wav
 node_modules
+
+# Claude Code Internal State & Credentials
+.credentials.json
+credentials.json
+.claude.json
+.claude.json.backup.*
+security_warnings_*.json
+stats-cache.json
+mcp-needs-auth-cache.json
+
+# Session & History
+history.jsonl
+backups/
+cache/
+debug/
+file-history/
+paste-cache/
+session-env/
+shell-snapshots/
+
+# Local Project Settings
+.claude/settings.local.json
