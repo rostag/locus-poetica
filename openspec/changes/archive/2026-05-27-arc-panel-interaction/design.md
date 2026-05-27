@@ -5,6 +5,7 @@
 ## Goals / Non-Goals
 
 **Goals:**
+
 - Panel always visible with a meaningful default state (intro text).
 - Hover and click produce distinct, layered interaction: hover = preview, click = lock.
 - All panel accent colors (background, borders, headers) respond to the hovered/clicked arc color.
@@ -12,6 +13,7 @@
 - Hover arc gets a visible stroke highlight without affecting layout.
 
 **Non-Goals:**
+
 - Panel animation / slide-in transitions.
 - Touch/mobile tap-to-lock (hover events only on pointer devices).
 - Persisting the clicked arc across page reloads.
@@ -28,6 +30,7 @@ clickedArc = signal<ArcHoverInfo | null>(null)   // persistent, set on arc click
 ```
 
 `ArcInfoPanelComponent` receives both as `@Input()`. Its internal `activeInfo` computed property resolves:
+
 ```
 activeInfo = hoveredInfo ?? clickedInfo  (hover preview overrides lock)
 ```
@@ -44,7 +47,7 @@ Alternatives considered: (a) Single signal with explicit state enum — more com
 export interface ArcHoverInfo {
   colorOrdinal: number;
   leafNum: number;
-  colorHex: string;   // ← new
+  colorHex: string; // ← new
 }
 ```
 
@@ -59,7 +62,7 @@ function contrastColor(hex: string): string {
   const b = parseInt(hex.slice(5, 7), 16);
   // Perceived luminance (ITU-R BT.601)
   const lum = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
-  return lum > 0.55 ? '#1a1a2e' : '#ffffff';
+  return lum > 0.55 ? "#1a1a2e" : "#ffffff";
 }
 ```
 
@@ -91,7 +94,7 @@ Arc `click` handler calls `event.stopPropagation()` to prevent the SVG canvas `c
 ### 7. Intro text content
 
 ```
-Navedytj kursor na koljorove kilce kvitky, ščob pobačyty joho znacennja.
+Navedytj kursor na koljorove kilce, ščob pobačyty joho znacennja.
 Natysnitj na kilce, ščob zakripyty informaciju.
 ```
 

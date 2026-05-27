@@ -1,26 +1,26 @@
 .arc-panel {
-  margin-top: 0.75rem;
-  width: 320px;
-  min-width: 280px;
+  margin-top: 0.8rem;
+  margin-left: 1rem;
+  width: 260px;
+  min-width: 240px;
   max-width: 320px;
   display: flex;
   flex-direction: column;
   gap: 12px;
   padding: 14px 12px;
-  background: #1a1a2e;
-  border-radius: 12px;
+  background: #fff;
+  /* background: #1a1a2e; */
+  border-radius: 18px;
   align-self: flex-start;
   margin-right: 16px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
 }
 
 .arc-intro {
-  padding: 20px 8px;
-  color: rgba(255, 255, 255, 0.45);
-  font-size: 0.82rem;
+  padding: 8px;
+  color: #222;
+  font-size: 1rem;
   line-height: 1.7;
-  text-align: center;
-  font-style: italic;
 }
 
 .arc-section {
@@ -82,11 +82,11 @@
 
 /* ČYSLO and POJEDNANNJA — background from panel; accent from --arc-color */
 .čyslo {
-  background: rgba(255, 255, 255, 0.06);
-  color: #ddf4ff;
+  background: rgba(0, 0, 0, 0.06);
+  color: #1d242f;
 }
 
 .pojednannja {
-  background: rgba(255, 255, 255, 0.08);
-  color: #f0e8ff;
+  background: rgba(0, 0, 0, 0.08);
+  color: #1d242f;
 }

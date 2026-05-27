@@ -282,7 +282,7 @@ export class GetOrdinalComponent implements OnInit {
     };
 
     const namePos = this.useDate
-      ? this.arrangementService.positionsForFlower('main', 0)
+      ? this.arrangementService.positionsForFlower("main", 0)
       : (PLANT_CENTER as [number, number]);
     const nameFlower: FlowerModel = {
       leaves: [leafJadro, leafImja, leafPobatkovi, leafPrizNeof, leafPriz],
@@ -317,7 +317,7 @@ export class GetOrdinalComponent implements OnInit {
     };
 
     const datePos = this.useName
-      ? this.arrangementService.positionsForFlower('main', 1)
+      ? this.arrangementService.positionsForFlower("main", 1)
       : (PLANT_CENTER as [number, number]);
     const dateFlower: FlowerModel = {
       leaves: [leafJadroDate, leafDen, leafMis, leafRik],
@@ -407,7 +407,7 @@ export class GetOrdinalComponent implements OnInit {
       leafNum: pojednanoJadroCyslo,
     };
 
-    const pojedPos = this.arrangementService.positionsForFlower('main', 2);
+    const pojedPos = this.arrangementService.positionsForFlower("main", 2);
     // 3
     const pojedFlower: FlowerModel = {
       leaves: [
@@ -432,10 +432,10 @@ export class GetOrdinalComponent implements OnInit {
     if (this.useDate && this.useName) {
       flowers.push(pojedFlower);
 
-      const rp0 = this.arrangementService.positionsForFlower('rozpakovka', 0);
-      const rp1 = this.arrangementService.positionsForFlower('rozpakovka', 1);
-      const rp2 = this.arrangementService.positionsForFlower('rozpakovka', 2);
-      const rp3 = this.arrangementService.positionsForFlower('rozpakovka', 3);
+      const rp0 = this.arrangementService.positionsForFlower("rozpakovka", 0);
+      const rp1 = this.arrangementService.positionsForFlower("rozpakovka", 1);
+      const rp2 = this.arrangementService.positionsForFlower("rozpakovka", 2);
+      const rp3 = this.arrangementService.positionsForFlower("rozpakovka", 3);
       const rozpakovkaBush: BushModel = {
         flowers: [
           {
@@ -564,7 +564,7 @@ export class GetOrdinalComponent implements OnInit {
 
   ngOnInit(): void {
     this.setInputs();
-    this.setDateInput(new Date());
+    // this.setDateInput(new Date());
     // this.setRandomWord();
     this.setData();
     this._initialized = true;

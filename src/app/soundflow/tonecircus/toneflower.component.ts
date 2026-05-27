@@ -65,7 +65,7 @@ export class ToneFlowerComponent implements OnInit {
 
   private margin = 50;
   private width = 350 - this.margin * 2;
-  private height = 500 - this.margin * 2;
+  private height = 475 - this.margin * 2;
 
   private tau = 2 * Math.PI;
   private minRad = 0;
