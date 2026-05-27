@@ -1,0 +1,39 @@
+<div class="arc-panel" [style]="{ '--arc-color': arcColor }">
+  @if (!activeInfo) {
+    <div class="arc-intro">
+      Navedytj kursor na koljorove kilce kvitky,<br />
+      ščob pobačyty joho znacennja.<br /><br />
+      Natysnitj na kilce, ščob zakripyty informaciju.
+    </div>
+  }
+  @if (activeInfo && colorData && numberData) {
+    <div
+      class="arc-section koljor"
+      [style.background]="arcColor"
+      [style.color]="arcColor ? contrastColor(arcColor) : null"
+    >
+      <div
+        class="section-label"
+        [style.color]="arcColor ? contrastColor(arcColor) : null"
+      >
+        KOLJOR
+      </div>
+      <div class="color-name">{{ colorData.name }}</div>
+      <div class="section-body">{{ colorData.description }}</div>
+    </div>
+
+    <div class="arc-section čyslo">
+      <div class="section-label">ČYSLO</div>
+      <div class="section-label-num">{{ activeInfo.leafNum }}</div>
+      <div class="section-body">{{ numberData.meaning }}</div>
+    </div>
+
+    @if (comboText) {
+      <div class="arc-section pojednannja">
+        <div class="section-label">POJEDNANNJA</div>
+        <div class="section-label-combo">{{ comboTitle }}</div>
+        <div class="section-body">{{ comboText }}</div>
+      </div>
+    }
+  }
+</div>

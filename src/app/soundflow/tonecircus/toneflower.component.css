@@ -12,7 +12,7 @@
   width: 50%;
   min-width: 300px;
   &.left {
-    margin-left: 0.5rem;
+    margin-left: -1.5rem;
   }
   &.right {
     margin-left: -2rem;

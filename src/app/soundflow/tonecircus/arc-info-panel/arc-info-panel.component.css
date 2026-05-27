@@ -1,0 +1,92 @@
+.arc-panel {
+  margin-top: 0.75rem;
+  width: 320px;
+  min-width: 280px;
+  max-width: 320px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 14px 12px;
+  background: #1a1a2e;
+  border-radius: 12px;
+  align-self: flex-start;
+  margin-right: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+}
+
+.arc-intro {
+  padding: 20px 8px;
+  color: rgba(255, 255, 255, 0.45);
+  font-size: 0.82rem;
+  line-height: 1.7;
+  text-align: center;
+  font-style: italic;
+}
+
+.arc-section {
+  padding: 10px 12px;
+  border-radius: 8px;
+  border-left: 3px solid var(--arc-color, #f0c040);
+}
+
+.section-label {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+  opacity: 0.85;
+  color: var(--arc-color, #f0c040);
+}
+.section-label-num {
+  font-size: 3rem;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 24px;
+  opacity: 0.85;
+  color: var(--arc-color, #f0c040);
+}
+.section-label-combo {
+  font-size: 2rem;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+  margin-top: 6px;
+  opacity: 0.85;
+  color: var(--arc-color, #f0c040);
+}
+
+.color-name {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 6px;
+  letter-spacing: 0.03em;
+}
+
+.section-body {
+  font-size: 0.78rem;
+  line-height: 1.55;
+  white-space: pre-line;
+}
+
+/* KOLJOR section — background and text color set via [style] bindings */
+.koljor {
+  border-radius: 8px;
+}
+
+.koljor .section-label {
+  opacity: 0.75;
+}
+
+/* ČYSLO and POJEDNANNJA — background from panel; accent from --arc-color */
+.čyslo {
+  background: rgba(255, 255, 255, 0.06);
+  color: #ddf4ff;
+}
+
+.pojednannja {
+  background: rgba(255, 255, 255, 0.08);
+  color: #f0e8ff;
+}

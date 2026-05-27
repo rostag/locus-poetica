@@ -52,6 +52,7 @@
   @if (showSettings) {
     <app-idn-list (onIdnUpdate)="redrawBush()" />
   }
+  <app-arc-info-panel [info]="hoveredArc()" [clickedInfo]="clickedArc()" />
   <div class="bushcont left">
     <figure class="bushwrap" id="bushwrap"></figure>
     <app-arrangement-presets bushId="main" />

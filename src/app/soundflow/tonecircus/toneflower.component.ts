@@ -3,7 +3,7 @@
 // Collide force - https://d3js.org/d3-force/collide
 // PIE - padAngle: https://observablehq.com/@d3/arc-pad-angle
 
-import { Component, inject, OnInit } from "@angular/core";
+import { Component, inject, OnInit, signal } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 import { MatSliderModule } from "@angular/material/slider";
 
@@ -11,10 +11,12 @@ import { RouterModule } from "@angular/router";
 import * as d3 from "d3";
 import { AbetkaComponent } from "src/app/soundflow/tonecircus/abetka/abetka.component";
 import { ArrangementPresetsComponent } from "src/app/soundflow/tonecircus/arrangement-presets/arrangement-presets.component";
+import { ArcInfoPanelComponent } from "src/app/soundflow/tonecircus/arc-info-panel/arc-info-panel.component";
 import { BushArrangementService } from "src/app/soundflow/tonecircus/bush-arrangement.service";
 import { GetOrdinalComponent } from "src/app/soundflow/tonecircus/get-ordinal/get-ordinal.component";
 import { ToneFlower } from "src/app/soundflow/tonecircus/toneflower.class";
 import {
+  ArcHoverInfo,
   BUSH_LOC,
   IC,
   PLAY_BUSH,
@@ -44,6 +46,7 @@ type OscItem = {
     GetOrdinalComponent,
     IdnListComponent,
     ArrangementPresetsComponent,
+    ArcInfoPanelComponent,
   ],
   templateUrl: "./toneflower.component.html",
   styleUrl: "./toneflower.component.css",
@@ -54,6 +57,9 @@ export class ToneFlowerComponent implements OnInit {
   public showSettings = true;
 
   protected arrangementService = inject(BushArrangementService);
+
+  hoveredArc = signal<ArcHoverInfo | null>(null);
+  clickedArc = signal<ArcHoverInfo | null>(null);
 
   private playFlower: ToneFlower;
 
@@ -154,7 +160,13 @@ export class ToneFlowerComponent implements OnInit {
       const flower = new ToneFlower();
       this.rozpFlowers.push(flower);
       flower.seed(flowerModel);
-      this.drawFlowerInSvg(this.rozpSvgr, this.rozpArcs, flower, i, "rozpakovka");
+      this.drawFlowerInSvg(
+        this.rozpSvgr,
+        this.rozpArcs,
+        flower,
+        i,
+        "rozpakovka",
+      );
     });
   }
 
@@ -193,7 +205,11 @@ export class ToneFlowerComponent implements OnInit {
       );
     });
 
-    if (bushId && flowerIndex >= 0 && this.arrangementService.isCustom(bushId)) {
+    if (
+      bushId &&
+      flowerIndex >= 0 &&
+      this.arrangementService.isCustom(bushId)
+    ) {
       flowerGroup.style("cursor", "grab");
       this.attachFlowerDrag(flowerGroup, flower, flowerIndex, bushId);
     }
@@ -220,8 +236,8 @@ export class ToneFlowerComponent implements OnInit {
       .attr("stroke-width", "1.5")
       .attr("cursor", "grab");
 
-    let offsetX = 0;
-    let offsetY = 0;
+    let startX = 0;
+    let startY = 0;
     let currentDx = 0;
     let currentDy = 0;
 
@@ -229,22 +245,26 @@ export class ToneFlowerComponent implements OnInit {
       d3
         .drag()
         .on("start", (event: any) => {
-          offsetX = event.x - flower.cx;
-          offsetY = event.y - flower.cy;
+          startX = event.x;
+          startY = event.y;
           currentDx = 0;
           currentDy = 0;
           flowerGroup.style("cursor", "grabbing");
         })
         .on("drag", (event: any) => {
-          const newCX = Math.max(0, Math.min(svgW, event.x - offsetX));
-          const newCY = Math.max(0, Math.min(svgH, event.y - offsetY));
-          currentDx = newCX - flower.cx;
-          currentDy = newCY - flower.cy;
+          currentDx = Math.max(
+            -flower.cx,
+            Math.min(svgW - flower.cx, event.x - startX),
+          );
+          currentDy = Math.max(
+            -flower.cy,
+            Math.min(svgH - flower.cy, event.y - startY),
+          );
           flowerGroup.attr("transform", `translate(${currentDx},${currentDy})`);
         })
         .on("end", () => {
           const newX = flower.cx + currentDx;
-          const newY = flower.cy + currentDy;
+          const newY = flower.cy + currentDy - this.bushMarginTop;
           if (bushId === "main") {
             svc.mainCustomPositions.update((positions) => {
               const updated: [number, number][] = [...positions];
@@ -391,7 +411,28 @@ export class ToneFlowerComponent implements OnInit {
         isLeaf,
       })
       .style("fill", this.getArcBgStyle(leafModel))
-      .attr("d", this.arcGen);
+      .attr("d", this.arcGen)
+      .on("mouseover", () => {
+        arcPath.style("stroke", "#ffffff").style("stroke-width", "1px");
+        this.hoveredArc.set({
+          colorOrdinal: leafModel.leafIdn.ordinal,
+          leafNum: leafModel.leafNum,
+          colorHex: leafModel.leafIdn.colorHex,
+        });
+      })
+      .on("mouseleave", () => {
+        arcPath.style("stroke", null).style("stroke-width", null);
+        this.hoveredArc.set(null);
+      })
+      .on("click", (event: any) => {
+        // event.stopPropagation();
+        arcPath.style("stroke", "#ffffff").style("stroke-width", "1px");
+        this.clickedArc.set({
+          colorOrdinal: leafModel.leafIdn.ordinal,
+          leafNum: leafModel.leafNum,
+          colorHex: leafModel.leafIdn.colorHex,
+        });
+      });
 
     if (this.showChyslo) {
       this.drawPie(
@@ -461,6 +502,7 @@ export class ToneFlowerComponent implements OnInit {
       .attr("viewBox", [0, 0, this.width, this.height]);
 
     this.svgr.on("click", (event) => {
+      // this.clickedArc.set(null);
       if (!this.audioStarted) {
         (async () => {
           await Tone.start();
