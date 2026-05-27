@@ -29,6 +29,22 @@ export const ROZP_POINTS = [
   [125, 240], // flower 4 — bottom
 ];
 
+export const BUSH_PRESETS: Array<{ name: string; points: [number, number][] }> = [
+  { name: 'Trykutnyk', points: [[162, 231], [80, 137], [165, 60]] },
+  { name: 'Duga',      points: [[60, 200],  [125, 80],  [190, 200]] },
+  { name: 'Linija',    points: [[125, 230], [125, 145], [125, 60]] },
+  { name: 'Romb',      points: [[125, 240], [60, 145],  [125, 50]] },
+  { name: 'Klaster',   points: [[125, 175], [95, 120],  [155, 120]] },
+];
+
+export const ROZP_PRESETS: Array<{ name: string; points: [number, number][] }> = [
+  { name: 'Romb',    points: [[125, 50],  [75, 140],  [175, 140], [125, 240]] },
+  { name: 'Khryst',  points: [[125, 40],  [40, 140],  [210, 140], [125, 250]] },
+  { name: 'Kvadrat', points: [[80, 70],   [170, 70],  [80, 200],  [170, 200]] },
+  { name: 'Linija',  points: [[125, 50],  [125, 110], [125, 180], [125, 240]] },
+  { name: 'Klaster', points: [[100, 110], [150, 110], [100, 170], [150, 170]] },
+];
+
 /**
  * The 12-entry chromatic IDN (Identity-Number) table.
  *

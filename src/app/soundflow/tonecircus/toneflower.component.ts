@@ -3,20 +3,21 @@
 // Collide force - https://d3js.org/d3-force/collide
 // PIE - padAngle: https://observablehq.com/@d3/arc-pad-angle
 
-import { Component, OnInit } from "@angular/core";
+import { Component, inject, OnInit } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 import { MatSliderModule } from "@angular/material/slider";
 
 import { RouterModule } from "@angular/router";
 import * as d3 from "d3";
 import { AbetkaComponent } from "src/app/soundflow/tonecircus/abetka/abetka.component";
+import { ArrangementPresetsComponent } from "src/app/soundflow/tonecircus/arrangement-presets/arrangement-presets.component";
+import { BushArrangementService } from "src/app/soundflow/tonecircus/bush-arrangement.service";
 import { GetOrdinalComponent } from "src/app/soundflow/tonecircus/get-ordinal/get-ordinal.component";
 import { ToneFlower } from "src/app/soundflow/tonecircus/toneflower.class";
 import {
   BUSH_LOC,
   IC,
   PLAY_BUSH,
-  ROZP_POINTS,
   SAMPLE_BUSHMODELS,
 } from "src/app/soundflow/tonecircus/toneflower.constants";
 import {
@@ -42,6 +43,7 @@ type OscItem = {
     AbetkaComponent,
     GetOrdinalComponent,
     IdnListComponent,
+    ArrangementPresetsComponent,
   ],
   templateUrl: "./toneflower.component.html",
   styleUrl: "./toneflower.component.css",
@@ -50,6 +52,8 @@ type OscItem = {
 export class ToneFlowerComponent implements OnInit {
   // TODO Unblock to set IDN colors etc
   public showSettings = true;
+
+  protected arrangementService = inject(BushArrangementService);
 
   private playFlower: ToneFlower;
 
@@ -115,7 +119,7 @@ export class ToneFlowerComponent implements OnInit {
       const flower = new ToneFlower();
       this.flowers.push(flower);
       flower.seed(flowerModel);
-      this.drawFlower(flower);
+      this.drawFlower(flower, i);
     });
   }
 
@@ -146,11 +150,11 @@ export class ToneFlowerComponent implements OnInit {
   }
 
   private drawRozpBush(bush: BushModel) {
-    bush.flowers.map((flowerModel) => {
+    bush.flowers.map((flowerModel, i) => {
       const flower = new ToneFlower();
       this.rozpFlowers.push(flower);
       flower.seed(flowerModel);
-      this.drawFlowerInSvg(this.rozpSvgr, this.rozpArcs, flower);
+      this.drawFlowerInSvg(this.rozpSvgr, this.rozpArcs, flower, i, "rozpakovka");
     });
   }
 
@@ -160,21 +164,25 @@ export class ToneFlowerComponent implements OnInit {
     this.drawRozpBush(bush);
   }
 
-  private drawFlower(flower: ToneFlower) {
-    this.drawFlowerInSvg(this.svgr, this.arcs, flower);
+  private drawFlower(flower: ToneFlower, flowerIndex: number) {
+    this.drawFlowerInSvg(this.svgr, this.arcs, flower, flowerIndex, "main");
   }
 
   private drawFlowerInSvg(
     svgTarget: any,
     arcsTarget: any[],
     flower: ToneFlower,
+    flowerIndex = -1,
+    bushId: "main" | "rozpakovka" | null = null,
   ) {
+    const flowerGroup = svgTarget.append("g").attr("class", "flower-group");
+
     flower.leaves.forEach((leaf, index) => {
       const centerX = flower.cx;
       const centerY = flower.cy;
       const radius = flower.baseRadius + flower.leafWidth * index;
       this.addArc(
-        svgTarget,
+        flowerGroup,
         arcsTarget,
         centerX,
         centerY,
@@ -184,6 +192,76 @@ export class ToneFlowerComponent implements OnInit {
         true,
       );
     });
+
+    if (bushId && flowerIndex >= 0 && this.arrangementService.isCustom(bushId)) {
+      flowerGroup.style("cursor", "grab");
+      this.attachFlowerDrag(flowerGroup, flower, flowerIndex, bushId);
+    }
+  }
+
+  private attachFlowerDrag(
+    flowerGroup: any,
+    flower: ToneFlower,
+    flowerIndex: number,
+    bushId: "main" | "rozpakovka",
+  ) {
+    const svgW = this.width;
+    const svgH = this.height;
+    const svc = this.arrangementService;
+
+    flowerGroup
+      .append("circle")
+      .attr("class", "drag-handle")
+      .attr("cx", flower.cx)
+      .attr("cy", flower.cy)
+      .attr("r", 16)
+      .attr("fill", "transparent")
+      .attr("stroke", "rgba(255,255,255,0.4)")
+      .attr("stroke-width", "1.5")
+      .attr("cursor", "grab");
+
+    let offsetX = 0;
+    let offsetY = 0;
+    let currentDx = 0;
+    let currentDy = 0;
+
+    flowerGroup.call(
+      d3
+        .drag()
+        .on("start", (event: any) => {
+          offsetX = event.x - flower.cx;
+          offsetY = event.y - flower.cy;
+          currentDx = 0;
+          currentDy = 0;
+          flowerGroup.style("cursor", "grabbing");
+        })
+        .on("drag", (event: any) => {
+          const newCX = Math.max(0, Math.min(svgW, event.x - offsetX));
+          const newCY = Math.max(0, Math.min(svgH, event.y - offsetY));
+          currentDx = newCX - flower.cx;
+          currentDy = newCY - flower.cy;
+          flowerGroup.attr("transform", `translate(${currentDx},${currentDy})`);
+        })
+        .on("end", () => {
+          const newX = flower.cx + currentDx;
+          const newY = flower.cy + currentDy;
+          if (bushId === "main") {
+            svc.mainCustomPositions.update((positions) => {
+              const updated: [number, number][] = [...positions];
+              updated[flowerIndex] = [newX, newY];
+              return updated;
+            });
+          } else {
+            svc.rozpakovkaCustomPositions.update((positions) => {
+              const updated: [number, number][] = [...positions];
+              updated[flowerIndex] = [newX, newY];
+              return updated;
+            });
+          }
+          svc.saveCustomPositions(bushId);
+          flowerGroup.style("cursor", "grab");
+        }),
+    );
   }
 
   private showPadLine = false;

@@ -1,12 +1,14 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  effect,
   EventEmitter,
+  inject,
   Input,
   OnInit,
   Output,
-  signal,
 } from "@angular/core";
+import { BushArrangementService } from "../bush-arrangement.service";
 import { FormsModule } from "@angular/forms";
 import { MatSliderModule } from "@angular/material/slider";
 import { MatIconModule } from "@angular/material/icon";
@@ -46,10 +48,8 @@ import {
 } from "src/app/soundflow/tonecircus/toneflower.model";
 import {
   IC,
-  PLANT_POINTS,
   BUSH_LOC,
   PLANT_CENTER,
-  ROZP_POINTS,
 } from "src/app/soundflow/tonecircus/toneflower.constants";
 import { BUSH_SAMPLES } from "src/app/soundflow/tonecircus/constants/sample.constants";
 import { MatCheckboxModule } from "@angular/material/checkbox";
@@ -79,6 +79,19 @@ import { ukrMova1000 } from "src/app/generator/components/models/ukr.mova.1000.m
   standalone: true,
 })
 export class GetOrdinalComponent implements OnInit {
+  private arrangementService = inject(BushArrangementService);
+  private _initialized = false;
+
+  constructor() {
+    effect(() => {
+      this.arrangementService.mainPreset();
+      this.arrangementService.rozpakovkaPreset();
+      this.arrangementService.mainCustomPositions();
+      this.arrangementService.rozpakovkaCustomPositions();
+      if (this._initialized) this.setData();
+    });
+  }
+
   @Input() set refresh(val: number) {
     this.setData();
   }
@@ -268,12 +281,13 @@ export class GetOrdinalComponent implements OnInit {
       leafNum: jadroCyslo,
     };
 
+    const namePos = this.useDate
+      ? this.arrangementService.positionsForFlower('main', 0)
+      : (PLANT_CENTER as [number, number]);
     const nameFlower: FlowerModel = {
       leaves: [leafJadro, leafImja, leafPobatkovi, leafPrizNeof, leafPriz],
-      flowerX: this.useDate ? PLANT_POINTS[0][0] : PLANT_CENTER[0],
-      flowerY:
-        (this.useDate ? PLANT_POINTS[0][1] : PLANT_CENTER[1]) +
-        BUSH_LOC.marginTop(), // 60
+      flowerX: namePos[0],
+      flowerY: namePos[1] + BUSH_LOC.marginTop(),
       buttSize: IC.flowerButtSize,
       leafWidth: IC.flowerLeafWidth,
     };
@@ -302,12 +316,13 @@ export class GetOrdinalComponent implements OnInit {
       ),
     };
 
+    const datePos = this.useName
+      ? this.arrangementService.positionsForFlower('main', 1)
+      : (PLANT_CENTER as [number, number]);
     const dateFlower: FlowerModel = {
       leaves: [leafJadroDate, leafDen, leafMis, leafRik],
-      flowerX: this.useName ? PLANT_POINTS[1][0] : PLANT_CENTER[0],
-      flowerY:
-        (this.useName ? PLANT_POINTS[1][1] : PLANT_CENTER[1]) +
-        BUSH_LOC.marginTop(),
+      flowerX: datePos[0],
+      flowerY: datePos[1] + BUSH_LOC.marginTop(),
       buttSize: IC.flowerButtSize,
       leafWidth: IC.flowerLeafWidth,
     };
@@ -392,6 +407,7 @@ export class GetOrdinalComponent implements OnInit {
       leafNum: pojednanoJadroCyslo,
     };
 
+    const pojedPos = this.arrangementService.positionsForFlower('main', 2);
     // 3
     const pojedFlower: FlowerModel = {
       leaves: [
@@ -400,8 +416,8 @@ export class GetOrdinalComponent implements OnInit {
         leafPoBatMisjac,
         leafPrizNeofPrizRik,
       ],
-      flowerX: PLANT_POINTS[2][0],
-      flowerY: PLANT_POINTS[2][1] + BUSH_LOC.marginTop(),
+      flowerX: pojedPos[0],
+      flowerY: pojedPos[1] + BUSH_LOC.marginTop(),
       buttSize: IC.flowerButtSize,
       leafWidth: IC.flowerLeafWidth,
     };
@@ -416,6 +432,10 @@ export class GetOrdinalComponent implements OnInit {
     if (this.useDate && this.useName) {
       flowers.push(pojedFlower);
 
+      const rp0 = this.arrangementService.positionsForFlower('rozpakovka', 0);
+      const rp1 = this.arrangementService.positionsForFlower('rozpakovka', 1);
+      const rp2 = this.arrangementService.positionsForFlower('rozpakovka', 2);
+      const rp3 = this.arrangementService.positionsForFlower('rozpakovka', 3);
       const rozpakovkaBush: BushModel = {
         flowers: [
           {
@@ -436,8 +456,8 @@ export class GetOrdinalComponent implements OnInit {
                 leafNum: jadroDateCyslo,
               },
             ],
-            flowerX: ROZP_POINTS[0][0],
-            flowerY: ROZP_POINTS[0][1] + BUSH_LOC.marginTop(),
+            flowerX: rp0[0],
+            flowerY: rp0[1] + BUSH_LOC.marginTop(),
             buttSize: IC.flowerButtSize,
             leafWidth: IC.flowerLeafWidth,
           },
@@ -451,8 +471,8 @@ export class GetOrdinalComponent implements OnInit {
               { leafOrder: 0, leafIdn: this.nameOut.imja!, leafNum: imjaCyslo },
               { leafOrder: 0, leafIdn: this.dateOut.denj!, leafNum: denCyslo },
             ],
-            flowerX: ROZP_POINTS[1][0],
-            flowerY: ROZP_POINTS[1][1] + BUSH_LOC.marginTop(),
+            flowerX: rp1[0],
+            flowerY: rp1[1] + BUSH_LOC.marginTop(),
             buttSize: IC.flowerButtSize,
             leafWidth: IC.flowerLeafWidth,
           },
@@ -474,8 +494,8 @@ export class GetOrdinalComponent implements OnInit {
                 leafNum: misjacCyslo,
               },
             ],
-            flowerX: ROZP_POINTS[2][0],
-            flowerY: ROZP_POINTS[2][1] + BUSH_LOC.marginTop(),
+            flowerX: rp2[0],
+            flowerY: rp2[1] + BUSH_LOC.marginTop(),
             buttSize: IC.flowerButtSize,
             leafWidth: IC.flowerLeafWidth,
           },
@@ -498,8 +518,8 @@ export class GetOrdinalComponent implements OnInit {
               },
               { leafOrder: 0, leafIdn: this.dateOut.rik!, leafNum: rikCyslo },
             ],
-            flowerX: ROZP_POINTS[3][0],
-            flowerY: ROZP_POINTS[3][1] + BUSH_LOC.marginTop(),
+            flowerX: rp3[0],
+            flowerY: rp3[1] + BUSH_LOC.marginTop(),
             buttSize: IC.flowerButtSize,
             leafWidth: IC.flowerLeafWidth,
           },
@@ -547,5 +567,6 @@ export class GetOrdinalComponent implements OnInit {
     this.setDateInput(new Date());
     // this.setRandomWord();
     this.setData();
+    this._initialized = true;
   }
 }

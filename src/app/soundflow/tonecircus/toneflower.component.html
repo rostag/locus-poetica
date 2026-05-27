@@ -54,9 +54,11 @@
   }
   <div class="bushcont left">
     <figure class="bushwrap" id="bushwrap"></figure>
+    <app-arrangement-presets bushId="main" />
   </div>
   <div class="bushcont right">
     <figure class="bushwrap" id="rozpakovka-bushwrap"></figure>
+    <app-arrangement-presets bushId="rozpakovka" />
   </div>
   <app-get-ordinal
     (onBushUpdate)="updateBush($event)"

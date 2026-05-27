@@ -1,0 +1,54 @@
+.presets-row {
+  margin-left: 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding: 6px 0;
+  align-items: center;
+}
+
+.preset-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  padding: 0;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background: #eee;
+  cursor: pointer;
+  transition:
+    border-color 0.15s,
+    background 0.15s;
+}
+
+.preset-btn:hover {
+  background: #ddd;
+  border-color: #333;
+}
+
+.preset-btn.active {
+  border-color: #bbb;
+  background: #ccc;
+}
+
+.preset-btn svg circle {
+  fill: #777;
+}
+
+.preset-btn.active svg circle {
+  fill: #111;
+}
+
+.custom-btn {
+  width: auto;
+  padding: 0 12px;
+  font-size: 0.75rem;
+  color: #777;
+  letter-spacing: 0.02em;
+}
+
+.preset-btn.active.custom-btn {
+  color: #111;
+}
