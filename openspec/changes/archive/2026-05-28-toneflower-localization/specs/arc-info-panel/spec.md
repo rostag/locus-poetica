@@ -1,3 +1,5 @@
+## MODIFIED Requirements
+
 ### Requirement: Arc hover triggers an info panel to the left of the bushes
 The system SHALL display a persistent info panel to the left of the bush flex row at all times. When an arc is hovered or clicked, the panel SHALL display three sections: KOLIR, ČYSLO, and POJEDNANNJA. The KOLIR section background SHALL match the arc's color (`colorHex`). The ČYSLO and POJEDNANNJA section headers and border-left accents SHALL match the same arc color. Text in the KOLIR section SHALL be rendered in a contrasting color (white for dark backgrounds, dark for light backgrounds) calculated from relative luminance. When no arc is active the panel SHALL show its intro state. All section labels and text content SHALL reflect the active language (Ukrainian Cyrillic or Latynka).
 

@@ -1,5 +1,5 @@
 <div style="margin-left: 1rem">
-  <label>Vidstup zgory: </label>
+  <label>{{ i18n.strings().labelVidstupZgory }} </label>
   <input
     matInput
     type="number"
@@ -14,7 +14,15 @@
     (click)="toggleChyslo()"
     style="margin-right: 12px"
   >
-    pokazuvaty čyslo
+    {{ i18n.strings().btnShowNumber }}
+  </button>
+
+  <button
+    matButton="elevated"
+    (click)="i18n.toggle()"
+    style="margin-left: auto; font-weight: 700; letter-spacing: 0.08em"
+  >
+    {{ i18n.currentLang() === "lat" ? "UA" : "LAT" }}
   </button>
   @if (showChyslo) {
     <mat-slider
@@ -43,7 +51,7 @@
       (click)="toggleBgStyle()"
       style="margin-right: 12px"
     >
-      kolir fonu
+      {{ i18n.strings().btnBgColor }}
     </button>
   }
 </div>
@@ -61,11 +69,22 @@
     <figure class="bushwrap" id="rozpakovka-bushwrap"></figure>
     <app-arrangement-presets bushId="rozpakovka" />
   </div>
-  <app-get-ordinal
-    (onBushUpdate)="updateBush($event)"
-    (onRozpakovkaBushUpdate)="updateRozpakovkaBush($event)"
-    [refresh]="bushMarginTop"
-  />
+  <div style="display: flex; flex-direction: column; align-items: flex-start">
+    <button
+      matButton="elevated"
+      (click)="rightPanelOpen.set(!rightPanelOpen())"
+      style="margin-bottom: 8px; font-size: 0.75rem"
+    >
+      {{ rightPanelOpen() ? "▶" : "◀" }}
+    </button>
+    @if (rightPanelOpen()) {
+      <app-get-ordinal
+        (onBushUpdate)="updateBush($event)"
+        (onRozpakovkaBushUpdate)="updateRozpakovkaBush($event)"
+        [refresh]="bushMarginTop"
+      />
+    }
+  </div>
 </div>
 
 <div style="margin: 2.5rem">

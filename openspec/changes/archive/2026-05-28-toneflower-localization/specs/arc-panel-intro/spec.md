@@ -1,3 +1,5 @@
+## MODIFIED Requirements
+
 ### Requirement: ArcInfoPanelComponent is always visible with a default intro state
 The panel SHALL be visible at all times — it SHALL NOT be hidden when no arc is hovered or clicked. When no arc is active (`activeInfo` is null), the panel SHALL display a short invitation text in the active language explaining how to interact with the flowers.
 

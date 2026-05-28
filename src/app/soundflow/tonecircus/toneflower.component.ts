@@ -3,11 +3,12 @@
 // Collide force - https://d3js.org/d3-force/collide
 // PIE - padAngle: https://observablehq.com/@d3/arc-pad-angle
 
-import { Component, inject, OnInit, signal } from "@angular/core";
+import { Component, effect, inject, OnInit, signal } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 import { MatSliderModule } from "@angular/material/slider";
 
 import { RouterModule } from "@angular/router";
+import { ToneflowerI18nService } from "src/app/soundflow/tonecircus/toneflower-i18n.service";
 import * as d3 from "d3";
 import { AbetkaComponent } from "src/app/soundflow/tonecircus/abetka/abetka.component";
 import { ArrangementPresetsComponent } from "src/app/soundflow/tonecircus/arrangement-presets/arrangement-presets.component";
@@ -57,9 +58,19 @@ export class ToneFlowerComponent implements OnInit {
   public showSettings = true;
 
   protected arrangementService = inject(BushArrangementService);
+  i18n = inject(ToneflowerI18nService);
 
   hoveredArc = signal<ArcHoverInfo | null>(null);
   clickedArc = signal<ArcHoverInfo | null>(null);
+  rightPanelOpen = signal<boolean>(
+    localStorage.getItem("rightPanelOpen") !== "false",
+  );
+
+  constructor() {
+    effect(() => {
+      localStorage.setItem("rightPanelOpen", String(this.rightPanelOpen()));
+    });
+  }
 
   private playFlower: ToneFlower;
 

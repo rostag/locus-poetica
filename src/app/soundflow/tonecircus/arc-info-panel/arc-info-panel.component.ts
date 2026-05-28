@@ -1,11 +1,7 @@
-import { Component, Input } from "@angular/core";
+import { Component, inject, Input } from "@angular/core";
 import { CommonModule } from "@angular/common";
-import {
-  ArcHoverInfo,
-  COLOR_INFO,
-  NUMBER_INFO,
-  COMBO_INFO,
-} from "src/app/soundflow/tonecircus/toneflower.constants";
+import { ArcHoverInfo } from "src/app/soundflow/tonecircus/toneflower.constants";
+import { ToneflowerI18nService } from "src/app/soundflow/tonecircus/toneflower-i18n.service";
 
 function contrastColor(hex: string): string {
   const r = parseInt(hex.slice(1, 3), 16);
@@ -23,6 +19,8 @@ function contrastColor(hex: string): string {
   styleUrl: "./arc-info-panel.component.css",
 })
 export class ArcInfoPanelComponent {
+  private i18n = inject(ToneflowerI18nService);
+
   @Input() info: ArcHoverInfo | null = null;
   @Input() clickedInfo: ArcHoverInfo | null = null;
 
@@ -38,23 +36,51 @@ export class ArcInfoPanelComponent {
     return contrastColor(hex);
   }
 
+  get panelInfoLabel(): string {
+    return this.i18n.strings().panelInfoLabel;
+  }
+
+  get introText(): string {
+    return this.i18n.strings().intro;
+  }
+
+  get labelKolir(): string {
+    return this.i18n.strings().labelKolir;
+  }
+
+  get labelCyslo(): string {
+    return this.i18n.strings().labelCyslo;
+  }
+
+  get labelPjednannja(): string {
+    return this.i18n.strings().labelPjednannja;
+  }
+
   get colorData() {
-    return this.activeInfo ? COLOR_INFO[this.activeInfo.colorOrdinal] : null;
+    return this.activeInfo
+      ? this.i18n.strings().colors[this.activeInfo.colorOrdinal]
+      : null;
   }
 
   get numberData() {
-    return this.activeInfo ? NUMBER_INFO[this.activeInfo.leafNum] : null;
+    return this.activeInfo
+      ? this.i18n.strings().numbers[this.activeInfo.leafNum]
+      : null;
   }
 
   get comboTitle(): string | null {
     if (!this.activeInfo) return null;
-    const pre = `${this.activeInfo.colorOrdinal}-${this.activeInfo.leafNum}`;
-    return pre ?? null;
+    return `${this.activeInfo.colorOrdinal}-${this.activeInfo.leafNum}`;
   }
+
   get comboText(): string | null {
     if (!this.activeInfo) return null;
-    const combo =
-      COMBO_INFO[`${this.activeInfo.colorOrdinal}_${this.activeInfo.leafNum}`];
-    return combo ?? null;
+    return (
+      this.i18n
+        .strings()
+        .combos[
+          `${this.activeInfo.colorOrdinal}_${this.activeInfo.leafNum}`
+        ] ?? null
+    );
   }
 }
