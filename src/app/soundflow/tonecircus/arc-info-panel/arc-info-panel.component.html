@@ -2,9 +2,9 @@
   @if (!activeInfo) {
     <h1 class="section-label pojednannja arc-intro arc-section">info</h1>
     <div class="arc-intro">
-      Navedytj kursor na koljorove kilce kvitky, ščob pobačyty joho
-      znacennja.<br /><br />
-      Natysnitj na kilce, ščob zakripyty informaciju.
+      Naveditj kursor na koljorove kiljce kvitky, ščob pobačyty jogo
+      značennja.<br /><br />
+      Natysnitj na kiljce, ščob zakripyty informaciju.
     </div>
   }
   @if (activeInfo && colorData && numberData) {
@@ -17,7 +17,7 @@
         class="section-label"
         [style.color]="arcColor ? contrastColor(arcColor) : null"
       >
-        KOLJOR
+        KOLIR
       </div>
       <div class="color-name">{{ colorData.name }}</div>
       <div class="section-body">{{ colorData.description }}</div>
