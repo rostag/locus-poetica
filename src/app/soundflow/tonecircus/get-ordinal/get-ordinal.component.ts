@@ -7,8 +7,10 @@ import {
   Input,
   OnInit,
   Output,
+  signal,
 } from "@angular/core";
 import { BushArrangementService } from "../bush-arrangement.service";
+import { ToneflowerI18nService } from "../toneflower-i18n.service";
 import { FormsModule } from "@angular/forms";
 import { MatSliderModule } from "@angular/material/slider";
 import { MatIconModule } from "@angular/material/icon";
@@ -80,6 +82,7 @@ import { ukrMova1000 } from "src/app/generator/components/models/ukr.mova.1000.m
 })
 export class GetOrdinalComponent implements OnInit {
   private arrangementService = inject(BushArrangementService);
+  protected i18n = inject(ToneflowerI18nService);
   private _initialized = false;
 
   constructor() {
@@ -155,6 +158,18 @@ export class GetOrdinalComponent implements OnInit {
   ordinalByDate = ordinalByDate;
   cardinalByWord = cardinalByWord;
   cardinalByDate = cardinalByDate;
+
+  copied = signal(false);
+
+  copyLayout(): void {
+    const layout = {
+      main: this.arrangementService.mainCustomPositions(),
+      rozpakovka: this.arrangementService.rozpakovkaCustomPositions(),
+    };
+    navigator.clipboard.writeText(JSON.stringify(layout, null, 2));
+    this.copied.set(true);
+    setTimeout(() => this.copied.set(false), 1500);
+  }
 
   handleAbetkaSelect(evt: Event) {
     const val = (evt.currentTarget as any)?.value;

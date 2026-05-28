@@ -7,6 +7,8 @@ export interface ToneflowerStrings {
   btnShowNumber: string;
   btnBgColor: string;
   panelInfoLabel: string;
+  btnCopyLayout: string;
+  btnCopied: string;
   colors: Record<number, { name: string; description: string }>;
   numbers: Record<number, { meaning: string }>;
   combos: Record<string, string>;
@@ -23,6 +25,8 @@ export const TRANSLATIONS: Record<"uk" | "lat", ToneflowerStrings> = {
     btnShowNumber: "pokazuvaty čyslo",
     btnBgColor: "kolir fonu",
     panelInfoLabel: "info",
+    btnCopyLayout: "copy layout JSON",
+    btnCopied: "copied!",
     colors: {
       1: {
         name: "Čornyj",
@@ -206,6 +210,8 @@ export const TRANSLATIONS: Record<"uk" | "lat", ToneflowerStrings> = {
     btnShowNumber: "показувати число",
     btnBgColor: "колір фону",
     panelInfoLabel: "інфо",
+    btnCopyLayout: "копіювати JSON розкладки",
+    btnCopied: "скопійовано!",
     colors: {
       1: {
         name: "Чорний",
