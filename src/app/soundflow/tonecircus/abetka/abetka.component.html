@@ -6,11 +6,11 @@
     (closed)="panelOpenState.set(false)"
   >
     <mat-expansion-panel-header>
-      <mat-panel-title>Algorytmy</mat-panel-title>
+      <mat-panel-title>{{ i18n.strings().abetka.panelTitle }}</mat-panel-title>
       <mat-panel-description></mat-panel-description>
     </mat-expansion-panel-header>
     <div>
-      <h2>Rozrahunok koljoru ta zvuku</h2>
+      <h2>{{ i18n.strings().abetka.h2ColorSound }}</h2>
       <pre>
     <b>
 1 - A Ї Ф
@@ -27,147 +27,93 @@
 12 - І У
 </b>
 
-Dlja slova (imeni) – vse skladajemo i dali vidnimajemo 12, poky ne otrymajemo čyslo  vid 1 do 12.
-Dlja daty – vid cilogo čysla vidnimajemo 12, poky ne otrymajemo čyslo  vid 1 do 12. 
+{{ i18n.strings().abetka.ruleForWord }}
 
-<h3>Pryklad:</h3>Ростислав
-9+7+10+11+11+10+4+1+3=66. 
-66-(12×5)=6 (blakytnyj kolir/nota fa) 
+<h3>{{ i18n.strings().abetka.labelPryklad }}</h3>Ростислав
+9+7+10+11+11+10+4+1+3=66.
+{{ i18n.strings().abetka.exName1result }}
 
-<em>Avtomatyčnyj rezuljtat: {{example1}} - {{ordinalByWord(abetkaByName("Ukrajinsjka"), example1)}}</em>
+<em>{{ i18n.strings().abetka.autoResult }} {{example1}} - {{ordinalByWord(abetkaByName("Ukrajinsjka"), example1)}}</em>
 
 24.08.1991 r.
-24-12=12 (bilyj/si); 
-8 (fioletovyj/solj); 
-1991-(12×165)=11 (sribnyj/lja#); 
-suma (seredynka): 12+8+11=31. 31-(12×2)=7 (synij/fa#)
+{{ i18n.strings().abetka.exDate1result }}
 
-<em>Avtomatyčnyj rezuljtat: {{ example1date }} - {{ ordinalByDate(example1date) }}</em>
+<em>{{ i18n.strings().abetka.autoResult }} {{ example1date }} - {{ ordinalByDate(example1date) }}</em>
 
 <img src="assets/images/vibrascope/abetka-ua-12m.jpeg" width="400" />
 
-<h2>2. Rozrahunok čysla</h2><b>1 - А З О Ч
+<h2>{{ i18n.strings().abetka.h2Number }}</h2><b>1 - А З О Ч
 2 - Б И П Ш
 3 - В І Р Щ
 4 - Г Ї С Ь
 5 - Ґ Й Т Ю
-6 - Д К У Я 
+6 - Д К У Я
 7 - Е Л Ф
 8 - Є М Х
 9 - Ж Н Ц</b>
 
-Vse skladajemo, poky ne otrymajemo čyslo vid 1 do 9. 
+{{ i18n.strings().abetka.ruleForNumber }}
 
-<h3>Pryklad:</h3>Ростислав
+<h3>{{ i18n.strings().abetka.labelPryklad }}</h3>Ростислав
 3+1+4+5+2+4+7+1+3=30.
-3+0=3. 
+3+0=3.
 
-<em>Avtomatyčnyj rezuljtat: {{example2}} - {{cardinalByWord(abetkaByName("Ukrajinsjka"), example2)}}</em>
+<em>{{ i18n.strings().abetka.autoResult }} {{example2}} - {{cardinalByWord(abetkaByName("Ukrajinsjka"), example2)}}</em>
 
 24.08.1991 r.
 2+4=6;
-8; 
+8;
 1+9+9+1=20. 2+0=2.
-summa (seredynka): 6+8+2=16. 1+6=7
+{{ i18n.strings().abetka.exDate2summary }}
 
-<em>Avtomatyčnyj rezuljtat: {{example2date}} - {{cardinalByDate(example2date)}}</em>
+<em>{{ i18n.strings().abetka.autoResult }} {{example2date}} - {{cardinalByDate(example2date)}}</em>
 
 <img src="assets/images/vibrascope/abetka-ua-9m.jpeg" width="400" />
 
-<h2>3. Pidsumok</h2>Ростислав: blakytna 3 (trijka); fa 
-
-denj 24: bila 6 (šistj); si
-misjacj 08: fioletova 8 (visim);solj
-rik 1991: sribna 2 (dvijka); lja#
-seredyna: synja 7 (sim); fa#
+<h2>{{ i18n.strings().abetka.h2Summary }}</h2>{{ i18n.strings().abetka.summaryResult }}
 </pre>
-      <h3>Rozrahunok pojednannja imeni ta daty narodžennja</h3>
+      <h3>{{ i18n.strings().abetka.h3ComboTitle }}</h3>
       <pre>
-1. vlasne im'ja + denj narodžennja
-2. po batjkovi + masjacj narodžennja
-3. prizvyšče neoficijne + prizvyšče + rik narodžennja
-4. jadro = summa pokaznykiv 
+{{ i18n.strings().abetka.comboRules }}
 </pre
       >
 
-      <h3>Pryklad (kolir/zvuk)</h3>
+      <h3>{{ i18n.strings().abetka.h3ExColorSound }}</h3>
       <pre>
-1. 6 (blakytnyj/fa) + 2 (červonyj/do#) = 8 (fioletovyj/solj)
-2. 6 (blakytnyj/fa) + 11 (sribnyj/lja#) = 17. 17 - 12 = 5 (zelenyj/mi)
-3. 6 (blakytnyj/fa) + 9 (zolotyj/solj#) + 10 (perlynovyj/lja) = 25. 25 - (12×2) = 1 (čornyj/do)
-4. 8 (fioletovyj/solj) + 5 (zelenyj/mi) + 1 (čornyj/do) = 14. 14 - 12 = 2 (červonyj/do#) 
+{{ i18n.strings().abetka.exColorSound }}
 </pre
       >
 
-      <h3>Pryklad (čyslo)</h3>
+      <h3>{{ i18n.strings().abetka.h3ExNumber }}</h3>
       <pre>
-1. 3+8=11. 1+1=2
-2. 6+2=8
-3. 3+9+7=19. 1+9=10. 1+0=1
-4. 2+8+1=11. 1+1=2 
+{{ i18n.strings().abetka.exNumber }}
 </pre
       >
 
       <h3>
-        P.S. Jak variant, №4 možna skladaty naprjamu vid iznačaljnyh pokaznykiv
-        jadra:
+        {{ i18n.strings().abetka.ps }}
       </h3>
       <pre>
-4. 3 (pomarančevyj/re) + 11 (sribnyj/lja#) = 14. 14 - 12 = 2 (červonyj/do#)
- 3+8=11. 1+1=2  
+{{ i18n.strings().abetka.exPs }}
 </pre
       >
     </div>
 
     <div>
-      <p>KOLIR – NOTA</p>
+      <p>{{ i18n.strings().abetka.colorNoteTitle }}</p>
       <pre>
-1 •⁠ čornyй — do
-2 •⁠ červonyй – do#
-3 •⁠ pomarančevyй – re
-4 •⁠ žovtyй – re#
-5 •⁠ zelenyй – mi
-6 •⁠ blakytnyй – fa
-7 •⁠ syniй – fa#
-8 •⁠ fioletovyй – solj
-9 •⁠ zolotyй – solj#
-10 •⁠ perlynovyй – lja
-11 •⁠ sribnyй – lja#
-12 •⁠ bilyй – si
-
+{{ i18n.strings().abetka.colorNoteTable }}
 </pre
       >
 
       <pre>
-Rozrahunok "rozpakovky" 
-
-1. jadro imeni + jadro dnja narodžennja
-2. vlasne im'ja + denj narodžennja
-3. po batjkovi + misjacj narodžennja
-4. neoficijne prizvyšče + prizvyšče + rik narodžennja 
-
-Pryklad (kolir/zvuk)
-1. 3 (pomarančevyj/re) + 11 (sribnyj/lja#) = 14. 14 - 12 = 2 (červonyj/do#)
-2. 6 (blakytnyj/fa) + 2 (červonyj/do#) = 8 (fioletovyj/solj)
-3. 6 (blakytnyj/fa) + 11 (sribnyj/lja#) = 17. 17 - 12 = 5 (zelenyj/mi)
-4. 6 (blakytnyj/fa) + 9 (zolotyj/solj#) + 10 (perlynovyj/lja) = 25. 25 - (12×2) = 1 (čornyj/do) 
-
-Pryklad (čyslo)
-1. 3+8=11. 1+1=2
-2. 3+8=11. 1+1=2
-3. 6+2=8
-4. 3+9+7=19. 1+9=10. 1+0=1  
+{{ i18n.strings().abetka.rozpakovkaBlock }}
 </pre
       >
 
-      <p>Dali</p>
+      <p>{{ i18n.strings().abetka.daliTitle }}</p>
       <pre>
-- nalaštuvannja koljoriv
-- kulja - obʼjekt, ščo nese na sobi parametry i zvuku takoje (častota, gučnitj, dovžyna)
-- mitka vysoty i potočnoji gučnosti na kuli
-- pry zitknenni menšyj ne zvučytj
-- zaležnistj gučnosti vid rozmiru
-- pry zitknenni menšyj rozdiljajetjsja
+{{ i18n.strings().abetka.daliItems }}
 - <a [routerLink]="['tonetest']">tone test</a>, <a [routerLink]="['../']">sound flow</a>
 </pre>
     </div>

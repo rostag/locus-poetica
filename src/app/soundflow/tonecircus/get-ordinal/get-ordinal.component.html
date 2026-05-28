@@ -2,20 +2,20 @@
   <div>
     <h3 class="flex-row gap-1">
       <mat-checkbox [checked]="useName" (change)="setUseName($event.checked)">
-        Imja
+        {{ i18n.strings().labels.imja }}
       </mat-checkbox>
       <select (change)="handleAbetkaSelect($event)">
-        <option>Ukrajinsjka</option>
-        <option>Ukrajinsjka Latynka</option>
-        <option>Moskaljsjka</option>
-        <option>Anglijsjka</option>
+        <option value="Ukrajinsjka">{{ i18n.strings().labels.selectUkrainska }}</option>
+        <option value="Ukrajinsjka Latynka">{{ i18n.strings().labels.selectUkrLatynka }}</option>
+        <option value="Moskaljsjka">{{ i18n.strings().labels.selectMoskalska }}</option>
+        <option value="Anglijsjka">{{ i18n.strings().labels.selectAnglijska }}</option>
       </select>
     </h3>
 
     <!-- Im'ja -->
     <div class="flex-row">
       <mat-form-field appearance="fill">
-        <mat-label>Im'ja</mat-label>
+        <mat-label>{{ i18n.strings().labels.imja }}</mat-label>
         <input matInput [(ngModel)]="nameIn.imja" (input)="setData()" />
       </mat-form-field>
       <app-idn [idn]="nameOut.imja" (onIdnUpdate)="setData()"></app-idn>
@@ -23,7 +23,7 @@
     <!-- Po bat'kovi -->
     <div class="flex-row">
       <mat-form-field appearance="fill">
-        <mat-label>Po-batjkovi</mat-label>
+        <mat-label>{{ i18n.strings().labels.pobatjkovi }}</mat-label>
         <input matInput [(ngModel)]="nameIn.pobatjkovi" (input)="setData()" />
       </mat-form-field>
       <app-idn [idn]="nameOut.pobatjkovi" (onIdnUpdate)="setData()"></app-idn>
@@ -31,7 +31,7 @@
     <!-- prizvysceNeoficijne -->
     <div class="flex-row">
       <mat-form-field appearance="fill">
-        <mat-label>Prizvyšče neoficijne</mat-label>
+        <mat-label>{{ i18n.strings().labels.prizvysceNeoficijne }}</mat-label>
         <input
           matInput
           [(ngModel)]="nameIn.prizvysceNeoficijne"
@@ -46,7 +46,7 @@
     <!-- Prizvyšče -->
     <div class="flex-row">
       <mat-form-field appearance="fill">
-        <mat-label>Prizvyšče</mat-label>
+        <mat-label>{{ i18n.strings().labels.prizvysce }}</mat-label>
         <input matInput [(ngModel)]="nameIn.prizvysce" (input)="setData()" />
       </mat-form-field>
       <app-idn [idn]="nameOut.prizvysce" (onIdnUpdate)="setData()"></app-idn>
@@ -62,13 +62,13 @@
 
     <h3>
       <mat-checkbox [checked]="useDate" (change)="setUseDate($event.checked)"
-        >Data</mat-checkbox
+        >{{ i18n.strings().labels.data }}</mat-checkbox
       >
     </h3>
     <!-- Denj -->
     <div class="flex-row">
       <mat-form-field appearance="fill">
-        <mat-label>Denj</mat-label>
+        <mat-label>{{ i18n.strings().labels.denj }}</mat-label>
         <input matInput [(ngModel)]="dateIn.denj" (input)="setData()" />
       </mat-form-field>
       <app-idn [idn]="dateOut.denj" (onIdnUpdate)="setData()"></app-idn>
@@ -76,7 +76,7 @@
     <!-- Misjacj -->
     <div class="flex-row">
       <mat-form-field appearance="fill">
-        <mat-label>Misjacj</mat-label>
+        <mat-label>{{ i18n.strings().labels.misjacj }}</mat-label>
         <input matInput [(ngModel)]="dateIn.misjacj" (input)="setData()" />
       </mat-form-field>
       <app-idn [idn]="dateOut.misjacj" (onIdnUpdate)="setData()"></app-idn>
@@ -84,7 +84,7 @@
     <!-- Rik -->
     <div class="flex-row">
       <mat-form-field appearance="fill">
-        <mat-label>Rik</mat-label>
+        <mat-label>{{ i18n.strings().labels.rik }}</mat-label>
         <input matInput [(ngModel)]="dateIn.rik" (input)="setData()" />
       </mat-form-field>
       <app-idn [idn]="dateOut.rik" (onIdnUpdate)="setData()"></app-idn>

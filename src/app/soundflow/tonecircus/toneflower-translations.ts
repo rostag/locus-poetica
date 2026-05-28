@@ -9,6 +9,47 @@ export interface ToneflowerStrings {
   panelInfoLabel: string;
   btnCopyLayout: string;
   btnCopied: string;
+  labels: {
+    imja: string;
+    pobatjkovi: string;
+    prizvysceNeoficijne: string;
+    prizvysce: string;
+    data: string;
+    denj: string;
+    misjacj: string;
+    rik: string;
+    selectUkrainska: string;
+    selectUkrLatynka: string;
+    selectMoskalska: string;
+    selectAnglijska: string;
+  };
+  abetka: {
+    panelTitle: string;
+    h2ColorSound: string;
+    ruleForWord: string;
+    labelPryklad: string;
+    autoResult: string;
+    exName1result: string;
+    exDate1result: string;
+    h2Number: string;
+    ruleForNumber: string;
+    exDate2summary: string;
+    h2Summary: string;
+    summaryResult: string;
+    h3ComboTitle: string;
+    comboRules: string;
+    h3ExColorSound: string;
+    exColorSound: string;
+    h3ExNumber: string;
+    exNumber: string;
+    ps: string;
+    exPs: string;
+    colorNoteTitle: string;
+    colorNoteTable: string;
+    rozpakovkaBlock: string;
+    daliTitle: string;
+    daliItems: string;
+  };
   colors: Record<number, { name: string; description: string }>;
   numbers: Record<number, { meaning: string }>;
   combos: Record<string, string>;
@@ -27,6 +68,57 @@ export const TRANSLATIONS: Record<"uk" | "lat", ToneflowerStrings> = {
     panelInfoLabel: "info",
     btnCopyLayout: "copy layout JSON",
     btnCopied: "copied!",
+    labels: {
+      imja: "Im'ja",
+      pobatjkovi: "Po-batjkovi",
+      prizvysceNeoficijne: "Prizvyšče neoficijne",
+      prizvysce: "Prizvyšče",
+      data: "Data",
+      denj: "Denj",
+      misjacj: "Misjacj",
+      rik: "Rik",
+      selectUkrainska: "Ukrajinsjka",
+      selectUkrLatynka: "Ukrajinsjka Latynka",
+      selectMoskalska: "Moskaljsjka",
+      selectAnglijska: "Anglijsjka",
+    },
+    abetka: {
+      panelTitle: "Algorytmy",
+      h2ColorSound: "Rozrahunok koljoru ta zvuku",
+      ruleForWord:
+        "Dlja slova (imeni) – vse skladajemo i dali vidnimajemo 12, poky ne otrymajemo čyslo  vid 1 do 12.\nDlja daty – vid cilogo čysla vidnimajemo 12, poky ne otrymajemo čyslo  vid 1 do 12.",
+      labelPryklad: "Pryklad:",
+      autoResult: "Avtomatyčnyj rezuljtat:",
+      exName1result: "66-(12×5)=6 (blakytnyj kolir/nota fa)",
+      exDate1result:
+        "24-12=12 (bilyj/si); \n8 (fioletovyj/solj); \n1991-(12×165)=11 (sribnyj/lja#); \nsuma (seredynka): 12+8+11=31. 31-(12×2)=7 (synij/fa#)",
+      h2Number: "2. Rozrahunok čysla",
+      ruleForNumber: "Vse skladajemo, poky ne otrymajemo čyslo vid 1 do 9.",
+      exDate2summary: "summa (seredynka): 6+8+2=16. 1+6=7",
+      h2Summary: "3. Pidsumok",
+      summaryResult:
+        "Ростислав: blakytna 3 (trijka); fa \n\ndenj 24: bila 6 (šistj); si\nmisjacj 08: fioletova 8 (visim);solj\nrik 1991: sribna 2 (dvijka); lja#\nseredyna: synja 7 (sim); fa#",
+      h3ComboTitle: "Rozrahunok pojednannja imeni ta daty narodžennja",
+      comboRules:
+        "1. vlasne im'ja + denj narodžennja\n2. po batjkovi + masjacj narodžennja\n3. prizvyšče neoficijne + prizvyšče + rik narodžennja\n4. jadro = summa pokaznykiv",
+      h3ExColorSound: "Pryklad (kolir/zvuk)",
+      exColorSound:
+        "1. 6 (blakytnyj/fa) + 2 (červonyj/do#) = 8 (fioletovyj/solj)\n2. 6 (blakytnyj/fa) + 11 (sribnyj/lja#) = 17. 17 - 12 = 5 (zelenyj/mi)\n3. 6 (blakytnyj/fa) + 9 (zolotyj/solj#) + 10 (perlynovyj/lja) = 25. 25 - (12×2) = 1 (čornyj/do)\n4. 8 (fioletovyj/solj) + 5 (zelenyj/mi) + 1 (čornyj/do) = 14. 14 - 12 = 2 (červonyj/do#)",
+      h3ExNumber: "Pryklad (čyslo)",
+      exNumber:
+        "1. 3+8=11. 1+1=2\n2. 6+2=8\n3. 3+9+7=19. 1+9=10. 1+0=1\n4. 2+8+1=11. 1+1=2",
+      ps: "P.S. Jak variant, №4 možna skladaty naprjamu vid iznačaljnyh pokaznykiv jadra:",
+      exPs:
+        "4. 3 (pomarančevyj/re) + 11 (sribnyj/lja#) = 14. 14 - 12 = 2 (červonyj/do#)\n 3+8=11. 1+1=2",
+      colorNoteTitle: "KOLIR – NOTA",
+      colorNoteTable:
+        "1 •⁠ čornyй — do\n2 •⁠ červonyй – do#\n3 •⁠ pomarančevyй – re\n4 •⁠ žovtyй – re#\n5 •⁠ zelenyй – mi\n6 •⁠ blakytnyй – fa\n7 •⁠ syniй – fa#\n8 •⁠ fioletovyй – solj\n9 •⁠ zolotyй – solj#\n10 •⁠ perlynovyй – lja\n11 •⁠ sribnyй – lja#\n12 •⁠ bilyй – si",
+      rozpakovkaBlock:
+        'Rozrahunok "rozpakovky" \n\n1. jadro imeni + jadro dnja narodžennja\n2. vlasne im\'ja + denj narodžennja\n3. po batjkovi + misjacj narodžennja\n4. neoficijne prizvyšče + prizvyšče + rik narodžennja \n\nPryklad (kolir/zvuk)\n1. 3 (pomarančevyj/re) + 11 (sribnyj/lja#) = 14. 14 - 12 = 2 (červonyj/do#)\n2. 6 (blakytnyj/fa) + 2 (červonyj/do#) = 8 (fioletovyj/solj)\n3. 6 (blakytnyj/fa) + 11 (sribnyj/lja#) = 17. 17 - 12 = 5 (zelenyj/mi)\n4. 6 (blakytnyj/fa) + 9 (zolotyj/solj#) + 10 (perlynovyj/lja) = 25. 25 - (12×2) = 1 (čornyj/do) \n\nPryklad (čyslo)\n1. 3+8=11. 1+1=2\n2. 3+8=11. 1+1=2\n3. 6+2=8\n4. 3+9+7=19. 1+9=10. 1+0=1',
+      daliTitle: "Dali",
+      daliItems:
+        "- nalaštuvannja koljoriv\n- kulja - obʼjekt, ščo nese na sobi parametry i zvuku takoje (частота, gučnitj, dovžyna)\n- mitka vysoty i potočnoji gučnosti na kuli\n- pry zitknenni menšyj ne zvučytj\n- zaležnistj gučnosti vid rozmiru\n- pry zitknenni menšyj rozdiljajetjsja",
+    },
     colors: {
       1: {
         name: "Čornyj",
@@ -212,6 +304,57 @@ export const TRANSLATIONS: Record<"uk" | "lat", ToneflowerStrings> = {
     panelInfoLabel: "інфо",
     btnCopyLayout: "копіювати JSON розкладки",
     btnCopied: "скопійовано!",
+    labels: {
+      imja: "Ім'я",
+      pobatjkovi: "По-батькові",
+      prizvysceNeoficijne: "Прізвище неофіційне",
+      prizvysce: "Прізвище",
+      data: "Дата",
+      denj: "День",
+      misjacj: "Місяць",
+      rik: "Рік",
+      selectUkrainska: "Українська",
+      selectUkrLatynka: "Українська Латинка",
+      selectMoskalska: "Московська",
+      selectAnglijska: "Англійська",
+    },
+    abetka: {
+      panelTitle: "Алгоритми",
+      h2ColorSound: "Розрахунок кольору та звуку",
+      ruleForWord:
+        "Для слова (імені) – все складаємо і далі віднімаємо 12, поки не отримаємо число від 1 до 12.\nДля дати – від цілого числа віднімаємо 12, поки не отримаємо число від 1 до 12.",
+      labelPryklad: "Приклад:",
+      autoResult: "Автоматичний результат:",
+      exName1result: "66-(12×5)=6 (блакитний колір/нота фа)",
+      exDate1result:
+        "24-12=12 (білий/сі); \n8 (фіолетовий/соль); \n1991-(12×165)=11 (срібний/ля#); \nсума (серединка): 12+8+11=31. 31-(12×2)=7 (синій/фа#)",
+      h2Number: "2. Розрахунок числа",
+      ruleForNumber: "Все складаємо, поки не отримаємо число від 1 до 9.",
+      exDate2summary: "сума (серединка): 6+8+2=16. 1+6=7",
+      h2Summary: "3. Підсумок",
+      summaryResult:
+        "Ростислав: блакитна 3 (трійка); фа\n\nдень 24: біла 6 (шість); сі\nмісяць 08: фіолетова 8 (вісім); соль\nрік 1991: срібна 2 (двійка); ля#\nсередина: синя 7 (сім); фа#",
+      h3ComboTitle: "Розрахунок поєднання імені та дати народження",
+      comboRules:
+        "1. власне ім'я + день народження\n2. по батькові + місяць народження\n3. прізвище неофіційне + прізвище + рік народження\n4. ядро = сума показників",
+      h3ExColorSound: "Приклад (колір/звук)",
+      exColorSound:
+        "1. 6 (блакитний/фа) + 2 (червоний/до#) = 8 (фіолетовий/соль)\n2. 6 (блакитний/фа) + 11 (срібний/ля#) = 17. 17 - 12 = 5 (зелений/мі)\n3. 6 (блакитний/фа) + 9 (золотий/соль#) + 10 (перлиновий/ля) = 25. 25 - (12×2) = 1 (чорний/до)\n4. 8 (фіолетовий/соль) + 5 (зелений/мі) + 1 (чорний/до) = 14. 14 - 12 = 2 (червоний/до#)",
+      h3ExNumber: "Приклад (число)",
+      exNumber:
+        "1. 3+8=11. 1+1=2\n2. 6+2=8\n3. 3+9+7=19. 1+9=10. 1+0=1\n4. 2+8+1=11. 1+1=2",
+      ps: "P.S. Як варіант, №4 можна складати напряму від ізначальних показників ядра:",
+      exPs:
+        "4. 3 (помаранчевий/ре) + 11 (срібний/ля#) = 14. 14 - 12 = 2 (червоний/до#)\n 3+8=11. 1+1=2",
+      colorNoteTitle: "КОЛІР – НОТА",
+      colorNoteTable:
+        "1 • чорний — до\n2 • червоний – до#\n3 • помаранчевий – ре\n4 • жовтий – ре#\n5 • зелений – мі\n6 • блакитний – фа\n7 • синій – фа#\n8 • фіолетовий – соль\n9 • золотий – соль#\n10 • перлиновий – ля\n11 • срібний – ля#\n12 • білий – сі",
+      rozpakovkaBlock:
+        'Розрахунок "розпаковки"\n\n1. ядро імені + ядро дня народження\n2. власне ім\'я + день народження\n3. по батькові + місяць народження\n4. неофіційне прізвище + прізвище + рік народження\n\nПриклад (колір/звук)\n1. 3 (помаранчевий/ре) + 11 (срібний/ля#) = 14. 14 - 12 = 2 (червоний/до#)\n2. 6 (блакитний/фа) + 2 (червоний/до#) = 8 (фіолетовий/соль)\n3. 6 (блакитний/фа) + 11 (срібний/ля#) = 17. 17 - 12 = 5 (зелений/мі)\n4. 6 (блакитний/фа) + 9 (золотий/соль#) + 10 (перлиновий/ля) = 25. 25 - (12×2) = 1 (чорний/до)\n\nПриклад (число)\n1. 3+8=11. 1+1=2\n2. 3+8=11. 1+1=2\n3. 6+2=8\n4. 3+9+7=19. 1+9=10. 1+0=1',
+      daliTitle: "Далі",
+      daliItems:
+        "- налаштування кольорів\n- куля - об'єкт, що несе на собі параметри і звуку також (частота, гучність, довжина)\n- мітка висоти і поточної гучності на кулі\n- при зіткненні менший не звучить\n- залежність гучності від розміру\n- при зіткненні менший розділяється",
+    },
     colors: {
       1: {
         name: "Чорний",

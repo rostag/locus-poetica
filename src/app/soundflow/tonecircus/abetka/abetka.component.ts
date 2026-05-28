@@ -1,6 +1,7 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  inject,
   OnInit,
   signal,
 } from "@angular/core";
@@ -12,6 +13,7 @@ import { MatButtonModule } from "@angular/material/button";
 import { MatExpansionModule } from "@angular/material/expansion";
 
 import { RouterModule } from "@angular/router";
+import { ToneflowerI18nService } from "src/app/soundflow/tonecircus/toneflower-i18n.service";
 import {
   abetkaByName,
   cardinalByDate,
@@ -39,6 +41,7 @@ import {
 })
 export class AbetkaComponent implements OnInit {
   readonly panelOpenState = signal(false);
+  protected i18n = inject(ToneflowerI18nService);
 
   public example1 = "Ростислав";
   public example1date = "24.08.1991";
