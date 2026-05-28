@@ -1,4 +1,4 @@
-<div style="margin-left: 1rem">
+<div class="flow-header-controls">
   <label>{{ i18n.strings().labelVidstupZgory }} </label>
   <input
     matInput
@@ -17,13 +17,6 @@
     {{ i18n.strings().btnShowNumber }}
   </button>
 
-  <button
-    matButton="elevated"
-    (click)="i18n.toggle()"
-    style="margin-left: auto; font-weight: 700; letter-spacing: 0.08em"
-  >
-    {{ i18n.currentLang() === "lat" ? "UA" : "LAT" }}
-  </button>
   @if (showChyslo) {
     <mat-slider
       min="0"
@@ -54,6 +47,22 @@
       {{ i18n.strings().btnBgColor }}
     </button>
   }
+
+  <div class="flow-header-right">
+    <button
+      matButton="elevated"
+      (click)="i18n.toggle()"
+      style="font-weight: 700; letter-spacing: 0.08em"
+    >
+      {{ i18n.currentLang() === "lat" ? "UA" : "LAT" }}
+    </button>
+    <button
+      matButton="elevated"
+      (click)="rightPanelOpen.set(!rightPanelOpen())"
+    >
+      {{ rightPanelOpen() ? "▶" : "◀" }}
+    </button>
+  </div>
 </div>
 
 <div class="flex-row midwrap" style="margin-right: 2.5rem">
@@ -69,14 +78,7 @@
     <figure class="bushwrap" id="rozpakovka-bushwrap"></figure>
     <app-arrangement-presets bushId="rozpakovka" />
   </div>
-  <div style="display: flex; flex-direction: column; align-items: flex-start">
-    <button
-      matButton="elevated"
-      (click)="rightPanelOpen.set(!rightPanelOpen())"
-      style="margin-bottom: 8px; font-size: 0.75rem"
-    >
-      {{ rightPanelOpen() ? "▶" : "◀" }}
-    </button>
+  <div style="margin-top: 0.75rem">
     @if (rightPanelOpen()) {
       <app-get-ordinal
         (onBushUpdate)="updateBush($event)"

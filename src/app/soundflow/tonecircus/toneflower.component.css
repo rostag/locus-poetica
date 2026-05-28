@@ -1,3 +1,23 @@
+.flow-header-controls {
+  margin: 0 2.75rem;
+  display: flex;
+  align-items: center;
+
+  button {
+    height: 24px;
+    border: 1px solid #c0c0d8 !important;
+    background: #eef !important;
+    border-radius: 3px;
+  }
+}
+
+.flow-header-right {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
 .controls {
   margin-left: 2.5rem;
   display: flex;

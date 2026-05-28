@@ -5,10 +5,18 @@
         {{ i18n.strings().labels.imja }}
       </mat-checkbox>
       <select (change)="handleAbetkaSelect($event)">
-        <option value="Ukrajinsjka">{{ i18n.strings().labels.selectUkrainska }}</option>
-        <option value="Ukrajinsjka Latynka">{{ i18n.strings().labels.selectUkrLatynka }}</option>
-        <option value="Moskaljsjka">{{ i18n.strings().labels.selectMoskalska }}</option>
-        <option value="Anglijsjka">{{ i18n.strings().labels.selectAnglijska }}</option>
+        <option value="Ukrajinsjka">
+          {{ i18n.strings().labels.selectUkrainska }}
+        </option>
+        <option value="Ukrajinsjka Latynka">
+          {{ i18n.strings().labels.selectUkrLatynka }}
+        </option>
+        <option value="Moskaljsjka">
+          {{ i18n.strings().labels.selectMoskalska }}
+        </option>
+        <option value="Anglijsjka">
+          {{ i18n.strings().labels.selectAnglijska }}
+        </option>
       </select>
     </h3>
 
@@ -61,9 +69,9 @@
     </div>
 
     <h3>
-      <mat-checkbox [checked]="useDate" (change)="setUseDate($event.checked)"
-        >{{ i18n.strings().labels.data }}</mat-checkbox
-      >
+      <mat-checkbox [checked]="useDate" (change)="setUseDate($event.checked)">{{
+        i18n.strings().labels.data
+      }}</mat-checkbox>
     </h3>
     <!-- Denj -->
     <div class="flex-row">
