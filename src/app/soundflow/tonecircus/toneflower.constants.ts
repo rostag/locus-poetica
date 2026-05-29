@@ -34,9 +34,9 @@ export const BUSH_PRESETS: Array<{ name: string; points: [number, number][] }> =
     {
       name: "Baza",
       points: [
-        [160, 250],
-        [70.5, 130],
-        [175.5, 40],
+        [144.9, 222.3],
+        [76.6, 131.5],
+        [151.4, 62.9],
       ],
     },
     {
@@ -62,10 +62,10 @@ export const ROZP_PRESETS: Array<{ name: string; points: [number, number][] }> =
     {
       name: "Baza",
       points: [
-        [125, 27.5],
-        [64, 145],
-        [185.5, 145],
-        [125, 266],
+        [104.5, 48.8],
+        [97.8, 172.7],
+        [147.2, 112.9],
+        [162.7, 236.8],
       ],
     },
     {
