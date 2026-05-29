@@ -210,6 +210,60 @@ export const CARDINALS_BY_LETTERS_EN: NumberByLetter[] = [
   { cardinal: 9, letters: ["I", "R"] },
 ];
 
+/** KT - Rozrahunok koljoru ta zvuku (krymsjkotatarsjka)
+1  - A Â J Ş
+2  - B K T
+3  - C L U
+4  - Ç M Ü
+5  - D N V
+6  - E Ñ Y
+7  - F O Z
+8  - G Ö
+9  - Ğ P
+10 - H Q
+11 - I ı R     (dotless I: U+0049 / U+0131 — stored explicitly, not via /i flag)
+12 - İ i S     (dotted I:  U+0130 / U+0069 — stored explicitly, not via /i flag)
+*/
+
+export const ORDINALS_BY_LETTERS_KT: NumberByLetter[] = [
+  { cardinal: 1, letters: ["A", "Â", "J", "Ş"] },
+  { cardinal: 2, letters: ["B", "K", "T"] },
+  { cardinal: 3, letters: ["C", "L", "U"] },
+  { cardinal: 4, letters: ["Ç", "M", "Ü"] },
+  { cardinal: 5, letters: ["D", "N", "V"] },
+  { cardinal: 6, letters: ["E", "Ñ", "Y"] },
+  { cardinal: 7, letters: ["F", "O", "Z"] },
+  { cardinal: 8, letters: ["G", "Ö"] },
+  { cardinal: 9, letters: ["Ğ", "P"] },
+  { cardinal: 10, letters: ["H", "Q"] },
+  { cardinal: 11, letters: ["I", "ı", "R"] }, // dotless: I (U+0049) + ı (U+0131)
+  { cardinal: 12, letters: ["İ", "i", "S"] }, // dotted:  İ (U+0130) + i (U+0069)
+];
+
+/** KT - Rozrahunok čysla (krymsjkotatarsjka)
+1 - A Â H O Ü
+2 - B I ı Ö V  (dotless I: U+0049 / U+0131)
+3 - C İ i P Y  (dotted I:  U+0130 / U+0069)
+4 - Ç J Q Z
+5 - D K R
+6 - E L S
+7 - F M Ş
+8 - G N T
+9 - Ğ Ñ U
+*/
+
+export const CARDINALS_BY_LETTERS_KT: NumberByLetter[] = [
+  { cardinal: 1, letters: ["A", "Â", "H", "O", "Ü"] },
+  { cardinal: 2, letters: ["B", "I", "ı", "Ö", "V"] }, // dotless: I (U+0049) + ı (U+0131)
+  { cardinal: 3, letters: ["C", "İ", "i", "P", "Y"] }, // dotted:  İ (U+0130) + i (U+0069)
+  { cardinal: 4, letters: ["Ç", "J", "Q", "Z"] },
+  { cardinal: 5, letters: ["D", "K", "R"] },
+  { cardinal: 6, letters: ["E", "L", "S"] },
+  { cardinal: 7, letters: ["F", "M", "Ş"] },
+  { cardinal: 8, letters: ["G", "N", "T"] },
+  { cardinal: 9, letters: ["Ğ", "Ñ", "U"] },
+];
+
 export const ABETKA_UA: Abetka = {
   name: "Ukrajinsjka",
   ordinals: ORDINALS_BY_LETTERS_UA,
@@ -234,11 +288,18 @@ export const ABETKA_EN: Abetka = {
   cardinals: CARDINALS_BY_LETTERS_EN,
 };
 
+export const ABETKA_KT: Abetka = {
+  name: "Krymsjkotatarsjka",
+  ordinals: ORDINALS_BY_LETTERS_KT,
+  cardinals: CARDINALS_BY_LETTERS_KT,
+};
+
 export const ABETKY: Abetka[] = [
   ABETKA_UA,
   ABETKA_UA_LAT,
   ABETKA_MSK,
   ABETKA_EN,
+  ABETKA_KT,
 ];
 
 export const ABETKA_STD = ABETKA_EN;

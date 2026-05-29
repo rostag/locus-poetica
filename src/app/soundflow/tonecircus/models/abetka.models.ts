@@ -84,4 +84,5 @@ export type AbetkaName =
   | "Ukrajinsjka"
   | "Ukrajinsjka Latynka"
   | "Moskaljsjka"
-  | "Anglijsjka";
+  | "Anglijsjka"
+  | "Krymsjkotatarsjka";

@@ -3,6 +3,7 @@ import {
   ABETKA_UA_LAT,
   ABETKA_MSK,
   ABETKA_EN,
+  ABETKA_KT,
 } from "../constants/abetka.constants";
 import { IDNS } from "../toneflower.constants";
 import {
@@ -398,5 +399,92 @@ describe("numerology-cardinal — cardinalByNumber", () => {
 
   it("99 → 9+9 = 18 → 1+8 = 9", () => {
     expect(cardinalByNumber("99")).toEqual(9);
+  });
+});
+
+// Spec: openspec/changes/add-krymsjkotatarsjka-abetka/specs/numerology-ordinal/spec.md
+describe("numerology-ordinal — Crimean Tatar (Krymsjkotatarsjka) letter table", () => {
+  const cases: [string, number][] = [
+    ["A", 1], ["Â", 1], ["J", 1], ["Ş", 1],
+    ["B", 2], ["K", 2], ["T", 2],
+    ["C", 3], ["L", 3], ["U", 3],
+    ["Ç", 4], ["M", 4], ["Ü", 4],
+    ["D", 5], ["N", 5], ["V", 5],
+    ["E", 6], ["Ñ", 6], ["Y", 6],
+    ["F", 7], ["O", 7], ["Z", 7],
+    ["G", 8], ["Ö", 8],
+    ["Ğ", 9], ["P", 9],
+    ["H", 10], ["Q", 10],
+    ["I", 11], ["R", 11],  // dotless I (U+0049)
+    ["İ", 12], ["S", 12], // dotted İ (U+0130)
+  ];
+
+  it.each(cases)(
+    "KT letter '%s' maps to ordinal %i",
+    (letter, expected) => {
+      expect(ordinalByWord(ABETKA_KT, letter)).toEqual(expected);
+    }
+  );
+
+  it("every KT letter resolves to a non-zero ordinal", () => {
+    const allLetters = [
+      "A", "Â", "B", "C", "Ç", "D", "E", "F", "G", "Ğ",
+      "H", "I", "ı", "İ", "i", "J", "K", "L", "M", "N",
+      "Ñ", "O", "Ö", "P", "Q", "R", "S", "Ş", "T", "U",
+      "Ü", "V", "Y", "Z",
+    ];
+    allLetters.forEach((letter) => {
+      expect(ordinalByWord(ABETKA_KT, letter)).toBeGreaterThan(0);
+    });
+  });
+
+  it("dotless ı (U+0131) maps to ordinal 11 — same as I", () => {
+    expect(ordinalByWord(ABETKA_KT, "ı")).toEqual(11);
+  });
+
+  it("dotted İ (U+0130) maps to ordinal 12 — same as i", () => {
+    expect(ordinalByWord(ABETKA_KT, "İ")).toEqual(12);
+  });
+});
+
+// Spec: openspec/changes/add-krymsjkotatarsjka-abetka/specs/numerology-cardinal/spec.md
+describe("numerology-cardinal — Crimean Tatar (Krymsjkotatarsjka) letter table", () => {
+  const cases: [string, number][] = [
+    ["A", 1], ["Â", 1], ["H", 1], ["O", 1], ["Ü", 1],
+    ["B", 2], ["I", 2], ["Ö", 2], ["V", 2],  // dotless I (U+0049)
+    ["C", 3], ["İ", 3], ["P", 3], ["Y", 3],  // dotted İ (U+0130)
+    ["Ç", 4], ["J", 4], ["Q", 4], ["Z", 4],
+    ["D", 5], ["K", 5], ["R", 5],
+    ["E", 6], ["L", 6], ["S", 6],
+    ["F", 7], ["M", 7], ["Ş", 7],
+    ["G", 8], ["N", 8], ["T", 8],
+    ["Ğ", 9], ["Ñ", 9], ["U", 9],
+  ];
+
+  it.each(cases)(
+    "KT letter '%s' maps to cardinal %i",
+    (letter, expected) => {
+      expect(cardinalByWord(ABETKA_KT, letter)).toEqual(expected);
+    }
+  );
+
+  it("every KT letter resolves to a non-zero cardinal", () => {
+    const allLetters = [
+      "A", "Â", "B", "C", "Ç", "D", "E", "F", "G", "Ğ",
+      "H", "I", "ı", "İ", "i", "J", "K", "L", "M", "N",
+      "Ñ", "O", "Ö", "P", "Q", "R", "S", "Ş", "T", "U",
+      "Ü", "V", "Y", "Z",
+    ];
+    allLetters.forEach((letter) => {
+      expect(cardinalByWord(ABETKA_KT, letter)).toBeGreaterThan(0);
+    });
+  });
+
+  it("dotless ı (U+0131) maps to cardinal 2 — same as I", () => {
+    expect(cardinalByWord(ABETKA_KT, "ı")).toEqual(2);
+  });
+
+  it("dotted İ (U+0130) maps to cardinal 3 — same as i", () => {
+    expect(cardinalByWord(ABETKA_KT, "İ")).toEqual(3);
   });
 });

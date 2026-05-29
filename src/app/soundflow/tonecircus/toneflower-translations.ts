@@ -22,6 +22,7 @@ export interface ToneflowerStrings {
     selectUkrLatynka: string;
     selectMoskalska: string;
     selectAnglijska: string;
+    selectKrymsjkotatarsjka: string;
   };
   abetka: {
     panelTitle: string;
@@ -81,6 +82,7 @@ export const TRANSLATIONS: Record<"uk" | "lat", ToneflowerStrings> = {
       selectUkrLatynka: "Ukrajinsjka Latynka",
       selectMoskalska: "Moskaljsjka",
       selectAnglijska: "Anglijsjka",
+      selectKrymsjkotatarsjka: "Krymsjkotatarsjka",
     },
     abetka: {
       panelTitle: "Algorytmy",
@@ -317,6 +319,7 @@ export const TRANSLATIONS: Record<"uk" | "lat", ToneflowerStrings> = {
       selectUkrLatynka: "Українська Латинка",
       selectMoskalska: "Московська",
       selectAnglijska: "Англійська",
+      selectKrymsjkotatarsjka: "Кримськотатарська",
     },
     abetka: {
       panelTitle: "Алгоритми",
