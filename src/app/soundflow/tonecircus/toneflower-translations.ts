@@ -23,6 +23,8 @@ export interface ToneflowerStrings {
     selectMoskalska: string;
     selectAnglijska: string;
     selectKrymsjkotatarsjka: string;
+    labelYadro: string;
+    labelRozmir: string;
   };
   abetka: {
     panelTitle: string;
@@ -83,6 +85,8 @@ export const TRANSLATIONS: Record<"uk" | "lat", ToneflowerStrings> = {
       selectMoskalska: "Moskaljsjka",
       selectAnglijska: "Anglijsjka",
       selectKrymsjkotatarsjka: "Krymsjkotatarsjka",
+      labelYadro: "Jadro",
+      labelRozmir: "Rozmir",
     },
     abetka: {
       panelTitle: "Algorytmy",
@@ -110,8 +114,7 @@ export const TRANSLATIONS: Record<"uk" | "lat", ToneflowerStrings> = {
       exNumber:
         "1. 3+8=11. 1+1=2\n2. 6+2=8\n3. 3+9+7=19. 1+9=10. 1+0=1\n4. 2+8+1=11. 1+1=2",
       ps: "P.S. Jak variant, №4 možna skladaty naprjamu vid iznačaljnyh pokaznykiv jadra:",
-      exPs:
-        "4. 3 (pomarančevyj/re) + 11 (sribnyj/lja#) = 14. 14 - 12 = 2 (červonyj/do#)\n 3+8=11. 1+1=2",
+      exPs: "4. 3 (pomarančevyj/re) + 11 (sribnyj/lja#) = 14. 14 - 12 = 2 (červonyj/do#)\n 3+8=11. 1+1=2",
       colorNoteTitle: "KOLIR – NOTA",
       colorNoteTable:
         "1 •⁠ čornyй — do\n2 •⁠ červonyй – do#\n3 •⁠ pomarančevyй – re\n4 •⁠ žovtyй – re#\n5 •⁠ zelenyй – mi\n6 •⁠ blakytnyй – fa\n7 •⁠ syniй – fa#\n8 •⁠ fioletovyй – solj\n9 •⁠ zolotyй – solj#\n10 •⁠ perlynovyй – lja\n11 •⁠ sribnyй – lja#\n12 •⁠ bilyй – si",
@@ -304,7 +307,7 @@ export const TRANSLATIONS: Record<"uk" | "lat", ToneflowerStrings> = {
     btnShowNumber: "показувати число",
     btnBgColor: "колір фону",
     panelInfoLabel: "інфо",
-    btnCopyLayout: "копіювати JSON розкладки",
+    btnCopyLayout: "Копіювати код розкладки",
     btnCopied: "скопійовано!",
     labels: {
       imja: "Ім'я",
@@ -320,6 +323,8 @@ export const TRANSLATIONS: Record<"uk" | "lat", ToneflowerStrings> = {
       selectMoskalska: "Московська",
       selectAnglijska: "Англійська",
       selectKrymsjkotatarsjka: "Кримськотатарська",
+      labelYadro: "Ядро",
+      labelRozmir: "Розмір",
     },
     abetka: {
       panelTitle: "Алгоритми",
@@ -347,8 +352,7 @@ export const TRANSLATIONS: Record<"uk" | "lat", ToneflowerStrings> = {
       exNumber:
         "1. 3+8=11. 1+1=2\n2. 6+2=8\n3. 3+9+7=19. 1+9=10. 1+0=1\n4. 2+8+1=11. 1+1=2",
       ps: "P.S. Як варіант, №4 можна складати напряму від ізначальних показників ядра:",
-      exPs:
-        "4. 3 (помаранчевий/ре) + 11 (срібний/ля#) = 14. 14 - 12 = 2 (червоний/до#)\n 3+8=11. 1+1=2",
+      exPs: "4. 3 (помаранчевий/ре) + 11 (срібний/ля#) = 14. 14 - 12 = 2 (червоний/до#)\n 3+8=11. 1+1=2",
       colorNoteTitle: "КОЛІР – НОТА",
       colorNoteTable:
         "1 • чорний — до\n2 • червоний – до#\n3 • помаранчевий – ре\n4 • жовтий – ре#\n5 • зелений – мі\n6 • блакитний – фа\n7 • синій – фа#\n8 • фіолетовий – соль\n9 • золотий – соль#\n10 • перлиновий – ля\n11 • срібний – ля#\n12 • білий – сі",

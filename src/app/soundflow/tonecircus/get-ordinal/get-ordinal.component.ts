@@ -7,7 +7,6 @@ import {
   Input,
   OnInit,
   Output,
-  signal,
 } from "@angular/core";
 import { BushArrangementService } from "../bush-arrangement.service";
 import { ToneflowerI18nService } from "../toneflower-i18n.service";
@@ -158,18 +157,6 @@ export class GetOrdinalComponent implements OnInit {
   ordinalByDate = ordinalByDate;
   cardinalByWord = cardinalByWord;
   cardinalByDate = cardinalByDate;
-
-  copied = signal(false);
-
-  copyLayout(): void {
-    const layout = {
-      main: this.arrangementService.mainCustomPositions(),
-      rozpakovka: this.arrangementService.rozpakovkaCustomPositions(),
-    };
-    navigator.clipboard.writeText(JSON.stringify(layout, null, 2));
-    this.copied.set(true);
-    setTimeout(() => this.copied.set(false), 1500);
-  }
 
   handleAbetkaSelect(evt: Event) {
     const val = (evt.currentTarget as any)?.value;
@@ -579,7 +566,7 @@ export class GetOrdinalComponent implements OnInit {
 
   ngOnInit(): void {
     this.setInputs();
-    // this.setDateInput(new Date());
+    this.setDateInput(new Date());
     // this.setRandomWord();
     this.setData();
     this._initialized = true;

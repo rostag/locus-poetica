@@ -6,8 +6,8 @@ export const IC = {
   bushId: 1,
   padAngle: 0.01,
   padAngleMax: 0.1,
-  flowerButtSize: 12,
-  flowerLeafWidth: 10,
+  flowerButtSize: 13,
+  flowerLeafWidth: 12,
 };
 
 export const BUSH_LOC = {
@@ -34,9 +34,9 @@ export const BUSH_PRESETS: Array<{ name: string; points: [number, number][] }> =
     {
       name: "Baza",
       points: [
-        [150.5, 233.5],
-        [75.5, 130.5],
-        [163.65, 56],
+        [160, 250],
+        [70.5, 130],
+        [175.5, 40],
       ],
     },
     {
@@ -45,14 +45,6 @@ export const BUSH_PRESETS: Array<{ name: string; points: [number, number][] }> =
         [70, 200],
         [190, 200],
         [140, 100],
-      ],
-    },
-    {
-      name: "Linija",
-      points: [
-        [125, 260],
-        [125, 145],
-        [125, 40],
       ],
     },
     {
@@ -70,10 +62,10 @@ export const ROZP_PRESETS: Array<{ name: string; points: [number, number][] }> =
     {
       name: "Baza",
       points: [
-        [125, 50],
-        [73, 145],
-        [178, 145],
-        [125, 245],
+        [125, 27.5],
+        [64, 145],
+        [185.5, 145],
+        [125, 266],
       ],
     },
     {
@@ -83,15 +75,6 @@ export const ROZP_PRESETS: Array<{ name: string; points: [number, number][] }> =
         [170, 90],
         [70, 190],
         [170, 190],
-      ],
-    },
-    {
-      name: "Linija",
-      points: [
-        [125, 15],
-        [125, 100],
-        [125, 185],
-        [125, 280],
       ],
     },
     {

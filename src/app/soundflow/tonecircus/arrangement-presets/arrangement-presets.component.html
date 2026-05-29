@@ -22,3 +22,23 @@
     MOJA
   </button>
 </div>
+
+@if (bushId === 'main') {
+  <div class="size-controls">
+    <div class="size-sliders">
+      <label class="slider-label">
+        <span>{{ i18n.strings().labels.labelYadro }}</span>
+        <input type="range" min="5" max="20" [value]="svc.flowerButtSize()" (input)="onButtSize($event)" />
+        <span class="slider-val">{{ svc.flowerButtSize() }}</span>
+      </label>
+      <label class="slider-label">
+        <span>{{ i18n.strings().labels.labelRozmir }}</span>
+        <input type="range" min="5" max="20" [value]="svc.flowerLeafWidth()" (input)="onLeafWidth($event)" />
+        <span class="slider-val">{{ svc.flowerLeafWidth() }}</span>
+      </label>
+    </div>
+    <button class="copy-btn" (click)="copyLayout()">
+      {{ copied() ? i18n.strings().btnCopied : i18n.strings().btnCopyLayout }}
+    </button>
+  </div>
+}
