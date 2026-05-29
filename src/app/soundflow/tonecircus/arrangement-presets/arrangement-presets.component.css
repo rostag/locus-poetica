@@ -52,3 +52,56 @@
 .preset-btn.active.custom-btn {
   color: #111;
 }
+
+.size-controls {
+  margin-left: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 4px 0;
+}
+
+.size-sliders {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.copy-btn {
+  height: 24px;
+  padding: 0 8px;
+  font-size: 0.65rem;
+  letter-spacing: 0.06em;
+  color: #666;
+  border: 1px solid #c0c0d8;
+  background: #eef;
+  border-radius: 3px;
+  cursor: pointer;
+  white-space: nowrap;
+  align-self: center;
+}
+
+.copy-btn:hover {
+  background: #ddf;
+}
+
+.slider-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.7rem;
+  color: #888;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+
+  input[type="range"] {
+    width: 100px;
+    accent-color: #999;
+  }
+}
+
+.slider-val {
+  min-width: 18px;
+  text-align: right;
+  color: #555;
+}

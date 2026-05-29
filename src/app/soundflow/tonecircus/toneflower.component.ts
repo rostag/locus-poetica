@@ -66,10 +66,29 @@ export class ToneFlowerComponent implements OnInit {
     localStorage.getItem("rightPanelOpen") !== "false",
   );
 
+  private bushesInitialized = false;
+
   constructor() {
     effect(() => {
       localStorage.setItem("rightPanelOpen", String(this.rightPanelOpen()));
     });
+    effect(() => {
+      const buttSize = this.arrangementService.flowerButtSize();
+      const leafWidth = this.arrangementService.flowerLeafWidth();
+      if (this.bushesInitialized) {
+        this.patchAndRedraw(buttSize, leafWidth);
+      }
+    });
+  }
+
+  private patchAndRedraw(buttSize: number, leafWidth: number): void {
+    if (this.bush) {
+      this.bush.flowers.forEach((f) => { f.buttSize = buttSize; f.leafWidth = leafWidth; });
+    }
+    if (this.rozpBush) {
+      this.rozpBush.flowers.forEach((f) => { f.buttSize = buttSize; f.leafWidth = leafWidth; });
+    }
+    this.redrawBush();
   }
 
   private playFlower: ToneFlower;
@@ -730,6 +749,8 @@ export class ToneFlowerComponent implements OnInit {
   ngOnInit(): void {
     this.initFlow();
     this.drawFlowers();
+    this.updateRozpakovkaBush(SAMPLE_BUSHMODELS[1]);
+    this.bushesInitialized = true;
     // this.renderCycle();
   }
 }

@@ -1,7 +1,19 @@
 import { Injectable, signal, WritableSignal } from "@angular/core";
-import { BUSH_PRESETS, ROZP_PRESETS } from "./toneflower.constants";
+import { BUSH_PRESETS, IC, ROZP_PRESETS } from "./toneflower.constants";
 
 const LS_MAIN_PRESET = "toneflower.bush.main.preset";
+const LS_BUTT_SIZE = "toneflower.flower.buttSize";
+const LS_LEAF_WIDTH = "toneflower.flower.leafWidth";
+const DEFAULT_BUTT_SIZE = 12;
+const DEFAULT_LEAF_WIDTH = 10;
+
+function readNumber(key: string, def: number, min: number, max: number): number {
+  try {
+    const n = parseInt(localStorage.getItem(key) ?? "", 10);
+    if (!isNaN(n) && n >= min && n <= max) return n;
+  } catch {}
+  return def;
+}
 const LS_MAIN_CUSTOM = "toneflower.bush.main.custom";
 const LS_ROZP_PRESET = "toneflower.bush.rozpakovka.preset";
 const LS_ROZP_CUSTOM = "toneflower.bush.rozpakovka.custom";
@@ -38,10 +50,16 @@ export class BushArrangementService {
   readonly mainCustomPositions: WritableSignal<[number, number][]>;
   readonly rozpakovkaPreset: WritableSignal<number | "custom">;
   readonly rozpakovkaCustomPositions: WritableSignal<[number, number][]>;
+  readonly flowerButtSize: WritableSignal<number>;
+  readonly flowerLeafWidth: WritableSignal<number>;
 
   constructor() {
     const savedMainPreset = readPreset(LS_MAIN_PRESET);
     const savedRozpPreset = readPreset(LS_ROZP_PRESET);
+    const savedButtSize = readNumber(LS_BUTT_SIZE, DEFAULT_BUTT_SIZE, 5, 20);
+    const savedLeafWidth = readNumber(LS_LEAF_WIDTH, DEFAULT_LEAF_WIDTH, 5, 20);
+    IC.flowerButtSize = savedButtSize;
+    IC.flowerLeafWidth = savedLeafWidth;
 
     const defaultMainCustom = BUSH_PRESETS[0].points.map(
       (p) => [p[0], p[1]] as [number, number],
@@ -64,6 +82,8 @@ export class BushArrangementService {
     this.mainCustomPositions = signal(savedMainCustom);
     this.rozpakovkaPreset = signal(savedRozpPreset);
     this.rozpakovkaCustomPositions = signal(savedRozpCustom);
+    this.flowerButtSize = signal(savedButtSize);
+    this.flowerLeafWidth = signal(savedLeafWidth);
   }
 
   positionsForFlower(bushId: "main" | "rozpakovka", index: number): [number, number] {
@@ -110,5 +130,17 @@ export class BushArrangementService {
     return bushId === "main"
       ? this.mainPreset() === "custom"
       : this.rozpakovkaPreset() === "custom";
+  }
+
+  setFlowerButtSize(v: number): void {
+    IC.flowerButtSize = v;
+    this.flowerButtSize.set(v);
+    localStorage.setItem(LS_BUTT_SIZE, String(v));
+  }
+
+  setFlowerLeafWidth(v: number): void {
+    IC.flowerLeafWidth = v;
+    this.flowerLeafWidth.set(v);
+    localStorage.setItem(LS_LEAF_WIDTH, String(v));
   }
 }

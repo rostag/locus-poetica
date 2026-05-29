@@ -40,23 +40,21 @@
   color: var(--arc-color, #f0c040);
 }
 .section-label-num {
-  font-size: 3rem;
-  font-weight: 900;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  margin-bottom: 24px;
-  opacity: 0.85;
-  color: var(--arc-color, #f0c040);
-}
-.section-label-combo {
   font-size: 2rem;
   font-weight: 900;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   margin-bottom: 16px;
+  color: color-mix(in srgb, var(--arc-color, #f0c040) 60%, #000 40%);
+}
+.section-label-combo {
+  font-size: 1.5rem;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 12px;
   margin-top: 6px;
-  opacity: 0.85;
-  color: var(--arc-color, #f0c040);
+  color: color-mix(in srgb, var(--arc-color, #f0c040) 60%, #000 40%);
 }
 
 .color-name {
