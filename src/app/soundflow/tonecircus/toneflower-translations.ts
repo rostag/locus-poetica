@@ -183,7 +183,7 @@ export const TRANSLATIONS: Record<"uk" | "lat", ToneflowerStrings> = {
       12: {
         name: "Bilyj",
         description:
-          "Pervynne svitlo.\nBožestvennyj kolir. Česnistj; vysvitlennja usjogo takym, jakym vono je naspravdi; čyste dzerkalo. Pervynne svitlo.",
+          "Pervynne svitlo.\nBožestvennyj kolir. Česnistj; vysvitlennja usjogo takym, jakym vono je naspravdi; čyste dzerkalo. Pervynne svitlo — peršodžerelo vseredyni ljudyny, vnutrišnij bog.",
       },
     },
     numbers: {
@@ -421,7 +421,7 @@ export const TRANSLATIONS: Record<"uk" | "lat", ToneflowerStrings> = {
       12: {
         name: "Білий",
         description:
-          "Первинне світло.\nБожественний колір. Чесність; висвітлення усього таким, яким воно є насправді; чисте дзеркало. Первинне світло.",
+          "Первинне світло.\nБожественний колір. Чесність; висвітлення усього таким, яким воно є насправді; чисте дзеркало. Первинне світло — першоджерело всередині людини, внутрішній бог.",
       },
     },
     numbers: {

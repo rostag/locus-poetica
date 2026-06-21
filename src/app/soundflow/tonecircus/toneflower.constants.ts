@@ -299,7 +299,7 @@ export const COLOR_INFO: Record<number, { name: string; description: string }> =
     12: {
       name: "Bilyj",
       description:
-        "Pervynne svitlo.\nBožestvennyj kolir. Česnistj; vysvitlennja usjogo takym, jakym vono je naspravdi; čyste dzerkalo. Pervynne svitlo.",
+        "Pervynne svitlo.\nBožestvennyj kolir. Česnistj; vysvitlennja usjogo takym, jakym vono je naspravdi; čyste dzerkalo. Pervynne svitlo — peršodžerelo vseredyni ljudyny, vnutrišnij bog.",
     },
   };
 
