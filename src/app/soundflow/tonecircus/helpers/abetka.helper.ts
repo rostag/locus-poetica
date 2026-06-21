@@ -7,16 +7,30 @@ import {
   ABETKY,
 } from "../../tonecircus/constants/abetka.constants";
 
-function ordinalByLetter(abetka: Abetka, letter: string) {
-  const ordinal =
-    abetka.ordinals.find((ordinalByLetter: NumberByLetter) => {
-      return ordinalByLetter.letters.find((letters) =>
-        letters.match(new RegExp(letter, "i"))
-      );
-    })?.cardinal || 0;
-  // console.log(letter, ordinal);
+/**
+ * Resolve a single letter to its number within a set of letter-groups.
+ *
+ * Exact match wins first, so alphabets that store explicit case pairs (e.g.
+ * Crimean Tatar dotted `İ`/`i` vs dotless `I`/`ı`) resolve unambiguously and a
+ * dotted `i` is never folded onto the dotless `I` bucket. When no exact match
+ * exists (alphabets that store a single case), fall back to a case-insensitive
+ * comparison so lowercase input still matches an uppercase table entry.
+ *
+ * Returns 0 when the letter is in no group.
+ */
+function numberByLetter(groups: NumberByLetter[], letter: string): number {
+  const exact = groups.find((group) => group.letters.includes(letter));
+  if (exact) return exact.cardinal;
 
-  return ordinal;
+  const lower = letter.toLowerCase();
+  const ci = groups.find((group) =>
+    group.letters.some((l) => l.toLowerCase() === lower)
+  );
+  return ci?.cardinal || 0;
+}
+
+function ordinalByLetter(abetka: Abetka, letter: string) {
+  return numberByLetter(abetka.ordinals, letter);
 }
 
 /**
@@ -67,16 +81,7 @@ export function ordinalByNumber(numString: string) {
 }
 
 function cardinalByLetter(abetka: Abetka, letter: string) {
-  const cardinal =
-    abetka.cardinals.find((cardinalByLetter: NumberByLetter) => {
-      return cardinalByLetter.letters.find((letters) =>
-        letters.match(new RegExp(letter, "i"))
-      // letters.includes(letter.toLocaleUpperCase()) // yo fix
-      );
-    })?.cardinal || 0;
-  // console.log(letter, cardinal);
-
-  return cardinal;
+  return numberByLetter(abetka.cardinals, letter);
 }
 
 function reduceNumber(num: number) {

@@ -73,7 +73,7 @@ export const TRANSLATIONS: Record<"uk" | "lat", ToneflowerStrings> = {
     btnCopied: "copied!",
     labels: {
       imja: "Im'ja",
-      pobatjkovi: "Po-batjkovi",
+      pobatjkovi: "Po batjkovi",
       prizvysceNeoficijne: "Prizvyšče neoficijne",
       prizvysce: "Prizvyšče",
       data: "Data",
@@ -311,7 +311,7 @@ export const TRANSLATIONS: Record<"uk" | "lat", ToneflowerStrings> = {
     btnCopied: "скопійовано!",
     labels: {
       imja: "Ім'я",
-      pobatjkovi: "По-батькові",
+      pobatjkovi: "По батькові",
       prizvysceNeoficijne: "Прізвище неофіційне",
       prizvysce: "Прізвище",
       data: "Дата",

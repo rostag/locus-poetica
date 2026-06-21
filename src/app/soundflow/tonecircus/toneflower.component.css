@@ -2,6 +2,11 @@
   margin: 0 2.75rem;
   display: flex;
   align-items: center;
+  /* Reserve the expanded ("pokazuvaty čyslo") slider height so the gap between
+     the header and the content below stays constant — and as wide as the
+     show-number state — on the default title view, in both LAT and UA. */
+  min-height: 48px;
+  margin-bottom: 1rem;
 
   button {
     height: 24px;
@@ -26,6 +31,9 @@
 
 .midwrap {
   margin-right: 0.5rem;
+  /* Top-align INFO panel, both papers, and the right-hand form so their top
+     edges sit on the same line as the header / language switcher. */
+  align-items: flex-start;
 }
 
 .bushcont {

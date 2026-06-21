@@ -1,5 +1,6 @@
 .arc-panel {
-  margin-top: 0.8rem;
+  /* Top edge aligns with the papers and the right-hand form (see .midwrap). */
+  margin-top: 0;
   margin-left: 1rem;
   width: 260px;
   min-width: 240px;
